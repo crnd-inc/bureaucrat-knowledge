@@ -19,6 +19,7 @@
     # always loaded
     'data': [
         'security/security.xml',
+        'security/ir.model.access.csv',
         'views/bureaucrat_knowledge_category.xml',
         'views/bureaucrat_knowledge_document.xml',
         'views/bureaucrat_knowledge_menu.xml',

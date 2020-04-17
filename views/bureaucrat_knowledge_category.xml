@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="bureaucrat_knowledge_category_view_search" model="ir.ui.view">
+        <field name="model">bureaucrat.knowledge.category</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="parent_id"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="bureaucrat_knowledge_category_view_tree" model="ir.ui.view">
+        <field name="model">bureaucrat.knowledge.category</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="parent_id"/>
+                <field name="child_category_count"/>
+                <field name="documents_count"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="bureaucrat_knowledge_category_view_form" model="ir.ui.view">
+        <field name="model">bureaucrat.knowledge.category</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_child_category_count"
+                                type="object"
+                                class="oe_stat_button" icon="fa-clone">
+                            <field string="Child Categories" name="child_category_count"
+                                   widget="statinfo"/>
+                        </button>
+                        <button name="action_document_count"
+                                type="object"
+                                class="oe_stat_button" icon="fa-file-text-o">
+                            <field string="Documents" name="documents_count"
+                                   widget="statinfo"/>
+                        </button>
+                    </div>
+                    <div name="title" class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Name..."/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="parent_id"/>
+                        </group>
+                        <group></group>
+                    </group>
+                    <field name="description"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

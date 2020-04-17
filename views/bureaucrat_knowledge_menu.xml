@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="action_bureaucrat_knowledge_category" model="ir.actions.act_window">
+        <field name="name">Categories</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">bureaucrat.knowledge.category</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+       <record id="action_bureaucrat_knowledge_document" model="ir.actions.act_window">
+        <field name="name">Documents</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">bureaucrat.knowledge.document</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="bureaucrat_knowledge_menu"
+              name="Knowledge"
+              groups="bureaucrat_knowledge.group_bureaucratic_knowledge_user"
+              sequence="50"/>
+
+    <menuitem id="bureaucrat_knowledge_document_menu"
+              parent="bureaucrat_knowledge_menu" sequence="15"
+              name="Documents"/>
+
+    <menuitem id="bureaucrat_knowledge_category_menu"
+              parent="bureaucrat_knowledge_document_menu" sequence="15"
+              action="action_bureaucrat_knowledge_category"/>
+
+    <menuitem id="bureaucrat_knowledge_document_document_menu"
+              parent="bureaucrat_knowledge_document_menu" sequence="15"
+              action="action_bureaucrat_knowledge_document"/>
+
+</odoo>

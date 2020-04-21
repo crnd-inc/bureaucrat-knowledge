@@ -28,13 +28,13 @@
             <form>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
-                        <button name="action_child_category_count"
+                        <button name="action_view_subcategories"
                                 type="object"
                                 class="oe_stat_button" icon="fa-clone">
                             <field string="Child Categories" name="child_category_count"
                                    widget="statinfo"/>
                         </button>
-                        <button name="action_document_count"
+                        <button name="action_view_documents"
                                 type="object"
                                 class="oe_stat_button" icon="fa-file-text-o">
                             <field string="Documents" name="documents_count"

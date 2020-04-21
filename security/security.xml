@@ -7,32 +7,34 @@
     </record>
 
     <record id="group_bureaucratic_knowledge_user_implicit" model="res.groups">
-        <field name="name">Bureaucratic Knowledge user implicit</field>
+        <field name="name">Bureaucratic Knowledge / User (implicit)</field>
         <field name="category_id" ref="bureaucrat_knowledge.module_category_bureaucratic_knowledge"/>
         <field name="comment">
-            Bureaucratic Knowledge user implicit
+            User (implicit) has readonly access to knowledge base, has no access to Knowledge menu.
+            This access right have to be used for cases, when user have to be able to read knowledgebase documents
+            from related objects, but does not have to have access to Knowledgebase.
         </field>
     </record>
 
     <record id="group_bureaucratic_knowledge_user" model="res.groups">
-        <field name="name">Bureaucratic Knowledge user</field>
+        <field name="name">Bureaucratic Knowledge / User</field>
         <field name="implied_ids"
                eval="[
                (4, ref('bureaucrat_knowledge.group_bureaucratic_knowledge_user_implicit')),
                (4, ref('base.group_user'))]"/>
         <field name="category_id" ref="bureaucrat_knowledge.module_category_bureaucratic_knowledge"/>
         <field name="comment">
-            Bureaucratic Knowledge user
+            Usual user of knowledge base with readonly access.
         </field>
     </record>
 
     <record id="group_bureaucratic_knowledge_manager" model="res.groups">
-        <field name="name">Bureaucratic Knowledge manager</field>
+        <field name="name">Bureaucratic Knowledge / Manager</field>
         <field name="implied_ids" eval="[(4, ref('bureaucrat_knowledge.group_bureaucratic_knowledge_user'))]"/>
         <field name="category_id" ref="bureaucrat_knowledge.module_category_bureaucratic_knowledge"/>
         <field name="users" eval="[(4, ref('base.user_root'))]"/>
         <field name="comment">
-            Bureaucratic Knowledge manager
+            Manager of knowledge base. Users in this group have full access to knowledgebase.
         </field>
     </record>
 </odoo>

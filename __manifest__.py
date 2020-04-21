@@ -8,16 +8,18 @@
     'author': "Center of Research and Development",
     'website': "https://crnd.pro",
     'version': '11.0.0.1.0',
-    'category': 'Bureaucrat',
+    'category': 'Knowledge',
 
     # any module necessary for this one to work correctly
     'depends': [
         'base',
         'generic_mixin',
+        'generic_tag',
     ],
 
     # always loaded
     'data': [
+        'data/generic_tag_model.xml',
         'security/security.xml',
         'security/ir.model.access.csv',
         'views/bureaucrat_knowledge_category.xml',

@@ -15,7 +15,7 @@ class BureaucratKnowledgeCategory(models.Model):
     name = fields.Char(translate=True, index=True, required=True)
     description = fields.Html()
     parent_id = fields.Many2one(
-        'bureaucrat.knowledge.category', index=True)
+        'bureaucrat.knowledge.category', index=True, ondelete='cascade')
     parent_left = fields.Integer('Left Parent', index=True)
     parent_right = fields.Integer('Right Parent', index=True)
     child_ids = fields.One2many(
@@ -36,18 +36,20 @@ class BureaucratKnowledgeCategory(models.Model):
         for rec in self:
             rec.documents_count = len(rec.document_ids)
 
-    def action_child_category_count(self):
+    def action_view_subcategories(self):
         self.ensure_one()
         action = self.env.ref(
             'bureaucrat_knowledge.action_bureaucrat_knowledge_category'
         ).read()[0]
         action['domain'] = [('parent_id', '=', self.id)]
+        action['context'] = {'default_parent_id': self.id}
         return action
 
-    def action_document_count(self):
+    def action_view_documents(self):
         self.ensure_one()
         action = self.env.ref(
             'bureaucrat_knowledge.action_bureaucrat_knowledge_document'
         ).read()[0]
         action['domain'] = [('category_id', '=', self.id)]
+        action['context'] = {'default_category_id': self.id}
         return action

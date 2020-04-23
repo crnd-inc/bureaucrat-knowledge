@@ -16,8 +16,7 @@ class BureaucratKnowledgeCategory(models.Model):
     description = fields.Html()
     parent_id = fields.Many2one(
         'bureaucrat.knowledge.category', index=True, ondelete='cascade')
-    parent_left = fields.Integer('Left Parent', index=True)
-    parent_right = fields.Integer('Right Parent', index=True)
+    parent_path = fields.Char(index=True)
     child_ids = fields.One2many(
         'bureaucrat.knowledge.category', 'parent_id')
     child_category_count = fields.Integer(

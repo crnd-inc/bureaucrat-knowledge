@@ -32,7 +32,7 @@
         <field name="name">Bureaucratic Knowledge / Manager</field>
         <field name="implied_ids" eval="[(4, ref('bureaucrat_knowledge.group_bureaucratic_knowledge_user'))]"/>
         <field name="category_id" ref="bureaucrat_knowledge.module_category_bureaucratic_knowledge"/>
-        <field name="users" eval="[(4, ref('base.user_root'))]"/>
+        <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
         <field name="comment">
             Manager of knowledge base. Users in this group have full access to knowledgebase.
         </field>

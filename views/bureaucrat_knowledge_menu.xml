@@ -7,7 +7,7 @@
         <field name="view_mode">tree,form</field>
     </record>
 
-       <record id="action_bureaucrat_knowledge_document" model="ir.actions.act_window">
+    <record id="action_bureaucrat_knowledge_document" model="ir.actions.act_window">
         <field name="name">Documents</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">bureaucrat.knowledge.document</field>
@@ -17,7 +17,8 @@
     <menuitem id="bureaucrat_knowledge_menu"
               name="Knowledge"
               groups="bureaucrat_knowledge.group_bureaucratic_knowledge_user"
-              sequence="50"/>
+              sequence="50"
+              web_icon="bureaucrat_knowledge,static/description/icon.png"/>
 
     <menuitem id="bureaucrat_knowledge_document_menu"
               parent="bureaucrat_knowledge_menu" sequence="15"

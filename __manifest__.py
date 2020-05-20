@@ -20,6 +20,8 @@
     # always loaded
     'data': [
         'data/generic_tag_model.xml',
+        'data/bureaucrat_knowledge_base_data.xml',
+        'data/bureaucrat_knowledge_base_documents_data.xml',
         'security/security.xml',
         'security/ir.model.access.csv',
         'views/bureaucrat_knowledge_category.xml',

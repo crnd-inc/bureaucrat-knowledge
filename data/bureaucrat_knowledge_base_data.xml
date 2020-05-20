@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="bureaucrat_documentation"
+            model="bureaucrat.knowledge.category">
+        <field name="name">Bureaucrat Documentation</field>
+    </record>
+
+    <record id="bureaucrat_documentation_reference"
+            model="bureaucrat.knowledge.category">
+        <field name="name">Reference</field>
+        <field name="parent_id"
+               ref="bureaucrat_documentation"/>
+    </record>
+
+    <record id="reference_generic_request_modules"
+            model="bureaucrat.knowledge.category">
+        <field name="name">Generic Request Modules</field>
+        <field name="parent_id"
+               ref="bureaucrat_documentation_reference"/>
+    </record>
+
+    <record id="reference_website_service_desk_modules"
+            model="bureaucrat.knowledge.category">
+        <field name="name">Website Service Desk Modules</field>
+        <field name="parent_id"
+               ref="bureaucrat_documentation_reference"/>
+    </record>
+
+    <record id="reference_generic_condition_modules"
+            model="bureaucrat.knowledge.category">
+        <field name="name">Generic Condition Modules</field>
+        <field name="parent_id"
+               ref="bureaucrat_documentation_reference"/>
+    </record>
+
+</odoo>

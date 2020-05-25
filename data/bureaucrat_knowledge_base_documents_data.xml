@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    
-    
+
+
     <record id="configure_request_category"
             model="bureaucrat.knowledge.document">
         <field name="name">Configure Request Category</field>
         <field name="category_id"
                ref="bureaucrat_documentation_admin_guides"/>
         <field name="document_body"><![CDATA[
-        
+
 <p>Generic Request. Admin's Guide.</p>
 <h1 id="configure-the-request-category">Configure the Request Category</h1>
 <p>To configure the request category, under the <strong>Configuration</strong> menu click <strong>Categories</strong>. </p>
@@ -38,7 +38,7 @@
         <field name="category_id"
                ref="bureaucrat_documentation_admin_guides"/>
         <field name="document_body"><![CDATA[
-        
+
 <p>Generic Request. Admin's Guide.</p>
 <h1 id="configure-the-request-type">Configure the Request Type</h1>
 <p>To configure the request type do the following:</p>
@@ -72,7 +72,7 @@
         <field name="category_id"
                ref="bureaucrat_documentation_admin_guides"/>
         <field name="document_body"><![CDATA[
-        
+
 <p>Generic Request. Admin's Guide.</p>
 <h1 id="configure-request-type-stages">Configure Request Type Stages</h1>
 <p>To configure request type stage, go to the stages page. To do this, on the request type form, click <strong>Stages</strong>.</p>
@@ -102,7 +102,7 @@
         <field name="category_id"
                ref="bureaucrat_documentation_admin_guides"/>
         <field name="document_body"><![CDATA[
-        
+
 <p>Generic Request. Admin's guide.</p>
 <h1 id="configure-request-type-routes">Configure Request Type Routes</h1>
 <p>After creating <a href="../Generic_Request_Type_Stages_Configure_admin_eng/">request type stages</a>, configure request type routes.</p>
@@ -148,7 +148,7 @@
 <p>Click <strong>Save</strong>.</p>
 </li>
 <li>
-<p>Repeat steps 2-11 until all stages of the request are connected. After this, the routes page will look similar to this: 
+<p>Repeat steps 2-11 until all stages of the request are connected. After this, the routes page will look similar to this:
     <img alt="" class="knowledge-document-img" src="/bureaucrat_knowledge/static/knowledge/bureaucrat_documentation_admin_guides/configure_request_type_routes/generic_request_routes.png"/></p>
 </li>
 </ol>
@@ -162,7 +162,7 @@
         <field name="category_id"
                ref="bureaucrat_documentation_admin_guides"/>
         <field name="document_body"><![CDATA[
-        
+
 <h1 id="how-to-configure-request-for-incident">How to Configure Request for Incident</h1>
 <blockquote>
 <p>Depending on the installed Generic Request modules, the appearance, menu structure and functionality of the application may vary. </p>
@@ -295,7 +295,7 @@
         <field name="category_id"
                ref="bureaucrat_documentation_admin_guides"/>
         <field name="document_body"><![CDATA[
-        
+
 <h1 id="request-for-changes-rfc">Request for Changes (RFC)</h1>
 <p>Request for Changes (RFC) is a formal request for the implementation of Changes. It controls the lifecycle of all changes and contains all information required to approve a Change.</p>
 <p>Request for Changes is a way to bring beneficial changes to your company with minimum disruption to IT services.</p>
@@ -385,7 +385,7 @@
         <field name="category_id"
                ref="bureaucrat_documentation_admin_guides"/>
         <field name="document_body"><![CDATA[
-        
+
 <h1 id="how-to-set-up-integration-between-requests-and-project">How to Set Up Integration between Requests and Project</h1>
 <p>The integration between projects and requests provides with the help of several addons. Each of them adds a new level of integration and can be installed separately for the needs of your company.</p>
 <p>These addons are:</p>
@@ -484,7 +484,7 @@
         <field name="category_id"
                ref="bureaucrat_documentation_admin_guides"/>
         <field name="document_body"><![CDATA[
-        
+
 <h1 id="how-to-assign-users-manager">How to Assign User's Manager</h1>
 <p>Most of the incidents that occur in daily work of employees will be one way or another related to their managers. Let's create an assignment policy and set up the request route to assign at a certain stage manager of the user who submitted the request.</p>
 <p>Assignment policy is a set of rules for assignment a responsible person.</p>
@@ -605,7 +605,7 @@
         <field name="category_id"
                ref="bureaucrat_documentation_admin_guides"/>
         <field name="document_body"><![CDATA[
-        
+
 <h1 id="configure-the-request-numbering-sequence">Configure The Request Numbering Sequence</h1>
 <p>You can customize the numbering sequence for each type of request. This sequence will be used to generate request names for the current request type.</p>
 <p>You can get to the sequence configuration page by clicking <strong>Sequence</strong> on the request type form and selecting the <strong>Create and Edit</strong> option.</p>
@@ -673,7 +673,7 @@
         <field name="category_id"
                ref="bureaucrat_documentation_admin_guides"/>
         <field name="document_body"><![CDATA[
-        
+
 <h1 id="how-to-move-requests-by-the-route-from-website-interface">How to Move Requests by the Route from Website Interface</h1>
 <p>Bureaucrat system can provide an ability for users to move requests manually by certain routes from the website interface.</p>
 <p>This is very useful if you need customers' approvement on some actions, and helps you to coordinate request processing with users and make it more interactive.</p>
@@ -720,7 +720,7 @@
         <field name="category_id"
                ref="bureaucrat_documentation_admin_guides"/>
         <field name="document_body"><![CDATA[
-        
+
 <h1 id="how-to-configure-sla-to-work-for-clients-with-different-services-and-service-levels-in-contracts">How to Configure SLA to Work for Clients with Different Services and Service Levels in Contracts</h1>
 <h2 id="basic-sla-configuration">Basic SLA Configuration</h2>
 <p>Let's configure SLA for Incident requests.</p>
@@ -1066,7 +1066,7 @@
         <field name="category_id"
                ref="bureaucrat_documentation_admin_guides"/>
         <field name="document_body"><![CDATA[
-        
+
 <h1 id="setting-up-a-request-only-assigned-person-or-system-administrator-can-move-requests-by-the-route">Setting Up a Request: Only Assigned Person or System Administrator Can Move Requests by the Route</h1>
 <p>The task is to set up request's workflow in such a way that only the assigned person or a system administrator can move requests by the route.</p>
 <p>To solve this task, you need to configure routes of a request type adding a custom condition to required routes.</p>
@@ -1135,7 +1135,7 @@
         <field name="category_id"
                ref="bureaucrat_documentation_admin_guides"/>
         <field name="document_body"><![CDATA[
-        
+
 <h1 id="how-to-set-up-notifications">How to Set Up Notifications</h1>
 <p>Bureaucrat system has multiple options for setting up notifications:</p>
 <ul>
@@ -1213,7 +1213,7 @@
         <field name="category_id"
                ref="bureaucrat_documentation_admin_guides"/>
         <field name="document_body"><![CDATA[
-        
+
 <h1 id="set-up-automated-emails-on-sla-events">Set Up Automated Emails on SLA Events</h1>
 <p>In this guide, we will configure the Incident type of request to send emails on SLA events. We will do this using automated actions.</p>
 <p>We have 2 configured SLA Rules: <em>Reaction Time</em> and <em>Resolve Time</em>. The task is to set up actions to automatically send emails when SLA reaches its warning and limit.</p>
@@ -1464,7 +1464,7 @@ has Failed the SLA.</code></p>
         <field name="category_id"
                ref="bureaucrat_documentation_user_guides"/>
         <field name="document_body"><![CDATA[
-        
+
 <h2 id="website-service-desk">Website Service Desk</h2>
 <p>Website Service Desk is an application that provides website user interface for Service Desk. It integrates with the Generic Request application and allows the users to create, submit and monitor execution of the requests through the website interface.</p>
 <p>Generic Request is a module designed to be the single channel for submitting all the events that occur in daily routine. </p>
@@ -1599,7 +1599,7 @@ has Failed the SLA.</code></p>
         <field name="category_id"
                ref="bureaucrat_documentation_user_guides"/>
         <field name="document_body"><![CDATA[
-        
+
 <h1 id="incident-life-cycle">Incident Life Cycle</h1>
 <p>In the company with the configured incident handling system there is an incident - the printer of the employee named Mary does not work. She submits the request to the company's service desk. Let's follow the life cycle of this request - from submitting to resolving a problem and closing the request.</p>
 <p>Mary logging into the system and submitting the request: <strong>Service Desk</strong> -&gt; <strong>Create request</strong>.</p>
@@ -1645,7 +1645,7 @@ has Failed the SLA.</code></p>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_generic_request_modules"/>
         <field name="document_body"><![CDATA[
-        
+
 <h2 id="generic-request-overview">Generic Request Overview</h2>
 <p>Generic Request module is an independent application which also operates as a  part of Bureaucrat application. It is a managing system for logging, recording, tracking, addressing, handling and archiving issues that occur in daily routine.</p>
 <p>It is designed to be the single channel for submitting all the events that prevent normal business operation and saving staff desraption for asking about advise on hardware or software problems.</p>
@@ -1662,7 +1662,7 @@ has Failed the SLA.</code></p>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_generic_request_modules"/>
         <field name="document_body"><![CDATA[
-        
+
 <h1 id="generic-request-action-hr-module">Generic Request Action (HR) Module</h1>
 <p>Generic Request Action (HR) is a module developed by the Center of Research &amp; Development company. The module provides integration between the HR application and the Generic Request (Actions) module.</p>
 <p>Generic Request Action (HR) requires that the following modules and applications be installed:</p>
@@ -1695,7 +1695,7 @@ has Failed the SLA.</code></p>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_generic_request_modules"/>
         <field name="document_body"><![CDATA[
-        
+
 <h1 id="generic-request-actions-module">Generic Request (Actions) Module</h1>
 <p>Generic Request (Actions) is a module of the Generic Request application developed by the Center of Research &amp; Development company. It allows you to assign actions that will be automatically performed for selected request type. </p>
 <p>After installing the Generic Request (Actions) module, the option to assign actions to the request when it moves along the route is enabled by default. You can enable or disable this option in the settings.</p>
@@ -1859,7 +1859,7 @@ has Failed the SLA.</code></p>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_generic_request_modules"/>
         <field name="document_body"><![CDATA[
-        
+
 <h1 id="generic-request-action-subrequest-module">Generic Request (Action Subrequest) Module</h1>
 <p>Generic Request (Action Subrequest) is a module of the Generic Request application developed by the Center of Research &amp; Development company. It allows you to automatically create sub-requests using assigned actions when the request moves along the route. </p>
 <p>The following modules need to be installed for the module:</p>
@@ -1907,7 +1907,7 @@ has Failed the SLA.</code></p>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_generic_request_modules"/>
         <field name="document_body"><![CDATA[
-        
+
 <h1 id="generic-request-auto-route-module">Generic Request (Auto route) Module</h1>
 <p>Generic Request (Auto route) is a module of the Generic Request application developed by the Center of Research &amp; Development company. It allows the request to automatically move along the route under certain conditions (by the trigger).</p>
 <p>In order to use this module, you need to install the Generic Request (Conditions) module.</p>
@@ -1976,7 +1976,7 @@ has Failed the SLA.</code></p>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_generic_request_modules"/>
         <field name="document_body"><![CDATA[
-        
+
 <h1 id="generic-request-auto-routes-subrequest-module">Generic Request (Auto routes subrequest) Module</h1>
 <p>Generic Request (Auto routes subrequest) is a module of the Generic Request application developed by the Center of Research &amp; Development company. It extends the functionality of the Generic Request (Auto route) module by adding the new trigger option. Now, the request can automatically navigate to the next stage when the sub-request's stage is changed. </p>
 <p>For the Generic Request (Auto routes subrequest) module, the following modules must be installed:</p>
@@ -1999,7 +1999,7 @@ has Failed the SLA.</code></p>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_generic_request_modules"/>
         <field name="document_body"><![CDATA[
-        
+
 <h1 id="generic-request-conditional-actions-module">Generic Request (Conditional Actions) Module</h1>
 <p>Generic Request (Conditional Actions) is a module of the Generic Request application developed by the Center of Research &amp; Development company. It allows you to make actions that are performed, conditional (actions that are performed when the request navigates between the stages). </p>
 <p>For the module the following modules need to be installed:</p>
@@ -2047,7 +2047,7 @@ has Failed the SLA.</code></p>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_generic_request_modules"/>
         <field name="document_body"><![CDATA[
-        
+
 <h1 id="generic-request-conditions-module">Generic Request (Conditions) Module</h1>
 <p>Generic Request (Conditions) is a module of the Generic Request application developed by the Center of Research &amp; Development company. It provides integration between Generic Request and Generic Condition modules.</p>
 <p>The Generic Request (Conditions) module requires the following modules to be installed:</p>
@@ -2075,7 +2075,7 @@ has Failed the SLA.</code></p>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_generic_request_modules"/>
         <field name="document_body"><![CDATA[
-        
+
 <h1 id="generic-request-dashboard-module">Generic Request Dashboard Module</h1>
 <blockquote>
 <p>Note! After update, the Generic Request Dashboard addon with all its functionality is now part of the Generic Request module. It does not exist as a separate module.</p>
@@ -2130,7 +2130,7 @@ has Failed the SLA.</code></p>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_generic_request_modules"/>
         <field name="document_body"><![CDATA[
-        
+
 <h1 id="generic-request-field-module">Generic Request Field Module</h1>
 <p>Generic Request Field is a module of the Generic Request application developed by the Center of Research &amp; Development company. The module extends overall functionality of the application by allowing additional information fields to be configured for specific request types.</p>
 <h2 id="overview-of-the-generic-request-field-module">Overview of the Generic Request Field module</h2>
@@ -2216,7 +2216,7 @@ has Failed the SLA.</code></p>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_generic_request_modules"/>
         <field name="document_body"><![CDATA[
-        
+
 <h1 id="generic-request-kind-module">Generic Request Kind Module</h1>
 <p>Generic Request Kind is a module of the Generic Request application developed by the Center of Research &amp; Development company.  It provides additional opportunities for classifying requests by kind of request.</p>
 <p>You can enable or disable the use of the Generic Request Kind module in the settings. To do this take the following steps:</p>
@@ -2272,7 +2272,7 @@ has Failed the SLA.</code></p>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_generic_request_modules"/>
         <field name="document_body"><![CDATA[
-        
+
 <h1 id="generic-request-mail">Generic Request Mail</h1>
 <p>Generic Request Mail is a module developed by the Center of Research &amp; Development company.</p>
 <p>It allows you to:</p>
@@ -2346,7 +2346,7 @@ has Failed the SLA.</code></p>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_generic_request_modules"/>
         <field name="document_body"><![CDATA[
-        
+
 <h1 id="generic-request-parent-module">Generic Request Parent Module</h1>
 <p>Generic Request Parent is a module of the Generic Request application developed by the Center of Research &amp; Development company. This module allows you to use sub-requests that are related to the main request, that is, adds a parent/child relationship to the requests. </p>
 <p>You can enable or disable the use of this module in the settings. </p>
@@ -2393,7 +2393,7 @@ has Failed the SLA.</code></p>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_generic_request_modules"/>
         <field name="document_body"><![CDATA[
-        
+
 <h1 id="generic-request-priority-module">Generic Request Priority Module</h1>
 <p>Generic Request Priority is a module of the Generic Request application developed by the Center of Research &amp; Development company. Now you can add priority to each request.</p>
 <p>You can enable or disable the use of this module in the settings. </p>
@@ -2442,7 +2442,7 @@ has Failed the SLA.</code></p>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_generic_request_modules"/>
         <field name="document_body"><![CDATA[
-        
+
 <h1 id="generic-request-related-document-module">Generic Request Related Document Module</h1>
 <p>Generic Request Related Document is a module of the Generic Request application developed by the Center of Research &amp; Development company. It allow you to link any Odoo documents with requests.</p>
 <p>You can enable or disable the use of this module in the settings. </p>
@@ -2491,7 +2491,7 @@ has Failed the SLA.</code></p>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_generic_request_modules"/>
         <field name="document_body"><![CDATA[
-        
+
 <h1 id="generic-request-related-requests-module">Generic Request Related Requests Module</h1>
 <p>Generic Request Related Requests is a module of the Generic Request application developed by the Center of Research &amp; Development company. It allows you to establish the links between requests. </p>
 <hr/>
@@ -2534,7 +2534,7 @@ has Failed the SLA.</code></p>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_generic_request_modules"/>
         <field name="document_body"><![CDATA[
-        
+
 <h1 id="generic-request-reopen-as-module">Generic Request Reopen As Module</h1>
 <p>Generic Request Reopen As is a module of the Generic Request application developed by the Center of Research &amp; Development company. It allows users to reopen closed requests with a new type of request.</p>
 <hr/>
@@ -2585,7 +2585,7 @@ has Failed the SLA.</code></p>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_generic_request_modules"/>
         <field name="document_body"><![CDATA[
-        
+
 <h1 id="generic-request-resource-module">Generic Request (Resource) Module</h1>
 <p>Generic Request (Resource) is a module of the Generic Request application developed by the Center of Research &amp; Development company. It provides integration between Generic Resource and Generic Request modules. Now, when you creating the request that contains services, you can choose resources that are involved in these services.</p>
 <hr/>
@@ -2610,7 +2610,7 @@ has Failed the SLA.</code></p>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_generic_request_modules"/>
         <field name="document_body"><![CDATA[
-        
+
 <h1 id="generic-request-service-module">Generic Request Service Module</h1>
 <p>Generic Request Service is a module of the Generic Request application developed by the Center of Research &amp; Development company. It provides integration between Generic Service and Generic Request modules. Now, when you creating a request,  you can also order a service.</p>
 <hr/>
@@ -2668,7 +2668,7 @@ has Failed the SLA.</code></p>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_generic_request_modules"/>
         <field name="document_body"><![CDATA[
-        
+
 <h1 id="generic-request-sla-module">Generic Request SLA Module</h1>
 <p>In this instruction you can read the following:</p>
 <p><a href="#1">Generic Request SLA Module Review</a></p>
@@ -2812,7 +2812,7 @@ has Failed the SLA.</code></p>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_generic_request_modules"/>
         <field name="document_body"><![CDATA[
-        
+
 <h1 id="generic-request-sla-log-module">Generic Request SLA: Log Module</h1>
 <p>Generic Request SLA: Log is a module of the Generic Request application developed by the Center of Research &amp; Development company. The module adds the ability to log and report actions that occur with requests. To get full functionality it is recommended to use the Generic Request SLA: Log and Generic Request SLA modules in pair.</p>
 <hr/>
@@ -2855,7 +2855,7 @@ has Failed the SLA.</code></p>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_generic_request_modules"/>
         <field name="document_body"><![CDATA[
-        
+
 <h1 id="generic-request-stage-type-module">Generic Request Stage Type Module</h1>
 <p><strong>Generic Request Stage Type module is now part of the Generic Request functionality and does not require installation.</strong></p>
 <p>It allows the request stage to be subjected to global types of stages. You can distinguish request stages at glance and easily look after their execution.</p>
@@ -2892,7 +2892,7 @@ has Failed the SLA.</code></p>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_generic_request_modules"/>
         <field name="document_body"><![CDATA[
-        
+
 <h1 id="generic-request-stage-type-sla-module">Generic Request Stage Type (SLA) Module</h1>
 <p><strong>Generic Request Stage Type (SLA) addon is now part of the Generic Request SLA functionality and does not require installation.</strong></p>
 <p>It provides the ability to add information about global request stages while logging and use them to group entries while reviewing.</p>
@@ -2916,7 +2916,7 @@ has Failed the SLA.</code></p>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_generic_request_modules"/>
         <field name="document_body"><![CDATA[
-        
+
 <h1 id="generic-request-tags-module">Generic Request (Tags) Module</h1>
 <p>Generic Request (Tags) is a module of the Generic Request application developed by the Center of Research &amp; Development company. It provides integration between the Generic Request and Generic Tag applications. Now you can use tags while working with requests.</p>
 <p>For the Generic Request (Tags) module the following applications and modules required to be installed:</p>
@@ -2969,7 +2969,7 @@ has Failed the SLA.</code></p>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_website_service_desk_modules"/>
         <field name="document_body"><![CDATA[
-        
+
 <h1 id="website-service-desk-field">Website Service Desk (Field)</h1>
 <p>Website Service Desk (Field) is a module developed by the Center of Research &amp; Development company. It provides integration between the Website Service Desk and Generic Request (Fields) modules and allows to use additional fields when submitting requests using the website interface.</p>
 <p><img alt="" class="knowledge-document-img" src="/bureaucrat_knowledge/static/knowledge/bureaucrat_documentation_reference/bureaucrat_documentation_reference_website_service_desk_modules/website_service_desk_field/website_service_desk_31.png"/></p>
@@ -2984,7 +2984,7 @@ has Failed the SLA.</code></p>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_website_service_desk_modules"/>
         <field name="document_body"><![CDATA[
-        
+
 <h1 id="website-service-desk-resource">Website Service Desk (Resource)</h1>
 <p>Website Service Desk (Resource) is a module developed by the Center of Research &amp; Development company. It provides integration between the Website Service Desk and Generic Request (Resource) modules and allows to use resources when submitting requests using the website interface.</p>
 <p><img alt="" class="knowledge-document-img" src="/bureaucrat_knowledge/static/knowledge/bureaucrat_documentation_reference/bureaucrat_documentation_reference_website_service_desk_modules/website_service_desk_resource/website_service_desk_36.png"/></p>
@@ -2999,7 +2999,7 @@ has Failed the SLA.</code></p>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_website_service_desk_modules"/>
         <field name="document_body"><![CDATA[
-        
+
 <h1 id="website-service-desk-service">Website Service Desk (Service)</h1>
 <p>Website Service Desk (Service) is a module developed by the Center of Research &amp; Development company. It provides integration between the Website Service Desk and Generic Request Service modules and allows to use services when submitting requests using the website interface.</p>
 <p><img alt="" class="knowledge-document-img" src="/bureaucrat_knowledge/static/knowledge/bureaucrat_documentation_reference/bureaucrat_documentation_reference_website_service_desk_modules/website_service_desk_service/website_service_desk_5.png"/></p>
@@ -3014,7 +3014,7 @@ has Failed the SLA.</code></p>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_website_service_desk_modules"/>
         <field name="document_body"><![CDATA[
-        
+
 <h1 id="website-service-desk-tag">Website Service Desk (Tag)</h1>
 <p>Website Service Desk (Tag) is a module developed by the Center of Research &amp; Development company. It provides integration between the Website Service Desk and Generic Request (Tag) modules and allows to use tags when submitting requests using the website interface.</p>
 <p><img alt="" class="knowledge-document-img" src="/bureaucrat_knowledge/static/knowledge/bureaucrat_documentation_reference/bureaucrat_documentation_reference_website_service_desk_modules/website_service_desk_tag/website_service_desk_28.png"/></p>
@@ -3029,7 +3029,7 @@ has Failed the SLA.</code></p>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_generic_condition_modules"/>
         <field name="document_body"><![CDATA[
-        
+
 <h1 id="generic-condition-module">Generic Condition Module</h1>
 <p>Generic Condition is a module developed by the Center of Research &amp; Development company. The module allows you to create generic conditions on which you can program some logic in Odoo objects. </p>
 <p>Generic Condition module is integrated and can be used with other Odoo applications with additional modules.</p>
@@ -3053,7 +3053,13 @@ has Failed the SLA.</code></p>
 <p>Depending on the selected type, different options for further programming of the condition will appear.</p>
 <ol>
 <li>
-<p>If you choose the type of the condition <strong>Expression</strong>:<br/>You can describe the condition as an expression in the Python programming language (For example the expression "obj.request_text == 'do assign'" means that the text of the request  should be equal to "do assign")<br/><img alt="" class="knowledge-document-img" src="/bureaucrat_knowledge/static/knowledge/bureaucrat_documentation_reference/bureaucrat_documentation_reference_generic_condition_modules/generic_condition/50.png"/><br/>The expression is not limited to one line, you can write a large snippets of the code simply by pressing the Enter key in the end of the line. <br/>You can use the following variables:<br/>- obj - object that is checked<br/>- record - record of the object that is checked (same as obj)<br/>- env - environment<br/>- model - model<br/>- uid - current user id<br/>- user - current user<br/>- time - python module "time"<br/>- datetime - python module "datetime"<br/>- dateutil - python module "dateutil"<br/>- timezone - python module "timezone"</p>
+<p>If you choose the type of the condition <strong>Expression</strong>:<br/>You can describe the condition as an expression in the Python programming language (For example the expression "obj.request_text == 'do assign'" means that the text of the request  should be equal to "do assign")<br/><img alt="" class="knowledge-document-img" src="/bureaucrat_knowledge/static/knowledge/bureaucrat_documentation_reference/bureaucrat_documentation_reference_generic_condition_modules/generic_condition/50.png"/><br/>The expression is not limited to one line, you can write a large snippets of the code simply by pressing the Enter key in the end of the line.
+<br/>You can use the following variables:
+    <ul>
+        <li> obj - object that is checked</li><li> record - record of the object that is checked (same as obj)</li><li> env - environment</li><li> model - model</li><li> uid - current user id</li><li> user - current user</li><li> time - python module "time"</li><li> datetime - python module "datetime"</li><li> dateutil - python module "dateutil"</li><li> timezone - python module "timezone"</li>
+    </ul
+</p>
+
 </li>
 <li>
 <p><strong>Filter</strong>:<br/>Here, next to the <em>Condition (filter)</em> field, you need to specify the filter for the verification. This type of condition is used to work with custom Odoo filters.<br/>Click the drop down menu and select filter from the list or click <em>Create and Edit...</em> to create a new one.<br/><img alt="" class="knowledge-document-img" src="/bureaucrat_knowledge/static/knowledge/bureaucrat_documentation_reference/bureaucrat_documentation_reference_generic_condition_modules/generic_condition/51.png"/></p>
@@ -3062,16 +3068,44 @@ has Failed the SLA.</code></p>
 <p><strong>Condition</strong>:<br/>In that case you can select one of the already created conditions  (this could be useful if you use the same condition but with inversion or as a superuser). Click the drop down menu next to the <em>Condition</em> field and select from the list. To see more options click <em>Search More...</em>. To create a new condition click <em>Create and Edit...</em>.<br/><img alt="" class="knowledge-document-img" src="/bureaucrat_knowledge/static/knowledge/bureaucrat_documentation_reference/bureaucrat_documentation_reference_generic_condition_modules/generic_condition/52.png"/></p>
 </li>
 <li>
-<p><strong>Condition grop</strong>:<br/>With this type of condition you can use multiple conditions simultaneously.<br/>- Next to the <em>Condition (condition group): operator</em> field select one of the two logical operators ("OR" - the general condition will be fulfilled if at least one of the above conditions is fulfilled; "AND" - general condition will be fulfilled if all of the conditions are fulfilled).<br/>- Next to the <em>Condition (condition group)</em> field select all the necessary conditions or create a new one by clicking <em>Create and Edit...</em>.<br/><img alt="" class="knowledge-document-img" src="/bureaucrat_knowledge/static/knowledge/bureaucrat_documentation_reference/bureaucrat_documentation_reference_generic_condition_modules/generic_condition/53.png"/></p>
+<p><strong>Condition grop</strong>:<br/>With this type of condition you can use multiple conditions simultaneously.
+    <ul>
+        <li> Next to the <em>Condition (condition group): operator</em> field select one of the two logical operators ("OR" - the general condition will be fulfilled if at least one of the above conditions is fulfilled; "AND" - general condition will be fulfilled if all of the conditions are fulfilled).</li><li> Next to the <em>Condition (condition group)</em> field select all the necessary conditions or create a new one by clicking <em>Create and Edit...</em>.<br/><img alt="" class="knowledge-document-img" src="/bureaucrat_knowledge/static/knowledge/bureaucrat_documentation_reference/bureaucrat_documentation_reference_generic_condition_modules/generic_condition/53.png"/></li>
+    </ul>
+    </p>
 </li>
 <li>
-<p><strong>Date difference</strong>:<br/>This type of the condition allows you to estimate the date difference between certain events: <br/>- In the <em>End Date</em> and <em>Start Date</em> fields you can specify the date, time, current date or attach the date to the field with date (created, assigned, moved etc).<br/>- In the <em>Operator</em> field select comparison operator.<br/>- In the <em>Result</em> field enter the necessary digit. <br/>- In the next field select the units for the date difference.<br/>- To ensure that the date difference is always positive, check the <em>Absolute</em> field.<br/><img alt="" class="knowledge-document-img" src="/bureaucrat_knowledge/static/knowledge/bureaucrat_documentation_reference/bureaucrat_documentation_reference_generic_condition_modules/generic_condition/54.png"/></p>
+<p><strong>Date difference</strong>:<br/>This type of the condition allows you to estimate the date difference between certain events:
+
+<ul>
+ <li> In the <em>End Date</em> and <em>Start Date</em> fields you can specify the date, time, current date or attach the date to the field with date (created, assigned, moved etc).</li>
+ <li> In the <em>Operator</em> field select comparison operator.</li>
+ <li> In the <em>Result</em> field enter the necessary digit. </li>
+ <li> In the next field select the units for the date difference.</li>
+ <li> To ensure that the date difference is always positive, check the <em>Absolute</em> field.</li>
+</ul>
+
+ <br/><img alt="" class="knowledge-document-img" src="/bureaucrat_knowledge/static/knowledge/bureaucrat_documentation_reference/bureaucrat_documentation_reference_generic_condition_modules/generic_condition/54.png"/></p>
 </li>
 <li>
-<p><strong>Simple field</strong>:<br/>Here you can create a condition that relates to the simple field of the Odoo object.<br/>- In the <em>Field</em> drop down menu select required field.<br/>- Click the <em>Operator</em> drop down menu and select required operator. Depending on the selected field, it can be mathematical, boolean, etc. If selected field contains text, with the operator you can search by text with given parameters (regardless of the case, search using the regular expression). <br/>- In the <em>Value</em> field, specify the required condition value or text (regular expression) to search and compare.<br/><img alt="" class="knowledge-document-img" src="/bureaucrat_knowledge/static/knowledge/bureaucrat_documentation_reference/bureaucrat_documentation_reference_generic_condition_modules/generic_condition/55.png"/></p>
+<p><strong>Simple field</strong>:<br/>Here you can create a condition that relates to the simple field of the Odoo object.
+
+<ul>
+<li> In the <em>Field</em> drop down menu select required field.</li>
+<li> Click the <em>Operator</em> drop down menu and select required operator. Depending on the selected field, it can be mathematical, boolean, etc. If selected field contains text, with the operator you can search by text with given parameters (regardless of the case, search using the regular expression).</li>
+<li> In the <em>Value</em> field, specify the required condition value or text (regular expression) to search and compare.</li>
+</ul>
+
+<br/><img alt="" class="knowledge-document-img" src="/bureaucrat_knowledge/static/knowledge/bureaucrat_documentation_reference/bureaucrat_documentation_reference_generic_condition_modules/generic_condition/55.png"/></p>
+
 </li>
 <li>
-<p><strong>Related field</strong>:<br/>This type of condition applies to related fields.<br/>- Click the <em>Field</em> drop down menu and select the required field.<br/>- In the <em>Operator</em> menu select one of the three operators (Set, Not set. Contains). If you select <em>Contains</em> as an operator, another <em>Value</em> field appears, select the desired value here.<br/><img alt="" class="knowledge-document-img" src="/bureaucrat_knowledge/static/knowledge/bureaucrat_documentation_reference/bureaucrat_documentation_reference_generic_condition_modules/generic_condition/56.png"/></p>
+<p><strong>Related field</strong>:<br/>This type of condition applies to related fields.
+<ul>
+<li> Click the <em>Field</em> drop down menu and select the required field.</li>
+<li> In the <em>Operator</em> menu select one of the three operators (Set, Not set. Contains). If you select <em>Contains</em> as an operator, another <em>Value</em> field appears, select the desired value here.</li>
+
+<br/><img alt="" class="knowledge-document-img" src="/bureaucrat_knowledge/static/knowledge/bureaucrat_documentation_reference/bureaucrat_documentation_reference_generic_condition_modules/generic_condition/56.png"/></p>
 </li>
 <li>
 <p><strong>Current user</strong>:<br/>This type of condition allows you to perform checks related to the current user. You can select one of <em>Check Types</em> in the appropriate field.</p>
@@ -3092,11 +3126,47 @@ has Failed the SLA.</code></p>
 </ul>
 </li>
 <li>
-<p><strong>Monetary field</strong>:<br/>By this type you can create the condition to compare monetary indicators.<br/>- Click the <em>Field</em> drop down menu and select the field from which the information will be taken. Below choose a currency.<br/>- In the <em>Operator</em> field, select the comparison operator.<br/>- In the <em>Result</em> field specify the result for comparison and below the currency.<br/>- Click the <em>Accounting date</em> field and select the date of the account or the date field.<br/><img alt="" class="knowledge-document-img" src="/bureaucrat_knowledge/static/knowledge/bureaucrat_documentation_reference/bureaucrat_documentation_reference_generic_condition_modules/generic_condition/58.png"/></p>
+<p><strong>Monetary field</strong>:<br/>By this type you can create the condition to compare monetary indicators.
+<ul>
+    <li>Click the <em>Field</em> drop down menu and select the field from which the information will be taken. Below choose a currency.</li>
+    <li>In the <em>Operator</em> field, select the comparison operator.</li>
+    <li>In the <em>Result</em> field specify the result for comparison and below the currency.</li>
+    <li>Click the <em>Accounting date</em> field and select the date of the account or the date field.</li>
+</ul>
+<br/><img alt="" class="knowledge-document-img" src="/bureaucrat_knowledge/static/knowledge/bureaucrat_documentation_reference/bureaucrat_documentation_reference_generic_condition_modules/generic_condition/58.png"/></p>
 </li>
 <li>
-<p><strong>Related conditions</strong>:<br/>Used to check the properties of related objects.<br/><img alt="" class="knowledge-document-img" src="/bureaucrat_knowledge/static/knowledge/bureaucrat_documentation_reference/bureaucrat_documentation_reference_generic_condition_modules/generic_condition/59.png"/><br/>Here you need to enter the following data: <br/>1 - a way to check related records:<br/>    - <em>Match</em> - when all the selected entries match the conditions of the check<br/>    - <em>Contains</em> - when at least one of the entries match the condition<br/>2 - the field by which we will search for the related object<br/>3 - operator of the filter condition:<br/>    - <em>AND</em> - valid when all filter conditions are validÑ<br/>    -  <em>OR</em> - Valid when at least one of the filter conditions is valid<br/>4 - related filter conditions<br/>5 - operator of the related check conditions:<br/>    - <em>AND</em> - valid when all filter conditions are validÑ<br/>    - <em>OR</em> - Valid when at least one of the filter conditions is valid<br/>6 - related check conditions</p>
-</li>
+<p><strong>Related conditions</strong>:<br/>Used to check the properties of related objects.<br/><img alt="" class="knowledge-document-img" src="/bureaucrat_knowledge/static/knowledge/bureaucrat_documentation_reference/bureaucrat_documentation_reference_generic_condition_modules/generic_condition/59.png"/><br/>
+
+
+Here you need to enter the following data:
+        <ol>
+            <li>A way to check related records:
+                <ul>
+                    <li><em>Match</em> - when all the selected entries match the conditions of the check</li>
+                    <li><em>Contains</em> - when at least one of the entries match the condition</li>
+                </ul>
+            </li>
+
+
+            <li>The field by which we will search for the related object</li>
+            <li>Operator of the filter condition:
+                <ul>
+                    <li><em>AND</em> - valid when all filter conditions are valid</li>
+                    <li><em>OR</em> - Valid when at least one of the filter conditions is valid</li>
+                </ul>
+
+            <li>Related filter conditions</li>
+            <li>Operator of the related check conditions:
+                <ul>
+                    <li><em>AND</em> - valid when all filter conditions are valid</li>
+                    <li><em>OR</em> - Valid when at least one of the filter conditions is valid</li>
+                </ul>
+            </li>
+            <li>Related check conditions</li>
+        </ol>
+        </p>
+    </li>
 </ol>
 <p>The form for creating condition contains additional options that can be set by ticking.</p>
 <p><img alt="" class="knowledge-document-img" src="/bureaucrat_knowledge/static/knowledge/bureaucrat_documentation_reference/bureaucrat_documentation_reference_generic_condition_modules/generic_condition/60.png"/></p>
@@ -3134,7 +3204,7 @@ has Failed the SLA.</code></p>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_generic_condition_modules"/>
         <field name="document_body"><![CDATA[
-        
+
 <h1 id="generic-condition-action-rules-automation">Generic Condition Action Rules (Automation)</h1>
 <p><a href="https://www.odoo.com/apps/modules/12.0/generic_condition_automation/">Generic Condition - Action Rules</a> provides integration between the <a href="https://crnd.pro/doc-bureaucrat-itsm/11.0/en/Generic_Condition_admin_eng/">Generic Condition</a> and Automated Action Rules (base_automation) addons.</p>
 <p>It allows you to use generic conditions when programming automated actions.</p>
@@ -3186,7 +3256,7 @@ has Failed the SLA.</code></p>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_generic_condition_modules"/>
         <field name="document_body"><![CDATA[
-        
+
 <h1 id="generic-condition-module">Generic Condition Module</h1>
 <p>Generic Condition is a module developed by the Center of Research &amp; Development company. The module allows you to create generic conditions on which you can program some logic in Odoo objects. </p>
 <p>You can set different conditions for changing stages, appointing responsible persons, automatically triggering events, etc., so that your everyday business processes can proceed more smoothly and automated.</p>
@@ -3211,7 +3281,7 @@ has Failed the SLA.</code></p>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_generic_resource_modules"/>
         <field name="document_body"><![CDATA[
-        
+
 <h1 id="generic-resource-module">Generic Resource Module</h1>
 <p>Generic Resource is a module developed by the Center of Research &amp; Development company. It provides the ability to create and categorize various resources that can be used in other Odoo modules.</p>
 <p>After installing the module, it will be available in the main dashboard menu on the left. Click <strong>Generic Resources</strong>.</p>
@@ -3276,7 +3346,7 @@ has Failed the SLA.</code></p>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_generic_resource_modules"/>
         <field name="document_body"><![CDATA[
-        
+
 <h1 id="generic-resource-role-module">Generic Resource Role Module</h1>
 <p>Generic Resource Role is a module developed by the Center of Research &amp; Development company. It extends the functionality of the Generic Resource application and provides the ability to organize resources by roles.</p>
 <p>For the Generic Resource Role module, the following applications and modules must be installed:</p>
@@ -3348,7 +3418,7 @@ has Failed the SLA.</code></p>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_generic_resource_modules"/>
         <field name="document_body"><![CDATA[
-        
+
 <h1 id="generic-resource-timesheet-module">Generic Resource Timesheet Module</h1>
 <p>Generic Resource Timesheet is a module developed by the Center of Research &amp; Development company. It extends the functionality of the Generic Resource module, providing the ability to add a resource scheduling.</p>
 <hr/>
@@ -3399,7 +3469,7 @@ has Failed the SLA.</code></p>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_generic_service_modules"/>
         <field name="document_body"><![CDATA[
-        
+
 <h1 id="generic-service">Generic Service</h1>
 <p>Generic Service is an application developed by the Center of Research &amp; Development company. It allows you to create and manage service catalog. It also implements a concept of service level, allowing to create and use different levels of service for different clients or services.</p>
 <hr/>
@@ -3446,7 +3516,7 @@ has Failed the SLA.</code></p>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_generic_service_modules"/>
         <field name="document_body"><![CDATA[
-        
+
 <h1 id="generic-service-resource-module">Generic Service (Resource) Module</h1>
 <p>Generic Service (Resource) is a module developed by the Center of Research &amp; Development company. It provides integration between the Generic Service and Generic Resource modules. Now when you create resources, you can choose services for them, and when you create the services you can choose the necessary resources.</p>
 <p>For the Generic Service (Resource) module, the following applications and modules must be installed:</p>
@@ -3488,7 +3558,7 @@ has Failed the SLA.</code></p>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_generic_tag_modules"/>
         <field name="document_body"><![CDATA[
-        
+
 <h1 id="generic-tag">Generic Tag</h1>
 <p>Generic Tag is an application developed by the Center of Research &amp; Development company. It allows you to create and categorize generic tags (keywords). With these tags in other applications, you can use the logic associated with them (for example, search by tags). Integration with other modules is realized with the help of additional modules.</p>
 <hr/>
@@ -3565,7 +3635,7 @@ has Failed the SLA.</code></p>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_generic_tag_modules"/>
         <field name="document_body"><![CDATA[
-        
+
 <h1 id="generic-tag">Generic Tag</h1>
 <p>Generic Tag is a module developed by the Center of Research &amp; Development company. It allows you to create and categorize generic tags (keywords). </p>
 <p>With these tags in other applications, you can use the logic associated with them (for example, search and filter objects by tags). </p>
@@ -3588,7 +3658,7 @@ has Failed the SLA.</code></p>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_generic_assignment_modules"/>
         <field name="document_body"><![CDATA[
-        
+
 <h1 id="generic-assignment-policy">Generic Assignment Policy</h1>
 <p>Generic Assignment Policy is a technical addon developed by the Center of Research &amp; Development company. It allows you to create custom user assignment policies and rules by which this assignments will take place.</p>
 <p>To use this module you need to have the Generic Condition addon installed.</p>
@@ -3682,7 +3752,7 @@ has Failed the SLA.</code></p>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_generic_assignment_modules"/>
         <field name="document_body"><![CDATA[
-        
+
 <h1 id="genenric-assignment-hr">Genenric Assignment HR</h1>
 <p>Genenric Assignment HR is a module developed by the Center of Research &amp; Development company. It provides integration between the Generic Assignment Policy and HR modules.</p>
 <p>Now when you create rules for an assignment policy using the Generic Assignment Policy module, you will have additional options for assigning users.</p>
@@ -3702,7 +3772,7 @@ has Failed the SLA.</code></p>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_generic_assignment_modules"/>
         <field name="document_body"><![CDATA[
-        
+
 <h1 id="generic-assignment-team">Generic Assignment Team</h1>
 <p>Generic Assignment Team is a module developed by the Center of Research &amp; Development company. It provides integration between the Generic Assignment Policy and Generic Team modules.</p>
 <p>Now when you create rules for an assignment policy using the Generic Assignment Policy module, you will have additional options for assigning users.</p>
@@ -3722,7 +3792,7 @@ has Failed the SLA.</code></p>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_generic_team_modules"/>
         <field name="document_body"><![CDATA[
-        
+
 <h1 id="generic-team">Generic Team</h1>
 <p>Generic Team is a module developed by the Center of Research &amp; Development company. You can create teams and add users to them, which allows you to perform group actions (such as assigning responsible team instead of one person) while working with Odoo applications. The teams can be used in other Odoo applications with the help of additional communication modules. </p>
 <hr/>
@@ -3760,7 +3830,7 @@ has Failed the SLA.</code></p>
         <field name="category_id"
                ref="bureaucrat_documentation_reference"/>
         <field name="document_body"><![CDATA[
-        
+
 <h1 id="odoo-notification-management">Odoo Notification Management</h1>
 <p>In this article, we will explore the general mechanism of notifications in Odoo: how they work, in which cases they are sent and how not to send them (if you don't want to spam your clients with minor events, or your Odoo only for internal usage).</p>
 <p>We used Odoo v.11 applications for this article.</p>
@@ -3888,7 +3958,7 @@ has Failed the SLA.</code></p>
         <field name="category_id"
                ref="bureaucrat_documentation_faq_troubleshooting"/>
         <field name="document_body"><![CDATA[
-        
+
 <h1 id="diagram-view-odoo-bug">Diagram View Odoo Bug</h1>
 <p>There is an Odoo bug that raises an error on the diagram view. It appears when the diagram object has 2 fields (one2many + many2one) that points to related nodes.</p>
 <p>For example, we have the following model to display diagram view on in:</p>
@@ -3921,7 +3991,7 @@ ValueError: Expected singleton: ir.model.fields(6706, 6713)
         <field name="category_id"
                ref="bureaucrat_documentation_faq"/>
         <field name="document_body"><![CDATA[
-        
+
 <h1 id="how-to-backup-and-restore-database-in-odoo-using-website-interface">How to Backup and Restore Database in Odoo Using Website Interface</h1>
 <p>Odoo supports database management using website interface.</p>
 <p>To open the database manager, access the database manager page by the url: http://your_odoo_server/web/database/manager</p>

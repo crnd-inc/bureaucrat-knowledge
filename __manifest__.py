@@ -28,6 +28,8 @@
         'views/bureaucrat_knowledge_document.xml',
         'views/bureaucrat_knowledge_menu.xml',
         'views/bureaucrat_knowledge_document_history.xml',
+
+        'templates/templates.xml',
     ],
     'images': [],
     'demo': [],

@@ -7,95 +7,95 @@
     </record>
 
     
-    <record id="admin_guides"
+    <record id="bureaucrat_documentation_admin_guides"
             model="bureaucrat.knowledge.category">
         <field name="name">Admin Guides</field>
         <field name="parent_id"
                ref="bureaucrat_documentation"/>
     </record>
 
-    <record id="user_guides"
+    <record id="bureaucrat_documentation_user_guides"
             model="bureaucrat.knowledge.category">
         <field name="name">User Guides</field>
         <field name="parent_id"
                ref="bureaucrat_documentation"/>
     </record>
 
-    <record id="reference"
+    <record id="bureaucrat_documentation_reference"
             model="bureaucrat.knowledge.category">
         <field name="name">Reference</field>
         <field name="parent_id"
                ref="bureaucrat_documentation"/>
     </record>
 
-    <record id="reference_generic_request_modules"
+    <record id="bureaucrat_documentation_reference_generic_request_modules"
             model="bureaucrat.knowledge.category">
         <field name="name">Generic Request Modules</field>
         <field name="parent_id"
-               ref="reference"/>
+               ref="bureaucrat_documentation_reference"/>
     </record>
 
-    <record id="reference_website_service_desk_modules"
+    <record id="bureaucrat_documentation_reference_website_service_desk_modules"
             model="bureaucrat.knowledge.category">
         <field name="name">Website Service Desk Modules</field>
         <field name="parent_id"
-               ref="reference"/>
+               ref="bureaucrat_documentation_reference"/>
     </record>
 
-    <record id="reference_generic_condition_modules"
+    <record id="bureaucrat_documentation_reference_generic_condition_modules"
             model="bureaucrat.knowledge.category">
         <field name="name">Generic Condition Modules</field>
         <field name="parent_id"
-               ref="reference"/>
+               ref="bureaucrat_documentation_reference"/>
     </record>
 
-    <record id="reference_generic_resource_modules"
+    <record id="bureaucrat_documentation_reference_generic_resource_modules"
             model="bureaucrat.knowledge.category">
         <field name="name">Generic Resource Modules</field>
         <field name="parent_id"
-               ref="reference"/>
+               ref="bureaucrat_documentation_reference"/>
     </record>
 
-    <record id="reference_generic_service_modules"
+    <record id="bureaucrat_documentation_reference_generic_service_modules"
             model="bureaucrat.knowledge.category">
         <field name="name">Generic Service Modules</field>
         <field name="parent_id"
-               ref="reference"/>
+               ref="bureaucrat_documentation_reference"/>
     </record>
 
-    <record id="reference_generic_tag_modules"
+    <record id="bureaucrat_documentation_reference_generic_tag_modules"
             model="bureaucrat.knowledge.category">
         <field name="name">Generic Tag Modules</field>
         <field name="parent_id"
-               ref="reference"/>
+               ref="bureaucrat_documentation_reference"/>
     </record>
 
-    <record id="reference_generic_assignment_modules"
+    <record id="bureaucrat_documentation_reference_generic_assignment_modules"
             model="bureaucrat.knowledge.category">
         <field name="name">Generic Assignment modules</field>
         <field name="parent_id"
-               ref="reference"/>
+               ref="bureaucrat_documentation_reference"/>
     </record>
 
-    <record id="reference_generic_team_modules"
+    <record id="bureaucrat_documentation_reference_generic_team_modules"
             model="bureaucrat.knowledge.category">
         <field name="name">Generic Team modules</field>
         <field name="parent_id"
-               ref="reference"/>
+               ref="bureaucrat_documentation_reference"/>
     </record>
 
-    <record id="faq"
+    <record id="bureaucrat_documentation_faq"
             model="bureaucrat.knowledge.category">
         <field name="name">FAQ</field>
         <field name="parent_id"
                ref="bureaucrat_documentation"/>
     </record>
 
-    <record id="faq_troubleshooting"
+    <record id="bureaucrat_documentation_faq_troubleshooting"
             model="bureaucrat.knowledge.category">
         <field name="name">Troubleshooting</field>
         <field name="parent_id"
-               ref="faq"/>
+               ref="bureaucrat_documentation_faq"/>
     </record>
 
 

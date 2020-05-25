@@ -34,3 +34,5 @@ class BureaucratKnowledgeDocument(models.Model):
             'date_create': fields.Datetime.now(),
             'document_id': self.id,
         })
+
+    active = fields.Boolean(default=True, index=True)

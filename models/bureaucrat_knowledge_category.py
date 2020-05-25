@@ -26,6 +26,7 @@ class BureaucratKnowledgeCategory(models.Model):
     document_ids = fields.One2many(
         'bureaucrat.knowledge.document', 'category_id')
     documents_count = fields.Integer(compute='_compute_documents_count')
+    active = fields.Boolean(default=True, index=True)
 
     @api.depends('child_ids')
     def _compute_child_category_count(self):

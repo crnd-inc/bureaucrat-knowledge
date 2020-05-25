@@ -38,7 +38,22 @@
                         </group>
                         <group></group>
                     </group>
-                    <field name="document_body"/>
+                    <notebook>
+                        <page name="document_body" string="Document">
+                            <field name="document_body"/>
+                        </page>
+                        <page name="document_history" string="Document History">
+                            <field name="history_ids">
+                                <tree create="0" delete="0">
+                                    <field name="commit_summary"/>
+                                    <field name="user_id"/>
+                                    <field name="date_create"/>
+                                </tree>
+                            </field>
+                            <field name="commit_summary" class="oe_edit_only"/>
+                        </page>
+                    </notebook>
+
                 </sheet>
             </form>
         </field>

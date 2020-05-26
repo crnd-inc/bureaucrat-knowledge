@@ -55,3 +55,23 @@ class BureaucratKnowledgeCategory(models.Model):
         action['domain'] = [('category_id', '=', self.id)]
         action['context'] = {'default_category_id': self.id}
         return action
+
+    @api.constrains('active')
+    def change_status_subcategories_docs(self):
+        for rec in self:
+            sub_categories = rec.search(
+                [('parent_id', '=', rec.id), ('active', '!=', rec.active)])
+            documents = rec.env[
+                'bureaucrat.knowledge.document'].search(
+                    [('category_id', '=', rec.id),
+                     ('active', '!=', rec.active)])
+            for doc in documents:
+                doc.active = rec.active
+            for cat in sub_categories:
+                cat.active = rec.active
+                sub_documents = rec.env[
+                    'bureaucrat.knowledge.document'].search(
+                        [('category_id', '=', cat.id),
+                         ('active', '!=', cat.active)])
+                for doc in sub_documents:
+                    doc.active = cat.active

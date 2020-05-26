@@ -8,6 +8,14 @@ class BureaucratKnowledgeDocumentHistory(models.Model):
 
     commit_summary = fields.Char()
     document_body = fields.Html()
-    user_id = fields.Many2one('res.users')
-    date_create = fields.Datetime(default=datetime.datetime.now())
-    document_id = fields.Many2one('bureaucrat.knowledge.document')
+    user_id = fields.Many2one(
+        'res.users',
+        index=True, required=True, readony=True,
+        default=lambda self: self.env.user.id,
+    )
+    date_create = fields.Datetime(
+        default=datetime.datetime.now(),
+        index=True, required=True, readony=True)
+    document_id = fields.Many2one(
+        'bureaucrat.knowledge.document',
+        index=True, required=True, readony=True)

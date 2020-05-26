@@ -30,7 +30,7 @@ class BureaucratKnowledgeDocument(models.Model):
     # @api.onchange('document_body')
     def _inverse_document_body(self):
         self.env['bureaucrat.knowledge.document.history'].create({
-            'commit_summary': '',
+            'commit_summary': self.commit_summary,
             'document_body': self.document_body,
             'user_id': self.env.user.id,
             'date_create': fields.Datetime.now(),

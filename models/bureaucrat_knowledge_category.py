@@ -3,6 +3,7 @@ from odoo import models, fields, api
 
 class BureaucratKnowledgeCategory(models.Model):
     _name = 'bureaucrat.knowledge.category'
+    _description = "Bureaucrat Knowledge: Category"
     _parent_store = True
     _parent_name = 'parent_id'
     _parent_order = 'name'

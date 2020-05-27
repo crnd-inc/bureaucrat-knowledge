@@ -3,6 +3,7 @@ from odoo import models, fields, api
 
 class BureaucratKnowledgeDocument(models.Model):
     _name = 'bureaucrat.knowledge.document'
+    _description = 'Bureaucrat Knowledge: Document'
     _inherit = [
         'generic.tag.mixin',
         'mail.thread',
@@ -16,18 +17,15 @@ class BureaucratKnowledgeDocument(models.Model):
         'bureaucrat.knowledge.category', index=True, ondelete='restrict')
     history_ids = fields.One2many(
         'bureaucrat.knowledge.document.history', 'document_id')
-    commit_summary = fields.Char()
+    commit_summary = fields.Char(store=False)
 
     @api.depends('history_ids', 'history_ids.document_body')
     def _compute_document_body(self):
         for rec in self:
-            if rec.history_ids:
-                history = rec.history_ids
-                rec.document_body = history[0].document_body
-            else:
-                rec.document_body = False
+            history_recs = rec.history_ids.sorted()
+            rec.document_body = (
+                history_recs[0].document_body if history_recs else False)
 
-    # @api.onchange('document_body')
     def _inverse_document_body(self):
         self.env['bureaucrat.knowledge.document.history'].create({
             'commit_summary': self.commit_summary,

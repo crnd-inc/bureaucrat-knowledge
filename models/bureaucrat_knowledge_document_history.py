@@ -4,6 +4,7 @@ from odoo import models, fields
 
 class BureaucratKnowledgeDocumentHistory(models.Model):
     _name = 'bureaucrat.knowledge.document.history'
+    _description = 'Bureaucrat Knowledge: Document History'
     _order = 'date_create DESC'
 
     commit_summary = fields.Char()

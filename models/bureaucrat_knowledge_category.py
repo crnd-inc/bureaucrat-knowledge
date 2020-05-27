@@ -1,9 +1,6 @@
 from odoo import models, fields, api
 from odoo.addons.generic_mixin import post_write
 
-import logging
-_logger = logging.getLogger(__name__)
-
 
 class BureaucratKnowledgeCategory(models.Model):
     _name = 'bureaucrat.knowledge.category'
@@ -70,6 +67,6 @@ class BureaucratKnowledgeCategory(models.Model):
             sub_categories.write({'active': rec.active})
             documents = self.env['bureaucrat.knowledge.document'].with_context(
                 active_test=False).search(
-                [('category_id', 'child_of', rec.id),
-                 ('active', '!=', rec.active)])
+                    [('category_id', 'child_of', rec.id),
+                     ('active', '!=', rec.active)])
             documents.write({'active': rec.active})

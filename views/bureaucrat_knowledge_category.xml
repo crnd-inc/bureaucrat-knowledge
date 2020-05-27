@@ -26,7 +26,6 @@
             <tree>
                 <field name="name"/>
                 <field name="parent_id"/>
-
                 <field name="child_category_count"
                        string="Subcategories"/>
                 <field name="tag_ids"
@@ -36,10 +35,7 @@
                        context="{'default_model': 'bureaucrat.knowledge.category'}"/>
                 <field name="documents_count"
                        string="Documents"/>
-                <field name="child_category_count"/>
-                <field name="documents_count"/>
                 <field name="active"/>
-
             </tree>
         </field>
     </record>

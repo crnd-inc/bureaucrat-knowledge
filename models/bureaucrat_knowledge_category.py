@@ -1,4 +1,8 @@
 from odoo import models, fields, api
+from odoo.addons.generic_mixin import post_write
+
+import logging
+_logger = logging.getLogger(__name__)
 
 
 class BureaucratKnowledgeCategory(models.Model):
@@ -10,6 +14,7 @@ class BureaucratKnowledgeCategory(models.Model):
     _inherit = [
         'generic.tag.mixin',
         'generic.mixin.parent.names',
+        'generic.mixin.track.changes',
         'mail.thread',
     ]
 
@@ -56,22 +61,15 @@ class BureaucratKnowledgeCategory(models.Model):
         action['context'] = {'default_category_id': self.id}
         return action
 
-    @api.constrains('active')
-    def change_status_subcategories_docs(self):
+    @post_write('active')
+    def _post_active_changed(self, changes):
         for rec in self:
-            sub_categories = rec.search(
-                [('parent_id', '=', rec.id), ('active', '!=', rec.active)])
-            documents = rec.env[
-                'bureaucrat.knowledge.document'].search(
-                    [('category_id', '=', rec.id),
-                     ('active', '!=', rec.active)])
-            for doc in documents:
-                doc.active = rec.active
-            for cat in sub_categories:
-                cat.active = rec.active
-                sub_documents = rec.env[
-                    'bureaucrat.knowledge.document'].search(
-                        [('category_id', '=', cat.id),
-                         ('active', '!=', cat.active)])
-                for doc in sub_documents:
-                    doc.active = cat.active
+            sub_categories = self.with_context(active_test=False).search(
+                [('parent_id', 'child_of', rec.id),
+                 ('active', '!=', rec.active)])
+            sub_categories.write({'active': rec.active})
+            documents = self.env['bureaucrat.knowledge.document'].with_context(
+                active_test=False).search(
+                [('category_id', 'child_of', rec.id),
+                 ('active', '!=', rec.active)])
+            documents.write({'active': rec.active})

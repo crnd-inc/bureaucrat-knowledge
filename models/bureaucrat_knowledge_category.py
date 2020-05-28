@@ -61,12 +61,11 @@ class BureaucratKnowledgeCategory(models.Model):
     @post_write('active')
     def _post_active_changed(self, changes):
         for rec in self:
-            sub_categories = self.with_context(active_test=False).search(
+            self.with_context(active_test=False).search(
                 [('parent_id', 'child_of', rec.id),
-                 ('active', '!=', rec.active)])
-            sub_categories.write({'active': rec.active})
-            documents = self.env['bureaucrat.knowledge.document'].with_context(
+                 ('active', '!=', rec.active)]).write({'active': rec.active})
+            self.env['bureaucrat.knowledge.document'].with_context(
                 active_test=False).search(
                     [('category_id', 'child_of', rec.id),
-                     ('active', '!=', rec.active)])
-            documents.write({'active': rec.active})
+                     ('active', '!=', rec.active)]).write(
+                         {'active': rec.active})

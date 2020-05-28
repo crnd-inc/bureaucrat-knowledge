@@ -14,6 +14,7 @@ class BureaucratKnowledgeCategory(models.Model):
         'generic.mixin.track.changes',
         'mail.thread',
     ]
+    _order = 'name'
 
     name = fields.Char(translate=True, index=True, required=True)
     description = fields.Html()
@@ -30,6 +31,10 @@ class BureaucratKnowledgeCategory(models.Model):
     documents_count = fields.Integer(compute='_compute_documents_count')
     active = fields.Boolean(default=True, index=True)
 
+    category_subcategories = fields.Html(
+        compute='_compute_category_subcategories')
+    category_documents = fields.Html(compute='_compute_category_documents')
+
     @api.depends('child_ids')
     def _compute_child_category_count(self):
         for rec in self:
@@ -39,6 +44,46 @@ class BureaucratKnowledgeCategory(models.Model):
     def _compute_documents_count(self):
         for rec in self:
             rec.documents_count = len(rec.document_ids)
+
+    @api.depends('child_ids')
+    def _compute_category_subcategories(self):
+        for rec in self:
+            html_string = '<ul class="list-group">'
+            for cat in rec.child_ids:
+                html_string += (
+                    '<li class="list-group-item">'
+                    '<a href="/web#id=%s&view_type=form&'
+                    'model=bureaucrat.knowledge.category&'
+                    'action=%s">'
+                    '<span class="fa fa-folder mr8"/>%s</a>'
+                    '</li>') % (
+                        cat.id,
+                        self.env.ref(
+                            'bureaucrat_knowledge.'
+                            'action_bureaucrat_knowledge_category').id,
+                        cat.name)
+            html_string += '</ul>'
+            rec.category_subcategories = html_string
+
+    @api.depends('document_ids')
+    def _compute_category_documents(self):
+        for rec in self:
+            html_string = '<ul class="list-group">'
+            for doc in rec.document_ids:
+                html_string += (
+                    '<li class="list-group-item">'
+                    '<a href="/web#id=%s&view_type=form&'
+                    'model=bureaucrat.knowledge.document&'
+                    'action=%s">'
+                    '<span class="fa fa-file mr8"/>%s</a>'
+                    '</li>') % (
+                        doc.id,
+                        self.env.ref(
+                            'bureaucrat_knowledge.'
+                            'action_bureaucrat_knowledge_document').id,
+                        doc.name)
+            html_string += '</ul>'
+            rec.category_documents = html_string
 
     def action_view_subcategories(self):
         self.ensure_one()

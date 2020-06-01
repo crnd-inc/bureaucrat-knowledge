@@ -1,0 +1,3 @@
+ - Display category contents on category form view:
+     - Display direct subcategories as list (links)
+     - Display related documents as list (links)

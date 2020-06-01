@@ -8,7 +8,7 @@ class BureaucratKnowledgeDocument(models.Model):
         'generic.tag.mixin',
         'mail.thread',
     ]
-    _order = 'name'
+    _order = 'name, id'
 
     name = fields.Char(translate=True, index=True, required=True)
     document_body = fields.Html(

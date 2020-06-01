@@ -30,6 +30,7 @@
         'views/bureaucrat_knowledge_document_history.xml',
 
         'templates/templates.xml',
+        'templates/category_content.xml',
     ],
     'images': [],
     'demo': [],

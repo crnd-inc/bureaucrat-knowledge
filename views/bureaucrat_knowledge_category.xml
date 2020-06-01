@@ -31,13 +31,13 @@
                 <field name="parent_id"/>
                 <field name="child_category_count"
                        string="Subcategories"/>
+                <field name="documents_count"
+                       string="Documents"/>
                 <field name="tag_ids"
                        options="{'color_field': 'color'}"
                        widget="many2many_tags"
                        placeholder="Tags..."
                        context="{'default_model': 'bureaucrat.knowledge.category'}"/>
-                <field name="documents_count"
-                       string="Documents"/>
                 <field name="active"/>
             </tree>
         </field>

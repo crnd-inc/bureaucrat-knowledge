@@ -9,6 +9,9 @@
                 <field name="tag_ids"/>
                 <field name="search_tag_id"/>
                 <field name="search_no_tag_id"/>
+                <filter name="filter_toplevel"
+                        string="TopLevel"
+                        domain="[('parent_id', '=', False)]"/>
                 <filter name="filter_archived"
                         string="Archived"
                         domain="[('active', '=', False)]"/>
@@ -91,6 +94,17 @@
                     </div>
                 </sheet>
             </form>
+        </field>
+    </record>
+
+    <record id="action_bureaucrat_knowledge_category" model="ir.actions.act_window">
+        <field name="name">Categories</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">bureaucrat.knowledge.category</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{
+            'search_default_filter_toplevel': 1,
+        }
         </field>
     </record>
 </odoo>

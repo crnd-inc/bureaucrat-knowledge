@@ -4,6 +4,7 @@
         <field name="model">bureaucrat.knowledge.document.history</field>
         <field name="arch" type="xml">
             <tree>
+                <field name="document_id"/>
                 <field name="commit_summary"/>
                 <field name="user_id"/>
                 <field name="date_create"/>
@@ -16,11 +17,22 @@
         <field name="arch" type="xml">
             <form>
                 <sheet>
+                    <group>
+                        <group>
+                            <field name="document_id"/>
+                        </group>
+                        <group>
+                            <field name="commit_summary"/>
+                        </group>
+                    </group>
                     <field name="document_body"/>
                     <group>
-                        <field name="commit_summary"/>
-                        <field name="user_id"/>
-                        <field name="date_create"/>
+                        <group>
+                            <field name="user_id"/>
+                        </group>
+                        <group>
+                            <field name="date_create"/>
+                        </group>
                     </group>
                 </sheet>
             </form>

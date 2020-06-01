@@ -78,11 +78,15 @@
                                     <field name="date_create"/>
                                 </tree>
                                 <form>
+                                    <field name="commit_summary"/>
                                     <field name="document_body"/>
                                     <group>
-                                        <field name="commit_summary"/>
-                                        <field name="user_id" readonly="1"/>
-                                        <field name="date_create" readonly="1"/>
+                                        <group>
+                                            <field name="user_id" readonly="1"/>
+                                        </group>
+                                        <group>
+                                            <field name="date_create" readonly="1"/>
+                                        </group>
                                     </group>
                                 </form>
                             </field>
@@ -92,5 +96,12 @@
                 </sheet>
             </form>
         </field>
+    </record>
+
+    <record id="action_bureaucrat_knowledge_document" model="ir.actions.act_window">
+        <field name="name">Documents</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">bureaucrat.knowledge.document</field>
+        <field name="view_mode">tree,form</field>
     </record>
 </odoo>

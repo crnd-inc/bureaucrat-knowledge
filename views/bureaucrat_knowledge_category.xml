@@ -6,6 +6,19 @@
             <search>
                 <field name="name"/>
                 <field name="parent_id"/>
+                <field name="tag_ids"/>
+                <field name="search_tag_id"/>
+                <field name="search_no_tag_id"/>
+                <filter name="filter_toplevel"
+                        string="TopLevel"
+                        domain="[('parent_id', '=', False)]"/>
+                <filter name="filter_archived"
+                        string="Archived"
+                        domain="[('active', '=', False)]"/>
+                <filter name="filter_active"
+                        string="Active"
+                        domain="[('active', '=', True)]"/>
+
             </search>
         </field>
     </record>
@@ -16,8 +29,16 @@
             <tree>
                 <field name="name"/>
                 <field name="parent_id"/>
-                <field name="child_category_count"/>
-                <field name="documents_count"/>
+                <field name="child_category_count"
+                       string="Subcategories"/>
+                <field name="documents_count"
+                       string="Documents"/>
+                <field name="tag_ids"
+                       options="{'color_field': 'color'}"
+                       widget="many2many_tags"
+                       placeholder="Tags..."
+                       context="{'default_model': 'bureaucrat.knowledge.category'}"/>
+                <field name="active"/>
             </tree>
         </field>
     </record>
@@ -31,7 +52,7 @@
                         <button name="action_view_subcategories"
                                 type="object"
                                 class="oe_stat_button" icon="fa-clone">
-                            <field string="Child Categories" name="child_category_count"
+                            <field string="Subcategories" name="child_category_count"
                                    widget="statinfo"/>
                         </button>
                         <button name="action_view_documents"
@@ -40,21 +61,50 @@
                             <field string="Documents" name="documents_count"
                                    widget="statinfo"/>
                         </button>
+                        <button name="toggle_active" type="object" groups="base.group_user"
+                                class="oe_stat_button" icon="fa-archive">
+                            <field name="active" widget="boolean_button"
+                                   options='{"terminology": "archive"}'/>
+                        </button>
                     </div>
                     <div name="title" class="oe_title">
-                        <h1>
+                        <h3>
+                            <field name="tag_ids"
+                                   options="{'color_field': 'color'}"
+                                   widget="many2many_tags"
+                                   placeholder="Tags..."
+                                   class="oe_inline"
+                                   domain="[('model_id.model', '=', 'bureaucrat.knowledge.category')]"
+                                   context="{'default_model': 'bureaucrat.knowledge.category'}"/>
+                        </h3>
+                        <h2>
+                            <field name="parent_id" class="oe_inline"/>
+                            <span class="ml4 mr4"
+                                  attrs="{'invisible': [('parent_id', '=', False)]}">
+                                /
+                            </span>
                             <field name="name" placeholder="Name..."/>
-                        </h1>
+                        </h2>
                     </div>
-                    <group>
-                        <group>
-                            <field name="parent_id"/>
-                        </group>
-                        <group></group>
-                    </group>
-                    <field name="description"/>
+                    <div>
+                        <h3 attrs="{'invisible': [('category_contents', '=', False)]}">Contents</h3>
+                        <field name="category_contents"/>
+                        <h3>Description</h3>
+                        <field name="description" placeholder="Description"/>
+                    </div>
                 </sheet>
             </form>
+        </field>
+    </record>
+
+    <record id="action_bureaucrat_knowledge_category" model="ir.actions.act_window">
+        <field name="name">Categories</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">bureaucrat.knowledge.category</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{
+            'search_default_filter_toplevel': 1,
+        }
         </field>
     </record>
 </odoo>

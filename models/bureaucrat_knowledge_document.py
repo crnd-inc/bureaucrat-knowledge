@@ -37,7 +37,6 @@ class BureaucratKnowledgeDocument(models.Model):
             category.message_coments_ids = category.message_ids.filtered(
                 lambda r: r.subtype_id == self.env.ref('mail.mt_comment'))
 
-
     @api.depends('history_ids')
     def _compute_document_latest_history_id(self):
         for record in self:

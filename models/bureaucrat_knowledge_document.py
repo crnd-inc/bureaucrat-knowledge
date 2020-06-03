@@ -7,6 +7,7 @@ class BureaucratKnowledgeDocument(models.Model):
     _inherit = [
         'generic.tag.mixin',
         'mail.thread',
+        'mail.activity.mixin',
     ]
     _order = 'name, id'
 
@@ -25,6 +26,17 @@ class BureaucratKnowledgeDocument(models.Model):
         readonly=True, store=True, auto_join=True)
     commit_summary = fields.Char(store=False)
     active = fields.Boolean(default=True, index=True)
+
+    message_notes_ids = fields.One2many(
+        'mail.message', 'res_id', string='Discussion Messages', store=False,
+        compute="_compute_message_notes_ids", compute_sudo=False)
+
+    @api.depends('message_ids')
+    def _compute_message_comments_ids(self):
+        for category in self:
+            category.message_coments_ids = category.message_ids.filtered(
+                lambda r: r.subtype_id == self.env.ref('mail.mt_comment'))
+
 
     @api.depends('history_ids')
     def _compute_document_latest_history_id(self):

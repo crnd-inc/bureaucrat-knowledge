@@ -15,6 +15,7 @@
         'base',
         'generic_mixin',
         'generic_tag',
+        'mail',
     ],
 
     # always loaded

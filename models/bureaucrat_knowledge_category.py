@@ -13,6 +13,7 @@ class BureaucratKnowledgeCategory(models.Model):
         'generic.mixin.parent.names',
         'generic.mixin.track.changes',
         'mail.thread',
+        'mail.activity.mixin',
     ]
     _order = 'name, id'
 
@@ -33,6 +34,16 @@ class BureaucratKnowledgeCategory(models.Model):
 
     category_contents = fields.Html(
         compute='_compute_category_contents')
+
+    message_comments_ids = fields.One2many(
+        'mail.message', 'res_id', string='Discussion Messages', store=False,
+        compute="_compute_message_comments_ids", compute_sudo=False)
+
+    @api.depends('message_ids')
+    def _compute_message_comments_ids(self):
+        for category in self:
+            category.message_coments_ids = category.message_ids.filtered(
+                lambda r: r.subtype_id == self.env.ref('mail.mt_comment'))
 
     @api.depends('child_ids')
     def _compute_child_category_count(self):

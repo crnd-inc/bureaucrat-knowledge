@@ -13,7 +13,6 @@ class BureaucratKnowledgeCategory(models.Model):
         'generic.mixin.parent.names',
         'generic.mixin.track.changes',
         'mail.thread',
-        'mail.activity.mixin',
     ]
     _order = 'name, id'
 

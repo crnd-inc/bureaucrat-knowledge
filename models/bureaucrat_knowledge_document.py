@@ -7,7 +7,6 @@ class BureaucratKnowledgeDocument(models.Model):
     _inherit = [
         'generic.tag.mixin',
         'mail.thread',
-        'mail.activity.mixin',
     ]
     _order = 'name, id'
 

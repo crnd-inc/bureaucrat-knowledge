@@ -7,7 +7,7 @@
 
     'author': "Center of Research and Development",
     'website': "https://crnd.pro",
-    'version': '12.0.0.4.0',
+    'version': '12.0.0.5.0',
     'category': 'Knowledge',
 
     # any module necessary for this one to work correctly
@@ -15,6 +15,7 @@
         'base',
         'generic_mixin',
         'generic_tag',
+        'mail',
     ],
 
     # always loaded

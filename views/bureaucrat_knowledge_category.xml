@@ -10,7 +10,7 @@
                 <field name="search_tag_id"/>
                 <field name="search_no_tag_id"/>
                 <filter name="filter_toplevel"
-                        string="TopLevel"
+                        string="Top Level"
                         domain="[('parent_id', '=', False)]"/>
                 <filter name="filter_archived"
                         string="Archived"

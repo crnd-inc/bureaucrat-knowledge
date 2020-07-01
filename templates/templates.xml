@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="knowledge_main" name="Bureaucrat knowledge">
+        <t t-call="website.layout">
+            <t t-set="title">Bureaucrat knowledge</t>
+            <div class="oe_structure">
+                <div class="container">
+                    <section class="container">
+                        <h4>Bureaucrat Knowledge Base:</h4>
+                        <a class="btn btn-link"
+                           href="/knowledge/categories">Categories</a>
+                        <a class="btn btn-link"
+                           href="/knowledge/documents">Documents</a>
+                    </section>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="knowledge_categories" name="Bureaucrat knowledge categories">
+        <t t-call="website.layout">
+            <t t-set="title">Categories</t>
+            <div class="oe_structure">
+                <div class="container">
+                <h4>Knowledge Categories:</h4>
+                <ul>
+                    <t t-foreach="categories" t-as="category">
+                        <p><li><t t-esc="category.name"/></li></p>
+                    </t>
+                </ul>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="knowledge_documents" name="Bureaucrat knowledge documents">
+        <t t-call="website.layout">
+            <t t-set="title">Documents</t>
+            <div class="oe_structure">
+                <div class="container">
+                <h4>Knowledge Documents:</h4>
+                <ul>
+                    <t t-foreach="documents" t-as="document">
+                        <p><li><t t-esc="document.category_id.name"/>/<b><t t-esc="document.name"/></b></li></p>
+                    </t>
+                </ul>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

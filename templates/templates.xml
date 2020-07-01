@@ -38,12 +38,32 @@
             <t t-set="title">Documents</t>
             <div class="oe_structure">
                 <div class="container">
-                <h4>Knowledge Documents:</h4>
-                <ul>
-                    <t t-foreach="documents" t-as="document">
-                        <p><li><t t-esc="document.category_id.name"/>/<b><t t-esc="document.name"/></b></li></p>
-                    </t>
-                </ul>
+                    <h4>Knowledge Documents:</h4>
+                    <ul>
+                        <t t-foreach="documents" t-as="document">
+                            <p>
+                                <li>
+                                    <t t-esc="document.category_id.name"/>/
+                                        <a t-attf-href="/knowledge/documents/{{document.id}}">
+                                            <t t-esc="document.name"/>
+                                        </a>
+                                </li>
+                            </p>
+                        </t>
+                    </ul>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="knowledge_document" name="Bureaucrat knowledge document">
+        <t t-call="website.layout">
+            <t t-set="title"><t t-esc="doc.name"/></t>
+            <div class="oe_structure">
+                <div class="container">
+                    <div id="document-text"
+                        t-raw="doc.document_body">
+                    </div>
                 </div>
             </div>
         </t>

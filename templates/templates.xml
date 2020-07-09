@@ -1,33 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <template id="knowledge_main" name="Bureaucrat knowledge">
-        <t t-call="website.layout">
-            <t t-set="title">Bureaucrat knowledge</t>
-            <div class="oe_structure">
-                <div class="container">
-                    <section class="container">
-                        <h4>Bureaucrat Knowledge Base:</h4>
-                        <a class="btn btn-link"
-                           href="/knowledge/categories">Categories</a>
-                        <a class="btn btn-link"
-                           href="/knowledge/documents">Documents</a>
-                    </section>
-                </div>
-            </div>
-        </t>
+
+    <template id="assets_backend" name="Generic Request Assets" inherit_id="web.assets_frontend">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet"
+                  type="text/less"
+                  href='/bureaucrat_knowledge_website/static/src/less/knowledge_base_website.less'/>
+        </xpath>
     </template>
 
-    <template id="knowledge_categories" name="Bureaucrat knowledge categories">
+    <template id="document_list" name="Render documents">
+        <ul>
+            <t t-foreach="docs_list" t-as="child_doc">
+                <p>
+                    <t t-if="category != None">
+                        <t t-set="category_id" t-value="category.id"/>
+                    </t>
+                    <t t-else="">
+                        <t t-set="category_id" t-value="child_doc.category_id.id"/>
+                    </t>
+                    <li class="child_doc">
+                        <i class="fa fa-file mr4"/>
+                        <a t-attf-href="/knowledge/{{category_id}}/doc/{{child_doc.id}}">
+                            <t t-esc="child_doc.name"/>
+                        </a>
+                    </li>
+                </p>
+            </t>
+        </ul>
+    </template>
+
+    <template id="category_list" name="Render categories">
+        <ul>
+            <t t-foreach="cats_list" t-as="child_cat">
+                <li class="child_categ">
+                    <i class="fa fa-folder mr4"/>
+                    <a t-attf-href="/knowledge/{{category.id}}/{{child_cat.id}}">
+                        <t t-esc="child_cat.name"/>
+                    </a>
+                    <t t-if="child_cat.document_ids != None">
+                        <t t-set="docs_list" t-value="category.document_ids"/>
+                        <t t-call="bureaucrat_knowledge_website.document_list"/>
+                    </t>
+                </li>
+            </t>
+        </ul>
+    </template>
+
+    <template id="content_body" name="Render Page">
+
+        <ul>
+            <t t-foreach="categories" t-as="category">
+                <li class="parent_categ">
+                    <a t-attf-href="/knowledge/{{category.id}}">
+                        <t t-esc="category.name"/>
+                    </a>
+                    <t t-if="category.child_ids != None">
+                        <t t-set="cats_list" t-value="category.child_ids"/>
+                        <t t-call="bureaucrat_knowledge_website.category_list"/>
+                    </t>
+                    <t t-if="category.document_ids != None">
+                        <t t-set="docs_list" t-value="category.document_ids"/>
+                        <t t-call="bureaucrat_knowledge_website.document_list"/>
+                    </t>
+                </li>
+            </t>
+        </ul>
+    </template>
+
+    <template id="knowledge_main" name="Bureaucrat knowledge main">
         <t t-call="website.layout">
             <t t-set="title">Categories</t>
             <div class="oe_structure">
                 <div class="container">
-                <h4>Knowledge Categories:</h4>
-                <ul>
-                    <t t-foreach="categories" t-as="category">
-                        <p><li><t t-esc="category.name"/></li></p>
+                    <h4>Knowledge Categories:</h4>
+                    <t t-call="bureaucrat_knowledge_website.content_body"/>
+                    <t t-if="documents != None">
+                        <t t-set="docs_list" t-value="documents"/>
+                        <t t-call="bureaucrat_knowledge_website.document_list"/>
                     </t>
-                </ul>
                 </div>
             </div>
         </t>
@@ -44,9 +95,9 @@
                             <p>
                                 <li>
                                     <t t-esc="document.category_id.name"/>/
-                                        <a t-attf-href="/knowledge/documents/{{document.id}}">
-                                            <t t-esc="document.name"/>
-                                        </a>
+                                    <a t-attf-href="/knowledge/documents/{{document.id}}">
+                                        <t t-esc="document.name"/>
+                                    </a>
                                 </li>
                             </p>
                         </t>

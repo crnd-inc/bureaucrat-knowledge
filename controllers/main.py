@@ -8,8 +8,7 @@ _logger = logging.getLogger(__name__)
 class KnowledgeBase(http.Controller):
 
     @http.route(['/knowledge',
-                 '/knowledge/<int:cat_id>',
-                 '/knowledge/<int:cat_id>/<int:subcat_id>'],
+                 '/knowledge/<int:cat_id>'],
                 auth='public', website=True)
     def knowledge_category(self, cat_id=False, subcat_id=0, **kw):
         Categories = request.env['bureaucrat.knowledge.category']
@@ -24,10 +23,9 @@ class KnowledgeBase(http.Controller):
                 'categories': cats,
                 'documents': docs})
 
-    @http.route(['/knowledge/<int:cat_id>/doc/<int:doc_id>',
-                 '/knowledge/<int:cat_id>/<int:subcat_id>/doc/<int:doc_id>'],
+    @http.route('/knowledge/doc/<int:doc_id>',
                 auth='public', website=True)
-    def document(self, doc_id, cat_id=False, subcat_id=False, **kw):
+    def knowledge_document(self, doc_id, cat_id=False, subcat_id=False, **kw):
         values = {}
         docs = request.env['bureaucrat.knowledge.document'].search(
             [('id', '=', doc_id)])

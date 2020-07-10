@@ -20,6 +20,8 @@
     'data': [
         'data/website_data.xml',
         'templates/templates.xml',
+        'views/bureaucrat_knowledge_category.xml',
+        'views/bureaucrat_knowledge_document.xml',
     ],
     'images': [],
     'demo': [],

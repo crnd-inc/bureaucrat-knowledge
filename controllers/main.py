@@ -8,32 +8,51 @@ _logger = logging.getLogger(__name__)
 class KnowledgeBase(http.Controller):
 
     @http.route(['/knowledge',
-                 '/knowledge/<int:cat_id>'],
+                 '/knowledge/<model("bureaucrat.knowledge.category"):categ>'],
                 auth='public', website=True)
-    def knowledge_category(self, cat_id=False, subcat_id=0, **kw):
+    def knowledge_category(self, categ=False, cat_id=False, **kw):
+        values = {}
         Categories = request.env['bureaucrat.knowledge.category']
-        if subcat_id:
-            cat_id = subcat_id
+        if categ:
+            cat_id = categ.id
         cats = Categories.search([('parent_id', '=', cat_id)])
         Documents = request.env['bureaucrat.knowledge.document']
         docs = Documents.search([('category_id', '=', cat_id)])
-        _logger.warning("Docs : %s", (cats, docs))
-        return request.render(
-            'bureaucrat_knowledge_website.knowledge_main', {
-                'categories': cats,
-                'documents': docs})
 
-    @http.route('/knowledge/doc/<int:doc_id>',
+        parents = self.calc_parents(categ)
+
+        values.update({
+            'categories': cats,
+            'documents': docs,
+            'parents': parents})
+
+        return request.render(
+            'bureaucrat_knowledge_website.knowledge_main', values)
+
+    @http.route('/knowledge/doc/<model("bureaucrat.knowledge.document"):doc>',
                 auth='public', website=True)
-    def knowledge_document(self, doc_id, cat_id=False, subcat_id=False, **kw):
+    def knowledge_document(self, doc, **kw):
         values = {}
         docs = request.env['bureaucrat.knowledge.document'].search(
-            [('id', '=', doc_id)])
+            [('id', '=', doc.id)])
 
         if not docs:
             raise request.not_found()
 
-        values.update({'doc': docs})
+        parents = self.calc_parents(doc)
+        values.update({
+            'doc': docs,
+            'parents': parents})
 
         return request.render(
             'bureaucrat_knowledge_website.knowledge_document', values)
+
+    def calc_parents(self, parent):
+        if parent and parent._name == 'bureaucrat.knowledge.document':
+            parent = parent.category_id
+        parents = []
+        while parent:
+            parents += parent
+            parent = parent.parent_id
+        parents.reverse()
+        return parents

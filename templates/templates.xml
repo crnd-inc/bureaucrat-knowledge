@@ -15,12 +15,10 @@
             <div class="col-xs-12 col-sm 12 col-md-6">
                 <ol class="breadcrumb">
                     <li><a href="/"><i class="fa fa-home"/></a></li>
-                    <t t-if="categories">
-                        <li><a href="/knowledge/">Categories</a></li>
-                    </t>
-                    <t t-else="">
-                        <li><a href="/knowledge/">Categories</a></li>
-                    </t>
+                        <li><a href="/knowledge/">Bureaucrat Knowledge</a></li>
+                        <t t-foreach="parents" t-as="p">
+                            <li><a t-attf-href="/knowledge/{{ slug(p) }}"><t t-esc="p.name"/></a></li>
+                        </t>
                 </ol>
             </div>
             <div class="oe_structure col-sm-12"/>
@@ -29,7 +27,7 @@
 
     <template id="documents_list" name="Render documents">
         <t t-if="docs_list != None">
-            <ul class="list-group">
+            <ul>
                 <t t-foreach="docs_list" t-as="child_doc">
                     <p>
                         <t t-if="category != None">
@@ -38,9 +36,9 @@
                         <t t-else="">
                             <t t-set="category_id" t-value="child_doc.category_id.id"/>
                         </t>
-                        <li class="list-group-item child_doc">
+                        <li class="child_doc">
                             <i class="fa fa-file mr4"/>
-                            <a t-attf-href="/knowledge/doc/{{child_doc.id}}">
+                            <a t-attf-href="/knowledge/doc/{{ slug(child_doc) }}">
                                 <t t-esc="child_doc.name"/>
                             </a>
                         </li>
@@ -52,11 +50,11 @@
 
     <template id="categories_list" name="Render Page">
         <t t-if="categories != None">
-            <ul class="list-group">
+            <ul>
                 <t t-foreach="categories" t-as="category">
-                    <li t-attf-class="list-group-item {{ 'parent_categ' if h == 1 else 'child_categ' }}">
+                    <li t-attf-class="{{ 'parent_categ' if h == 1 else 'child_categ' }}">
                         <i class="fa fa-folder mr4"/>
-                        <a t-attf-href="/knowledge/{{ '' if h == 1 and category.parent_id.id == False else category.id }}">
+                        <a t-attf-href="/knowledge/{{ '' if h == 1 and category.parent_id.id == False else slug(category) }}">
                             <t t-esc="category.name"/>
                         </a>
                         <t t-if="category.child_ids != None">
@@ -91,36 +89,16 @@
         </t>
     </template>
 
-    <template id="knowledge_documents" name="Bureaucrat knowledge documents">
-        <t t-call="website.layout">
-            <t t-set="title">Documents</t>
-            <div class="oe_structure">
-                <div class="container">
-                    <h4>Knowledge Documents:</h4>
-                    <ul>
-                        <t t-foreach="documents" t-as="document">
-                            <p>
-                                <li>
-                                    <t t-esc="document.category_id.name"/>/
-                                    <a t-attf-href="/knowledge/documents/{{document.id}}">
-                                        <t t-esc="document.name"/>
-                                    </a>
-                                </li>
-                            </p>
-                        </t>
-                    </ul>
-                </div>
-            </div>
-        </t>
-    </template>
-
     <template id="knowledge_document" name="Bureaucrat knowledge document">
         <t t-call="website.layout">
             <t t-set="title"><t t-esc="doc.name"/></t>
             <div class="oe_structure">
                 <div class="container">
-                    <div id="document-text"
-                        t-raw="doc.document_body">
+                    <t t-call="bureaucrat_knowledge_website.knowledge_category_navigation"/>
+                    <div class="container">
+                        <div id="document-text"
+                            t-raw="doc.document_body">
+                        </div>
                     </div>
                 </div>
             </div>

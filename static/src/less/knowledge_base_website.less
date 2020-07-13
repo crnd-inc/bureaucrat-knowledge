@@ -8,30 +8,50 @@
 }
 
 .parent_categ {
+    position: relative;
+    min-width: 160px;
     font-weight: bold;
-
-    /*    position: relative;
-    display: inline-block;
-    */
 }
 
 .child_categ {
+    display: none;
     font-style: italic;
     font-weight: normal;
-
-    /*    display: none;
-    position: absolute;
-    z-index: 1;
-    */
 }
-
-/*
-.parent_categ:hover .child_categ {
-  display: inline-block;
-}
-*/
 
 .child_doc {
-    list-style-type: square;
     font-weight: normal;
+    min-width: 160px;
+}
+
+.child_categ ul {
+    display: none;
+}
+
+.child_doc ul {
+    display: none;
+}
+
+.child_categ ul li {
+    display: none;
+}
+
+.child_doc ul li {
+    display: none;
+}
+
+.child_categ li ul li {
+    display: none;
+}
+
+.child_doc li ul li {
+    display: none;
+}
+
+.parent_categ:hover .child_categ {
+    display: block;
+}
+
+.parent_categ ul > li:hover > ul {
+    display: block;
 }

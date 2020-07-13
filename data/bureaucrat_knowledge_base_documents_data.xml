@@ -9,7 +9,6 @@
                ref="bureaucrat_documentation_admin_guides"/>
         <field name="document_body"><![CDATA[
 
-<p>Generic Request. Admin's Guide.</p>
 <h1 id="configure-the-request-category">Configure the Request Category</h1>
 <p>To configure the request category, under the <strong>Configuration</strong> menu click <strong>Categories</strong>. </p>
 <p><img alt="" class="knowledge-document-img" src="/bureaucrat_knowledge/static/knowledge/bureaucrat_documentation_admin_guides/configure_request_category/105.png"/></p>
@@ -39,7 +38,6 @@
                ref="bureaucrat_documentation_admin_guides"/>
         <field name="document_body"><![CDATA[
 
-<p>Generic Request. Admin's Guide.</p>
 <h1 id="configure-the-request-type">Configure the Request Type</h1>
 <p>To configure the request type do the following:</p>
 <ol>
@@ -73,7 +71,6 @@
                ref="bureaucrat_documentation_admin_guides"/>
         <field name="document_body"><![CDATA[
 
-<p>Generic Request. Admin's Guide.</p>
 <h1 id="configure-request-type-stages">Configure Request Type Stages</h1>
 <p>To configure request type stage, go to the stages page. To do this, on the request type form, click <strong>Stages</strong>.</p>
 <p><img alt="" class="knowledge-document-img" src="/bureaucrat_knowledge/static/knowledge/bureaucrat_documentation_admin_guides/configure_request_type_stages/generic_request_type_form_stages.png"/></p>
@@ -103,7 +100,6 @@
                ref="bureaucrat_documentation_admin_guides"/>
         <field name="document_body"><![CDATA[
 
-<p>Generic Request. Admin's guide.</p>
 <h1 id="configure-request-type-routes">Configure Request Type Routes</h1>
 <p>After creating <a href="../Generic_Request_Type_Stages_Configure_admin_eng/">request type stages</a>, configure request type routes.</p>
 <p>To configure routes do the following steps:</p>

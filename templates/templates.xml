@@ -13,7 +13,7 @@
         <div class="row mt16">
             <div class="oe_structure col-sm-12"/>
             <div class="col-xs-12 col-sm 12 col-md-6">
-                <ol class="navigation breadcrumb">
+                <ol class="breadcrumb">
                     <li><a href="/"><i class="fa fa-home"/></a></li>
                         <li><a href="/knowledge/">Bureaucrat Knowledge</a></li>
                         <t t-foreach="parents" t-as="p">

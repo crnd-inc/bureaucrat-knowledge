@@ -54,9 +54,17 @@
                 <t t-foreach="categories" t-as="category">
                     <li t-attf-class="{{ 'parent_categ' if h == 1 else 'child_categ' }}">
                         <i class="fa fa-folder mr4"/>
-                        <a t-attf-href="/knowledge/{{ '' if h == 1 and category.parent_id.id == False else slug(category) }}">
+                        <a t-attf-href="/knowledge/{{ '' if h == 1 and category.parent_id.id == None else slug(category) }}">
                             <t t-esc="category.name"/>
                         </a>
+                        <t t-if="category.description != False">
+                            <div class="description-category">
+                                <span>Description:</span>
+                                <div class="description-content"
+                                    t-raw="category.description">
+                                </div>
+                            </div>
+                        </t>
                         <t t-if="category.child_ids != None">
                             <t t-set="h" t-value="0"/>
                             <t t-set="categories" t-value="category.child_ids"/>

@@ -5,6 +5,7 @@ class BureaucratKnowledgeDocument(models.Model):
     _name = 'bureaucrat.knowledge.document'
     _inherit = [
         'bureaucrat.knowledge.document',
+        'website.seo.metadata',
         'portal.mixin',
     ]
 

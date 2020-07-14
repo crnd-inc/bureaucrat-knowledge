@@ -5,6 +5,7 @@ class BureaucratKnowledgeCategory(models.Model):
     _name = 'bureaucrat.knowledge.category'
     _inherit = [
         'bureaucrat.knowledge.category',
+        'website.seo.metadata',
         'portal.mixin',
     ]
 

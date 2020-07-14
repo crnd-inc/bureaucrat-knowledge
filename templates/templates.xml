@@ -13,7 +13,7 @@
         <div class="row mt16">
             <div class="oe_structure col-sm-12"/>
             <div class="col-xs-12 col-sm 12 col-md-6">
-                <ol class="breadcrumb">
+                <ol class="navigation breadcrumb">
                     <li><a href="/"><i class="fa fa-home"/></a></li>
                         <li><a href="/knowledge/">Bureaucrat Knowledge</a></li>
                         <t t-foreach="parents" t-as="p">
@@ -52,9 +52,9 @@
         <t t-if="categories">
             <ul>
                 <t t-foreach="categories" t-as="category">
-                    <li t-attf-class="{{ 'parent_categ' if h == 1 else 'child_categ' }}">
+                    <li>
                         <i class="fa fa-folder mr4"/>
-                        <a t-attf-href="/knowledge/{{ '' if h == 1 and not category.parent_id.id else slug(category) }}">
+                        <a t-attf-href="/knowledge/{{ slug(category) }}">
                             <t t-esc="category.name"/>
                         </a>
                         <t t-if="category.description">
@@ -66,7 +66,6 @@
                             </div>
                         </t>
                         <t t-if="category.child_ids">
-                            <t t-set="h" t-value="0"/>
                             <t t-set="categories" t-value="category.child_ids"/>
                             <t t-call="bureaucrat_knowledge_website.categories_list"/>
                         </t>
@@ -86,7 +85,6 @@
             <div class="oe_structure">
                 <div class="container">
                     <t t-call="bureaucrat_knowledge_website.knowledge_category_navigation"/>
-                    <t t-set="h" t-value="1"/>
                     <t t-call="bureaucrat_knowledge_website.categories_list"/>
                     <t t-if="documents">
                         <t t-set="docs_list" t-value="documents"/>

@@ -26,11 +26,11 @@
     </template>
 
     <template id="documents_list" name="Render documents">
-        <t t-if="docs_list != None">
+        <t t-if="docs_list">
             <ul>
                 <t t-foreach="docs_list" t-as="child_doc">
                     <p>
-                        <t t-if="category != None">
+                        <t t-if="category">
                             <t t-set="category_id" t-value="category.id"/>
                         </t>
                         <t t-else="">
@@ -49,15 +49,15 @@
     </template>
 
     <template id="categories_list" name="Render Page">
-        <t t-if="categories != None">
+        <t t-if="categories">
             <ul>
                 <t t-foreach="categories" t-as="category">
                     <li t-attf-class="{{ 'parent_categ' if h == 1 else 'child_categ' }}">
                         <i class="fa fa-folder mr4"/>
-                        <a t-attf-href="/knowledge/{{ '' if h == 1 and category.parent_id.id == None else slug(category) }}">
+                        <a t-attf-href="/knowledge/{{ '' if h == 1 and not category.parent_id.id else slug(category) }}">
                             <t t-esc="category.name"/>
                         </a>
-                        <t t-if="category.description != False">
+                        <t t-if="category.description">
                             <div class="description-category">
                                 <span>Description:</span>
                                 <div class="description-content"
@@ -65,12 +65,12 @@
                                 </div>
                             </div>
                         </t>
-                        <t t-if="category.child_ids != None">
+                        <t t-if="category.child_ids">
                             <t t-set="h" t-value="0"/>
                             <t t-set="categories" t-value="category.child_ids"/>
                             <t t-call="bureaucrat_knowledge_website.categories_list"/>
                         </t>
-                        <t t-if="category.document_ids != None">
+                        <t t-if="category.document_ids">
                             <t t-set="docs_list" t-value="category.document_ids"/>
                             <t t-call="bureaucrat_knowledge_website.documents_list"/>
                         </t>
@@ -88,7 +88,7 @@
                     <t t-call="bureaucrat_knowledge_website.knowledge_category_navigation"/>
                     <t t-set="h" t-value="1"/>
                     <t t-call="bureaucrat_knowledge_website.categories_list"/>
-                    <t t-if="documents != None">
+                    <t t-if="documents">
                         <t t-set="docs_list" t-value="documents"/>
                         <t t-call="bureaucrat_knowledge_website.documents_list"/>
                     </t>

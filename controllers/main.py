@@ -10,9 +10,10 @@ class KnowledgeBase(http.Controller):
     @http.route(['/knowledge',
                  '/knowledge/<model("bureaucrat.knowledge.category"):categ>'],
                 auth='public', website=True)
-    def knowledge_category(self, categ=False, cat_id=False, **kw):
+    def knowledge_category(self, categ=False, **kw):
         values = {}
         Categories = request.env['bureaucrat.knowledge.category']
+        cat_id = False
         if categ:
             cat_id = categ.id
         cats = Categories.search([('parent_id', '=', cat_id)])
@@ -33,15 +34,14 @@ class KnowledgeBase(http.Controller):
                 auth='public', website=True)
     def knowledge_document(self, doc, **kw):
         values = {}
-        docs = request.env['bureaucrat.knowledge.document'].search(
-            [('id', '=', doc.id)])
+        doc = request.env['bureaucrat.knowledge.document'].browse(doc.id)
 
-        if not docs:
+        if not doc:
             raise request.not_found()
 
         parents = self.calc_parents(doc)
         values.update({
-            'doc': docs,
+            'doc': doc,
             'parents': parents})
 
         return request.render(

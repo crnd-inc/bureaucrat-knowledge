@@ -85,11 +85,13 @@
             <div class="oe_structure">
                 <div class="container">
                     <t t-call="bureaucrat_knowledge_website.knowledge_category_navigation"/>
-                    <t t-call="bureaucrat_knowledge_website.categories_list"/>
-                    <t t-if="documents">
-                        <t t-set="docs_list" t-value="documents"/>
-                        <t t-call="bureaucrat_knowledge_website.documents_list"/>
-                    </t>
+                    <div class=" col-md-6 col-sm-4 col-xs-12">
+                        <t t-call="bureaucrat_knowledge_website.categories_list"/>
+                        <t t-if="documents">
+                            <t t-set="docs_list" t-value="documents"/>
+                            <t t-call="bureaucrat_knowledge_website.documents_list"/>
+                        </t>
+                    </div>
                 </div>
             </div>
         </t>

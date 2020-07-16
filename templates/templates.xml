@@ -58,7 +58,7 @@
                             <t t-esc="category.name"/>
                         </a>
                         <t t-if="category.description">
-                            <div class="description-category">
+                            <div class="category-description">
                                 <span>Description:</span>
                                 <div class="description-content"
                                     t-raw="category.description">
@@ -79,13 +79,50 @@
         </t>
     </template>
 
+    <template id="main_categories_list" name="Render Page">
+        <t t-if="categories">
+            <ul class="list-group">
+                <t t-foreach="categories" t-as="category">
+                    <li class="list-group-item">
+                        <i class="fa fa-folder mr4"/>
+                        <a t-attf-href="/knowledge/{{ slug(category) }}">
+                            <t t-esc="category.name"/>
+                        </a>
+                        <t t-if="category.description">
+                            <div class="category-description">
+                                <span>Description:</span>
+                                <div class="description-content"
+                                    t-raw="category.description">
+                                </div>
+                            </div>
+                        </t>
+                    </li>
+                </t>
+            </ul>
+        </t>
+    </template>
+
     <template id="knowledge_main" name="Bureaucrat knowledge main">
         <t t-call="website.layout">
-            <t t-set="title">Categories</t>
+            <t t-set="title">Bureaucrat Knowledge</t>
             <div class="oe_structure">
                 <div class="container">
                     <t t-call="bureaucrat_knowledge_website.knowledge_category_navigation"/>
-                    <div class="knowledge-content">
+                    <div class="knowledge-base-website">
+                        <t t-call="bureaucrat_knowledge_website.main_categories_list"/>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="knowledge_categories" name="Bureaucrat knowledge categories">
+        <t t-call="website.layout">
+            <t t-set="title"><t t-esc="parents[-1].name"/></t>
+            <div class="oe_structure">
+                <div class="container">
+                    <t t-call="bureaucrat_knowledge_website.knowledge_category_navigation"/>
+                    <div class="knowledge-base-website">
                         <t t-call="bureaucrat_knowledge_website.categories_list"/>
                         <t t-if="documents">
                             <t t-set="docs_list" t-value="documents"/>

@@ -37,6 +37,38 @@ class BureaucratKnowledgeCategory(models.Model):
     category_contents = fields.Html(
         compute='_compute_category_contents')
 
+    visibility_type = fields.Selection(
+        selection=[
+            ('public', 'Public'),
+            ('portal', 'Portal'),
+            ('internal', 'Internal'),
+            ('subscribers', 'Subscribers'),
+            ('restricted', 'Restricted'),
+            ('parent', 'Parent')],
+    )
+    visibility_group_ids = fields.Many2many(
+        'res.groups', string='Visibility groups')
+    visibility_user_ids = fields.Many2many('res.users', string='Readers')
+
+    editor_group_ids = fields.Many2many(
+        'res.groups', string='Editors groups')
+    editor_user_ids = fields.Many2many('res.users', string='Editors')
+
+    owner_group_ids = fields.Many2many(
+        'res.groups', string='Owners groups')
+    owner_user_ids = fields.Many2many('res.users', string='Owners')
+
+    @api.model
+    def create(self, vals):
+        if vals.get('parent_id', False):
+            vals['visibility_type'] = 'parent'
+        else:
+            vals['visibility_type'] = 'subscribers'
+
+        category = super(BureaucratKnowledgeCategory, self).create(vals)
+        category.write({'owner_user_ids': [(4, self.env.user.id)]})
+        return category
+
     @api.depends('child_ids')
     def _compute_child_category_count(self):
         for rec in self:

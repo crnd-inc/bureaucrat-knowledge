@@ -30,6 +30,38 @@ class BureaucratKnowledgeDocument(models.Model):
     commit_summary = fields.Char(store=False)
     active = fields.Boolean(default=True, index=True)
 
+    visibility_type = fields.Selection(
+        selection=[
+            ('public', 'Public'),
+            ('portal', 'Portal'),
+            ('internal', 'Internal'),
+            ('subscribers', 'Subscribers'),
+            ('restricted', 'Restricted'),
+            ('parent', 'Parent')],
+    )
+    visibility_group_ids = fields.Many2many(
+        'res.groups', string='Visibility groups')
+    visibility_user_ids = fields.Many2many('res.users', string='Readers')
+
+    editor_group_ids = fields.Many2many(
+        'res.groups', string='Editors groups')
+    editor_user_ids = fields.Many2many('res.users', string='Editors')
+
+    owner_group_ids = fields.Many2many(
+        'res.groups', string='Owners groups')
+    owner_user_ids = fields.Many2many('res.users', string='Owners')
+
+    @api.model
+    def create(self, vals):
+        if vals.get('parent_id', False):
+            vals['visibility_type'] = 'parent'
+        else:
+            vals['visibility_type'] = 'subscribers'
+
+        document = super(BureaucratKnowledgeCategory, self).create(vals)
+        document.write({'owner_user_ids': [(4, self.env.user.id)]})
+        return document
+
     @api.depends('history_ids')
     def _compute_document_latest_history_id(self):
         for record in self:

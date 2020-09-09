@@ -46,17 +46,45 @@ class BureaucratKnowledgeCategory(models.Model):
             ('restricted', 'Restricted'),
             ('parent', 'Parent')],
     )
+
     visibility_group_ids = fields.Many2many(
-        'res.groups', string='Visibility groups')
-    visibility_user_ids = fields.Many2many('res.users', string='Readers')
+        comodel_name='res.groups',
+        relation='bureaucrat_knowledge_category_visibility_groups',
+        column1='knowledge_category_id',
+        column2='group_id',
+        string='Readers groups')
+    visibility_user_ids = fields.Many2many(
+        comodel_name='res.users',
+        relation='bureaucrat_knowledge_category_visibility_users',
+        column1='knowledge_category_id',
+        column2='user_id',
+        string='Readers')
 
     editor_group_ids = fields.Many2many(
-        'res.groups', string='Editors groups')
-    editor_user_ids = fields.Many2many('res.users', string='Editors')
+        comodel_name='res.groups',
+        relation='bureaucrat_knowledge_category_editor_groups',
+        column1='knowledge_category_id',
+        column2='group_id',
+        string='Editors groups')
+    editor_user_ids = fields.Many2many(
+        comodel_name='res.users',
+        relation='bureaucrat_knowledge_category_editor_users',
+        column1='knowledge_category_id',
+        column2='user_id',
+        string='Editors')
 
     owner_group_ids = fields.Many2many(
-        'res.groups', string='Owners groups')
-    owner_user_ids = fields.Many2many('res.users', string='Owners')
+        comodel_name='res.groups',
+        relation='bureaucrat_knowledge_category_owner_groups',
+        column1='knowledge_category_id',
+        column2='group_id',
+        string='Owners groups')
+    owner_user_ids = fields.Many2many(
+        comodel_name='res.users',
+        relation='bureaucrat_knowledge_category_owner_users',
+        column1='knowledge_category_id',
+        column2='user_id',
+        string='Owners')
 
     @api.model
     def create(self, vals):

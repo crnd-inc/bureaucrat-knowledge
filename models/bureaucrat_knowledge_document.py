@@ -58,7 +58,7 @@ class BureaucratKnowledgeDocument(models.Model):
         else:
             vals['visibility_type'] = 'subscribers'
 
-        document = super(BureaucratKnowledgeCategory, self).create(vals)
+        document = super(BureaucratKnowledgeDocument, self).create(vals)
         document.write({'owner_user_ids': [(4, self.env.user.id)]})
         return document
 

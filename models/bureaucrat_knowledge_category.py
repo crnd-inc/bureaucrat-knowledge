@@ -89,6 +89,15 @@ class BureaucratKnowledgeCategory(models.Model):
         column2='user_id',
         string='Owners')
 
+    _sql_constraints = [
+        ("check_visibility_type_parent_not_in_the_top_categories",
+         "CHECK (parent_id IS NOT NULL OR"
+         "(parent_id IS NULL AND visibility_type != 'parent'))",
+         "Category must have a parent category"
+         " to set Visibility Type 'Parent'"
+         ),
+    ]
+
     @api.model
     def create(self, vals):
         if vals.get('parent_id', False):

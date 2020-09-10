@@ -46,6 +46,9 @@ class BureaucratKnowledgeCategory(models.Model):
             ('restricted', 'Restricted'),
             ('parent', 'Parent')],
     )
+    parent_visibility_type = fields.Char(
+        compute='_compute_parent_visibility_type',
+        readonly=True, store=True)
 
     visibility_group_ids = fields.Many2many(
         comodel_name='res.groups',
@@ -148,3 +151,16 @@ class BureaucratKnowledgeCategory(models.Model):
                     [('category_id', 'child_of', rec.id),
                      ('active', '!=', rec.active)]).write(
                          {'active': rec.active})
+
+    def _check_visibility(self, rec):
+        if rec.visibility_type == 'parent':
+            parent = rec.parent_id
+            while rec.visibility_type == 'parent' and parent:
+                rec = parent
+                parent = rec.parent_id
+            return rec.visibility_type
+
+    @post_write('visibility_type')
+    def _compute_parent_visibility_type(self, changes):
+        for rec in self:
+            rec.parent_visibility_type = self._check_visibility(rec)

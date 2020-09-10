@@ -46,8 +46,8 @@ class BureaucratKnowledgeCategory(models.Model):
             ('restricted', 'Restricted'),
             ('parent', 'Parent')],
     )
-    parent_visibility_type = fields.Char(
-        compute='_compute_parent_visibility_type',
+    actual_visibility_type = fields.Char(
+        compute='_compute_actual_visibility_type',
         readonly=True, store=True)
 
     visibility_group_ids = fields.Many2many(
@@ -160,7 +160,7 @@ class BureaucratKnowledgeCategory(models.Model):
                 parent = rec.parent_id
             return rec.visibility_type
 
-    @post_write('visibility_type')
-    def _compute_parent_visibility_type(self, changes):
+    @api.onchange('visibility_type')
+    def _compute_actual_visibility_type(self):
         for rec in self:
             rec.parent_visibility_type = self._check_visibility(rec)

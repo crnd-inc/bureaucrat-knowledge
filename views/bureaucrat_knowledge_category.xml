@@ -112,6 +112,8 @@
                             <div>
                                 <group>
                                     <field name="visibility_type"/>
+                                    <field name="actual_visibility_type"
+                                        attrs="{'invisible': [('visibility_type', '!=', 'parent')]}"/>
                                     <field name="visibility_group_ids" widget="many2many_tags"/>
                                     <field name="visibility_user_ids" widget="many2many_tags"/>
                                     <field name="editor_group_ids" widget="many2many_tags"/>

@@ -42,13 +42,13 @@ class BureaucratKnowledgeCategory(models.Model):
             ('public', 'Public'),
             ('portal', 'Portal'),
             ('internal', 'Internal'),
-            ('subscribers', 'Subscribers'),
             ('restricted', 'Restricted'),
             ('parent', 'Parent')],
     )
-    actual_visibility_type = fields.Char(
-        compute='_compute_actual_visibility_type',
-        readonly=True, store=True)
+    actual_visibility_parent_id = fields.Many2one(
+        'bureaucrat.knowledge.category',
+        compute='_compute_actual_parent_id',
+        store=True, index=True)
 
     visibility_group_ids = fields.Many2many(
         comodel_name='res.groups',
@@ -103,7 +103,7 @@ class BureaucratKnowledgeCategory(models.Model):
         if vals.get('parent_id', False):
             vals['visibility_type'] = 'parent'
         else:
-            vals['visibility_type'] = 'subscribers'
+            vals['visibility_type'] = 'restricted'
 
         category = super(BureaucratKnowledgeCategory, self).create(vals)
         category.write({'owner_user_ids': [(4, self.env.user.id)]})
@@ -161,15 +161,16 @@ class BureaucratKnowledgeCategory(models.Model):
                      ('active', '!=', rec.active)]).write(
                          {'active': rec.active})
 
-    def _check_visibility(self, rec):
-        if rec.visibility_type == 'parent':
+    def _get_actual_parent(self, rec):
+        parent = rec.parent_id
+        while rec.visibility_type == 'parent' and parent:
+            rec = parent
             parent = rec.parent_id
-            while rec.visibility_type == 'parent' and parent:
-                rec = parent
-                parent = rec.parent_id
-            return rec.visibility_type
+        return rec
 
-    @api.onchange('visibility_type')
-    def _compute_actual_visibility_type(self):
+    @api.depends('visibility_type')
+    def _compute_actual_parent_id(self):
         for rec in self:
-            rec.parent_visibility_type = self._check_visibility(rec)
+            if rec.visibility_type == 'parent':
+                actual_parent = self._get_actual_parent(rec)
+                rec.actual_visibility_parent_id = actual_parent.id

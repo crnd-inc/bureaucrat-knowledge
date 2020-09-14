@@ -13,6 +13,7 @@
     # any module necessary for this one to work correctly
     'depends': [
         'base',
+        'base_field_m2m_view',
         'generic_mixin',
         'generic_tag',
         'mail',

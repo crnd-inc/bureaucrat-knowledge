@@ -104,7 +104,7 @@
         <field eval="0" name="perm_unlink"/>
         <field eval="1" name="perm_write"/>
         <field eval="1" name="perm_read"/>
-        <field eval="0" name="perm_create"/>
+        <field eval="1" name="perm_create"/>
     </record>
 
     <record id="rule_bureaucrat_knowledge_category_owners" model="ir.rule">

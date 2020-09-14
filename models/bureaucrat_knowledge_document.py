@@ -6,9 +6,13 @@ class BureaucratKnowledgeDocument(models.Model):
     _description = 'Bureaucrat Knowledge: Document'
     _inherit = [
         'generic.tag.mixin',
+        'generic.mixin.track.changes',
+        'generic.mixin.data.updatable',
         'mail.thread',
     ]
     _order = 'name, id'
+
+    _auto_set_noupdate_on_write = True
 
     name = fields.Char(translate=True, index=True, required=True)
     document_body = fields.Html(

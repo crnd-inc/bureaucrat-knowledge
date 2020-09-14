@@ -84,9 +84,8 @@ class BureaucratKnowledgeDocument(models.Model):
             vals['visibility_type'] = 'parent'
         else:
             vals['visibility_type'] = 'subscribers'
-
+        vals['owner_user_ids'] = [(4, self.env.user.id)]
         document = super(BureaucratKnowledgeDocument, self).create(vals)
-        document.write({'owner_user_ids': [(4, self.env.user.id)]})
         return document
 
     @api.depends('history_ids')

@@ -79,12 +79,28 @@ class BureaucratKnowledgeCategory(models.Model):
         column1='knowledge_category_id',
         column2='group_id',
         string='Editors groups')
+    actual_editor_group_ids = fields.Many2many(
+        comodel_name='res.groups',
+        relation='bureaucrat_knowledge_category_actual_editor_groups',
+        column1='knowledge_category_id',
+        column2='group_id',
+        string='Actual editors groups',
+        readonly=True,
+        compute='_compute_actual_editor_groups_users')
     editor_user_ids = fields.Many2many(
         comodel_name='res.users',
         relation='bureaucrat_knowledge_category_editor_users',
         column1='knowledge_category_id',
         column2='user_id',
         string='Editors')
+    actual_editor_user_ids = fields.Many2many(
+        comodel_name='res.users',
+        relation='bureaucrat_knowledge_category_actual_editor_users',
+        column1='knowledge_category_id',
+        column2='user_id',
+        string='Actual editors',
+        readonly=True,
+        compute='_compute_actual_editor_groups_users')
 
     owner_group_ids = fields.Many2many(
         comodel_name='res.groups',
@@ -115,6 +131,17 @@ class BureaucratKnowledgeCategory(models.Model):
             parent = rec.parent_id
         return rec
 
+    def _get_actual_editors(self, rec):
+        actual_editor_users = rec.editor_user_ids
+        actual_editor_groups = rec.editor_group_ids
+        parent = rec.parent_id
+        while rec.visibility_type == 'parent' and parent:
+            rec = parent
+            parent = rec.parent_id
+            actual_editor_users += rec.editor_user_ids
+            actual_editor_groups += rec.editor_group_ids
+        return actual_editor_users, actual_editor_groups
+
     @api.depends(
         'visibility_type',
         'parent_id',
@@ -127,6 +154,21 @@ class BureaucratKnowledgeCategory(models.Model):
             if rec.visibility_type == 'parent':
                 actual_parent = self._get_actual_parent(rec)
                 rec.actual_visibility_parent_id = actual_parent.id
+
+    @api.depends(
+        'parent_id',
+        'parent_ids.parent_id',
+        'parent_id.editor_group_ids',
+        'parent_id.editor_user_ids',
+        'parent_ids.parent_id.editor_group_ids',
+        'parent_ids.parent_id.editor_user_ids',
+    )
+    def _compute_actual_editor_groups_users(self):
+        for rec in self:
+            actual_edit_users, actual_edit_groups = (
+                self._get_actual_editors(rec))
+            rec.actual_editor_user_ids = actual_edit_users
+            rec.actual_editor_group_ids = actual_edit_groups
 
     @api.depends('child_ids')
     def _compute_child_category_count(self):
@@ -176,8 +218,8 @@ class BureaucratKnowledgeCategory(models.Model):
         else:
             vals['visibility_type'] = 'restricted'
 
+        vals['owner_user_ids'] = [(4, self.env.user.id)]
         category = super(BureaucratKnowledgeCategory, self).create(vals)
-        category.write({'owner_user_ids': [(4, self.env.user.id)]})
 
         # Invalidate cache for 'parent_ids' field
         if 'parent_id' in vals:

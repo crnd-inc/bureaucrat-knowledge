@@ -91,19 +91,6 @@
                                 </form>
                             </field>
                         </page>
-                        <page name="page_other" string="Other">
-                            <group name="group_other_root">
-                                <group name="group_other_left">
-                                    <field name="ir_model_data_id"
-                                           groups="base.group_no_one"/>
-                                    <field name="ir_model_data_xmlid"/>
-                                    <field name="ir_model_data_no_update"
-                                           widget="boolean_toggle"/>
-                                </group>
-                                <group name="group_other_right">
-                                </group>
-                            </group>
-                        </page>
                         <page name="document_settings" string="Settings">
                             <div>
                                 <group>
@@ -116,6 +103,19 @@
                                     <field name="owner_user_ids" widget="many2many_tags"/>
                                 </group>
                             </div>
+                        </page>
+                        <page name="page_other" string="Other">
+                            <group name="group_other_root">
+                                <group name="group_other_left">
+                                    <field name="ir_model_data_id"
+                                           groups="base.group_no_one"/>
+                                    <field name="ir_model_data_xmlid"/>
+                                    <field name="ir_model_data_no_update"
+                                           widget="boolean_toggle"/>
+                                </group>
+                                <group name="group_other_right">
+                                </group>
+                            </group>
                         </page>
                     </notebook>
 

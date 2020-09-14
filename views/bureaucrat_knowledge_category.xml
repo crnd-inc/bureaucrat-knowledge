@@ -95,6 +95,25 @@
                                 <field name="description" placeholder="Description"/>
                             </div>
                         </page>
+                        <page name="category_settings" string="Settings">
+                            <div>
+                                <group>
+                                    <field name="visibility_type"/>
+                                    <field name="actual_visibility_parent_id"
+                                        attrs="{'invisible': [('visibility_type', '!=', 'parent')]}"/>
+                                    <field name="visibility_group_ids" widget="many2many_tags"/>
+                                    <field name="visibility_user_ids" widget="many2many_tags"/>
+                                    <field name="editor_group_ids" widget="many2many_tags"/>
+                                    <field name="actual_editor_group_ids" widget="many2many_tags"
+                                        attrs="{'invisible': [('visibility_type', '!=', 'parent')]}"/>
+                                    <field name="editor_user_ids" widget="many2many_tags"/>
+                                    <field name="actual_editor_user_ids" widget="many2many_tags"
+                                        attrs="{'invisible': [('visibility_type', '!=', 'parent')]}"/>
+                                    <field name="owner_group_ids" widget="many2many_tags"/>
+                                    <field name="owner_user_ids" widget="many2many_tags"/>
+                                </group>
+                            </div>
+                        </page>
                         <page name="page_other" string="Other">
                             <group name="group_other_root">
                                 <group name="group_other_left">
@@ -107,21 +126,6 @@
                                 <group name="group_other_right">
                                 </group>
                             </group>
-                        </page>
-                        <page name="category_settings" string="Settings">
-                            <div>
-                                <group>
-                                    <field name="visibility_type"/>
-                                    <field name="actual_visibility_parent_id"
-                                        attrs="{'invisible': [('visibility_type', '!=', 'parent')]}"/>
-                                    <field name="visibility_group_ids" widget="many2many_tags"/>
-                                    <field name="visibility_user_ids" widget="many2many_tags"/>
-                                    <field name="editor_group_ids" widget="many2many_tags"/>
-                                    <field name="editor_user_ids" widget="many2many_tags"/>
-                                    <field name="owner_group_ids" widget="many2many_tags"/>
-                                    <field name="owner_user_ids" widget="many2many_tags"/>
-                                </group>
-                            </div>
                         </page>
                     </notebook>
                 </sheet>

@@ -23,4 +23,23 @@
                ref="bureaucrat_demo_subcategory_1"/>
     </record>
 
+    <record id="bureaucrat_demo_subcategory_3"
+            model="bureaucrat.knowledge.category">
+        <field name="name">Subcategory 3</field>
+        <field name="parent_id"
+               ref="bureaucrat_demo_subcategory_2"/>
+    </record>
+
+    <record id="document_demo_sub_3"
+            model="bureaucrat.knowledge.document">
+        <field name="name">Demo Document For Subcategory 3</field>
+        <field name="category_id"
+               ref="bureaucrat_demo_subcategory_3"/>
+        <field name="document_body">
+            <![CDATA[
+                <h1>Demo document text.</h1>
+            ]]>
+        </field>
+    </record>
+
 </odoo>

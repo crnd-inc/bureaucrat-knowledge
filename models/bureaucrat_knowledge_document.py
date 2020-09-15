@@ -1,4 +1,3 @@
-from psycopg2 import sql
 from odoo import models, fields, api
 
 

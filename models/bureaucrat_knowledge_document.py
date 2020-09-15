@@ -1,3 +1,4 @@
+from psycopg2 import sql
 from odoo import models, fields, api
 
 
@@ -35,10 +36,18 @@ class BureaucratKnowledgeDocument(models.Model):
             ('public', 'Public'),
             ('portal', 'Portal'),
             ('internal', 'Internal'),
-            ('subscribers', 'Subscribers'),
             ('restricted', 'Restricted'),
             ('parent', 'Parent')],
     )
+
+    parent_ids = fields.Many2manyView(
+        comodel_name='bureaucrat.knowledge.document',
+        relation='bureaucrat_knowledge_document_parents_rel_view',
+        column1='child_id',
+        column2='parent_id',
+        string='Parents Categories For Document',
+        readonly=True)
+
     visibility_group_ids = fields.Many2many(
         comodel_name='res.groups',
         relation='bureaucrat_knowledge_document_visibility_groups',

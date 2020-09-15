@@ -35,7 +35,9 @@
         'templates/category_content.xml',
     ],
     'images': [],
-    'demo': [],
+    'demo': [
+        'demo/bureaucrat_knowledge_demo.xml',
+    ],
 
     'installable': True,
     'application': True,

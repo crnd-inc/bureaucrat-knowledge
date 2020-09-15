@@ -220,7 +220,6 @@ class BureaucratKnowledgeCategory(models.Model):
             vals['visibility_type'] = 'parent'
         else:
             vals['visibility_type'] = 'restricted'
-
         vals['owner_user_ids'] = [(4, self.env.user.id)]
         category = super(BureaucratKnowledgeCategory, self).create(vals)
         self._add_actual_editors(category)

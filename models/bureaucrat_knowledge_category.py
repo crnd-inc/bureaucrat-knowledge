@@ -143,10 +143,10 @@ class BureaucratKnowledgeCategory(models.Model):
         return actual_editor_users, actual_editor_groups
 
     def _add_actual_editors(self, rec):
-            actual_edit_users, actual_edit_groups = (
-                self._get_actual_editors(rec))
-            rec.actual_editor_user_ids = actual_edit_users
-            rec.actual_editor_group_ids = actual_edit_groups
+        actual_edit_users, actual_edit_groups = (
+            self._get_actual_editors(rec))
+        rec.actual_editor_user_ids = actual_edit_users
+        rec.actual_editor_group_ids = actual_edit_groups
 
     @api.depends(
         'visibility_type',
@@ -163,9 +163,9 @@ class BureaucratKnowledgeCategory(models.Model):
 
     @api.depends(
         'parent_id',
-        'parent_ids.parent_id',
         'parent_id.editor_group_ids',
         'parent_id.editor_user_ids',
+        'parent_ids.parent_id',
         'parent_ids.parent_id.editor_group_ids',
         'parent_ids.parent_id.editor_user_ids',
     )

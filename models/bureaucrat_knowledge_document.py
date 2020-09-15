@@ -40,13 +40,10 @@ class BureaucratKnowledgeDocument(models.Model):
             ('parent', 'Parent')],
     )
 
-    parent_ids = fields.Many2manyView(
-        comodel_name='bureaucrat.knowledge.document',
-        relation='bureaucrat_knowledge_document_parents_rel_view',
-        column1='child_id',
-        column2='parent_id',
-        string='Parents Categories For Document',
-        readonly=True)
+    actual_visibility_category_id = fields.Many2one(
+        'bureaucrat.knowledge.category',
+        compute='_compute_actual_visibility_category_id',
+        store=True, index=True)
 
     visibility_group_ids = fields.Many2many(
         comodel_name='res.groups',
@@ -67,12 +64,28 @@ class BureaucratKnowledgeDocument(models.Model):
         column1='knowledge_document_id',
         column2='group_id',
         string='Editors groups')
+    actual_editor_group_ids = fields.Many2many(
+        comodel_name='res.groups',
+        relation='bureaucrat_knowledge_document_actual_editor_groups',
+        column1='knowledge_document_id',
+        column2='group_id',
+        string='Actual editors groups',
+        readonly=True,
+        compute='_compute_actual_editor_groups_users')
     editor_user_ids = fields.Many2many(
         comodel_name='res.users',
         relation='bureaucrat_knowledge_document_editor_users',
         column1='knowledge_document_id',
         column2='user_id',
         string='Editors')
+    actual_editor_user_ids = fields.Many2many(
+        comodel_name='res.users',
+        relation='bureaucrat_knowledge_document_actual_editor_users',
+        column1='knowledge_document_id',
+        column2='user_id',
+        string='Actual editors',
+        readonly=True,
+        compute='_compute_actual_editor_groups_users')
 
     owner_group_ids = fields.Many2many(
         comodel_name='res.groups',
@@ -87,12 +100,76 @@ class BureaucratKnowledgeDocument(models.Model):
         column2='user_id',
         string='Owners')
 
+    _sql_constraints = [
+        ("check_visibility_type_parent_not_in_the_top_categories",
+         "CHECK (category_id IS NOT NULL OR"
+         "(category_id IS NULL AND visibility_type != 'parent'))",
+         "Document must have a parent category"
+         " to set Visibility Type 'Parent'"
+         ),
+    ]
+
+    def _get_actual_parent(self, rec):
+        if rec.category_id:
+            rec = rec.category_id
+            parent = rec.parent_id
+            while rec.visibility_type == 'parent' and parent:
+                rec = parent
+                parent = rec.parent_id
+            return rec
+
+    def _get_actual_editors(self, rec):
+        actual_editor_users = rec.editor_user_ids
+        actual_editor_groups = rec.editor_group_ids
+        if rec.category_id:
+            rec = rec.category_id
+            parent = rec.parent_id
+            while rec.visibility_type == 'parent' and parent:
+                rec = parent
+                parent = rec.parent_id
+                actual_editor_users += rec.editor_user_ids
+                actual_editor_groups += rec.editor_group_ids
+        return actual_editor_users, actual_editor_groups
+
+    def _add_actual_editors(self, rec):
+        actual_edit_users, actual_edit_groups = (
+            self._get_actual_editors(rec))
+        rec.actual_editor_user_ids = actual_edit_users
+        rec.actual_editor_group_ids = actual_edit_groups
+
+    @api.depends(
+        'visibility_type',
+        'category_id',
+        'category_id.editor_group_ids',
+        'category_id.editor_user_ids',
+        'category_id.parent_ids.parent_id',
+        'category_id.parent_ids.parent_id.visibility_type',
+    )
+    def _compute_actual_visibility_category_id(self):
+        for rec in self:
+            if rec.visibility_type == 'parent':
+                actual_category = self._get_actual_parent(rec)
+                rec.actual_visibility_category_id = (
+                    actual_category and actual_category.id)
+
+    @api.depends(
+        'category_id',
+        'category_id.editor_group_ids',
+        'category_id.editor_user_ids',
+        'category_id.parent_ids.parent_id',
+        'category_id.parent_ids.parent_id.editor_group_ids',
+        'category_id.parent_ids.parent_id.editor_user_ids',
+    )
+    def _compute_actual_editor_groups_users(self):
+        for rec in self:
+            self._add_actual_editors(rec)
+
     @api.model
     def create(self, vals):
-        if vals.get('parent_id', False):
+        if vals.get('category_id', False):
             vals['visibility_type'] = 'parent'
         else:
-            vals['visibility_type'] = 'subscribers'
+            vals['visibility_type'] = 'restricted'
         vals['owner_user_ids'] = [(4, self.env.user.id)]
         document = super(BureaucratKnowledgeDocument, self).create(vals)
         return document

@@ -33,7 +33,7 @@ class TestBureaucratKnowledgeBase(ReduceLoggingMixin,
             'bureaucrat_knowledge.bureaucrat_demo_subcategory_1')
         cls.category_subcat_2 = cls.env.ref(
             'bureaucrat_knowledge.bureaucrat_demo_subcategory_2')
-        cls.category_subcat_3 = cls.env.ref(
-            'bureaucrat_knowledge.bureaucrat_demo_subcategory_3')
-        cls.document_subcat_3 = cls.env.ref(
-            'bureaucrat_knowledge.document_demo_sub_3')
+        cls.document_demo_top_1 = cls.env.ref(
+            'bureaucrat_knowledge.document_demo_top_1')
+        cls.document_subcat_2 = cls.env.ref(
+            'bureaucrat_knowledge.document_demo_sub_2')

@@ -23,21 +23,24 @@
                ref="bureaucrat_demo_subcategory_1"/>
     </record>
 
-    <record id="bureaucrat_demo_subcategory_3"
-            model="bureaucrat.knowledge.category">
-        <field name="name">Subcategory 3</field>
-        <field name="parent_id"
-               ref="bureaucrat_demo_subcategory_2"/>
-    </record>
-
-    <record id="document_demo_sub_3"
+    <record id="document_demo_top_1"
             model="bureaucrat.knowledge.document">
-        <field name="name">Demo Document For Subcategory 3</field>
-        <field name="category_id"
-               ref="bureaucrat_demo_subcategory_3"/>
+        <field name="name">Demo Document Top Level</field>
         <field name="document_body">
             <![CDATA[
-                <h1>Demo document text.</h1>
+                <h1>Top level demo document text.</h1>
+            ]]>
+        </field>
+    </record>
+
+    <record id="document_demo_sub_2"
+            model="bureaucrat.knowledge.document">
+        <field name="name">Demo Document For Subcategory 2</field>
+        <field name="category_id"
+               ref="bureaucrat_demo_subcategory_2"/>
+        <field name="document_body">
+            <![CDATA[
+                <h1>Subcategory demo document text.</h1>
             ]]>
         </field>
     </record>

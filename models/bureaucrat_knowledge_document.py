@@ -92,12 +92,28 @@ class BureaucratKnowledgeDocument(models.Model):
         column1='knowledge_document_id',
         column2='group_id',
         string='Owners groups')
+    actual_owner_group_ids = fields.Many2many(
+        comodel_name='res.groups',
+        relation='bureaucrat_knowledge_document_actual_owner_groups',
+        column1='knowledge_document_id',
+        column2='group_id',
+        string='Actual owners groups',
+        readonly=True,
+        compute='_compute_actual_owner_groups_users')
     owner_user_ids = fields.Many2many(
         comodel_name='res.users',
         relation='bureaucrat_knowledge_document_owner_users',
         column1='knowledge__documentid',
         column2='user_id',
         string='Owners')
+    actual_owner_user_ids = fields.Many2many(
+        comodel_name='res.users',
+        relation='bureaucrat_knowledge_document_actual_owner_users',
+        column1='knowledge_document_id',
+        column2='user_id',
+        string='Actual owners',
+        readonly=True,
+        compute='_compute_actual_owner_groups_users')
 
     _sql_constraints = [
         ("check_visibility_type_parent_not_in_the_top_categories",
@@ -117,24 +133,49 @@ class BureaucratKnowledgeDocument(models.Model):
                 parent = rec.parent_id
             return rec
 
-    def _get_actual_editors(self, rec):
-        actual_editor_users = rec.editor_user_ids
-        actual_editor_groups = rec.editor_group_ids
+    def _get_actual_editors_ids(self, rec):
+        actual_editor_users_ids = rec.editor_user_ids.ids
+        actual_editor_groups_ids = rec.editor_group_ids.ids
         if rec.category_id:
             rec = rec.category_id
+            actual_editor_users_ids += rec.editor_user_ids.ids
+            actual_editor_groups_ids += rec.editor_group_ids.ids
             parent = rec.parent_id
             while rec.visibility_type == 'parent' and parent:
                 rec = parent
                 parent = rec.parent_id
-                actual_editor_users += rec.editor_user_ids
-                actual_editor_groups += rec.editor_group_ids
-        return actual_editor_users, actual_editor_groups
+                actual_editor_users_ids += rec.editor_user_ids.ids
+                actual_editor_groups_ids += rec.editor_group_ids.ids
+        return (list(set(actual_editor_users_ids)),
+                list(set(actual_editor_groups_ids)))
 
     def _add_actual_editors(self, rec):
         actual_edit_users, actual_edit_groups = (
-            self._get_actual_editors(rec))
+            self._get_actual_editors_ids(rec))
         rec.actual_editor_user_ids = actual_edit_users
         rec.actual_editor_group_ids = actual_edit_groups
+
+    def _get_actual_owners_ids(self, rec):
+        actual_owner_users_ids = rec.owner_user_ids.ids
+        actual_owner_groups_ids = rec.owner_group_ids.ids
+        if rec.category_id:
+            rec = rec.category_id
+            actual_owner_users_ids += rec.editor_user_ids.ids
+            actual_owner_groups_ids += rec.editor_group_ids.ids
+            parent = rec.parent_id
+            while rec.visibility_type == 'parent' and parent:
+                rec = parent
+                parent = rec.parent_id
+                actual_owner_users_ids += rec.owner_user_ids.ids
+                actual_owner_groups_ids += rec.owner_group_ids.ids
+        return (list(set(actual_owner_users_ids)),
+                list(set(actual_owner_groups_ids)))
+
+    def _add_actual_owners(self, rec):
+        actual_owner_users, actual_owner_groups = (
+            self._get_actual_owners_ids(rec))
+        rec.actual_owner_user_ids = actual_owner_users
+        rec.actual_owner_group_ids = actual_owner_groups
 
     @api.depends(
         'visibility_type',
@@ -162,6 +203,18 @@ class BureaucratKnowledgeDocument(models.Model):
     def _compute_actual_editor_groups_users(self):
         for rec in self:
             self._add_actual_editors(rec)
+
+    @api.depends(
+        'category_id',
+        'category_id.owner_group_ids',
+        'category_id.owner_user_ids',
+        'category_id.parent_ids.parent_id',
+        'category_id.parent_ids.parent_id.owner_group_ids',
+        'category_id.parent_ids.parent_id.owner_user_ids',
+    )
+    def _compute_actual_owner_groups_users(self):
+        for rec in self:
+            self._add_actual_owners(rec)
 
     @api.model
     def create(self, vals):

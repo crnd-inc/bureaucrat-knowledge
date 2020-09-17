@@ -132,7 +132,6 @@ class BureaucratKnowledgeCategory(models.Model):
         compute='_compute_actual_owner_groups_users',
     )
 
-
     _sql_constraints = [
         ("check_visibility_type_parent_not_in_the_top_categories",
          "CHECK (parent_id IS NOT NULL OR"
@@ -149,37 +148,40 @@ class BureaucratKnowledgeCategory(models.Model):
             parent = rec.parent_id
         return rec
 
-    def _get_actual_editors(self, rec):
-        actual_editor_users = rec.editor_user_ids
-        actual_editor_groups = rec.editor_group_ids
+    def _get_actual_editors_ids(self, rec):
+        actual_editor_users_ids = rec.editor_user_ids.ids
+        actual_editor_groups_ids = rec.editor_group_ids.ids
+
         parent = rec.parent_id
         while rec.visibility_type == 'parent' and parent:
             rec = parent
             parent = rec.parent_id
-        actual_editor_users += rec.editor_user_ids
-        actual_editor_groups += rec.editor_group_ids
-        return actual_editor_users, actual_editor_groups
+            actual_editor_users_ids += rec.editor_user_ids.ids
+            actual_editor_groups_ids += rec.editor_group_ids.ids
+        return (list(set(actual_editor_users_ids)),
+                list(set(actual_editor_groups_ids)))
 
     def _add_actual_editors(self, rec):
         actual_edit_users, actual_edit_groups = (
-            self._get_actual_editors(rec))
+            self._get_actual_editors_ids(rec))
         rec.actual_editor_user_ids = actual_edit_users
         rec.actual_editor_group_ids = actual_edit_groups
 
-    def _get_actual_owners(self, rec):
-        actual_owner_users = rec.owner_user_ids
-        actual_owner_groups = rec.owner_group_ids
+    def _get_actual_owners_ids(self, rec):
+        actual_owner_users_ids = rec.owner_user_ids.ids
+        actual_owner_groups_ids = rec.owner_group_ids.ids
         parent = rec.parent_id
         while rec.visibility_type == 'parent' and parent:
             rec = parent
             parent = rec.parent_id
-        actual_owner_users += rec.owner_user_ids
-        actual_owner_groups += rec.owner_group_ids
-        return actual_owner_users, actual_owner_groups
+            actual_owner_users_ids += rec.owner_user_ids.ids
+            actual_owner_groups_ids += rec.owner_group_ids.ids
+        return (list(set(actual_owner_users_ids)),
+                list(set(actual_owner_groups_ids)))
 
     def _add_actual_owners(self, rec):
         actual_owner_users, actual_owner_groups = (
-            self._get_actual_owners(rec))
+            self._get_actual_owners_ids(rec))
         rec.actual_owner_user_ids = actual_owner_users
         rec.actual_owner_group_ids = actual_owner_groups
 

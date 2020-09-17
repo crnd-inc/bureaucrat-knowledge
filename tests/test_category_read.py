@@ -794,7 +794,7 @@ class TesteKnowledgeCategoryRead(TestBureaucratKnowledgeBase):
         self.assertEqual(len(self.category_top_level.visibility_group_ids), 1)
         self.assertEqual(
             len((self.document_subcat_2.actual_visibility_category_id.
-             visibility_group_ids)), 1)
+                 visibility_group_ids)), 1)
         self.assertEqual(
             self.document_subcat_2.sudo(self.user).name,
             'Demo Document For Subcategory 2')
@@ -825,7 +825,7 @@ class TesteKnowledgeCategoryRead(TestBureaucratKnowledgeBase):
         self.assertEqual(len(self.category_top_level.editor_user_ids), 1)
         self.assertEqual(
             len((self.document_subcat_2.actual_visibility_category_id.
-             editor_user_ids)), 1)
+                 editor_user_ids)), 1)
         self.assertEqual(
             self.document_subcat_2.sudo(self.user).name,
             'Demo Document For Subcategory 2')
@@ -856,7 +856,7 @@ class TesteKnowledgeCategoryRead(TestBureaucratKnowledgeBase):
         self.assertEqual(len(self.category_top_level.editor_group_ids), 1)
         self.assertEqual(
             len((self.document_subcat_2.actual_visibility_category_id.
-             editor_group_ids)), 1)
+                 editor_group_ids)), 1)
         self.assertEqual(
             self.document_subcat_2.sudo(self.user).name,
             'Demo Document For Subcategory 2')

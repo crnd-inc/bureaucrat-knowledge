@@ -86,6 +86,7 @@ class BureaucratKnowledgeCategory(models.Model):
         column2='group_id',
         string='Actual editors groups',
         readonly=True,
+        store=True,
         compute='_compute_actual_editor_groups_users')
     editor_user_ids = fields.Many2many(
         comodel_name='res.users',
@@ -100,6 +101,7 @@ class BureaucratKnowledgeCategory(models.Model):
         column2='user_id',
         string='Actual editors',
         readonly=True,
+        store=True,
         compute='_compute_actual_editor_groups_users')
 
     owner_group_ids = fields.Many2many(
@@ -115,6 +117,7 @@ class BureaucratKnowledgeCategory(models.Model):
         column2='group_id',
         string='Actual owners groups',
         readonly=True,
+        store=True,
         compute='_compute_actual_owner_groups_users')
     owner_user_ids = fields.Many2many(
         comodel_name='res.users',
@@ -129,6 +132,7 @@ class BureaucratKnowledgeCategory(models.Model):
         column2='user_id',
         string='Actual owners',
         readonly=True,
+        store=True,
         compute='_compute_actual_owner_groups_users',
     )
 
@@ -199,9 +203,12 @@ class BureaucratKnowledgeCategory(models.Model):
                 rec.actual_visibility_parent_id = actual_parent.id
 
     @api.depends(
+        'editor_group_ids',
+        'editor_user_ids',
         'parent_id',
         'parent_id.editor_group_ids',
         'parent_id.editor_user_ids',
+        'parent_ids',
         'parent_ids.parent_id',
         'parent_ids.parent_id.editor_group_ids',
         'parent_ids.parent_id.editor_user_ids',
@@ -211,9 +218,12 @@ class BureaucratKnowledgeCategory(models.Model):
             self._add_actual_editors(rec)
 
     @api.depends(
+        'owner_group_ids',
+        'owner_user_ids',
         'parent_id',
         'parent_id.owner_group_ids',
         'parent_id.owner_user_ids',
+        'parent_ids',
         'parent_ids.parent_id',
         'parent_ids.parent_id.owner_group_ids',
         'parent_ids.parent_id.owner_user_ids',

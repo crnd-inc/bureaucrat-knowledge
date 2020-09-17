@@ -70,6 +70,7 @@ class BureaucratKnowledgeDocument(models.Model):
         column2='group_id',
         string='Actual editors groups',
         readonly=True,
+        store=True,
         compute='_compute_actual_editor_groups_users')
     editor_user_ids = fields.Many2many(
         comodel_name='res.users',
@@ -84,6 +85,7 @@ class BureaucratKnowledgeDocument(models.Model):
         column2='user_id',
         string='Actual editors',
         readonly=True,
+        store=True,
         compute='_compute_actual_editor_groups_users')
 
     owner_group_ids = fields.Many2many(
@@ -99,6 +101,7 @@ class BureaucratKnowledgeDocument(models.Model):
         column2='group_id',
         string='Actual owners groups',
         readonly=True,
+        store=True,
         compute='_compute_actual_owner_groups_users')
     owner_user_ids = fields.Many2many(
         comodel_name='res.users',
@@ -113,6 +116,7 @@ class BureaucratKnowledgeDocument(models.Model):
         column2='user_id',
         string='Actual owners',
         readonly=True,
+        store=True,
         compute='_compute_actual_owner_groups_users')
 
     _sql_constraints = [
@@ -160,8 +164,8 @@ class BureaucratKnowledgeDocument(models.Model):
         actual_owner_groups_ids = rec.owner_group_ids.ids
         if rec.category_id:
             rec = rec.category_id
-            actual_owner_users_ids += rec.editor_user_ids.ids
-            actual_owner_groups_ids += rec.editor_group_ids.ids
+            actual_owner_users_ids += rec.owner_user_ids.ids
+            actual_owner_groups_ids += rec.owner_group_ids.ids
             parent = rec.parent_id
             while rec.visibility_type == 'parent' and parent:
                 rec = parent
@@ -193,9 +197,13 @@ class BureaucratKnowledgeDocument(models.Model):
                     actual_category and actual_category.id)
 
     @api.depends(
+        'editor_group_ids',
+        'editor_user_ids',
         'category_id',
         'category_id.editor_group_ids',
         'category_id.editor_user_ids',
+        'category_id.parent_ids.editor_group_ids',
+        'category_id.parent_ids.editor_user_ids',
         'category_id.parent_ids.parent_id',
         'category_id.parent_ids.parent_id.editor_group_ids',
         'category_id.parent_ids.parent_id.editor_user_ids',
@@ -205,9 +213,13 @@ class BureaucratKnowledgeDocument(models.Model):
             self._add_actual_editors(rec)
 
     @api.depends(
+        'owner_group_ids',
+        'owner_user_ids',
         'category_id',
         'category_id.owner_group_ids',
         'category_id.owner_user_ids',
+        'category_id.parent_ids.owner_group_ids',
+        'category_id.parent_ids.owner_user_ids',
         'category_id.parent_ids.parent_id',
         'category_id.parent_ids.parent_id.owner_group_ids',
         'category_id.parent_ids.parent_id.owner_user_ids',

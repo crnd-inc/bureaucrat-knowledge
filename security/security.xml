@@ -91,9 +91,7 @@
         <field name="domain_force">[
                 '|',
                 ('editor_user_ids', 'child_of', user.id),
-                '&amp;',
-                ('visibility_type', '=', 'parent'),
-                ('actual_visibility_parent_id.editor_user_ids', 'child_of', user.id)
+                ('actual_editor_user_ids', 'child_of', user.id),
             ]</field>
         <field name="groups" eval="[(4, ref('bureaucrat_knowledge.group_bureaucratic_knowledge_user_implicit'))]"/>
         <field eval="0" name="perm_unlink"/>
@@ -108,9 +106,7 @@
         <field name="domain_force">[
                 '|',
                 ('editor_group_ids', 'in', user.groups_id.ids),
-                '&amp;',
-                ('visibility_type', '=', 'parent'),
-                ('actual_visibility_parent_id.editor_group_ids', 'in', user.groups_id.ids),
+                ('actual_editor_group_ids', 'in', user.groups_id.ids),
             ]</field>
         <field name="groups" eval="[(4, ref('bureaucrat_knowledge.group_bureaucratic_knowledge_user_implicit'))]"/>
         <field eval="0" name="perm_unlink"/>
@@ -125,9 +121,7 @@
         <field name="domain_force">[
                 '|',
                 ('owner_user_ids', 'child_of', user.id),
-                '&amp;',
-                ('visibility_type', '=', 'parent'),
-                ('actual_visibility_parent_id.owner_user_ids', 'child_of', user.id)
+                ('actual_owner_user_ids', 'child_of', user.id)
             ]</field>
         <field name="groups" eval="[(4, ref('bureaucrat_knowledge.group_bureaucratic_knowledge_user_implicit'))]"/>
         <field eval="1" name="perm_unlink"/>
@@ -142,9 +136,7 @@
         <field name="domain_force">[
                 '|',
                 ('owner_group_ids', 'in', user.groups_id.ids),
-                '&amp;',
-                ('visibility_type', '=', 'parent'),
-                ('actual_visibility_parent_id.owner_group_ids', 'in', user.groups_id.ids),
+                ('actual_owner_group_ids', 'in', user.groups_id.ids),
             ]</field>
         <field name="groups" eval="[(4, ref('bureaucrat_knowledge.group_bureaucratic_knowledge_user_implicit'))]"/>
         <field eval="1" name="perm_unlink"/>
@@ -253,9 +245,7 @@
         <field name="domain_force">[
                 '|',
                 ('editor_user_ids', 'child_of', user.id),
-                '&amp;',
-                ('visibility_type', '=', 'parent'),
-                ('actual_visibility_category_id.editor_user_ids', 'child_of', user.id)
+                ('actual_editor_user_ids', 'child_of', user.id)
             ]</field>
         <field name="groups" eval="[(4, ref('bureaucrat_knowledge.group_bureaucratic_knowledge_user_implicit'))]"/>
         <field eval="0" name="perm_unlink"/>
@@ -270,9 +260,7 @@
         <field name="domain_force">[
                 '|',
                 ('editor_group_ids', 'in', user.groups_id.ids),
-                '&amp;',
-                ('visibility_type', '=', 'parent'),
-                ('actual_visibility_category_id.editor_group_ids', 'in', user.groups_id.ids),
+                ('actual_editor_group_ids', 'in', user.groups_id.ids),
             ]</field>
         <field name="groups" eval="[(4, ref('bureaucrat_knowledge.group_bureaucratic_knowledge_user_implicit'))]"/>
         <field eval="0" name="perm_unlink"/>
@@ -287,9 +275,7 @@
         <field name="domain_force">[
                 '|',
                 ('owner_user_ids', 'child_of', user.id),
-                '&amp;',
-                ('visibility_type', '=', 'parent'),
-                ('actual_visibility_category_id.owner_user_ids', 'child_of', user.id)
+                ('actual_owner_user_ids', 'child_of', user.id)
             ]</field>
         <field name="groups" eval="[(4, ref('bureaucrat_knowledge.group_bureaucratic_knowledge_user_implicit'))]"/>
         <field eval="1" name="perm_unlink"/>
@@ -304,9 +290,7 @@
         <field name="domain_force">[
                 '|',
                 ('owner_group_ids', 'in', user.groups_id.ids),
-                '&amp;',
-                ('visibility_type', '=', 'parent'),
-                ('actual_visibility_category_id.owner_group_ids', 'in', user.groups_id.ids),
+                ('actual_owner_group_ids', 'in', user.groups_id.ids),
             ]</field>
         <field name="groups" eval="[(4, ref('bureaucrat_knowledge.group_bureaucratic_knowledge_user_implicit'))]"/>
         <field eval="1" name="perm_unlink"/>

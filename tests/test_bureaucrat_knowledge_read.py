@@ -3,7 +3,7 @@ from odoo.exceptions import AccessError
 from .test_common import TestBureaucratKnowledgeBase
 
 
-class TesteKnowledgeCategoryRead(TestBureaucratKnowledgeBase):
+class TestKnowledgeCategoryDocumentRead(TestBureaucratKnowledgeBase):
 
     # Testing Top level category for visibility_type = 'restricted'
     def test_category_restricted_access_read_user(self):

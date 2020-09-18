@@ -1,4 +1,5 @@
 from . import (
     test_bureaucrat_knowledge,
-    test_categories_documents_read
+    test_bureaucrat_knowledge_read,
+    test_bureaucrat_knowledge_write,
 )

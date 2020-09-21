@@ -411,19 +411,44 @@ class TestKnowledgeCategoryDocumentWrite(TestBureaucratKnowledgeBase):
              visibility_type), 'restricted')
         self.assertFalse(self.category_top_level.owner_group_ids)
         self.assertEqual(len(self.category_top_level.owner_user_ids), 1)
+        self.assertFalse(self.category_subcat_1.owner_group_ids)
+        self.assertEqual(len(self.category_subcat_1.owner_user_ids), 1)
+        self.assertFalse(self.category_subcat_2.owner_group_ids)
         self.assertEqual(len(self.category_subcat_2.owner_user_ids), 1)
+        self.assertFalse(self.category_subcat_1.actual_owner_group_ids)
+        self.assertEqual(len(self.category_subcat_1.actual_owner_user_ids), 1)
+        self.assertFalse(self.category_subcat_2.actual_owner_group_ids)
+        self.assertEqual(len(self.category_subcat_2.actual_owner_user_ids), 1)
 
         with self.assertRaises(AccessError):
-            self.category_subcat_2.sudo(self.user).write({
+            self.category_top_level.sudo(self.user).write({
                 'name': 'Top level category 1 renamed'})
+        with self.assertRaises(AccessError):
+            self.category_subcat_1.sudo(self.user).write({
+                'name': 'Subcategory 1 renamed'})
+        with self.assertRaises(AccessError):
+            self.category_subcat_2.sudo(self.user).write({
+                'name': 'Subcategory 2 renamed'})
 
-        self.category_subcat_2.write({
+        self.category_top_level.write({
             'owner_user_ids': [(4, self.user.id)]})
 
-        self.assertEqual(len(self.category_top_level.owner_user_ids), 1)
-        self.assertEqual(len(self.category_subcat_2.owner_user_ids), 2)
-        self.category_subcat_2.sudo(self.user).write({
+        self.assertEqual(len(self.category_top_level.owner_user_ids), 2)
+        self.assertFalse(self.category_subcat_1.owner_group_ids)
+        self.assertEqual(len(self.category_subcat_1.owner_user_ids), 1)
+        self.assertFalse(self.category_subcat_2.owner_group_ids)
+        self.assertEqual(len(self.category_subcat_2.owner_user_ids), 1)
+        self.assertFalse(self.category_subcat_1.actual_owner_group_ids)
+        self.assertEqual(len(self.category_subcat_1.actual_owner_user_ids), 2)
+        self.assertFalse(self.category_subcat_2.actual_owner_group_ids)
+        self.assertEqual(len(self.category_subcat_2.actual_owner_user_ids), 2)
+
+        self.category_top_level.sudo(self.user).write({
             'name': 'Top level category 1 renamed'})
+        self.category_subcat_1.sudo(self.user).write({
+            'name': 'Subcategory 1 renamed'})
+        self.category_subcat_2.sudo(self.user).write({
+            'name': 'Subcategory 2 renamed'})
 
     def test_subcategory_2_restricted_owners_access_write_group(self):
         self.user.groups_id |= self.group_knowledge_user_implicit
@@ -439,18 +464,44 @@ class TestKnowledgeCategoryDocumentWrite(TestBureaucratKnowledgeBase):
              visibility_type), 'restricted')
         self.assertFalse(self.category_top_level.owner_group_ids)
         self.assertEqual(len(self.category_top_level.owner_user_ids), 1)
+        self.assertFalse(self.category_subcat_1.owner_group_ids)
+        self.assertEqual(len(self.category_subcat_1.owner_user_ids), 1)
         self.assertFalse(self.category_subcat_2.owner_group_ids)
+        self.assertEqual(len(self.category_subcat_2.owner_user_ids), 1)
+        self.assertFalse(self.category_subcat_1.actual_owner_group_ids)
+        self.assertEqual(len(self.category_subcat_1.actual_owner_user_ids), 1)
+        self.assertFalse(self.category_subcat_2.actual_owner_group_ids)
+        self.assertEqual(len(self.category_subcat_2.actual_owner_user_ids), 1)
 
         with self.assertRaises(AccessError):
-            self.category_subcat_2.sudo(self.user).write({
+            self.category_top_level.sudo(self.user).write({
                 'name': 'Top level category 1 renamed'})
+        with self.assertRaises(AccessError):
+            self.category_subcat_1.sudo(self.user).write({
+                'name': 'Subcategory 1 renamed'})
+        with self.assertRaises(AccessError):
+            self.category_subcat_2.sudo(self.user).write({
+                'name': 'Subcategory 2 renamed'})
 
-        self.category_subcat_2.write({
+        self.category_top_level.write({
             'owner_group_ids': [(4, self.group_employee.id)]})
 
-        self.assertEqual(len(self.category_subcat_2.owner_group_ids), 1)
-        self.category_subcat_2.sudo(self.user).write({
+        self.assertEqual(len(self.category_top_level.owner_user_ids), 1)
+        self.assertFalse(self.category_subcat_1.owner_group_ids)
+        self.assertEqual(len(self.category_subcat_1.owner_user_ids), 1)
+        self.assertFalse(self.category_subcat_2.owner_group_ids)
+        self.assertEqual(len(self.category_subcat_2.owner_user_ids), 1)
+        self.assertEqual(len(self.category_subcat_1.actual_owner_group_ids), 1)
+        self.assertEqual(len(self.category_subcat_1.actual_owner_user_ids), 1)
+        self.assertEqual(len(self.category_subcat_2.actual_owner_group_ids), 1)
+        self.assertEqual(len(self.category_subcat_2.actual_owner_user_ids), 1)
+
+        self.category_top_level.sudo(self.user).write({
             'name': 'Top level category 1 renamed'})
+        self.category_subcat_1.sudo(self.user).write({
+            'name': 'Subcategory 1 renamed'})
+        self.category_subcat_2.sudo(self.user).write({
+            'name': 'Subcategory 2 renamed'})
 
     # Testing subcategory 2nd level depth for visibility_type = 'public'
     def test_subcategory_public_access_write_user(self):
@@ -1025,7 +1076,8 @@ class TestKnowledgeCategoryDocumentWrite(TestBureaucratKnowledgeBase):
             self.document_subcat_2.sudo(self.user).write({
                 'name': 'Demo Document For Subcategory 2 renamed'})
 
-    def test_document_subcategory_2_restricted_editors_access_read_group(self):
+    def test_document_subcategory_2_restricted_editors_access_write_group(
+            self):
         self.user.groups_id |= self.group_knowledge_user_implicit
 
         self.assertEqual(
@@ -1087,7 +1139,7 @@ class TestKnowledgeCategoryDocumentWrite(TestBureaucratKnowledgeBase):
             self.document_subcat_2.sudo(self.user).write({
                 'name': 'Demo Document For Subcategory 2 renamed'})
 
-        # Test owner subategory 2
+        # Test editor subategory 2
         self.assertFalse(self.category_subcat_2.editor_group_ids)
         self.assertFalse(self.document_subcat_2.actual_editor_group_ids)
 
@@ -1108,7 +1160,7 @@ class TestKnowledgeCategoryDocumentWrite(TestBureaucratKnowledgeBase):
             self.document_subcat_2.sudo(self.user).write({
                 'name': 'Demo Document For Subcategory 2 renamed'})
 
-    def test_document_subcategory_2_restricted_owners_access_read_user(self):
+    def test_document_subcategory_2_restricted_owners_access_write_user(self):
         self.user.groups_id |= self.group_knowledge_user_implicit
 
         self.assertEqual(

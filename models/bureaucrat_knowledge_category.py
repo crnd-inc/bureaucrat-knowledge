@@ -174,6 +174,7 @@ class BureaucratKnowledgeCategory(models.Model):
     def _get_actual_owners_ids(self, rec):
         actual_owner_users_ids = rec.owner_user_ids.ids
         actual_owner_groups_ids = rec.owner_group_ids.ids
+
         parent = rec.parent_id
         while rec.visibility_type == 'parent' and parent:
             rec = parent
@@ -224,6 +225,8 @@ class BureaucratKnowledgeCategory(models.Model):
         'parent_id.owner_group_ids',
         'parent_id.owner_user_ids',
         'parent_ids',
+        'parent_ids.owner_group_ids',
+        'parent_ids.owner_user_ids',
         'parent_ids.parent_id',
         'parent_ids.parent_id.owner_group_ids',
         'parent_ids.parent_id.owner_user_ids',
@@ -282,6 +285,7 @@ class BureaucratKnowledgeCategory(models.Model):
         vals['owner_user_ids'] = [(4, self.env.user.id)]
         category = super(BureaucratKnowledgeCategory, self).create(vals)
         self._add_actual_editors(category)
+        self._add_actual_owners(category)
 
         # Invalidate cache for 'parent_ids' field
         if 'parent_id' in vals:

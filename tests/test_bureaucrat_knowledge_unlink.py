@@ -404,6 +404,9 @@ class TestKnowledgeCategoryDocumentUnlink(TestBureaucratKnowledgeBase):
         category_top_level.write({
             'owner_user_ids': [(4, self.user.id)]})
 
+        # category_subcat_1._add_actual_owners(category_subcat_2)
+
+        self.assertEqual(category_subcat_1.parent_id, category_top_level)
         self.assertEqual(category_subcat_2.parent_id, category_subcat_1)
         self.assertEqual(len(category_top_level.owner_user_ids), 2)
         self.assertFalse(category_subcat_1.owner_group_ids)
@@ -416,9 +419,9 @@ class TestKnowledgeCategoryDocumentUnlink(TestBureaucratKnowledgeBase):
 
         # TODO: find out why self.user.id
         # not assigned to category_subcat_2.actual_owner_user_ids
-        # self.assertEqual(len(category_subcat_2.actual_owner_user_ids), 2)
+        self.assertEqual(len(category_subcat_2.actual_owner_user_ids), 2)
 
-        # category_subcat_2.sudo(self.user).unlink()
+        category_subcat_2.sudo(self.user).unlink()
         category_subcat_1.sudo(self.user).unlink()
         category_top_level.sudo(self.user).unlink()
 

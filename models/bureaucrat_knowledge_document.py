@@ -186,6 +186,8 @@ class BureaucratKnowledgeDocument(models.Model):
         'category_id',
         'category_id.editor_group_ids',
         'category_id.editor_user_ids',
+        'category_id.owner_group_ids',
+        'category_id.owner_user_ids',
         'category_id.parent_ids.parent_id',
         'category_id.parent_ids.parent_id.visibility_type',
     )

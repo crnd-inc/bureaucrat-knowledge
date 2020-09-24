@@ -54,6 +54,13 @@ class BureaucratKnowledgeCategory(models.Model):
         column2='parent_id',
         string='Parents Categories',
         readonly=True)
+#    categories_owner_user_ids = fields.Many2manyView(
+#        comodel_name='bureaucrat.knowledge.category',
+#        relation='bureaucrat_knowledge_category_owner_users_rel_view',
+#        column1='category_id',
+#        column2='user_id',
+#        string='Owner users',
+#        readonly=True)
 
     actual_visibility_parent_id = fields.Many2one(
         'bureaucrat.knowledge.category',
@@ -110,31 +117,26 @@ class BureaucratKnowledgeCategory(models.Model):
         column1='knowledge_category_id',
         column2='group_id',
         string='Owners groups')
-    actual_owner_group_ids = fields.Many2many(
+    actual_owner_group_ids = fields.Many2manyView(
         comodel_name='res.groups',
-        relation='bureaucrat_knowledge_category_actual_owner_groups',
+        relation='bureaucrat_knowledge_category_actual_owner_groups_rev_view',
         column1='knowledge_category_id',
         column2='group_id',
         string='Actual owners groups',
-        readonly=True,
-        store=True,
-        compute='_compute_actual_owner_groups_users')
+        readonly=True)
     owner_user_ids = fields.Many2many(
         comodel_name='res.users',
         relation='bureaucrat_knowledge_category_owner_users',
         column1='knowledge_category_id',
         column2='user_id',
         string='Owners')
-    actual_owner_user_ids = fields.Many2many(
+    actual_owner_user_ids = fields.Many2manyView(
         comodel_name='res.users',
-        relation='bureaucrat_knowledge_category_actual_owner_users',
+        relation='bureaucrat_knowledge_category_actual_owner_users_rel_view',
         column1='knowledge_category_id',
         column2='user_id',
         string='Actual owners',
-        readonly=True,
-        store=True,
-        compute='_compute_actual_owner_groups_users',
-    )
+        readonly=True)
 
     _sql_constraints = [
         ("check_visibility_type_parent_not_in_the_top_categories",
@@ -171,25 +173,6 @@ class BureaucratKnowledgeCategory(models.Model):
         rec.actual_editor_user_ids = actual_edit_users
         rec.actual_editor_group_ids = actual_edit_groups
 
-    def _get_actual_owners_ids(self, rec):
-        actual_owner_users_ids = rec.owner_user_ids.ids
-        actual_owner_groups_ids = rec.owner_group_ids.ids
-
-        parent = rec.parent_id
-        while rec.visibility_type == 'parent' and parent:
-            rec = parent
-            parent = rec.parent_id
-            actual_owner_users_ids += rec.owner_user_ids.ids
-            actual_owner_groups_ids += rec.owner_group_ids.ids
-        return (list(set(actual_owner_users_ids)),
-                list(set(actual_owner_groups_ids)))
-
-    def _add_actual_owners(self, rec):
-        actual_owner_users, actual_owner_groups = (
-            self._get_actual_owners_ids(rec))
-        rec.actual_owner_user_ids = actual_owner_users
-        rec.actual_owner_group_ids = actual_owner_groups
-
     @api.depends(
         'visibility_type',
         'parent_id',
@@ -217,23 +200,6 @@ class BureaucratKnowledgeCategory(models.Model):
     def _compute_actual_editor_groups_users(self):
         for rec in self:
             self._add_actual_editors(rec)
-
-    @api.depends(
-        'owner_group_ids',
-        'owner_user_ids',
-        'parent_id',
-        'parent_id.owner_group_ids',
-        'parent_id.owner_user_ids',
-        'parent_ids',
-        'parent_ids.owner_group_ids',
-        'parent_ids.owner_user_ids',
-        'parent_ids.parent_id',
-        'parent_ids.parent_id.owner_group_ids',
-        'parent_ids.parent_id.owner_user_ids',
-    )
-    def _compute_actual_owner_groups_users(self):
-        for rec in self:
-            self._add_actual_owners(rec)
 
     @api.depends('child_ids')
     def _compute_child_category_count(self):
@@ -276,6 +242,43 @@ class BureaucratKnowledgeCategory(models.Model):
             )
         """))
 
+        tools.drop_view_if_exists(
+            self.env.cr,
+            'bureaucrat_knowledge_category_actual_owner_users_rel_view')
+        self.env.cr.execute(sql.SQL("""
+           CREATE or REPLACE VIEW
+               bureaucrat_knowledge_category_actual_owner_users_rel_view AS (
+               SELECT DISTINCT
+                    parent_ids.child_id AS knowledge_category_id,
+                    own_usr.user_id     AS user_id
+               FROM bureaucrat_knowledge_category_parents_rel_view
+                    AS parent_ids
+               JOIN bureaucrat_knowledge_category_owner_users AS own_usr ON (
+                    parent_ids.child_id = own_usr.knowledge_category_id
+                    OR
+                    parent_ids.parent_id = own_usr.knowledge_category_id)
+            )
+        """))
+
+        tools.drop_view_if_exists(
+            self.env.cr,
+            'bureaucrat_knowledge_category_actual_owner_groups_rev_view')
+        self.env.cr.execute(sql.SQL("""
+           CREATE or REPLACE VIEW
+              bureaucrat_knowledge_category_actual_owner_groups_rev_view AS (
+               SELECT DISTINCT
+                    parent_ids.child_id AS knowledge_category_id,
+                    own_group.group_id     AS group_id
+               FROM bureaucrat_knowledge_category_parents_rel_view
+                    AS parent_ids
+               JOIN bureaucrat_knowledge_category_owner_groups AS own_group
+               ON (
+                    parent_ids.child_id = own_group.knowledge_category_id
+                    OR
+                    parent_ids.parent_id = own_group.knowledge_category_id)
+            )
+        """))
+
     @api.model
     def create(self, vals):
         if vals.get('parent_id', False):
@@ -285,13 +288,17 @@ class BureaucratKnowledgeCategory(models.Model):
         vals['owner_user_ids'] = [(4, self.env.user.id)]
         category = super(BureaucratKnowledgeCategory, self).create(vals)
         self._add_actual_editors(category)
-        self._add_actual_owners(category)
 
         # Invalidate cache for 'parent_ids' field
         if 'parent_id' in vals:
             self.env.cache.invalidate(
                 [(self._fields['parent_ids'], None)])
-
+        if 'owner_user_ids' in vals:
+            self.env.cache.invalidate(
+                [(self._fields['actual_owner_user_ids'], None)])
+        if 'owner_group_ids' in vals:
+            self.env.cache.invalidate(
+                [(self._fields['actual_owner_group_ids'], None)])
         return category
 
     def write(self, vals):
@@ -301,6 +308,12 @@ class BureaucratKnowledgeCategory(models.Model):
         if 'parent_id' in vals:
             self.env.cache.invalidate(
                 [(self._fields['parent_ids'], None)])
+        if 'owner_user_ids' in vals:
+            self.env.cache.invalidate(
+                [(self._fields['actual_owner_user_ids'], None)])
+        if 'owner_group_ids' in vals:
+            self.env.cache.invalidate(
+                [(self._fields['actual_owner_group_ids'], None)])
         return res
 
     def action_view_subcategories(self):

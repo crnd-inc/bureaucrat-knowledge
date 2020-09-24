@@ -401,10 +401,11 @@ class TestKnowledgeCategoryDocumentUnlink(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             category_top_level.sudo(self.user).unlink()
 
+        self.category_top_level.invalidate_cache()
+        self.category_subcat_1.invalidate_cache()
+        self.category_subcat_2.invalidate_cache()
         category_top_level.write({
             'owner_user_ids': [(4, self.user.id)]})
-
-        # category_subcat_1._add_actual_owners(category_subcat_2)
 
         self.assertEqual(category_subcat_1.parent_id, category_top_level)
         self.assertEqual(category_subcat_2.parent_id, category_subcat_1)
@@ -412,6 +413,9 @@ class TestKnowledgeCategoryDocumentUnlink(TestBureaucratKnowledgeBase):
         self.assertFalse(category_subcat_1.owner_group_ids)
         self.assertEqual(len(category_subcat_1.owner_user_ids), 1)
         self.assertFalse(category_subcat_1.actual_owner_group_ids)
+        self.category_top_level.invalidate_cache()
+        self.category_subcat_1.invalidate_cache()
+        self.category_subcat_2.invalidate_cache()
         self.assertEqual(len(category_subcat_1.actual_owner_user_ids), 2)
         self.assertFalse(category_subcat_2.owner_group_ids)
         self.assertEqual(len(category_subcat_2.owner_user_ids), 1)

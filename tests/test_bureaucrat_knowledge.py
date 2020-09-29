@@ -17,17 +17,23 @@ class TestBureaucratKnowledge(TestBureaucratKnowledgeBase):
         self.assertFalse(category.editor_user_ids)
 
         category.write({
-            'editor_user_ids': [(4, self.user.id)]})
+            'editor_user_ids': [(6, 0, [self.user.id])]})
 
         subcategory = Category.sudo(self.user).create({
             'name': 'Test subcategory',
             'parent_id': category.id,
         })
 
+        self.assertEqual(len(category.editor_user_ids), 1)
+        self.assertEqual(len(category.actual_editor_user_ids), 1)
+        self.assertIn(self.user, category.editor_user_ids)
+        self.assertIn(self.user, category.actual_editor_user_ids)
         self.assertEqual(subcategory.visibility_type, 'parent')
         self.assertEqual(len(subcategory.owner_user_ids), 1)
         self.assertIn(self.user, subcategory.owner_user_ids)
+
         self.assertFalse(subcategory.editor_user_ids)
+        subcategory.invalidate_cache()
         self.assertEqual(len(subcategory.actual_editor_user_ids), 1)
         self.assertIn(self.user, subcategory.actual_editor_user_ids)
 

@@ -54,13 +54,6 @@ class BureaucratKnowledgeCategory(models.Model):
         column2='parent_id',
         string='Parents Categories',
         readonly=True)
-#    categories_owner_user_ids = fields.Many2manyView(
-#        comodel_name='bureaucrat.knowledge.category',
-#        relation='bureaucrat_knowledge_category_owner_users_rel_view',
-#        column1='category_id',
-#        column2='user_id',
-#        string='Owner users',
-#        readonly=True)
 
     actual_visibility_parent_id = fields.Many2one(
         'bureaucrat.knowledge.category',
@@ -285,7 +278,7 @@ class BureaucratKnowledgeCategory(models.Model):
             vals['visibility_type'] = 'parent'
         else:
             vals['visibility_type'] = 'restricted'
-        vals['owner_user_ids'] = [(4, self.env.user.id)]
+        vals['owner_user_ids'] = [(6, 0, [self.env.user.id])]
         category = super(BureaucratKnowledgeCategory, self).create(vals)
 
         # Invalidate cache for 'parent_ids' field

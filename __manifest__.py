@@ -36,6 +36,7 @@
     ],
     'images': [],
     'demo': [
+        'demo/res_groups.xml',
         'demo/bureaucrat_knowledge_demo.xml',
     ],
 

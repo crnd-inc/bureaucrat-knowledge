@@ -13,7 +13,7 @@ class TestBureaucratKnowledgeBase(ReduceLoggingMixin,
         super(TestBureaucratKnowledgeBase, cls).setUpClass()
 
         # User
-        cls.user = cls.env.ref('base.user_demo')
+        cls.demo_user = cls.env.ref('base.user_demo')
         cls.portal_user = cls.env.ref('base.demo_user0')
         cls.public_user = cls.env.ref('base.public_user')
 
@@ -24,7 +24,8 @@ class TestBureaucratKnowledgeBase(ReduceLoggingMixin,
             'bureaucrat_knowledge.group_bureaucratic_knowledge_user')
         cls.group_knowledge_manager = cls.env.ref(
             'bureaucrat_knowledge.group_bureaucratic_knowledge_manager')
-        cls.group_employee = cls.env.ref('base.group_user')
+        cls.group_demo = cls.env.ref(
+            'bureaucrat_knowledge.group_demo_knowledge_base_test')
 
         # Test categories
         cls.category_top_level = cls.env.ref(

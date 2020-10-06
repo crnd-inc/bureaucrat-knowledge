@@ -136,13 +136,6 @@ class BureaucratKnowledgeCategory(models.Model):
          ),
     ]
 
-    def _get_actual_parent(self, rec):
-        parent = rec.parent_id
-        while rec.visibility_type == 'parent' and parent:
-            rec = parent
-            parent = rec.parent_id
-        return rec
-
     @api.depends(
         'visibility_type',
         'parent_id',
@@ -152,9 +145,11 @@ class BureaucratKnowledgeCategory(models.Model):
     )
     def _compute_actual_visibility_parent_id(self):
         for rec in self:
-            if rec.visibility_type == 'parent':
-                actual_parent = self._get_actual_parent(rec)
-                rec.actual_visibility_parent_id = actual_parent.id
+            parent = rec
+            while parent.visibility_type == 'parent' and parent.parent_id:
+                parent = parent.parent_id
+
+            rec.actual_visibility_parent_id = parent
 
     @api.depends('child_ids')
     def _compute_child_category_count(self):
@@ -272,15 +267,7 @@ class BureaucratKnowledgeCategory(models.Model):
             )
         """))
 
-    @api.model
-    def create(self, vals):
-        if vals.get('parent_id', False):
-            vals['visibility_type'] = 'parent'
-        else:
-            vals['visibility_type'] = 'restricted'
-        vals['owner_user_ids'] = [(6, 0, [self.env.user.id])]
-        category = super(BureaucratKnowledgeCategory, self).create(vals)
-
+    def _clean_caches_on_create_write(self, vals):
         # Invalidate cache for 'parent_ids' field
         if 'parent_id' in vals:
             self.env.cache.invalidate(
@@ -297,27 +284,27 @@ class BureaucratKnowledgeCategory(models.Model):
         if 'editor_user_ids' in vals:
             self.env.cache.invalidate(
                 [(self._fields['actual_editor_user_ids'], None)])
+
+    @api.model
+    def create(self, vals):
+        # TODO: move this to defaults
+        if vals.get('parent_id', False):
+            vals['visibility_type'] = 'parent'
+        else:
+            vals['visibility_type'] = 'restricted'
+
+        vals['owner_user_ids'] = [(6, 0, [self.env.user.id])]
+        category = super(BureaucratKnowledgeCategory, self).create(vals)
+
+        self._clean_caches_on_create_write(vals)
+
         return category
 
     def write(self, vals):
         res = super(BureaucratKnowledgeCategory, self).write(vals)
 
-        # Invalidate cache for 'parent_ids' field
-        if 'parent_id' in vals:
-            self.env.cache.invalidate(
-                [(self._fields['parent_ids'], None)])
-        if 'owner_group_ids' in vals:
-            self.env.cache.invalidate(
-                [(self._fields['actual_owner_group_ids'], None)])
-        if 'owner_user_ids' in vals:
-            self.env.cache.invalidate(
-                [(self._fields['actual_owner_user_ids'], None)])
-        if 'editor_group_ids' in vals:
-            self.env.cache.invalidate(
-                [(self._fields['actual_editor_group_ids'], None)])
-        if 'editor_user_ids' in vals:
-            self.env.cache.invalidate(
-                [(self._fields['actual_editor_user_ids'], None)])
+        self._clean_caches_on_create_write(vals)
+
         return res
 
     def action_view_subcategories(self):

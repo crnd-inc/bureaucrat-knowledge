@@ -128,15 +128,6 @@ class BureaucratKnowledgeDocument(models.Model):
          ),
     ]
 
-    def _get_actual_parent(self, rec):
-        if rec.category_id:
-            rec = rec.category_id
-            parent = rec.parent_id
-            while rec.visibility_type == 'parent' and parent:
-                rec = parent
-                parent = rec.parent_id
-            return rec
-
     def _get_actual_editors_ids(self, rec):
         actual_editor_users_ids = rec.editor_user_ids.ids
         actual_editor_groups_ids = rec.editor_group_ids.ids
@@ -184,19 +175,17 @@ class BureaucratKnowledgeDocument(models.Model):
     @api.depends(
         'visibility_type',
         'category_id',
-        'category_id.editor_group_ids',
-        'category_id.editor_user_ids',
-        'category_id.owner_group_ids',
-        'category_id.owner_user_ids',
+        'category_id.visibility_type',
         'category_id.parent_ids.parent_id',
-        'category_id.parent_ids.parent_id.visibility_type',
+        'category_id.parent_ids.visibility_type',
     )
     def _compute_actual_visibility_category_id(self):
         for rec in self:
-            if rec.visibility_type == 'parent':
-                actual_category = self._get_actual_parent(rec)
-                rec.actual_visibility_category_id = (
-                    actual_category and actual_category.id)
+            parent = rec.category_id
+            while parent.visibility_type == 'parent' and parent.parent_id:
+                parent = parent.parent_id
+
+            rec.actual_visibility_category_id = parent
 
     @api.depends(
         'editor_group_ids',
@@ -232,10 +221,12 @@ class BureaucratKnowledgeDocument(models.Model):
 
     @api.model
     def create(self, vals):
+        # TODO: move to defaults level
         if vals.get('category_id', False):
             vals['visibility_type'] = 'parent'
         else:
             vals['visibility_type'] = 'restricted'
+
         vals['owner_user_ids'] = [(4, self.env.user.id)]
         document = super(BureaucratKnowledgeDocument, self).create(vals)
         self._add_actual_editors(document)

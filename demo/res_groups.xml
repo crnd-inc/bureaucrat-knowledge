@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="group_demo_knowledge_base_test" model="res.groups">
+        <field name="name">Bureaucrat Knowledge Demo Test</field>
+        <field name="category_id" ref="bureaucrat_knowledge.module_category_bureaucratic_knowledge"/>
+        <field name="comment">Demo group, used in automated tests to test access rights</field>
+    </record>
+</odoo>

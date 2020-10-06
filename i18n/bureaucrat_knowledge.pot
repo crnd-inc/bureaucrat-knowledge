@@ -527,6 +527,11 @@ msgid "Incident Life Cycle"
 msgstr ""
 
 #. module: bureaucrat_knowledge
+#: model:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_category_view_form
+msgid "Info"
+msgstr ""
+
+#. module: bureaucrat_knowledge
 #: model:ir.ui.menu,name:bureaucrat_knowledge.bureaucrat_knowledge_menu
 msgid "Knowledge"
 msgstr ""
@@ -577,6 +582,12 @@ msgstr ""
 #. module: bureaucrat_knowledge
 #: model:bureaucrat.knowledge.document,name:bureaucrat_knowledge.odoo_notification_management
 msgid "Odoo Notification Management"
+msgstr ""
+
+#. module: bureaucrat_knowledge
+#: model:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_category_view_form
+#: model:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_document_view_form
+msgid "Other"
 msgstr ""
 
 #. module: bureaucrat_knowledge

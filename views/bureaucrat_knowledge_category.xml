@@ -96,6 +96,7 @@
                             </div>
                         </page>
                         <page name="category_settings" string="Settings">
+                            <!-- TODO: have to be visible only for owners -->
                             <div>
                                 <group>
                                     <field name="visibility_type"/>

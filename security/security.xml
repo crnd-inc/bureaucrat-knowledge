@@ -24,7 +24,10 @@
                (4, ref('base.group_user'))]"/>
         <field name="category_id" ref="bureaucrat_knowledge.module_category_bureaucratic_knowledge"/>
         <field name="comment">
-            Usual user of knowledge base with readonly access.
+            Users un this group have regular access to knowledge base.
+            If they are mentioned in editors or owners of document or categ,
+            then they can edit that document or category, and if such user
+            is owner of document or category, he can delete that document or category.
         </field>
     </record>
 
@@ -418,7 +421,7 @@
             ]</field>
         <field name="groups" eval="[(4, ref('bureaucrat_knowledge.group_bureaucratic_knowledge_user_implicit'))]"/>
         <field eval="0" name="perm_unlink"/>
-        <field eval="1" name="perm_write"/>
+        <field eval="0" name="perm_write"/>
         <field eval="1" name="perm_read"/>
         <field eval="1" name="perm_create"/>
     </record>
@@ -433,7 +436,7 @@
             ]</field>
         <field name="groups" eval="[(4, ref('bureaucrat_knowledge.group_bureaucratic_knowledge_user_implicit'))]"/>
         <field eval="0" name="perm_unlink"/>
-        <field eval="1" name="perm_write"/>
+        <field eval="0" name="perm_write"/>
         <field eval="1" name="perm_read"/>
         <field eval="1" name="perm_create"/>
     </record>
@@ -517,5 +520,37 @@
         <field eval="0" name="perm_write"/>
         <field eval="1" name="perm_read"/>
         <field eval="0" name="perm_create"/>
+    </record>
+
+    <!-- Manager access rights -->
+    <record id="rule_bureaucrat_knowledge_category_group_manager" model="ir.rule">
+        <field name="name">knowledge category (manager)</field>
+        <field name="model_id" ref="bureaucrat_knowledge.model_bureaucrat_knowledge_category"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('bureaucrat_knowledge.group_bureaucratic_knowledge_manager'))]"/>
+        <field eval="1" name="perm_unlink"/>
+        <field eval="1" name="perm_write"/>
+        <field eval="1" name="perm_read"/>
+        <field eval="1" name="perm_create"/>
+    </record>
+    <record id="rule_bureaucrat_knowledge_document_group_manager" model="ir.rule">
+        <field name="name">knowledge document (manager)</field>
+        <field name="model_id" ref="bureaucrat_knowledge.model_bureaucrat_knowledge_document"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('bureaucrat_knowledge.group_bureaucratic_knowledge_manager'))]"/>
+        <field eval="1" name="perm_unlink"/>
+        <field eval="1" name="perm_write"/>
+        <field eval="1" name="perm_read"/>
+        <field eval="1" name="perm_create"/>
+    </record>
+    <record id="rule_bureaucrat_knowledge_document_history_group_manager" model="ir.rule">
+        <field name="name">knowledge document histories (manager)</field>
+        <field name="model_id" ref="bureaucrat_knowledge.model_bureaucrat_knowledge_document_history"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('bureaucrat_knowledge.group_bureaucratic_knowledge_manager'))]"/>
+        <field eval="1" name="perm_unlink"/>
+        <field eval="1" name="perm_write"/>
+        <field eval="1" name="perm_read"/>
+        <field eval="1" name="perm_create"/>
     </record>
 </odoo>

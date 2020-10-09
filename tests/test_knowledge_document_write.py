@@ -131,27 +131,27 @@ class TestKnowledgeDocumentWrite(TestBureaucratKnowledgeBase):
              visibility_type), 'restricted')
 
         with self.assertRaises(AccessError):
-            self.document_subcat_2.sudo(self.demo_user).write({
+            self.document_subcat_2.sudo(self.public_user).write({
                 'name': 'Demo Document For Subcategory 2 renamed'})
 
         self.document_subcat_2.visibility_type = 'restricted'
         with self.assertRaises(AccessError):
-            self.document_subcat_2.sudo(self.demo_user).write({
+            self.document_subcat_2.sudo(self.public_user).write({
                 'name': 'Demo Document For Subcategory 2 renamed'})
 
         self.document_subcat_2.visibility_type = 'internal'
         with self.assertRaises(AccessError):
-            self.document_subcat_2.sudo(self.demo_user).write({
+            self.document_subcat_2.sudo(self.public_user).write({
                 'name': 'Demo Document For Subcategory 2 renamed'})
 
         self.document_subcat_2.visibility_type = 'portal'
         with self.assertRaises(AccessError):
-            self.document_subcat_2.sudo(self.demo_user).write({
+            self.document_subcat_2.sudo(self.public_user).write({
                 'name': 'Demo Document For Subcategory 2 renamed'})
 
         self.document_subcat_2.visibility_type = 'public'
         with self.assertRaises(AccessError):
-            self.document_subcat_2.sudo(self.demo_user).write({
+            self.document_subcat_2.sudo(self.public_user).write({
                 'name': 'Demo Document For Subcategory 2 renamed'})
 
     # Testing document visibility_type = 'public' from parent category
@@ -163,27 +163,27 @@ class TestKnowledgeDocumentWrite(TestBureaucratKnowledgeBase):
              visibility_type), 'restricted')
 
         with self.assertRaises(AccessError):
-            self.document_subcat_2.sudo(self.demo_user).write({
+            self.document_subcat_2.sudo(self.public_user).write({
                 'name': 'Demo Document For Subcategory 2 renamed'})
 
         self.category_top_level.visibility_type = 'restricted'
         with self.assertRaises(AccessError):
-            self.document_subcat_2.sudo(self.demo_user).write({
+            self.document_subcat_2.sudo(self.public_user).write({
                 'name': 'Demo Document For Subcategory 2 renamed'})
 
         self.category_top_level.visibility_type = 'internal'
         with self.assertRaises(AccessError):
-            self.document_subcat_2.sudo(self.demo_user).write({
+            self.document_subcat_2.sudo(self.public_user).write({
                 'name': 'Demo Document For Subcategory 2 renamed'})
 
         self.category_top_level.visibility_type = 'portal'
         with self.assertRaises(AccessError):
-            self.document_subcat_2.sudo(self.demo_user).write({
+            self.document_subcat_2.sudo(self.public_user).write({
                 'name': 'Demo Document For Subcategory 2 renamed'})
 
         self.document_subcat_2.visibility_type = 'public'
         with self.assertRaises(AccessError):
-            self.document_subcat_2.sudo(self.demo_user).write({
+            self.document_subcat_2.sudo(self.public_user).write({
                 'name': 'Demo Document For Subcategory 2 renamed'})
 
     # Testing document visibility_type = 'portal'
@@ -195,27 +195,27 @@ class TestKnowledgeDocumentWrite(TestBureaucratKnowledgeBase):
              visibility_type), 'restricted')
 
         with self.assertRaises(AccessError):
-            self.document_subcat_2.sudo(self.demo_user).write({
+            self.document_subcat_2.sudo(self.portal_user).write({
                 'name': 'Demo Document For Subcategory 2 renamed'})
 
         self.document_subcat_2.visibility_type = 'restricted'
         with self.assertRaises(AccessError):
-            self.document_subcat_2.sudo(self.demo_user).write({
+            self.document_subcat_2.sudo(self.portal_user).write({
                 'name': 'Demo Document For Subcategory 2 renamed'})
 
         self.document_subcat_2.visibility_type = 'internal'
         with self.assertRaises(AccessError):
-            self.document_subcat_2.sudo(self.demo_user).write({
+            self.document_subcat_2.sudo(self.portal_user).write({
                 'name': 'Demo Document For Subcategory 2 renamed'})
 
         self.document_subcat_2.visibility_type = 'public'
         with self.assertRaises(AccessError):
-            self.document_subcat_2.sudo(self.demo_user).write({
+            self.document_subcat_2.sudo(self.portal_user).write({
                 'name': 'Demo Document For Subcategory 2 renamed'})
 
         self.document_subcat_2.visibility_type = 'portal'
         with self.assertRaises(AccessError):
-            self.document_subcat_2.sudo(self.demo_user).write({
+            self.document_subcat_2.sudo(self.portal_user).write({
                 'name': 'Demo Document For Subcategory 2 renamed'})
 
     # Testing document visibility_type = 'portal' from parent category
@@ -227,27 +227,27 @@ class TestKnowledgeDocumentWrite(TestBureaucratKnowledgeBase):
              visibility_type), 'restricted')
 
         with self.assertRaises(AccessError):
-            self.document_subcat_2.sudo(self.demo_user).write({
+            self.document_subcat_2.sudo(self.portal_user).write({
                 'name': 'Demo Document For Subcategory 2 renamed'})
 
         self.category_top_level.visibility_type = 'restricted'
         with self.assertRaises(AccessError):
-            self.document_subcat_2.sudo(self.demo_user).write({
+            self.document_subcat_2.sudo(self.portal_user).write({
                 'name': 'Demo Document For Subcategory 2 renamed'})
 
         self.category_top_level.visibility_type = 'internal'
         with self.assertRaises(AccessError):
-            self.document_subcat_2.sudo(self.demo_user).write({
+            self.document_subcat_2.sudo(self.portal_user).write({
                 'name': 'Demo Document For Subcategory 2 renamed'})
 
         self.category_top_level.visibility_type = 'public'
         with self.assertRaises(AccessError):
-            self.document_subcat_2.sudo(self.demo_user).write({
+            self.document_subcat_2.sudo(self.portal_user).write({
                 'name': 'Demo Document For Subcategory 2 renamed'})
 
         self.document_subcat_2.visibility_type = 'portal'
         with self.assertRaises(AccessError):
-            self.document_subcat_2.sudo(self.demo_user).write({
+            self.document_subcat_2.sudo(self.portal_user).write({
                 'name': 'Demo Document For Subcategory 2 renamed'})
 
     # Testing document visibility_type = 'internal'

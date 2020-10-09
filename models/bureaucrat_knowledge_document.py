@@ -226,8 +226,8 @@ class BureaucratKnowledgeDocument(models.Model):
             vals['visibility_type'] = 'parent'
         else:
             vals['visibility_type'] = 'restricted'
+            vals['owner_user_ids'] = [(4, self.env.user.id)]
 
-        vals['owner_user_ids'] = [(4, self.env.user.id)]
         document = super(BureaucratKnowledgeDocument, self).create(vals)
         self._add_actual_editors(document)
         return document

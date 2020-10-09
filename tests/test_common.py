@@ -38,3 +38,5 @@ class TestBureaucratKnowledgeBase(ReduceLoggingMixin,
             'bureaucrat_knowledge.document_demo_top_1')
         cls.document_subcat_2 = cls.env.ref(
             'bureaucrat_knowledge.document_demo_sub_2')
+
+        cls.DocHist = cls.env['bureaucrat.knowledge.document.history']

@@ -7,7 +7,7 @@ class TestKnowledgeCategoryUnlink(TestBureaucratKnowledgeBase):
     @classmethod
     def setUpClass(cls):
         super(TestKnowledgeCategoryUnlink, cls).setUpClass()
-        cls.demo_user.groups_id |= cls.group_knowledge_manager
+        cls.demo_user.groups_id |= cls.group_knowledge_user
 
     # Testing Top level category for visibility_type = 'restricted'
     def test_category_restricted_access_unlink_user(self):

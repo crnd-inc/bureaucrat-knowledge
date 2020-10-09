@@ -292,8 +292,8 @@ class BureaucratKnowledgeCategory(models.Model):
             vals['visibility_type'] = 'parent'
         else:
             vals['visibility_type'] = 'restricted'
+            vals['owner_user_ids'] = [(6, 0, [self.env.user.id])]
 
-        vals['owner_user_ids'] = [(6, 0, [self.env.user.id])]
         category = super(BureaucratKnowledgeCategory, self).create(vals)
 
         self._clean_caches_on_create_write(vals)

@@ -2,7 +2,7 @@ from odoo import exceptions
 from .test_common import TestBureaucratKnowledgeBase
 
 
-class TestKnowledgeDocumentRead(TestBureaucratKnowledgeBase):
+class TestKnowledgeDocumentHistoryRead(TestBureaucratKnowledgeBase):
 
     # Testing document
     def test_document_restricted_access_read_user(self):

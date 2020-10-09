@@ -7,7 +7,7 @@ class TestKnowledgeDocumentUnlink(TestBureaucratKnowledgeBase):
     @classmethod
     def setUpClass(cls):
         super(TestKnowledgeDocumentUnlink, cls).setUpClass()
-        cls.demo_user.groups_id |= cls.group_knowledge_manager
+        cls.demo_user.groups_id |= cls.group_knowledge_user
 
     # Testing document
     def test_document_restricted_access_unlink_user(self):

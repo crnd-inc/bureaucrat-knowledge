@@ -6,6 +6,7 @@ from . import (
     test_knowledge_document_write,
     test_knowledge_category_unlink,
     test_knowledge_document_unlink,
+    test_knowledge_document_history_read,
 
     # TODO: Add tests for creation
 )

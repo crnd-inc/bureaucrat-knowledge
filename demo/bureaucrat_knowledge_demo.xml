@@ -38,11 +38,7 @@
         <field name="name">Demo Document For Subcategory 2</field>
         <field name="category_id"
                ref="bureaucrat_demo_subcategory_2"/>
-        <field name="document_body">
-            <![CDATA[
-                <h1>Subcategory demo document text.</h1>
-            ]]>
-        </field>
+        <field name="document_body">Subcategory2 document content</field>
     </record>
 
 </odoo>

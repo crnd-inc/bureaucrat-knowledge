@@ -585,6 +585,25 @@ msgid "Incident Life Cycle"
 msgstr ""
 
 #. module: bureaucrat_knowledge
+#: model:ir.model.fields,help:bureaucrat_knowledge.field_bureaucrat_knowledge_category__ir_model_data_no_update
+#: model:ir.model.fields,help:bureaucrat_knowledge.field_bureaucrat_knowledge_document__ir_model_data_no_update
+msgid "Indicates whether this record will be updated with module update or not. If set to True, the record will not be overriden on module update, if set to False, thenrecord will be overridden by module update"
+msgstr ""
+
+#. module: bureaucrat_knowledge
+#: model_terms:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_category_view_form
+msgid "Info"
+msgstr ""
+
+#. module: bureaucrat_knowledge
+#: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category__ir_model_data_id
+#: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category__ir_model_data_ids
+#: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document__ir_model_data_id
+#: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document__ir_model_data_ids
+msgid "Ir Model Data"
+msgstr ""
+
+#. module: bureaucrat_knowledge
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category__message_is_follower
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document__message_is_follower
 msgid "Is Follower"
@@ -664,6 +683,12 @@ msgid "No tag (deprecated)"
 msgstr ""
 
 #. module: bureaucrat_knowledge
+#: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category__ir_model_data_no_update
+#: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document__ir_model_data_no_update
+msgid "Non Updatable"
+msgstr ""
+
+#. module: bureaucrat_knowledge
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category__message_needaction_counter
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document__message_needaction_counter
 msgid "Number of Actions"
@@ -696,6 +721,12 @@ msgstr ""
 #. module: bureaucrat_knowledge
 #: model:bureaucrat.knowledge.document,name:bureaucrat_knowledge.odoo_notification_management
 msgid "Odoo Notification Management"
+msgstr ""
+
+#. module: bureaucrat_knowledge
+#: model_terms:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_category_view_form
+#: model_terms:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_document_view_form
+msgid "Other"
 msgstr ""
 
 #. module: bureaucrat_knowledge
@@ -804,5 +835,17 @@ msgstr ""
 #. module: bureaucrat_knowledge
 #: model:bureaucrat.knowledge.category,name:bureaucrat_knowledge.bureaucrat_documentation_reference_website_service_desk_modules
 msgid "Website Service Desk Modules"
+msgstr ""
+
+#. module: bureaucrat_knowledge
+#: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category__ir_model_data_xmlid
+#: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document__ir_model_data_xmlid
+msgid "XML ID"
+msgstr ""
+
+#. module: bureaucrat_knowledge
+#: model:ir.model.fields,help:bureaucrat_knowledge.field_bureaucrat_knowledge_category__ir_model_data_xmlid
+#: model:ir.model.fields,help:bureaucrat_knowledge.field_bureaucrat_knowledge_document__ir_model_data_xmlid
+msgid "XML ID for this record."
 msgstr ""
 

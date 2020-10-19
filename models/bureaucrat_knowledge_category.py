@@ -12,9 +12,12 @@ class BureaucratKnowledgeCategory(models.Model):
         'generic.tag.mixin',
         'generic.mixin.parent.names',
         'generic.mixin.track.changes',
+        'generic.mixin.data.updatable',
         'mail.thread',
     ]
     _order = 'name, id'
+
+    _auto_set_noupdate_on_write = True
 
     name = fields.Char(translate=True, index=True, required=True)
     description = fields.Html()

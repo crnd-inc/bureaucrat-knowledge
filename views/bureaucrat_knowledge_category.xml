@@ -86,12 +86,29 @@
                             <field name="name" placeholder="Name..."/>
                         </h2>
                     </div>
-                    <div>
-                        <h3 attrs="{'invisible': [('category_contents', '=', False)]}">Contents</h3>
-                        <field name="category_contents"/>
-                        <h3>Description</h3>
-                        <field name="description" placeholder="Description"/>
-                    </div>
+                    <notebook>
+                        <page name="page_info" string="Info">
+                            <div>
+                                <h3 attrs="{'invisible': [('category_contents', '=', False)]}">Contents</h3>
+                                <field name="category_contents"/>
+                                <h3>Description</h3>
+                                <field name="description" placeholder="Description"/>
+                            </div>
+                        </page>
+                        <page name="page_other" string="Other">
+                            <group name="group_other_root">
+                                <group name="group_other_left">
+                                    <field name="ir_model_data_id"
+                                           groups="base.group_no_one"/>
+                                    <field name="ir_model_data_xmlid"/>
+                                    <field name="ir_model_data_no_update"
+                                           widget="boolean_toggle"/>
+                                </group>
+                                <group name="group_other_right">
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
                 </sheet>
                 <div class="oe_chatter">
                     <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>

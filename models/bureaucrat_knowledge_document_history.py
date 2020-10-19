@@ -7,6 +7,8 @@ class BureaucratKnowledgeDocumentHistory(models.Model):
     _description = 'Bureaucrat Knowledge: Document History'
     _order = 'date_create DESC'
 
+    _auto_set_noupdate_on_write = True
+
     commit_summary = fields.Char()
     document_body = fields.Html()
     user_id = fields.Many2one(

@@ -24,11 +24,13 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
             self.DocHist.sudo(self.demo_user).create({
                 'document_id': self.document_subcat_2.id})
         with self.assertRaises(AccessError):
-            self.document_subcat_2.latest_history_id.sudo(self.demo_user).unlink()
+            self.document_subcat_2.latest_history_id.sudo(
+                self.demo_user).unlink()
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
                 self.demo_user).write({
-                    'document_body': 'Demo Document For Subcategory 2 renamed'})
+                    'document_body': 'Demo Document For Subcategory 2 e',
+                })
 
         self.document_subcat_2.write({
             'visibility_user_ids': [(4, self.demo_user.id)]})
@@ -38,11 +40,13 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
             self.DocHist.sudo(self.demo_user).create({
                 'document_id': self.document_subcat_2.id})
         with self.assertRaises(AccessError):
-            self.document_subcat_2.latest_history_id.sudo(self.demo_user).unlink()
+            self.document_subcat_2.latest_history_id.sudo(
+                self.demo_user).unlink()
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
                 self.demo_user).write({
-                    'document_body': 'Demo Document For Subcategory 2 renamed'})
+                    'document_body': 'Demo Document For Subcategory 2 e',
+                })
 
     def test_document_restricted_access_write_group(self):
         self.demo_user.groups_id |= self.group_demo
@@ -56,11 +60,13 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
             self.DocHist.sudo(self.demo_user).create({
                 'document_id': self.document_subcat_2.id})
         with self.assertRaises(AccessError):
-            self.document_subcat_2.latest_history_id.sudo(self.demo_user).unlink()
+            self.document_subcat_2.latest_history_id.sudo(
+                self.demo_user).unlink()
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
                 self.demo_user).write({
-                    'document_body': 'Demo Document For Subcategory 2 renamed'})
+                    'document_body': 'Demo Document For Subcategory 2 e',
+                })
 
         self.document_subcat_2.write({
             'visibility_group_ids': [(4, self.group_demo.id)]})
@@ -70,11 +76,13 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
             self.DocHist.sudo(self.demo_user).create({
                 'document_id': self.document_subcat_2.id})
         with self.assertRaises(AccessError):
-            self.document_subcat_2.latest_history_id.sudo(self.demo_user).unlink()
+            self.document_subcat_2.latest_history_id.sudo(
+                self.demo_user).unlink()
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
                 self.demo_user).write({
-                    'document_body': 'Demo Document For Subcategory 2 renamed'})
+                    'document_body': 'Demo Document For Subcategory 2 e',
+                })
 
     def test_document_restricted_editors_access_write_user(self):
         self.assertFalse(self.document_subcat_2.editor_group_ids)
@@ -90,7 +98,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
                 self.demo_user).write({
-                    'document_body': 'Demo Document For Subcategory 2 renamed'})
+                    'document_body': 'Demo Document For Subcategory 2 e'})
 
         self.document_subcat_2.write({
             'editor_user_ids': [(4, self.demo_user.id)]})
@@ -104,7 +112,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
                 self.demo_user).write({
-                    'document_body': 'Demo Document For Subcategory 2 renamed'})
+                    'document_body': 'Demo Document For Subcategory 2 e'})
 
     def test_document_restricted_editors_access_write_group(self):
         self.demo_user.groups_id |= self.group_demo
@@ -122,7 +130,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
                 self.demo_user).write({
-                    'document_body': 'Demo Document For Subcategory 2 renamed'})
+                    'document_body': 'Demo Document For Subcategory 2 e'})
 
         self.document_subcat_2.write({
             'editor_group_ids': [(4, self.group_demo.id)]})
@@ -136,7 +144,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
                 self.demo_user).write({
-                    'document_body': 'Demo Document For Subcategory 2 renamed'})
+                    'document_body': 'Demo Document For Subcategory 2 e'})
 
     def test_document_restricted_owners_access_write_user(self):
         self.assertFalse(self.document_subcat_2.owner_group_ids)
@@ -150,7 +158,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
                 self.demo_user).write({
-                    'document_body': 'Demo Document For Subcategory 2 renamed'})
+                    'document_body': 'Demo Document For Subcategory 2 e'})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(self.demo_user).unlink()
 
@@ -162,7 +170,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
             'document_id': self.document_subcat_2.id})
         self.document_subcat_2.latest_history_id.sudo(
             self.demo_user).write({
-                'document_body': 'Demo Document For Subcategory 2 renamed'})
+                'document_body': 'Demo Document For Subcategory 2 e'})
         self.document_subcat_2.latest_history_id.sudo(self.demo_user).unlink()
 
     def test_document_restricted_owners_access_write_group(self):
@@ -179,7 +187,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
                 self.demo_user).write({
-                    'document_body': 'Demo Document For Subcategory 2 renamed'})
+                    'document_body': 'Demo Document For Subcategory 2 e'})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(self.demo_user).unlink()
 
@@ -191,7 +199,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
             'document_id': self.document_subcat_2.id})
         self.document_subcat_2.latest_history_id.sudo(
             self.demo_user).write({
-                'document_body': 'Demo Document For Subcategory 2 renamed'})
+                'document_body': 'Demo Document For Subcategory 2 e'})
         self.document_subcat_2.latest_history_id.sudo(self.demo_user).unlink()
 
     # Testing document visibility_type = 'public'
@@ -208,7 +216,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
                 self.public_user).write({
-                    'document_body': 'Demo Document For Subcategory 2 renamed'})
+                    'document_body': 'Demo Document For Subcategory 2 e'})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(self.public_user).unlink()
 
@@ -219,7 +227,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
                 self.public_user).write({
-                    'document_body': 'Demo Document For Subcategory 2 renamed'})
+                    'document_body': 'Demo Document For Subcategory 2 e'})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(self.public_user).unlink()
 
@@ -230,7 +238,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
                 self.public_user).write({
-                    'document_body': 'Demo Document For Subcategory 2 renamed'})
+                    'document_body': 'Demo Document For Subcategory 2 e'})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(self.public_user).unlink()
 
@@ -241,7 +249,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
                 self.public_user).write({
-                    'document_body': 'Demo Document For Subcategory 2 renamed'})
+                    'document_body': 'Demo Document For Subcategory 2 e'})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(self.public_user).unlink()
 
@@ -252,7 +260,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
                 self.public_user).write({
-                    'document_body': 'Demo Document For Subcategory 2 renamed'})
+                    'document_body': 'Demo Document For Subcategory 2 e'})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(self.public_user).unlink()
 
@@ -270,7 +278,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
                 self.public_user).write({
-                    'document_body': 'Demo Document For Subcategory 2 renamed'})
+                    'document_body': 'Demo Document For Subcategory 2 e'})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(self.public_user).unlink()
 
@@ -281,7 +289,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
                 self.public_user).write({
-                    'document_body': 'Demo Document For Subcategory 2 renamed'})
+                    'document_body': 'Demo Document For Subcategory 2 e'})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(self.public_user).unlink()
 
@@ -292,7 +300,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
                 self.public_user).write({
-                    'document_body': 'Demo Document For Subcategory 2 renamed'})
+                    'document_body': 'Demo Document For Subcategory 2 e'})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(self.public_user).unlink()
 
@@ -303,7 +311,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
                 self.public_user).write({
-                    'document_body': 'Demo Document For Subcategory 2 renamed'})
+                    'document_body': 'Demo Document For Subcategory 2 e'})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(self.public_user).unlink()
 
@@ -314,7 +322,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
                 self.public_user).write({
-                    'document_body': 'Demo Document For Subcategory 2 renamed'})
+                    'document_body': 'Demo Document For Subcategory 2 e'})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(self.public_user).unlink()
 
@@ -332,7 +340,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
                 self.portal_user).write({
-                    'document_body': 'Demo Document For Subcategory 2 renamed'})
+                    'document_body': 'Demo Document For Subcategory 2 e'})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(self.portal_user).unlink()
 
@@ -343,7 +351,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
                 self.portal_user).write({
-                    'document_body': 'Demo Document For Subcategory 2 renamed'})
+                    'document_body': 'Demo Document For Subcategory 2 e'})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(self.portal_user).unlink()
 
@@ -354,7 +362,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
                 self.portal_user).write({
-                    'document_body': 'Demo Document For Subcategory 2 renamed'})
+                    'document_body': 'Demo Document For Subcategory 2 e'})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(self.portal_user).unlink()
 
@@ -365,7 +373,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
                 self.portal_user).write({
-                    'document_body': 'Demo Document For Subcategory 2 renamed'})
+                    'document_body': 'Demo Document For Subcategory 2 e'})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(self.portal_user).unlink()
 
@@ -376,7 +384,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
                 self.portal_user).write({
-                    'document_body': 'Demo Document For Subcategory 2 renamed'})
+                    'document_body': 'Demo Document For Subcategory 2 e'})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(self.portal_user).unlink()
 
@@ -394,7 +402,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
                 self.portal_user).write({
-                    'document_body': 'Demo Document For Subcategory 2 renamed'})
+                    'document_body': 'Demo Document For Subcategory 2 e'})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(self.portal_user).unlink()
 
@@ -405,7 +413,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
                 self.portal_user).write({
-                    'document_body': 'Demo Document For Subcategory 2 renamed'})
+                    'document_body': 'Demo Document For Subcategory 2 e'})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(self.portal_user).unlink()
 
@@ -416,7 +424,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
                 self.portal_user).write({
-                    'document_body': 'Demo Document For Subcategory 2 renamed'})
+                    'document_body': 'Demo Document For Subcategory 2 e'})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(self.portal_user).unlink()
 
@@ -427,7 +435,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
                 self.portal_user).write({
-                    'document_body': 'Demo Document For Subcategory 2 renamed'})
+                    'document_body': 'Demo Document For Subcategory 2 e'})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(self.portal_user).unlink()
 
@@ -438,7 +446,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
                 self.portal_user).write({
-                    'document_body': 'Demo Document For Subcategory 2 renamed'})
+                    'document_body': 'Demo Document For Subcategory 2 e'})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(self.portal_user).unlink()
 
@@ -456,7 +464,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
                 self.demo_user).write({
-                    'document_body': 'Demo Document For Subcategory 2 renamed'})
+                    'document_body': 'Demo Document For Subcategory 2 e'})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(self.demo_user).unlink()
 
@@ -467,7 +475,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
                 self.demo_user).write({
-                    'document_body': 'Demo Document For Subcategory 2 renamed'})
+                    'document_body': 'Demo Document For Subcategory 2 e'})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(self.demo_user).unlink()
 
@@ -478,7 +486,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
                 self.demo_user).write({
-                    'document_body': 'Demo Document For Subcategory 2 renamed'})
+                    'document_body': 'Demo Document For Subcategory 2 e'})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(self.demo_user).unlink()
 
@@ -489,7 +497,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
                 self.demo_user).write({
-                    'document_body': 'Demo Document For Subcategory 2 renamed'})
+                    'document_body': 'Demo Document For Subcategory 2 e'})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(self.demo_user).unlink()
 
@@ -500,7 +508,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
                 self.demo_user).write({
-                    'document_body': 'Demo Document For Subcategory 2 renamed'})
+                    'document_body': 'Demo Document For Subcategory 2 e'})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(self.demo_user).unlink()
 
@@ -518,14 +526,14 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
                 self.demo_user).write({
-                    'document_body': 'Demo Document For Subcategory 2 renamed'})
+                    'document_body': 'Demo Document For Subcategory 2 e'})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(self.demo_user).unlink()
 
         self.category_top_level.visibility_type = 'restricted'
         with self.assertRaises(AccessError):
             self.document_subcat_2.sudo(self.demo_user).write({
-                'document_body': 'Demo Document For Subcategory 2 renamed'})
+                'document_body': 'Demo Document For Subcategory 2 e'})
 
         self.category_top_level.visibility_type = 'portal'
         with self.assertRaises(AccessError):
@@ -534,7 +542,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
                 self.demo_user).write({
-                    'document_body': 'Demo Document For Subcategory 2 renamed'})
+                    'document_body': 'Demo Document For Subcategory 2 e'})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(self.demo_user).unlink()
 
@@ -545,7 +553,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
                 self.demo_user).write({
-                    'document_body': 'Demo Document For Subcategory 2 renamed'})
+                    'document_body': 'Demo Document For Subcategory 2 e'})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(self.demo_user).unlink()
 
@@ -556,7 +564,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
                 self.demo_user).write({
-                    'document_body': 'Demo Document For Subcategory 2 renamed'})
+                    'document_body': 'Demo Document For Subcategory 2 e'})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(self.demo_user).unlink()
 
@@ -582,7 +590,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
                 self.demo_user).write({
-                    'document_body': 'Demo Document For Subcategory 2 renamed'})
+                    'document_body': 'Demo Document For Subcategory 2 e'})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(self.demo_user).unlink()
 
@@ -599,7 +607,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
                 self.demo_user).write({
-                    'document_body': 'Demo Document For Subcategory 2 renamed'})
+                    'document_body': 'Demo Document For Subcategory 2 e'})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(self.demo_user).unlink()
 
@@ -626,7 +634,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
                 self.demo_user).write({
-                    'document_body': 'Demo Document For Subcategory 2 renamed'})
+                    'document_body': 'Demo Document For Subcategory 2 e'})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(self.demo_user).unlink()
 
@@ -643,7 +651,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
                 self.demo_user).write({
-                    'document_body': 'Demo Document For Subcategory 2 renamed'})
+                    'document_body': 'Demo Document For Subcategory 2 e'})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(self.demo_user).unlink()
 
@@ -670,7 +678,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
                 self.demo_user).write({
-                    'document_body': 'Demo Document For Subcategory 2 renamed'})
+                    'document_body': 'Demo Document For Subcategory 2 e'})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(self.demo_user).unlink()
 
@@ -687,7 +695,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
                 self.demo_user).write({
-                    'document_body': 'Demo Document For Subcategory 2 renamed'})
+                    'document_body': 'Demo Document For Subcategory 2 e'})
 
         self.category_top_level.write({
             'editor_user_ids': [(3, self.demo_user.id)]})
@@ -697,7 +705,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
                 self.demo_user).write({
-                    'document_body': 'Demo Document For Subcategory 2 renamed'})
+                    'document_body': 'Demo Document For Subcategory 2 e'})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(self.demo_user).unlink()
 
@@ -714,11 +722,12 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         self.DocHist.sudo(self.demo_user).create({
             'document_id': self.document_subcat_2.id})
         with self.assertRaises(AccessError):
-            self.document_subcat_2.latest_history_id.sudo(self.demo_user).unlink()
+            self.document_subcat_2.latest_history_id.sudo(
+                self.demo_user).unlink()
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
                 self.demo_user).write({
-                    'document_body': 'Demo Document For Subcategory 2 renamed'})
+                    'document_body': 'Demo Document For Subcategory 2 e'})
 
         self.category_subcat_1.write({
             'editor_user_ids': [(3, self.demo_user.id)]})
@@ -728,9 +737,10 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
                 self.demo_user).write({
-                    'document_body': 'Demo Document For Subcategory 2 renamed'})
+                    'document_body': 'Demo Document For Subcategory 2 e'})
         with self.assertRaises(AccessError):
-            self.document_subcat_2.latest_history_id.sudo(self.demo_user).unlink()
+            self.document_subcat_2.latest_history_id.sudo(
+                self.demo_user).unlink()
 
         # Test editor subategory 2
         self.assertFalse(self.category_subcat_1.editor_user_ids)
@@ -745,11 +755,12 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         self.DocHist.sudo(self.demo_user).create({
             'document_id': self.document_subcat_2.id})
         with self.assertRaises(AccessError):
-            self.document_subcat_2.latest_history_id.sudo(self.demo_user).unlink()
+            self.document_subcat_2.latest_history_id.sudo(
+                self.demo_user).unlink()
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
                 self.demo_user).write({
-                    'document_body': 'Demo Document For Subcategory 2 renamed'})
+                    'document_body': 'Demo Document For Subcategory 2 e'})
 
         self.category_subcat_2.write({
             'editor_user_ids': [(3, self.demo_user.id)]})
@@ -759,9 +770,10 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
                 self.demo_user).write({
-                    'document_body': 'Demo Document For Subcategory 2 renamed'})
+                    'document_body': 'Demo Document For Subcategory 2 e'})
         with self.assertRaises(AccessError):
-            self.document_subcat_2.latest_history_id.sudo(self.demo_user).unlink()
+            self.document_subcat_2.latest_history_id.sudo(
+                self.demo_user).unlink()
 
     def test_document_subcategory_2_restricted_editors_access_write_group(
             self):
@@ -789,9 +801,10 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
                 self.demo_user).write({
-                    'document_body': 'Demo Document For Subcategory 2 renamed'})
+                    'document_body': 'Demo Document For Subcategory 2 e'})
         with self.assertRaises(AccessError):
-            self.document_subcat_2.latest_history_id.sudo(self.demo_user).unlink()
+            self.document_subcat_2.latest_history_id.sudo(
+                self.demo_user).unlink()
 
         self.category_top_level.write({
             'editor_group_ids': [(4, self.group_demo.id)]})
@@ -803,11 +816,12 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         self.DocHist.sudo(self.demo_user).create({
             'document_id': self.document_subcat_2.id})
         with self.assertRaises(AccessError):
-            self.document_subcat_2.latest_history_id.sudo(self.demo_user).unlink()
+            self.document_subcat_2.latest_history_id.sudo(
+                self.demo_user).unlink()
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
                 self.demo_user).write({
-                    'document_body': 'Demo Document For Subcategory 2 renamed'})
+                    'document_body': 'Demo Document For Subcategory 2 e'})
 
         self.category_top_level.write({
             'editor_group_ids': [(3, self.group_demo.id)]})
@@ -817,9 +831,10 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
                 self.demo_user).write({
-                    'document_body': 'Demo Document For Subcategory 2 renamed'})
+                    'document_body': 'Demo Document For Subcategory 2 e'})
         with self.assertRaises(AccessError):
-            self.document_subcat_2.latest_history_id.sudo(self.demo_user).unlink()
+            self.document_subcat_2.latest_history_id.sudo(
+                self.demo_user).unlink()
 
         # Test editor subategory 1
         self.assertFalse(self.category_subcat_1.editor_group_ids)
@@ -834,11 +849,12 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         self.DocHist.sudo(self.demo_user).create({
             'document_id': self.document_subcat_2.id})
         with self.assertRaises(AccessError):
-            self.document_subcat_2.latest_history_id.sudo(self.demo_user).unlink()
+            self.document_subcat_2.latest_history_id.sudo(
+                self.demo_user).unlink()
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
                 self.demo_user).write({
-                    'document_body': 'Demo Document For Subcategory 2 renamed'})
+                    'document_body': 'Demo Document For Subcategory 2 e'})
 
         self.category_subcat_1.write({
             'editor_group_ids': [(3, self.group_demo.id)]})
@@ -848,9 +864,10 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
                 self.demo_user).write({
-                    'document_body': 'Demo Document For Subcategory 2 renamed'})
+                    'document_body': 'Demo Document For Subcategory 2 e'})
         with self.assertRaises(AccessError):
-            self.document_subcat_2.latest_history_id.sudo(self.demo_user).unlink()
+            self.document_subcat_2.latest_history_id.sudo(
+                self.demo_user).unlink()
 
         # Test editor subategory 2
         self.assertFalse(self.category_subcat_2.editor_group_ids)
@@ -865,11 +882,12 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         self.DocHist.sudo(self.demo_user).create({
             'document_id': self.document_subcat_2.id})
         with self.assertRaises(AccessError):
-            self.document_subcat_2.latest_history_id.sudo(self.demo_user).unlink()
+            self.document_subcat_2.latest_history_id.sudo(
+                self.demo_user).unlink()
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
                 self.demo_user).write({
-                    'document_body': 'Demo Document For Subcategory 2 renamed'})
+                    'document_body': 'Demo Document For Subcategory 2 e'})
 
         self.category_subcat_2.write({
             'editor_group_ids': [(3, self.group_demo.id)]})
@@ -879,9 +897,10 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
                 self.demo_user).write({
-                    'document_body': 'Demo Document For Subcategory 2 renamed'})
+                    'document_body': 'Demo Document For Subcategory 2 e'})
         with self.assertRaises(AccessError):
-            self.document_subcat_2.latest_history_id.sudo(self.demo_user).unlink()
+            self.document_subcat_2.latest_history_id.sudo(
+                self.demo_user).unlink()
 
     def test_document_subcategory_2_restricted_owners_access_write_user(self):
         self.assertEqual(
@@ -906,9 +925,10 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
                 self.demo_user).write({
-                    'document_body': 'Demo Document For Subcategory 2 renamed'})
+                    'document_body': 'Demo Document For Subcategory 2 e'})
         with self.assertRaises(AccessError):
-            self.document_subcat_2.latest_history_id.sudo(self.demo_user).unlink()
+            self.document_subcat_2.latest_history_id.sudo(
+                self.demo_user).unlink()
 
         # Add owner to Top level category
         self.category_top_level.write({
@@ -921,7 +941,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
             'document_id': self.document_subcat_2.id})
         self.document_subcat_2.latest_history_id.sudo(
             self.demo_user).write({
-                'document_body': 'Demo Document For Subcategory 2 renamed'})
+                'document_body': 'Demo Document For Subcategory 2 e'})
         self.document_subcat_2.latest_history_id.sudo(self.demo_user).unlink()
 
         self.category_top_level.write({
@@ -932,9 +952,10 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
                 self.demo_user).write({
-                    'document_body': 'Demo Document For Subcategory 2 renamed'})
+                    'document_body': 'Demo Document For Subcategory 2 e'})
         with self.assertRaises(AccessError):
-            self.document_subcat_2.latest_history_id.sudo(self.demo_user).unlink()
+            self.document_subcat_2.latest_history_id.sudo(
+                self.demo_user).unlink()
 
         # Test owner subategory 1
         self.assertEqual(len(self.category_subcat_1.owner_user_ids), 0)
@@ -951,7 +972,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
             'document_id': self.document_subcat_2.id})
         self.document_subcat_2.latest_history_id.sudo(
             self.demo_user).write({
-                'document_body': 'Demo Document For Subcategory 2 renamed'})
+                'document_body': 'Demo Document For Subcategory 2 e'})
         self.document_subcat_2.latest_history_id.sudo(self.demo_user).unlink()
 
         self.category_subcat_1.write({
@@ -962,9 +983,10 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
                 self.demo_user).write({
-                    'document_body': 'Demo Document For Subcategory 2 renamed'})
+                    'document_body': 'Demo Document For Subcategory 2 e'})
         with self.assertRaises(AccessError):
-            self.document_subcat_2.latest_history_id.sudo(self.demo_user).unlink()
+            self.document_subcat_2.latest_history_id.sudo(
+                self.demo_user).unlink()
 
         # Test owner subategory 2
         self.assertEqual(len(self.category_subcat_2.owner_user_ids), 0)
@@ -981,7 +1003,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
             'document_id': self.document_subcat_2.id})
         self.document_subcat_2.latest_history_id.sudo(
             self.demo_user).write({
-                'document_body': 'Demo Document For Subcategory 2 renamed'})
+                'document_body': 'Demo Document For Subcategory 2 e'})
         self.document_subcat_2.latest_history_id.sudo(self.demo_user).unlink()
 
         self.category_subcat_2.write({
@@ -992,9 +1014,10 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
                 self.demo_user).write({
-                    'document_body': 'Demo Document For Subcategory 2 renamed'})
+                    'document_body': 'Demo Document For Subcategory 2 e'})
         with self.assertRaises(AccessError):
-            self.document_subcat_2.latest_history_id.sudo(self.demo_user).unlink()
+            self.document_subcat_2.latest_history_id.sudo(
+                self.demo_user).unlink()
 
     def test_document_subcategory_2_restricted_owners_access_write_group(self):
         self.demo_user.groups_id |= self.group_demo
@@ -1021,9 +1044,10 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
                 self.demo_user).write({
-                    'document_body': 'Demo Document For Subcategory 2 renamed'})
+                    'document_body': 'Demo Document For Subcategory 2 e'})
         with self.assertRaises(AccessError):
-            self.document_subcat_2.latest_history_id.sudo(self.demo_user).unlink()
+            self.document_subcat_2.latest_history_id.sudo(
+                self.demo_user).unlink()
 
         # Add owner group to Top level category
         self.category_top_level.write({
@@ -1036,7 +1060,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
             'document_id': self.document_subcat_2.id})
         self.document_subcat_2.latest_history_id.sudo(
             self.demo_user).write({
-                'document_body': 'Demo Document For Subcategory 2 renamed'})
+                'document_body': 'Demo Document For Subcategory 2 e'})
         self.document_subcat_2.latest_history_id.sudo(self.demo_user).unlink()
 
         self.category_top_level.write({
@@ -1047,9 +1071,10 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
                 self.demo_user).write({
-                    'document_body': 'Demo Document For Subcategory 2 renamed'})
+                    'document_body': 'Demo Document For Subcategory 2 e'})
         with self.assertRaises(AccessError):
-            self.document_subcat_2.latest_history_id.sudo(self.demo_user).unlink()
+            self.document_subcat_2.latest_history_id.sudo(
+                self.demo_user).unlink()
 
         # Test owner group subategory 1
         self.assertFalse(self.category_subcat_1.owner_group_ids)
@@ -1065,7 +1090,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
             'document_id': self.document_subcat_2.id})
         self.document_subcat_2.latest_history_id.sudo(
             self.demo_user).write({
-                'document_body': 'Demo Document For Subcategory 2 renamed'})
+                'document_body': 'Demo Document For Subcategory 2 e'})
         self.document_subcat_2.latest_history_id.sudo(self.demo_user).unlink()
 
         self.category_subcat_1.write({
@@ -1076,9 +1101,10 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
                 self.demo_user).write({
-                    'document_body': 'Demo Document For Subcategory 2 renamed'})
+                    'document_body': 'Demo Document For Subcategory 2 e'})
         with self.assertRaises(AccessError):
-            self.document_subcat_2.latest_history_id.sudo(self.demo_user).unlink()
+            self.document_subcat_2.latest_history_id.sudo(
+                self.demo_user).unlink()
 
         # Test owner group subategory 2
         self.assertFalse(self.category_subcat_1.owner_group_ids)
@@ -1094,7 +1120,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
             'document_id': self.document_subcat_2.id})
         self.document_subcat_2.latest_history_id.sudo(
             self.demo_user).write({
-                'document_body': 'Demo Document For Subcategory 2 renamed'})
+                'document_body': 'Demo Document For Subcategory 2 e'})
         self.document_subcat_2.latest_history_id.sudo(self.demo_user).unlink()
 
         self.category_subcat_2.write({
@@ -1105,6 +1131,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
                 self.demo_user).write({
-                    'document_body': 'Demo Document For Subcategory 2 renamed'})
+                    'document_body': 'Demo Document For Subcategory 2 e'})
         with self.assertRaises(AccessError):
-            self.document_subcat_2.latest_history_id.sudo(self.demo_user).unlink()
+            self.document_subcat_2.latest_history_id.sudo(
+                self.demo_user).unlink()

@@ -310,8 +310,8 @@ class BureaucratKnowledgeCategory(models.Model):
         # is referenced as sudo)
         category = category.with_env(self.env)
 
-        # Clean caches to enforce odoo to reread fields, instead of using cached
-        # (incorrect) value
+        # Clean caches to enforce odoo to reread fields, instead of using
+        # cached (incorrect) value
         self._clean_caches_on_create_write(vals)
 
         category.check_access_rule('create')

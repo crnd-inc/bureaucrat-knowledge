@@ -83,7 +83,7 @@ class TestKnowledgeDocumentHistoryRead(TestBureaucratKnowledgeBase):
 
     def test_document_restricted_owners_access_read_user(self):
         self.assertFalse(self.document_subcat_2.owner_group_ids)
-        self.assertEqual(len(self.document_subcat_2.owner_user_ids), 1)
+        self.assertEqual(len(self.document_subcat_2.owner_user_ids), 0)
 
         self.document_subcat_2.visibility_type = 'restricted'
 
@@ -93,7 +93,7 @@ class TestKnowledgeDocumentHistoryRead(TestBureaucratKnowledgeBase):
         self.document_subcat_2.write({
             'owner_user_ids': [(4, self.demo_user.id)]})
 
-        self.assertEqual(len(self.document_subcat_2.owner_user_ids), 2)
+        self.assertEqual(len(self.document_subcat_2.owner_user_ids), 1)
         self.assertEqual(
             self.document_subcat_2.latest_history_id.sudo(self.demo_user).read(
                 ['document_body'])[0]['document_body'],
@@ -103,7 +103,7 @@ class TestKnowledgeDocumentHistoryRead(TestBureaucratKnowledgeBase):
         self.demo_user.groups_id |= self.group_demo
 
         self.assertFalse(self.document_subcat_2.owner_group_ids)
-        self.assertEqual(len(self.document_subcat_2.owner_user_ids), 1)
+        self.assertEqual(len(self.document_subcat_2.owner_user_ids), 0)
 
         self.document_subcat_2.visibility_type = 'restricted'
 
@@ -503,7 +503,7 @@ class TestKnowledgeDocumentHistoryRead(TestBureaucratKnowledgeBase):
             len(self.document_subcat_2.actual_visibility_category_id.
                 owner_user_ids), 1)
         self.assertFalse(self.document_subcat_2.owner_group_ids)
-        self.assertEqual(len(self.document_subcat_2.owner_user_ids), 1)
+        self.assertEqual(len(self.document_subcat_2.owner_user_ids), 0)
         self.assertFalse(self.document_subcat_2.actual_owner_group_ids)
         self.assertEqual(len(self.document_subcat_2.actual_owner_user_ids), 1)
 
@@ -528,14 +528,14 @@ class TestKnowledgeDocumentHistoryRead(TestBureaucratKnowledgeBase):
             self.document_subcat_2.latest_history_id.sudo(self.demo_user).read(['document_body'])
 
         # Test owner subategory 1
-        self.assertEqual(len(self.category_subcat_1.owner_user_ids), 1)
+        self.assertEqual(len(self.category_subcat_1.owner_user_ids), 0)
         self.assertEqual(
             len((self.document_subcat_2.actual_owner_user_ids)), 1)
 
         self.category_subcat_1.write({
             'owner_user_ids': [(4, self.demo_user.id)]})
 
-        self.assertEqual(len(self.category_subcat_1.owner_user_ids), 2)
+        self.assertEqual(len(self.category_subcat_1.owner_user_ids), 1)
         self.assertEqual(
             len((self.document_subcat_2.actual_owner_user_ids)), 2)
         self.assertEqual(
@@ -549,14 +549,14 @@ class TestKnowledgeDocumentHistoryRead(TestBureaucratKnowledgeBase):
             self.document_subcat_2.latest_history_id.sudo(self.demo_user).read(['document_body'])
 
         # Test owner subategory 2
-        self.assertEqual(len(self.category_subcat_2.owner_user_ids), 1)
+        self.assertEqual(len(self.category_subcat_2.owner_user_ids), 0)
         self.assertEqual(
             len((self.document_subcat_2.actual_owner_user_ids)), 1)
 
         self.category_subcat_2.write({
             'owner_user_ids': [(4, self.demo_user.id)]})
 
-        self.assertEqual(len(self.category_subcat_2.owner_user_ids), 2)
+        self.assertEqual(len(self.category_subcat_2.owner_user_ids), 1)
         self.assertEqual(
             len((self.document_subcat_2.actual_owner_user_ids)), 2)
         self.assertEqual(
@@ -584,7 +584,7 @@ class TestKnowledgeDocumentHistoryRead(TestBureaucratKnowledgeBase):
             len(self.document_subcat_2.actual_visibility_category_id.
                 owner_user_ids), 1)
         self.assertFalse(self.document_subcat_2.owner_group_ids)
-        self.assertEqual(len(self.document_subcat_2.owner_user_ids), 1)
+        self.assertEqual(len(self.document_subcat_2.owner_user_ids), 0)
         self.assertFalse(self.document_subcat_2.actual_owner_group_ids)
         self.assertEqual(len(self.document_subcat_2.actual_owner_user_ids), 1)
 

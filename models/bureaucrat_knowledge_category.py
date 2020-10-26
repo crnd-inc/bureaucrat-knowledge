@@ -1,6 +1,9 @@
+import logging
 from psycopg2 import sql
 from odoo import models, fields, api, tools
 from odoo.addons.generic_mixin import post_write
+
+_logger = logging.getLogger(__name__)
 
 
 class BureaucratKnowledgeCategory(models.Model):
@@ -58,7 +61,7 @@ class BureaucratKnowledgeCategory(models.Model):
     actual_visibility_parent_id = fields.Many2one(
         'bureaucrat.knowledge.category',
         compute='_compute_actual_visibility_parent_id',
-        store=True, index=True)
+        store=True, index=True, compute_sudo=True)
 
     visibility_group_ids = fields.Many2many(
         comodel_name='res.groups',
@@ -145,7 +148,7 @@ class BureaucratKnowledgeCategory(models.Model):
     )
     def _compute_actual_visibility_parent_id(self):
         for rec in self:
-            parent = rec
+            parent = rec.sudo()
             while parent.visibility_type == 'parent' and parent.parent_id:
                 parent = parent.parent_id
 
@@ -287,6 +290,7 @@ class BureaucratKnowledgeCategory(models.Model):
 
     @api.model
     def create(self, vals):
+        self.check_access_rights('create')
         # TODO: move this to defaults
         if vals.get('parent_id', False):
             vals['visibility_type'] = 'parent'
@@ -294,9 +298,23 @@ class BureaucratKnowledgeCategory(models.Model):
             vals['visibility_type'] = 'restricted'
             vals['owner_user_ids'] = [(6, 0, [self.env.user.id])]
 
-        category = super(BureaucratKnowledgeCategory, self).create(vals)
+        # create with sudo to avoid access rights error on creation, but check
+        # access rights later
+        category = super(BureaucratKnowledgeCategory, self.sudo()).create(vals)
 
+        # It is required to recompute parnt-store, because access rules relies
+        # on parent-store already computed
+        category._parent_store_compute()
+
+        # reference created category as self.env (because before this category
+        # is referenced as sudo)
+        category = category.with_env(self.env)
+
+        # Clean caches to enforce odoo to reread fields, instead of using cached
+        # (incorrect) value
         self._clean_caches_on_create_write(vals)
+
+        category.check_access_rule('create')
 
         return category
 

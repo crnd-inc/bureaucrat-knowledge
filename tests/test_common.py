@@ -40,3 +40,5 @@ class TestBureaucratKnowledgeBase(ReduceLoggingMixin,
             'bureaucrat_knowledge.document_demo_sub_2')
 
         cls.DocHist = cls.env['bureaucrat.knowledge.document.history']
+        cls.Category = cls.env['bureaucrat.knowledge.category']
+        cls.Document = cls.env['bureaucrat.knowledge.document']

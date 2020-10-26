@@ -1,4 +1,7 @@
+import logging
 from .test_common import TestBureaucratKnowledgeBase
+
+_logger = logging.getLogger(__name__)
 
 
 class TestBureaucratKnowledge(TestBureaucratKnowledgeBase):
@@ -34,8 +37,7 @@ class TestBureaucratKnowledge(TestBureaucratKnowledgeBase):
         self.assertIn(self.demo_user, category.editor_user_ids)
         self.assertIn(self.demo_user, category.actual_editor_user_ids)
         self.assertEqual(subcategory.visibility_type, 'parent')
-        self.assertEqual(len(subcategory.owner_user_ids), 1)
-        self.assertIn(self.demo_user, subcategory.owner_user_ids)
+        self.assertEqual(len(subcategory.owner_user_ids), 0)
 
         self.assertFalse(subcategory.editor_user_ids)
         self.assertEqual(len(subcategory.actual_editor_user_ids), 1)
@@ -51,8 +53,7 @@ class TestBureaucratKnowledge(TestBureaucratKnowledgeBase):
         self.env['bureaucrat.knowledge.category']._parent_store_compute()
 
         self.assertEqual(subcategory2.visibility_type, 'parent')
-        self.assertEqual(len(subcategory2.owner_user_ids), 1)
-        self.assertIn(self.demo_user, subcategory2.owner_user_ids)
+        self.assertEqual(len(subcategory2.owner_user_ids), 0)
         self.assertFalse(subcategory2.editor_user_ids)
         self.assertEqual(len(subcategory2.actual_editor_user_ids), 1)
         self.assertIn(self.demo_user, subcategory2.actual_editor_user_ids)
@@ -73,10 +74,8 @@ class TestBureaucratKnowledge(TestBureaucratKnowledgeBase):
         Category = self.env['bureaucrat.knowledge.category']
         category = Category.sudo(self.demo_user).create({
             'name': 'Test top level category2',
+            'editor_user_ids': [(4, self.demo_user.id)],
         })
-
-        category.write({
-            'editor_user_ids': [(4, self.demo_user.id)]})
 
         subdocument = Document.sudo(self.demo_user).create({
             'name': 'Test top level document',
@@ -84,8 +83,7 @@ class TestBureaucratKnowledge(TestBureaucratKnowledgeBase):
         })
 
         self.assertEqual(subdocument.visibility_type, 'parent')
-        self.assertEqual(len(subdocument.owner_user_ids), 1)
-        self.assertIn(self.demo_user, subdocument.owner_user_ids)
+        self.assertEqual(len(subdocument.owner_user_ids), 0)
         self.assertFalse(subdocument.editor_user_ids)
         self.assertEqual(len(subdocument.actual_editor_user_ids), 1)
         self.assertIn(self.demo_user, subdocument.actual_editor_user_ids)

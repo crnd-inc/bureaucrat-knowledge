@@ -88,7 +88,7 @@ class TestKnowledgeDocumentWrite(TestBureaucratKnowledgeBase):
 
     def test_document_restricted_owners_access_write_user(self):
         self.assertFalse(self.document_subcat_2.owner_group_ids)
-        self.assertEqual(len(self.document_subcat_2.owner_user_ids), 1)
+        self.assertEqual(len(self.document_subcat_2.owner_user_ids), 0)
 
         self.document_subcat_2.visibility_type = 'restricted'
 
@@ -99,7 +99,7 @@ class TestKnowledgeDocumentWrite(TestBureaucratKnowledgeBase):
         self.document_subcat_2.write({
             'owner_user_ids': [(4, self.demo_user.id)]})
 
-        self.assertEqual(len(self.document_subcat_2.owner_user_ids), 2)
+        self.assertEqual(len(self.document_subcat_2.owner_user_ids), 1)
         self.document_subcat_2.sudo(self.demo_user).write({
             'name': 'Demo Document For Subcategory 2 renamed'})
 
@@ -107,7 +107,7 @@ class TestKnowledgeDocumentWrite(TestBureaucratKnowledgeBase):
         self.demo_user.groups_id |= self.group_demo
 
         self.assertFalse(self.document_subcat_2.owner_group_ids)
-        self.assertEqual(len(self.document_subcat_2.owner_user_ids), 1)
+        self.assertEqual(len(self.document_subcat_2.owner_user_ids), 0)
 
         self.document_subcat_2.visibility_type = 'restricted'
 
@@ -556,7 +556,7 @@ class TestKnowledgeDocumentWrite(TestBureaucratKnowledgeBase):
             len(self.document_subcat_2.actual_visibility_category_id.
                 owner_user_ids), 1)
         self.assertFalse(self.document_subcat_2.owner_group_ids)
-        self.assertEqual(len(self.document_subcat_2.owner_user_ids), 1)
+        self.assertEqual(len(self.document_subcat_2.owner_user_ids), 0)
         self.assertFalse(self.document_subcat_2.actual_owner_group_ids)
         self.assertEqual(len(self.document_subcat_2.actual_owner_user_ids), 1)
 
@@ -583,14 +583,14 @@ class TestKnowledgeDocumentWrite(TestBureaucratKnowledgeBase):
                 'name': 'Demo Document For Subcategory 2 renamed'})
 
         # Test owner subategory 1
-        self.assertEqual(len(self.category_subcat_1.owner_user_ids), 1)
+        self.assertEqual(len(self.category_subcat_1.owner_user_ids), 0)
         self.assertEqual(
             len((self.document_subcat_2.actual_owner_user_ids)), 1)
 
         self.category_subcat_1.write({
             'owner_user_ids': [(4, self.demo_user.id)]})
 
-        self.assertEqual(len(self.category_subcat_1.owner_user_ids), 2)
+        self.assertEqual(len(self.category_subcat_1.owner_user_ids), 1)
         self.assertEqual(
             len((self.document_subcat_2.actual_owner_user_ids)), 2)
         self.document_subcat_2.sudo(self.demo_user).write({
@@ -605,14 +605,14 @@ class TestKnowledgeDocumentWrite(TestBureaucratKnowledgeBase):
                 'name': 'Demo Document For Subcategory 2 renamed'})
 
         # Test owner subategory 2
-        self.assertEqual(len(self.category_subcat_2.owner_user_ids), 1)
+        self.assertEqual(len(self.category_subcat_2.owner_user_ids), 0)
         self.assertEqual(
             len((self.document_subcat_2.actual_owner_user_ids)), 1)
 
         self.category_subcat_2.write({
             'owner_user_ids': [(4, self.demo_user.id)]})
 
-        self.assertEqual(len(self.category_subcat_2.owner_user_ids), 2)
+        self.assertEqual(len(self.category_subcat_2.owner_user_ids), 1)
         self.assertEqual(
             len((self.document_subcat_2.actual_owner_user_ids)), 2)
         self.document_subcat_2.sudo(self.demo_user).write({
@@ -641,7 +641,7 @@ class TestKnowledgeDocumentWrite(TestBureaucratKnowledgeBase):
             len(self.document_subcat_2.actual_visibility_category_id.
                 owner_user_ids), 1)
         self.assertFalse(self.document_subcat_2.owner_group_ids)
-        self.assertEqual(len(self.document_subcat_2.owner_user_ids), 1)
+        self.assertEqual(len(self.document_subcat_2.owner_user_ids), 0)
         self.assertFalse(self.document_subcat_2.actual_owner_group_ids)
         self.assertEqual(len(self.document_subcat_2.actual_owner_user_ids), 1)
 

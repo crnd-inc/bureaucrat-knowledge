@@ -12,7 +12,8 @@ class TestKnowledgeDocumentHistoryRead(TestBureaucratKnowledgeBase):
         self.document_subcat_2.visibility_type = 'restricted'
 
         with self.assertRaises(exceptions.AccessError):
-            self.document_subcat_2.latest_history_id.sudo(self.demo_user).read(['document_body'])
+            self.document_subcat_2.latest_history_id.sudo(self.demo_user).read(
+                ['document_body'])
 
         self.document_subcat_2.write({
             'visibility_user_ids': [(4, self.demo_user.id)]})
@@ -32,7 +33,8 @@ class TestKnowledgeDocumentHistoryRead(TestBureaucratKnowledgeBase):
         self.document_subcat_2.visibility_type = 'restricted'
 
         with self.assertRaises(exceptions.AccessError):
-            self.document_subcat_2.latest_history_id.sudo(self.demo_user).read(['document_body'])
+            self.document_subcat_2.latest_history_id.sudo(self.demo_user).read(
+                ['document_body'])
 
         self.document_subcat_2.write({
             'visibility_group_ids': [(4, self.group_demo.id)]})
@@ -50,7 +52,8 @@ class TestKnowledgeDocumentHistoryRead(TestBureaucratKnowledgeBase):
         self.document_subcat_2.visibility_type = 'restricted'
 
         with self.assertRaises(exceptions.AccessError):
-            self.document_subcat_2.latest_history_id.sudo(self.demo_user).read(['document_body'])
+            self.document_subcat_2.latest_history_id.sudo(self.demo_user).read(
+                ['document_body'])
 
         self.document_subcat_2.write({
             'editor_user_ids': [(4, self.demo_user.id)]})
@@ -70,7 +73,8 @@ class TestKnowledgeDocumentHistoryRead(TestBureaucratKnowledgeBase):
         self.document_subcat_2.visibility_type = 'restricted'
 
         with self.assertRaises(exceptions.AccessError):
-            self.document_subcat_2.latest_history_id.sudo(self.demo_user).read(['document_body'])
+            self.document_subcat_2.latest_history_id.sudo(self.demo_user).read(
+                ['document_body'])
 
         self.document_subcat_2.write({
             'editor_group_ids': [(4, self.group_demo.id)]})
@@ -88,7 +92,8 @@ class TestKnowledgeDocumentHistoryRead(TestBureaucratKnowledgeBase):
         self.document_subcat_2.visibility_type = 'restricted'
 
         with self.assertRaises(exceptions.AccessError):
-            self.document_subcat_2.latest_history_id.sudo(self.demo_user).read(['document_body'])
+            self.document_subcat_2.latest_history_id.sudo(self.demo_user).read(
+                ['document_body'])
 
         self.document_subcat_2.write({
             'owner_user_ids': [(4, self.demo_user.id)]})
@@ -108,14 +113,16 @@ class TestKnowledgeDocumentHistoryRead(TestBureaucratKnowledgeBase):
         self.document_subcat_2.visibility_type = 'restricted'
 
         with self.assertRaises(exceptions.AccessError):
-            self.document_subcat_2.latest_history_id.sudo(self.demo_user).read(['document_body'])
+            self.document_subcat_2.latest_history_id.sudo(self.demo_user).read(
+                ['document_body'])
 
         self.document_subcat_2.write({
             'owner_group_ids': [(4, self.group_demo.id)]})
 
         self.assertEqual(len(self.document_subcat_2.owner_group_ids), 1)
         self.assertEqual(
-            self.document_subcat_2.latest_history_id.sudo(self.demo_user).read(['document_body'])[0]['document_body'],
+            self.document_subcat_2.latest_history_id.sudo(self.demo_user).read(
+                ['document_body'])[0]['document_body'],
             '<p>Subcategory2 document content</p>')
 
     def test_document_public_access_portal_internal_read_user(self):
@@ -131,11 +138,14 @@ class TestKnowledgeDocumentHistoryRead(TestBureaucratKnowledgeBase):
 
         # Ensure nobody can access it
         with self.assertRaises(exceptions.AccessError):
-            self.document_subcat_2.latest_history_id.sudo(self.demo_user).read(['document_body'])
+            self.document_subcat_2.latest_history_id.sudo(self.demo_user).read(
+                ['document_body'])
         with self.assertRaises(exceptions.AccessError):
-            self.document_subcat_2.latest_history_id.sudo(self.portal_user).read(['document_body'])
+            self.document_subcat_2.latest_history_id.sudo(
+                self.portal_user).read(['document_body'])
         with self.assertRaises(exceptions.AccessError):
-            self.document_subcat_2.latest_history_id.sudo(self.public_user).read(['document_body'])
+            self.document_subcat_2.latest_history_id.sudo(
+                self.public_user).read(['document_body'])
 
         # Make document internal
         self.document_subcat_2.visibility_type = 'internal'
@@ -146,9 +156,11 @@ class TestKnowledgeDocumentHistoryRead(TestBureaucratKnowledgeBase):
                 ['document_body'])[0]['document_body'],
             '<p>Subcategory2 document content</p>')
         with self.assertRaises(exceptions.AccessError):
-            self.document_subcat_2.latest_history_id.sudo(self.portal_user).read(['document_body'])
+            self.document_subcat_2.latest_history_id.sudo(
+                self.portal_user).read(['document_body'])
         with self.assertRaises(exceptions.AccessError):
-            self.document_subcat_2.latest_history_id.sudo(self.public_user).read(['document_body'])
+            self.document_subcat_2.latest_history_id.sudo(
+                self.public_user).read(['document_body'])
 
         # Make document accessible via portal
         self.document_subcat_2.visibility_type = 'portal'
@@ -159,11 +171,13 @@ class TestKnowledgeDocumentHistoryRead(TestBureaucratKnowledgeBase):
                 ['document_body'])[0]['document_body'],
             '<p>Subcategory2 document content</p>')
         self.assertEqual(
-            self.document_subcat_2.latest_history_id.sudo(self.portal_user).read(
-                ['document_body'])[0]['document_body'],
+            self.document_subcat_2.latest_history_id.sudo(
+                self.portal_user).read(
+                    ['document_body'])[0]['document_body'],
             '<p>Subcategory2 document content</p>')
         with self.assertRaises(exceptions.AccessError):
-            self.document_subcat_2.latest_history_id.sudo(self.public_user).read(['document_body'])
+            self.document_subcat_2.latest_history_id.sudo(
+                self.public_user).read(['document_body'])
 
         # Make document public
         self.document_subcat_2.visibility_type = 'public'
@@ -174,12 +188,14 @@ class TestKnowledgeDocumentHistoryRead(TestBureaucratKnowledgeBase):
                 ['document_body'])[0]['document_body'],
             '<p>Subcategory2 document content</p>')
         self.assertEqual(
-            self.document_subcat_2.latest_history_id.sudo(self.portal_user).read(
-                ['document_body'])[0]['document_body'],
+            self.document_subcat_2.latest_history_id.sudo(
+                self.portal_user).read(
+                    ['document_body'])[0]['document_body'],
             '<p>Subcategory2 document content</p>')
         self.assertEqual(
-            self.document_subcat_2.latest_history_id.sudo(self.public_user).read(
-                ['document_body'])[0]['document_body'],
+            self.document_subcat_2.latest_history_id.sudo(
+                self.public_user).read(
+                    ['document_body'])[0]['document_body'],
             '<p>Subcategory2 document content</p>')
 
     def test_parent_document_public_portal_internal_access_read_user(self):
@@ -191,12 +207,14 @@ class TestKnowledgeDocumentHistoryRead(TestBureaucratKnowledgeBase):
 
         # Nobody can access document from restricted category
         with self.assertRaises(exceptions.AccessError):
-            self.document_subcat_2.latest_history_id.sudo(self.demo_user).read(['document_body'])
+            self.document_subcat_2.latest_history_id.sudo(self.demo_user).read(
+                ['document_body'])
         with self.assertRaises(exceptions.AccessError):
-            self.document_subcat_2.latest_history_id.sudo(self.portal_user).read(['document_body'])
+            self.document_subcat_2.latest_history_id.sudo(
+                self.portal_user).read(['document_body'])
         with self.assertRaises(exceptions.AccessError):
-            self.document_subcat_2.latest_history_id.sudo(self.public_user).read(['document_body'])
-
+            self.document_subcat_2.latest_history_id.sudo(
+                self.public_user).read(['document_body'])
 
         # Change visibility to internal
         self.category_top_level.visibility_type = 'internal'
@@ -207,9 +225,11 @@ class TestKnowledgeDocumentHistoryRead(TestBureaucratKnowledgeBase):
                 ['document_body'])[0]['document_body'],
             '<p>Subcategory2 document content</p>')
         with self.assertRaises(exceptions.AccessError):
-            self.document_subcat_2.latest_history_id.sudo(self.public_user).read(['document_body'])
+            self.document_subcat_2.latest_history_id.sudo(
+                self.public_user).read(['document_body'])
         with self.assertRaises(exceptions.AccessError):
-            self.document_subcat_2.latest_history_id.sudo(self.portal_user).read(['document_body'])
+            self.document_subcat_2.latest_history_id.sudo(
+                self.portal_user).read(['document_body'])
 
         # Change visibility to portal
         self.category_top_level.visibility_type = 'portal'
@@ -220,11 +240,13 @@ class TestKnowledgeDocumentHistoryRead(TestBureaucratKnowledgeBase):
                 ['document_body'])[0]['document_body'],
             '<p>Subcategory2 document content</p>')
         self.assertEqual(
-            self.document_subcat_2.latest_history_id.sudo(self.portal_user).read(
-                ['document_body'])[0]['document_body'],
+            self.document_subcat_2.latest_history_id.sudo(
+                self.portal_user).read(
+                    ['document_body'])[0]['document_body'],
             '<p>Subcategory2 document content</p>')
         with self.assertRaises(exceptions.AccessError):
-            self.document_subcat_2.latest_history_id.sudo(self.public_user).read(['document_body'])
+            self.document_subcat_2.latest_history_id.sudo(
+                self.public_user).read(['document_body'])
 
         # Change visibility to public
         self.category_top_level.visibility_type = 'public'
@@ -236,12 +258,14 @@ class TestKnowledgeDocumentHistoryRead(TestBureaucratKnowledgeBase):
                 ['document_body'])[0]['document_body'],
             '<p>Subcategory2 document content</p>')
         self.assertEqual(
-            self.document_subcat_2.latest_history_id.sudo(self.portal_user).read(
-                ['document_body'])[0]['document_body'],
+            self.document_subcat_2.latest_history_id.sudo(
+                self.portal_user).read(
+                    ['document_body'])[0]['document_body'],
             '<p>Subcategory2 document content</p>')
         self.assertEqual(
-            self.document_subcat_2.latest_history_id.sudo(self.public_user).read(
-                ['document_body'])[0]['document_body'],
+            self.document_subcat_2.latest_history_id.sudo(
+                self.public_user).read(
+                    ['document_body'])[0]['document_body'],
             '<p>Subcategory2 document content</p>')
 
         # Change visibility time of subcategory level 1 to 'internal'
@@ -253,9 +277,11 @@ class TestKnowledgeDocumentHistoryRead(TestBureaucratKnowledgeBase):
                 ['document_body'])[0]['document_body'],
             '<p>Subcategory2 document content</p>')
         with self.assertRaises(exceptions.AccessError):
-            self.document_subcat_2.latest_history_id.sudo(self.portal_user).read(['document_body'])
+            self.document_subcat_2.latest_history_id.sudo(
+                self.portal_user).read(['document_body'])
         with self.assertRaises(exceptions.AccessError):
-            self.document_subcat_2.latest_history_id.sudo(self.public_user).read(['document_body'])
+            self.document_subcat_2.latest_history_id.sudo(
+                self.public_user).read(['document_body'])
 
         # Change visibility type to 'restricted' for subcategory level 2
         self.document_subcat_2.visibility_type = 'portal'
@@ -266,11 +292,13 @@ class TestKnowledgeDocumentHistoryRead(TestBureaucratKnowledgeBase):
                 ['document_body'])[0]['document_body'],
             '<p>Subcategory2 document content</p>')
         self.assertEqual(
-            self.document_subcat_2.latest_history_id.sudo(self.portal_user).read(
-                ['document_body'])[0]['document_body'],
+            self.document_subcat_2.latest_history_id.sudo(
+                self.portal_user).read(
+                    ['document_body'])[0]['document_body'],
             '<p>Subcategory2 document content</p>')
         with self.assertRaises(exceptions.AccessError):
-            self.document_subcat_2.latest_history_id.sudo(self.public_user).read(['document_body'])
+            self.document_subcat_2.latest_history_id.sudo(
+                self.public_user).read(['document_body'])
 
     # Testing document with categoy, for categ visibility_type = 'restricted'
     def test_document_subcategory_2_restricted_access_read_user(self):
@@ -289,7 +317,8 @@ class TestKnowledgeDocumentHistoryRead(TestBureaucratKnowledgeBase):
         self.assertFalse(self.document_subcat_2.visibility_user_ids)
 
         with self.assertRaises(exceptions.AccessError):
-            self.document_subcat_2.latest_history_id.sudo(self.demo_user).read(['document_body'])
+            self.document_subcat_2.latest_history_id.sudo(
+                self.demo_user).read(['document_body'])
 
         self.category_top_level.write({
             'visibility_user_ids': [(4, self.demo_user.id)]})
@@ -321,7 +350,8 @@ class TestKnowledgeDocumentHistoryRead(TestBureaucratKnowledgeBase):
         self.assertFalse(self.document_subcat_2.visibility_user_ids)
 
         with self.assertRaises(exceptions.AccessError):
-            self.document_subcat_2.latest_history_id.sudo(self.demo_user).read(['document_body'])
+            self.document_subcat_2.latest_history_id.sudo(
+                self.demo_user).read(['document_body'])
 
         self.category_top_level.write({
             'visibility_group_ids': [(4, self.group_demo.id)]})
@@ -353,7 +383,8 @@ class TestKnowledgeDocumentHistoryRead(TestBureaucratKnowledgeBase):
         self.assertFalse(self.document_subcat_2.actual_editor_user_ids)
 
         with self.assertRaises(exceptions.AccessError):
-            self.document_subcat_2.latest_history_id.sudo(self.demo_user).read(['document_body'])
+            self.document_subcat_2.latest_history_id.sudo(
+                self.demo_user).read(['document_body'])
 
         self.category_top_level.write({
             'editor_user_ids': [(4, self.demo_user.id)]})
@@ -369,7 +400,8 @@ class TestKnowledgeDocumentHistoryRead(TestBureaucratKnowledgeBase):
         self.category_top_level.write({
             'editor_user_ids': [(3, self.demo_user.id)]})
         with self.assertRaises(exceptions.AccessError):
-            self.document_subcat_2.latest_history_id.sudo(self.demo_user).read(['document_body'])
+            self.document_subcat_2.latest_history_id.sudo(
+                self.demo_user).read(['document_body'])
 
         # Test editor subategory 1
         self.assertFalse(self.category_subcat_1.editor_user_ids)
@@ -389,7 +421,8 @@ class TestKnowledgeDocumentHistoryRead(TestBureaucratKnowledgeBase):
         self.category_subcat_1.write({
             'editor_user_ids': [(3, self.demo_user.id)]})
         with self.assertRaises(exceptions.AccessError):
-            self.document_subcat_2.latest_history_id.sudo(self.demo_user).read(['document_body'])
+            self.document_subcat_2.latest_history_id.sudo(
+                self.demo_user).read(['document_body'])
 
         # Test editor subategory 2
         self.assertFalse(self.category_subcat_1.editor_user_ids)
@@ -409,7 +442,8 @@ class TestKnowledgeDocumentHistoryRead(TestBureaucratKnowledgeBase):
         self.category_subcat_2.write({
             'editor_user_ids': [(3, self.demo_user.id)]})
         with self.assertRaises(exceptions.AccessError):
-            self.document_subcat_2.latest_history_id.sudo(self.demo_user).read(['document_body'])
+            self.document_subcat_2.latest_history_id.sudo(
+                self.demo_user).read(['document_body'])
 
     def test_document_subcategory_2_restricted_editors_access_read_group(self):
         self.demo_user.groups_id |= self.group_demo
@@ -431,7 +465,8 @@ class TestKnowledgeDocumentHistoryRead(TestBureaucratKnowledgeBase):
         self.assertFalse(self.document_subcat_2.actual_editor_user_ids)
 
         with self.assertRaises(exceptions.AccessError):
-            self.document_subcat_2.latest_history_id.sudo(self.demo_user).read(['document_body'])
+            self.document_subcat_2.latest_history_id.sudo(
+                self.demo_user).read(['document_body'])
 
         self.category_top_level.write({
             'editor_group_ids': [(4, self.group_demo.id)]})
@@ -448,7 +483,8 @@ class TestKnowledgeDocumentHistoryRead(TestBureaucratKnowledgeBase):
         self.category_top_level.write({
             'editor_group_ids': [(3, self.group_demo.id)]})
         with self.assertRaises(exceptions.AccessError):
-            self.document_subcat_2.latest_history_id.sudo(self.demo_user).read(['document_body'])
+            self.document_subcat_2.latest_history_id.sudo(
+                self.demo_user).read(['document_body'])
 
         # Test editor subategory 1
         self.assertFalse(self.category_subcat_1.editor_group_ids)
@@ -468,7 +504,8 @@ class TestKnowledgeDocumentHistoryRead(TestBureaucratKnowledgeBase):
         self.category_subcat_1.write({
             'editor_group_ids': [(3, self.group_demo.id)]})
         with self.assertRaises(exceptions.AccessError):
-            self.document_subcat_2.latest_history_id.sudo(self.demo_user).read(['document_body'])
+            self.document_subcat_2.latest_history_id.sudo(
+                self.demo_user).read(['document_body'])
 
         # Test owner subategory 2
         self.assertFalse(self.category_subcat_2.editor_group_ids)
@@ -488,7 +525,8 @@ class TestKnowledgeDocumentHistoryRead(TestBureaucratKnowledgeBase):
         self.category_subcat_2.write({
             'editor_group_ids': [(3, self.group_demo.id)]})
         with self.assertRaises(exceptions.AccessError):
-            self.document_subcat_2.latest_history_id.sudo(self.demo_user).read(['document_body'])
+            self.document_subcat_2.latest_history_id.sudo(
+                self.demo_user).read(['document_body'])
 
     def test_document_subcategory_2_restricted_owners_access_read_user(self):
         self.assertEqual(
@@ -508,7 +546,8 @@ class TestKnowledgeDocumentHistoryRead(TestBureaucratKnowledgeBase):
         self.assertEqual(len(self.document_subcat_2.actual_owner_user_ids), 1)
 
         with self.assertRaises(exceptions.AccessError):
-            self.document_subcat_2.latest_history_id.sudo(self.demo_user).read(['document_body'])
+            self.document_subcat_2.latest_history_id.sudo(
+                self.demo_user).read(['document_body'])
 
         # Add owner to Top level category
         self.category_top_level.write({
@@ -525,7 +564,8 @@ class TestKnowledgeDocumentHistoryRead(TestBureaucratKnowledgeBase):
         self.category_top_level.write({
             'owner_user_ids': [(3, self.demo_user.id)]})
         with self.assertRaises(exceptions.AccessError):
-            self.document_subcat_2.latest_history_id.sudo(self.demo_user).read(['document_body'])
+            self.document_subcat_2.latest_history_id.sudo(
+                self.demo_user).read(['document_body'])
 
         # Test owner subategory 1
         self.assertEqual(len(self.category_subcat_1.owner_user_ids), 0)
@@ -546,7 +586,8 @@ class TestKnowledgeDocumentHistoryRead(TestBureaucratKnowledgeBase):
         self.category_subcat_1.write({
             'owner_user_ids': [(3, self.demo_user.id)]})
         with self.assertRaises(exceptions.AccessError):
-            self.document_subcat_2.latest_history_id.sudo(self.demo_user).read(['document_body'])
+            self.document_subcat_2.latest_history_id.sudo(
+                self.demo_user).read(['document_body'])
 
         # Test owner subategory 2
         self.assertEqual(len(self.category_subcat_2.owner_user_ids), 0)
@@ -567,7 +608,8 @@ class TestKnowledgeDocumentHistoryRead(TestBureaucratKnowledgeBase):
         self.category_subcat_2.write({
             'owner_user_ids': [(3, self.demo_user.id)]})
         with self.assertRaises(exceptions.AccessError):
-            self.document_subcat_2.latest_history_id.sudo(self.demo_user).read(['document_body'])
+            self.document_subcat_2.latest_history_id.sudo(
+                self.demo_user).read(['document_body'])
 
     def test_document_subcategory_2_restricted_owners_access_read_group(self):
         self.demo_user.groups_id |= self.group_demo
@@ -589,7 +631,8 @@ class TestKnowledgeDocumentHistoryRead(TestBureaucratKnowledgeBase):
         self.assertEqual(len(self.document_subcat_2.actual_owner_user_ids), 1)
 
         with self.assertRaises(exceptions.AccessError):
-            self.document_subcat_2.latest_history_id.sudo(self.demo_user).read(['document_body'])
+            self.document_subcat_2.latest_history_id.sudo(
+                self.demo_user).read(['document_body'])
 
         # Add owner group to Top level category
         self.category_top_level.write({
@@ -606,7 +649,8 @@ class TestKnowledgeDocumentHistoryRead(TestBureaucratKnowledgeBase):
         self.category_top_level.write({
             'owner_group_ids': [(3, self.group_demo.id)]})
         with self.assertRaises(exceptions.AccessError):
-            self.document_subcat_2.latest_history_id.sudo(self.demo_user).read(['document_body'])
+            self.document_subcat_2.latest_history_id.sudo(
+                self.demo_user).read(['document_body'])
 
         # Test owner group subategory 1
         self.assertFalse(self.category_subcat_1.owner_group_ids)
@@ -626,7 +670,8 @@ class TestKnowledgeDocumentHistoryRead(TestBureaucratKnowledgeBase):
         self.category_subcat_1.write({
             'owner_group_ids': [(3, self.group_demo.id)]})
         with self.assertRaises(exceptions.AccessError):
-            self.document_subcat_2.latest_history_id.sudo(self.demo_user).read(['document_body'])
+            self.document_subcat_2.latest_history_id.sudo(
+                self.demo_user).read(['document_body'])
 
         # Test owner group subategory 2
         self.assertFalse(self.category_subcat_1.owner_group_ids)
@@ -646,4 +691,5 @@ class TestKnowledgeDocumentHistoryRead(TestBureaucratKnowledgeBase):
         self.category_subcat_2.write({
             'owner_group_ids': [(3, self.group_demo.id)]})
         with self.assertRaises(exceptions.AccessError):
-            self.document_subcat_2.latest_history_id.sudo(self.demo_user).read(['document_body'])
+            self.document_subcat_2.latest_history_id.sudo(
+                self.demo_user).read(['document_body'])

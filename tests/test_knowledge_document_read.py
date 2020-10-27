@@ -197,7 +197,6 @@ class TestKnowledgeDocumentRead(TestBureaucratKnowledgeBase):
         with self.assertRaises(exceptions.AccessError):
             self.document_subcat_2.sudo(self.public_user).read(['name'])
 
-
         # Change visibility to internal
         self.category_top_level.visibility_type = 'internal'
 

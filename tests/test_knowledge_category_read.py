@@ -114,6 +114,7 @@ class TestKnowledgeCategoryRead(TestBureaucratKnowledgeBase):
             'Top level category 1')
 
     def test_category_public_portal_internal_access_read_user(self):
+        # pylint: disable=too-many-statements
         # Initial state
         self.assertEqual(
             self.category_top_level.visibility_type, 'restricted')

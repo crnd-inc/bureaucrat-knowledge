@@ -135,8 +135,7 @@ class BureaucratKnowledgeCategory(models.Model):
          "CHECK (parent_id IS NOT NULL OR"
          "(parent_id IS NULL AND visibility_type != 'parent'))",
          "Category must have a parent category"
-         " to set Visibility Type 'Parent'"
-         ),
+         " to set Visibility Type 'Parent'"),
     ]
 
     @api.depends(

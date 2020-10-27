@@ -256,6 +256,7 @@ class TestKnowledgeCategoryCreate(TestBureaucratKnowledgeBase):
             self.Category.sudo(self.demo_user).create({
                 'name': 'Test Create',
                 'parent_id': self.category_top_level.id})
+
     # Testing subcategory 2nd level depth for visibility_type = 'restricted'
     def test_subcategory_2_restricted_access_write_user(self):
         self.assertEqual(

@@ -99,19 +99,31 @@
                             <!-- TODO: have to be visible only for owners -->
                             <div>
                                 <group>
-                                    <field name="visibility_type"/>
-                                    <field name="actual_visibility_parent_id"
-                                        attrs="{'invisible': [('visibility_type', '!=', 'parent')]}"/>
-                                    <field name="visibility_group_ids" widget="many2many_tags"/>
-                                    <field name="visibility_user_ids" widget="many2many_tags"/>
-                                    <field name="editor_group_ids" widget="many2many_tags"/>
-                                    <field name="actual_editor_group_ids" widget="many2many_tags"/>
-                                    <field name="editor_user_ids" widget="many2many_tags"/>
-                                    <field name="actual_editor_user_ids" widget="many2many_tags"/>
-                                    <field name="owner_group_ids" widget="many2many_tags"/>
-                                    <field name="actual_owner_group_ids" widget="many2many_tags"/>
-                                    <field name="owner_user_ids" widget="many2many_tags"/>
-                                    <field name="actual_owner_user_ids" widget="many2many_tags"/>
+                                    <group string="Visibility settings">
+                                        <field name="visibility_type"/>
+                                        <field name="actual_visibility_parent_id"
+                                               attrs="{'invisible': [('visibility_type', '!=', 'parent')]}"/>
+                                    </group>
+                                </group>
+                                <group>
+                                    <group string="Visibility groups and users">
+                                        <field name="visibility_group_ids" widget="many2many_tags"/>
+                                        <field name="visibility_user_ids" widget="many2many_tags"/>
+                                    </group>
+                                    <group string="Editors">
+                                        <field name="editor_group_ids" widget="many2many_tags"/>
+                                        <field name="editor_user_ids" widget="many2many_tags"/>
+                                    </group>
+                                    <group string="Owners">
+                                        <field name="owner_group_ids" widget="many2many_tags"/>
+                                        <field name="owner_user_ids" widget="many2many_tags"/>
+                                    </group>
+                                    <group string="Actual groups and users">
+                                        <field name="actual_editor_group_ids" widget="many2many_tags"/>
+                                        <field name="actual_editor_user_ids" widget="many2many_tags"/>
+                                        <field name="actual_owner_group_ids" widget="many2many_tags"/>
+                                        <field name="actual_owner_user_ids" widget="many2many_tags"/>
+                                    </group>
                                 </group>
                             </div>
                         </page>

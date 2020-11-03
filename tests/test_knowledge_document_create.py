@@ -32,6 +32,54 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'category_id': self.category_top_level.id,
                 'document_body': 'Test Document'})
 
+    def test_document_restricted_access_create_user2(self):
+        self.assertEqual(
+            self.category_top_level.visibility_type, 'restricted')
+        self.assertFalse(self.category_top_level.visibility_group_ids)
+        self.assertFalse(self.category_top_level.visibility_user_ids)
+
+        with self.assertRaises(AccessError):
+            self.Document.sudo(self.demo_user).create({
+                'name': 'Test Create',
+                'category_id': self.category_top_level.id,
+                'document_body': 'Test Document',
+                'editor_user_ids': [(4, self.demo_user.id)]})
+
+        self.category_top_level.write({
+            'visibility_user_ids': [(4, self.demo_user.id)]})
+
+        self.assertEqual(len(self.category_top_level.visibility_user_ids), 1)
+        with self.assertRaises(AccessError):
+            self.Document.sudo(self.demo_user).create({
+                'name': 'Test Create',
+                'category_id': self.category_top_level.id,
+                'document_body': 'Test Document',
+                'editor_user_ids': [(4, self.demo_user.id)]})
+
+    def test_document_restricted_access_create_user3(self):
+        self.assertEqual(
+            self.category_top_level.visibility_type, 'restricted')
+        self.assertFalse(self.category_top_level.visibility_group_ids)
+        self.assertFalse(self.category_top_level.visibility_user_ids)
+
+        with self.assertRaises(AccessError):
+            self.Document.sudo(self.demo_user).create({
+                'name': 'Test Create',
+                'category_id': self.category_top_level.id,
+                'document_body': 'Test Document',
+                'owner_user_ids': [(4, self.demo_user.id)]})
+
+        self.category_top_level.write({
+            'visibility_user_ids': [(4, self.demo_user.id)]})
+
+        self.assertEqual(len(self.category_top_level.visibility_user_ids), 1)
+        with self.assertRaises(AccessError):
+            self.Document.sudo(self.demo_user).create({
+                'name': 'Test Create',
+                'category_id': self.category_top_level.id,
+                'document_body': 'Test Document',
+                'owner_user_ids': [(4, self.demo_user.id)]})
+
     def test_document_restricted_access_create_group(self):
         self.demo_user.groups_id |= self.group_demo
 
@@ -55,6 +103,58 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'name': 'Test Create',
                 'category_id': self.category_top_level.id,
                 'document_body': 'Test Document'})
+
+    def test_document_restricted_access_create_group2(self):
+        self.demo_user.groups_id |= self.group_demo
+
+        self.assertEqual(
+            self.category_top_level.visibility_type, 'restricted')
+        self.assertFalse(self.category_top_level.visibility_group_ids)
+        self.assertFalse(self.category_top_level.visibility_user_ids)
+
+        with self.assertRaises(AccessError):
+            self.Document.sudo(self.demo_user).create({
+                'name': 'Test Create',
+                'category_id': self.category_top_level.id,
+                'document_body': 'Test Document',
+                'editor_group_ids': [(4, self.group_demo.id)]})
+
+        self.category_top_level.write({
+            'visibility_group_ids': [(4, self.group_demo.id)]})
+
+        self.assertEqual(len(self.category_top_level.visibility_group_ids), 1)
+        with self.assertRaises(AccessError):
+            self.Document.sudo(self.demo_user).create({
+                'name': 'Test Create',
+                'category_id': self.category_top_level.id,
+                'document_body': 'Test Document',
+                'editor_group_ids': [(4, self.group_demo.id)]})
+
+    def test_document_restricted_access_create_group3(self):
+        self.demo_user.groups_id |= self.group_demo
+
+        self.assertEqual(
+            self.category_top_level.visibility_type, 'restricted')
+        self.assertFalse(self.category_top_level.visibility_group_ids)
+        self.assertFalse(self.category_top_level.visibility_user_ids)
+
+        with self.assertRaises(AccessError):
+            self.Document.sudo(self.demo_user).create({
+                'name': 'Test Create',
+                'category_id': self.category_top_level.id,
+                'document_body': 'Test Document',
+                'owner_group_ids': [(4, self.group_demo.id)]})
+
+        self.category_top_level.write({
+            'visibility_group_ids': [(4, self.group_demo.id)]})
+
+        self.assertEqual(len(self.category_top_level.visibility_group_ids), 1)
+        with self.assertRaises(AccessError):
+            self.Document.sudo(self.demo_user).create({
+                'name': 'Test Create',
+                'category_id': self.category_top_level.id,
+                'document_body': 'Test Document',
+                'owner_group_ids': [(4, self.group_demo.id)]})
 
     def test_document_restricted_editors_access_create_user(self):
         self.assertEqual(

@@ -175,10 +175,19 @@ class BureaucratKnowledgeCategory(models.Model):
             else:
                 rec.category_contents = False
 
+    @api.onchange('parent_id', 'visibility_type')
+    def _onchange_parent_visibility_type(self):
+        for record in self:
+            if record.parent_id and not record.visibility_type:
+                record.visibility_type = 'parent'
+            elif record.visibility_type == 'parent' and not record.parent_id:
+                record.visibility_type = False
+
     def init(self):
         # Create relation (category_id <-> parent_category_id) as PG View
         # This relation is used to compute field parent_ids
 
+        # Parent / child relation made flat
         tools.drop_view_if_exists(
             self.env.cr, 'bureaucrat_knowledge_category_parents_rel_view')
         self.env.cr.execute(sql.SQL("""
@@ -194,6 +203,7 @@ class BureaucratKnowledgeCategory(models.Model):
             )
         """))
 
+        # Category m2m relations
         tools.drop_view_if_exists(
             self.env.cr,
             'bureaucrat_knowledge_category_actual_owner_groups_rev_view')
@@ -212,7 +222,6 @@ class BureaucratKnowledgeCategory(models.Model):
                     parent_ids.parent_id = own_group.knowledge_category_id)
             )
         """))
-
         tools.drop_view_if_exists(
             self.env.cr,
             'bureaucrat_knowledge_category_actual_owner_users_rel_view')
@@ -230,7 +239,6 @@ class BureaucratKnowledgeCategory(models.Model):
                     parent_ids.parent_id = own_usr.knowledge_category_id)
             )
         """))
-
         tools.drop_view_if_exists(
             self.env.cr,
             'bureaucrat_knowledge_category_actual_editor_groups_rel_view')
@@ -249,7 +257,6 @@ class BureaucratKnowledgeCategory(models.Model):
                     parent_ids.parent_id = editor_group.knowledge_category_id)
             )
         """))
-
         tools.drop_view_if_exists(
             self.env.cr,
             'bureaucrat_knowledge_category_actual_editor_users_rel_view')
@@ -313,6 +320,8 @@ class BureaucratKnowledgeCategory(models.Model):
         # cached (incorrect) value
         self._clean_caches_on_create_write(vals)
 
+        # Enforce check of access rights after category created,
+        # to ensure that current user has access to create this category
         category.check_access_rule('create')
 
         return category

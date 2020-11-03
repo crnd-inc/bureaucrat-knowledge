@@ -30,6 +30,28 @@ class TestKnowledgeCategoryCreate(TestBureaucratKnowledgeBase):
                 'name': 'Test Create',
                 'parent_id': self.category_top_level.id})
 
+    def test_category_restricted_access_create_user2(self):
+        self.assertEqual(
+            self.category_top_level.visibility_type, 'restricted')
+        self.assertFalse(self.category_top_level.visibility_group_ids)
+        self.assertFalse(self.category_top_level.visibility_user_ids)
+
+        with self.assertRaises(AccessError):
+            self.Category.sudo(self.demo_user).create({
+                'name': 'Test Create',
+                'parent_id': self.category_top_level.id,
+                'owner_user_ids': [(4, self.demo_user.id)]})
+
+        self.category_top_level.write({
+            'visibility_user_ids': [(4, self.demo_user.id)]})
+
+        self.assertEqual(len(self.category_top_level.visibility_user_ids), 1)
+        with self.assertRaises(AccessError):
+            self.Category.sudo(self.demo_user).create({
+                'name': 'Test Create',
+                'parent_id': self.category_top_level.id,
+                'owner_user_ids': [(4, self.demo_user.id)]})
+
     def test_category_restricted_access_create_group(self):
         self.demo_user.groups_id |= self.group_demo
 

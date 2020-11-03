@@ -115,6 +115,24 @@
         <field eval="0" name="perm_unlink"/>
         <field eval="1" name="perm_write"/>
         <field eval="1" name="perm_read"/>
+        <field eval="0" name="perm_create"/>
+    </record>
+ 
+    <record id="rule_bureaucrat_knowledge_category_create" model="ir.rule">
+        <field name="name">knowledge categories by editors (create)</field>
+        <field name="model_id" ref="bureaucrat_knowledge.model_bureaucrat_knowledge_category"/>
+        <field name="domain_force">[
+                '|', '|', '|', '|',
+                ('parent_id', '=', False),
+                ('parent_id.actual_editor_user_ids.id', '=', user.id),
+                ('parent_id.actual_editor_group_ids', 'in', user.groups_id.ids),
+                ('parent_id.actual_owner_user_ids.id', '=', user.id),
+                ('parent_id.actual_owner_group_ids', 'in', user.groups_id.ids),
+            ]</field>
+        <field name="groups" eval="[(4, ref('bureaucrat_knowledge.group_bureaucratic_knowledge_user_implicit'))]"/>
+        <field eval="0" name="perm_unlink"/>
+        <field eval="0" name="perm_write"/>
+        <field eval="0" name="perm_read"/>
         <field eval="1" name="perm_create"/>
     </record>
  
@@ -130,7 +148,7 @@
         <field eval="0" name="perm_unlink"/>
         <field eval="1" name="perm_write"/>
         <field eval="1" name="perm_read"/>
-        <field eval="1" name="perm_create"/>
+        <field eval="0" name="perm_create"/>
     </record>
 
     <record id="rule_bureaucrat_knowledge_category_owners" model="ir.rule">
@@ -145,7 +163,7 @@
         <field eval="1" name="perm_unlink"/>
         <field eval="1" name="perm_write"/>
         <field eval="1" name="perm_read"/>
-        <field eval="1" name="perm_create"/>
+        <field eval="0" name="perm_create"/>
     </record>
 
     <record id="rule_bureaucrat_knowledge_category_group_owners" model="ir.rule">
@@ -160,7 +178,7 @@
         <field eval="1" name="perm_unlink"/>
         <field eval="1" name="perm_write"/>
         <field eval="1" name="perm_read"/>
-        <field eval="1" name="perm_create"/>
+        <field eval="0" name="perm_create"/>
     </record>
 
     <record id="rule_bureaucrat_knowledge_category_group_public" model="ir.rule">
@@ -257,6 +275,24 @@
         <field eval="0" name="perm_create"/>
     </record>
 
+    <record id="rule_bureaucrat_knowledge_document_editors_create" model="ir.rule">
+        <field name="name">knowledge documents by editors (create)</field>
+        <field name="model_id" ref="bureaucrat_knowledge.model_bureaucrat_knowledge_document"/>
+        <field name="domain_force">[
+                '|', '|', '|', '|', 
+                ('category_id', '=', False),
+                ('category_id.actual_editor_user_ids.id', '=', user.id),
+                ('category_id.actual_editor_group_ids', 'in', user.groups_id.ids),
+                ('category_id.actual_owner_user_ids.id', '=', user.id),
+                ('category_id.actual_owner_group_ids', 'in', user.groups_id.ids),
+            ]</field>
+        <field name="groups" eval="[(4, ref('bureaucrat_knowledge.group_bureaucratic_knowledge_user_implicit'))]"/>
+        <field eval="0" name="perm_unlink"/>
+        <field eval="0" name="perm_write"/>
+        <field eval="0" name="perm_read"/>
+        <field eval="1" name="perm_create"/>
+    </record>
+
     <record id="rule_bureaucrat_knowledge_document_editors" model="ir.rule">
         <field name="name">knowledge documents by editors</field>
         <field name="model_id" ref="bureaucrat_knowledge.model_bureaucrat_knowledge_document"/>
@@ -269,7 +305,7 @@
         <field eval="0" name="perm_unlink"/>
         <field eval="1" name="perm_write"/>
         <field eval="1" name="perm_read"/>
-        <field eval="1" name="perm_create"/>
+        <field eval="0" name="perm_create"/>
     </record>
 
     <record id="rule_bureaucrat_knowledge_document_group_editors" model="ir.rule">
@@ -284,7 +320,7 @@
         <field eval="0" name="perm_unlink"/>
         <field eval="1" name="perm_write"/>
         <field eval="1" name="perm_read"/>
-        <field eval="1" name="perm_create"/>
+        <field eval="0" name="perm_create"/>
     </record>
 
     <record id="rule_bureaucrat_knowledge_document_owners" model="ir.rule">
@@ -299,7 +335,7 @@
         <field eval="1" name="perm_unlink"/>
         <field eval="1" name="perm_write"/>
         <field eval="1" name="perm_read"/>
-        <field eval="1" name="perm_create"/>
+        <field eval="0" name="perm_create"/>
     </record>
 
     <record id="rule_bureaucrat_knowledge_document_group_owners" model="ir.rule">
@@ -314,7 +350,7 @@
         <field eval="1" name="perm_unlink"/>
         <field eval="1" name="perm_write"/>
         <field eval="1" name="perm_read"/>
-        <field eval="1" name="perm_create"/>
+        <field eval="0" name="perm_create"/>
     </record>
 
     <record id="rule_bureaucrat_knowledge_document_group_public" model="ir.rule">

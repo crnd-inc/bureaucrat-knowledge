@@ -103,26 +103,60 @@
                                         <field name="visibility_type"/>
                                         <field name="actual_visibility_parent_id"
                                                attrs="{'invisible': [('visibility_type', '!=', 'parent')]}"/>
+                                        <field name="visibility_group_ids"
+                                               string="Reader Group"
+                                               widget="many2many_tags"/>
+                                        <field name="visibility_user_ids"
+                                               string="Reader User"
+                                               widget="many2many_tags"/>
                                     </group>
-                                </group>
-                                <group>
-                                    <group string="Visibility groups and users">
-                                        <field name="visibility_group_ids" widget="many2many_tags"/>
-                                        <field name="visibility_user_ids" widget="many2many_tags"/>
+                                    <group string="Editor groups" colspan="4">
+                                        <group>
+                                            <field name="editor_group_ids"
+                                                   string="Group"
+                                                   widget="many2many_tags"/>
+                                        </group>
+                                        <group>
+                                            <field name="actual_editor_group_ids"
+                                                   string="Actual Group"
+                                                   widget="many2many_tags"/>
+                                        </group>
                                     </group>
-                                    <group string="Editors">
-                                        <field name="editor_group_ids" widget="many2many_tags"/>
-                                        <field name="editor_user_ids" widget="many2many_tags"/>
+                                    <group string="Editor users" colspan="4">
+                                        <group>
+                                            <field name="editor_user_ids"
+                                                   string="Users"
+                                                   widget="many2many_tags"/>
+                                        </group>
+                                        <group>
+                                            <field name="actual_editor_user_ids"
+                                                   string="Actual Users"
+                                                   widget="many2many_tags"/>
+                                        </group>
                                     </group>
-                                    <group string="Owners">
-                                        <field name="owner_group_ids" widget="many2many_tags"/>
-                                        <field name="owner_user_ids" widget="many2many_tags"/>
+                                    <group string="Owner groups" colspan="4">
+                                        <group>
+                                            <field name="owner_group_ids"
+                                                   string="Group"
+                                                   widget="many2many_tags"/>
+                                        </group>
+                                        <group>
+                                            <field name="actual_owner_group_ids"
+                                                   string="Actual Group"
+                                                   widget="many2many_tags"/>
+                                        </group>
                                     </group>
-                                    <group string="Actual groups and users">
-                                        <field name="actual_editor_group_ids" widget="many2many_tags"/>
-                                        <field name="actual_editor_user_ids" widget="many2many_tags"/>
-                                        <field name="actual_owner_group_ids" widget="many2many_tags"/>
-                                        <field name="actual_owner_user_ids" widget="many2many_tags"/>
+                                    <group string="Owner users" colspan="4">
+                                        <group>
+                                            <field name="owner_user_ids"
+                                                   string="Users" 
+                                                   widget="many2many_tags"/>
+                                        </group>
+                                        <group>
+                                            <field name="actual_owner_user_ids"
+                                                   string="Actual Users"
+                                                   widget="many2many_tags"/>
+                                        </group>
                                     </group>
                                 </group>
                             </div>

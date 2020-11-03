@@ -54,12 +54,14 @@ msgstr ""
 #: model:res.groups,comment:bureaucrat_knowledge.group_bureaucratic_knowledge_user
 msgid ""
 "\n"
-"            Usual user of knowledge base with readonly access.\n"
+"            Users un this group have regular access to knowledge base.\n"
+"            If they are mentioned in editors or owners of document or "
+"categ,\n"
+"            then they can edit that document or category, and if such user\n"
+"            is owner of document or category, he can delete that document or "
+"category.\n"
 "        "
 msgstr ""
-"\n"
-"            Usual user of knowledge base with readonly access.\n"
-"        "
 
 #. module: bureaucrat_knowledge
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category_active
@@ -68,6 +70,52 @@ msgstr ""
 #: model:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_document_view_search
 msgid "Active"
 msgstr "Active"
+
+#. module: bureaucrat_knowledge
+#: model:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_category_view_form
+#: model:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_document_view_form
+msgid "Actual Group"
+msgstr ""
+
+#. module: bureaucrat_knowledge
+#: model:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_category_view_form
+#: model:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_document_view_form
+msgid "Actual Users"
+msgstr ""
+
+#. module: bureaucrat_knowledge
+#: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document_actual_visibility_category_id
+msgid "Actual Visibility Category"
+msgstr ""
+
+#. module: bureaucrat_knowledge
+#: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category_actual_visibility_parent_id
+msgid "Actual Visibility Parent"
+msgstr ""
+
+#. module: bureaucrat_knowledge
+#: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category_actual_editor_user_ids
+#: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document_actual_editor_user_ids
+msgid "Actual editors"
+msgstr ""
+
+#. module: bureaucrat_knowledge
+#: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category_actual_editor_group_ids
+#: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document_actual_editor_group_ids
+msgid "Actual editors groups"
+msgstr ""
+
+#. module: bureaucrat_knowledge
+#: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category_actual_owner_user_ids
+#: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document_actual_owner_user_ids
+msgid "Actual owners"
+msgstr ""
+
+#. module: bureaucrat_knowledge
+#: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category_actual_owner_group_ids
+#: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document_actual_owner_group_ids
+msgid "Actual owners groups"
+msgstr ""
 
 #. module: bureaucrat_knowledge
 #: model:bureaucrat.knowledge.category,name:bureaucrat_knowledge.bureaucrat_documentation_admin_guides
@@ -84,6 +132,11 @@ msgstr "Archived"
 #: model:bureaucrat.knowledge.category,name:bureaucrat_knowledge.bureaucrat_documentation
 msgid "Bureaucrat Documentation"
 msgstr "Bureaucrat Documentation"
+
+#. module: bureaucrat_knowledge
+#: model:res.groups,name:bureaucrat_knowledge.group_demo_knowledge_base_test
+msgid "Bureaucrat Knowledge Demo Test"
+msgstr ""
 
 #. module: bureaucrat_knowledge
 #: model:generic.tag.model,name:bureaucrat_knowledge.bureaucrat_knowledge_category_tag_model
@@ -139,6 +192,11 @@ msgstr "Category"
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category_category_contents
 msgid "Category Contents"
 msgstr "Category Contents"
+
+#. module: bureaucrat_knowledge
+#: sql_constraint:bureaucrat.knowledge.category:0
+msgid "Category must have a parent category to set Visibility Type 'Parent'"
+msgstr ""
 
 #. module: bureaucrat_knowledge
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category_child_ids
@@ -206,6 +264,21 @@ msgid "Date Create"
 msgstr "Date Create"
 
 #. module: bureaucrat_knowledge
+#: model:bureaucrat.knowledge.document,name:bureaucrat_knowledge.document_demo_sub_2
+msgid "Demo Document For Subcategory 2"
+msgstr ""
+
+#. module: bureaucrat_knowledge
+#: model:bureaucrat.knowledge.document,name:bureaucrat_knowledge.document_demo_top_1
+msgid "Demo Document Top Level"
+msgstr ""
+
+#. module: bureaucrat_knowledge
+#: model:res.groups,comment:bureaucrat_knowledge.group_demo_knowledge_base_test
+msgid "Demo group, used in automated tests to test access rights"
+msgstr ""
+
+#. module: bureaucrat_knowledge
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category_description
 #: model:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_category_view_form
 msgid "Description"
@@ -237,6 +310,11 @@ msgid "Document History"
 msgstr "Document History"
 
 #. module: bureaucrat_knowledge
+#: sql_constraint:bureaucrat.knowledge.document:0
+msgid "Document must have a parent category to set Visibility Type 'Parent'"
+msgstr ""
+
+#. module: bureaucrat_knowledge
 #: model:ir.actions.act_window,name:bureaucrat_knowledge.action_bureaucrat_knowledge_document
 #: model:ir.ui.menu,name:bureaucrat_knowledge.bureaucrat_knowledge_document_document_menu
 #: model:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_category_view_form
@@ -248,6 +326,30 @@ msgstr "Documents"
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category_documents_count
 msgid "Documents Count"
 msgstr "Documents Count"
+
+#. module: bureaucrat_knowledge
+#: model:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_category_view_form
+#: model:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_document_view_form
+msgid "Editor groups"
+msgstr ""
+
+#. module: bureaucrat_knowledge
+#: model:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_category_view_form
+#: model:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_document_view_form
+msgid "Editor users"
+msgstr ""
+
+#. module: bureaucrat_knowledge
+#: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category_editor_user_ids
+#: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document_editor_user_ids
+msgid "Editors"
+msgstr ""
+
+#. module: bureaucrat_knowledge
+#: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category_editor_group_ids
+#: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document_editor_group_ids
+msgid "Editors groups"
+msgstr ""
 
 #. module: bureaucrat_knowledge
 #: model:bureaucrat.knowledge.document,name:bureaucrat_knowledge.error_on_the_diagram_view
@@ -485,6 +587,12 @@ msgid "Generic Team modules"
 msgstr "Generic Team modules"
 
 #. module: bureaucrat_knowledge
+#: model:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_category_view_form
+#: model:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_document_view_form
+msgid "Group"
+msgstr ""
+
+#. module: bureaucrat_knowledge
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document_history_ids
 msgid "History"
 msgstr "History"
@@ -561,6 +669,12 @@ msgid "Info"
 msgstr ""
 
 #. module: bureaucrat_knowledge
+#: selection:bureaucrat.knowledge.category,visibility_type:0
+#: selection:bureaucrat.knowledge.document,visibility_type:0
+msgid "Internal"
+msgstr ""
+
+#. module: bureaucrat_knowledge
 #: model:ir.ui.menu,name:bureaucrat_knowledge.bureaucrat_knowledge_menu
 msgid "Knowledge"
 msgstr "Knowledge"
@@ -620,14 +734,87 @@ msgid "Other"
 msgstr ""
 
 #. module: bureaucrat_knowledge
+#: model:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_category_view_form
+#: model:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_document_view_form
+msgid "Owner groups"
+msgstr ""
+
+#. module: bureaucrat_knowledge
+#: model:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_category_view_form
+#: model:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_document_view_form
+msgid "Owner users"
+msgstr ""
+
+#. module: bureaucrat_knowledge
+#: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category_owner_user_ids
+#: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document_owner_user_ids
+msgid "Owners"
+msgstr ""
+
+#. module: bureaucrat_knowledge
+#: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category_owner_group_ids
+#: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document_owner_group_ids
+msgid "Owners groups"
+msgstr ""
+
+#. module: bureaucrat_knowledge
+#: selection:bureaucrat.knowledge.category,visibility_type:0
+#: selection:bureaucrat.knowledge.document,visibility_type:0
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category_parent_id
 msgid "Parent"
 msgstr "Parent"
 
 #. module: bureaucrat_knowledge
+#: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category_parent_ids
+msgid "Parents Categories"
+msgstr ""
+
+#. module: bureaucrat_knowledge
+#: selection:bureaucrat.knowledge.category,visibility_type:0
+#: selection:bureaucrat.knowledge.document,visibility_type:0
+msgid "Portal"
+msgstr ""
+
+#. module: bureaucrat_knowledge
+#: selection:bureaucrat.knowledge.category,visibility_type:0
+#: selection:bureaucrat.knowledge.document,visibility_type:0
+msgid "Public"
+msgstr ""
+
+#. module: bureaucrat_knowledge
+#: model:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_category_view_form
+#: model:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_document_view_form
+msgid "Reader Group"
+msgstr ""
+
+#. module: bureaucrat_knowledge
+#: model:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_category_view_form
+#: model:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_document_view_form
+msgid "Reader User"
+msgstr ""
+
+#. module: bureaucrat_knowledge
+#: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category_visibility_user_ids
+#: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document_visibility_user_ids
+msgid "Readers"
+msgstr ""
+
+#. module: bureaucrat_knowledge
+#: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category_visibility_group_ids
+#: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document_visibility_group_ids
+msgid "Readers groups"
+msgstr ""
+
+#. module: bureaucrat_knowledge
 #: model:bureaucrat.knowledge.category,name:bureaucrat_knowledge.bureaucrat_documentation_reference
 msgid "Reference"
 msgstr "Reference"
+
+#. module: bureaucrat_knowledge
+#: selection:bureaucrat.knowledge.category,visibility_type:0
+#: selection:bureaucrat.knowledge.document,visibility_type:0
+msgid "Restricted"
+msgstr ""
 
 #. module: bureaucrat_knowledge
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category_parent_right
@@ -645,9 +832,25 @@ msgstr ""
 
 #. module: bureaucrat_knowledge
 #: model:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_category_view_form
+#: model:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_document_view_form
+msgid "Settings"
+msgstr ""
+
+#. module: bureaucrat_knowledge
+#: model:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_category_view_form
 #: model:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_category_view_tree
 msgid "Subcategories"
 msgstr "Subcategories"
+
+#. module: bureaucrat_knowledge
+#: model:bureaucrat.knowledge.category,name:bureaucrat_knowledge.bureaucrat_demo_subcategory_1
+msgid "Subcategory 1"
+msgstr ""
+
+#. module: bureaucrat_knowledge
+#: model:bureaucrat.knowledge.category,name:bureaucrat_knowledge.bureaucrat_demo_subcategory_2
+msgid "Subcategory 2"
+msgstr ""
 
 #. module: bureaucrat_knowledge
 #: model:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_category_view_form
@@ -663,6 +866,11 @@ msgid "Top Level"
 msgstr "Top Level"
 
 #. module: bureaucrat_knowledge
+#: model:bureaucrat.knowledge.category,name:bureaucrat_knowledge.bureaucrat_demo_top_level_1
+msgid "Top level category 1"
+msgstr ""
+
+#. module: bureaucrat_knowledge
 #: model:bureaucrat.knowledge.category,name:bureaucrat_knowledge.bureaucrat_documentation_faq_troubleshooting
 msgid "Troubleshooting"
 msgstr "Troubleshooting"
@@ -676,6 +884,24 @@ msgstr "User"
 #: model:bureaucrat.knowledge.category,name:bureaucrat_knowledge.bureaucrat_documentation_user_guides
 msgid "User Guides"
 msgstr "User Guides"
+
+#. module: bureaucrat_knowledge
+#: model:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_category_view_form
+#: model:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_document_view_form
+msgid "Users"
+msgstr ""
+
+#. module: bureaucrat_knowledge
+#: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category_visibility_type
+#: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document_visibility_type
+msgid "Visibility Type"
+msgstr ""
+
+#. module: bureaucrat_knowledge
+#: model:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_category_view_form
+#: model:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_document_view_form
+msgid "Visibility settings"
+msgstr ""
 
 #. module: bureaucrat_knowledge
 #: model:bureaucrat.knowledge.document,name:bureaucrat_knowledge.website_service_desk
@@ -706,3 +932,12 @@ msgstr "Website Service Desk (Tag)"
 #: model:bureaucrat.knowledge.category,name:bureaucrat_knowledge.bureaucrat_documentation_reference_website_service_desk_modules
 msgid "Website Service Desk Modules"
 msgstr "Website Service Desk Modules"
+
+#~ msgid ""
+#~ "\n"
+#~ "            Usual user of knowledge base with readonly access.\n"
+#~ "        "
+#~ msgstr ""
+#~ "\n"
+#~ "            Usual user of knowledge base with readonly access.\n"
+#~ "        "

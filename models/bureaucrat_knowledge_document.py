@@ -199,37 +199,6 @@ class BureaucratKnowledgeDocument(models.Model):
             rec.actual_owner_user_ids = actual_owner_users
             rec.actual_owner_group_ids = actual_owner_groups
 
-    @api.onchange('category_id', 'visibility_type')
-    def _onchange_categ_visibility_type(self):
-        for record in self:
-            if record.category_id and not record.visibility_type:
-                record.visibility_type = 'parent'
-            elif record.visibility_type == 'parent' and not record.category_id:
-                record.visibility_type = False
-
-    @api.model
-    def create(self, vals):
-        self.check_access_rights('create')
-
-        # TODO: move to defaults level
-        if vals.get('category_id', False):
-            vals['visibility_type'] = 'parent'
-        else:
-            vals['visibility_type'] = 'restricted'
-            vals['owner_user_ids'] = [(4, self.env.user.id)]
-
-        document = super(BureaucratKnowledgeDocument, self.sudo()).create(vals)
-
-        # reference created document as self.env (because before this document
-        # is referenced as sudo)
-        document = document.with_env(self.env)
-
-        # Enforce check of access rights after document created,
-        # to ensure that current user has access to create this document
-        document.check_access_rule('create')
-
-        return document
-
     @api.depends('history_ids')
     def _compute_document_latest_history_id(self):
         for record in self:
@@ -261,3 +230,34 @@ class BureaucratKnowledgeDocument(models.Model):
 
     def _search_document_body(self, operator, value):
         return [('latest_history_id.document_body', operator, value)]
+
+    @api.onchange('category_id', 'visibility_type')
+    def _onchange_categ_visibility_type(self):
+        for record in self:
+            if record.category_id and not record.visibility_type:
+                record.visibility_type = 'parent'
+            elif record.visibility_type == 'parent' and not record.category_id:
+                record.visibility_type = False
+
+    @api.model
+    def create(self, vals):
+        self.check_access_rights('create')
+
+        # TODO: move to defaults level
+        if vals.get('category_id', False):
+            vals['visibility_type'] = 'parent'
+        else:
+            vals['visibility_type'] = 'restricted'
+            vals['owner_user_ids'] = [(4, self.env.user.id)]
+
+        document = super(BureaucratKnowledgeDocument, self.sudo()).create(vals)
+
+        # reference created document as self.env (because before this document
+        # is referenced as sudo)
+        document = document.with_env(self.env)
+
+        # Enforce check of access rights after document created,
+        # to ensure that current user has access to create this document
+        document.check_access_rule('create')
+
+        return document

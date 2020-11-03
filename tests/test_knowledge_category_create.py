@@ -550,7 +550,6 @@ class TestKnowledgeCategoryCreate(TestBureaucratKnowledgeBase):
         self.assertFalse(category.owner_group_ids)
         self.assertFalse(category.owner_user_ids)
 
-    # ---
     # Testing subcategory 2nd level depth for visibility_type = 'public'
     def test_subcategory_public_access_create_user(self):
         self.assertEqual(

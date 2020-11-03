@@ -2,6 +2,7 @@ from odoo.tests.common import SavepointCase
 from odoo.addons.generic_mixin.tests.common import (
     ReduceLoggingMixin,
     AccessRulesFixMixinST,
+    hide_log_messages,
 )
 
 
@@ -42,3 +43,18 @@ class TestBureaucratKnowledgeBase(ReduceLoggingMixin,
         cls.DocHist = cls.env['bureaucrat.knowledge.document.history']
         cls.Category = cls.env['bureaucrat.knowledge.category']
         cls.Document = cls.env['bureaucrat.knowledge.document']
+
+    @hide_log_messages(
+        'odoo.models',
+        lambda r: not any([
+            r.msg.strip().startswith(
+                'The requested operation cannot be completed'),
+            r.msg.strip().startswith(
+                'Access Denied by record rules for operation'),
+        ]))
+    @hide_log_messages(
+        'odoo.addons.base.ir.ir_model',
+        lambda r: not r.msg.strip().startswith(
+            'Access Denied by ACLs for operation'))
+    def run(self, *args, **kwargs):
+        return super(TestBureaucratKnowledgeBase, self).run(*args, **kwargs)

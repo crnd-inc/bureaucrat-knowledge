@@ -18,7 +18,6 @@
 
     # always loaded
     'data': [
-        'security/ir.model.access.csv',
         'data/website_data.xml',
         'templates/templates.xml',
         'views/bureaucrat_knowledge_category.xml',

@@ -57,14 +57,6 @@
                         <a t-attf-href="/knowledge/{{ slug(category) }}">
                             <t t-esc="category.name"/>
                         </a>
-                        <t t-if="category.description">
-                            <div class="category-description">
-                                <span>Description:</span>
-                                <div class="description-content"
-                                    t-raw="category.description">
-                                </div>
-                            </div>
-                        </t>
                         <t t-if="category.child_ids">
                             <t t-set="categories" t-value="category.child_ids"/>
                             <t t-call="bureaucrat_knowledge_website.categories_list"/>
@@ -88,14 +80,6 @@
                         <a t-attf-href="/knowledge/{{ slug(category) }}">
                             <t t-esc="category.name"/>
                         </a>
-                        <t t-if="category.description">
-                            <div class="category-description">
-                                <span>Description:</span>
-                                <div class="description-content"
-                                    t-raw="category.description">
-                                </div>
-                            </div>
-                        </t>
                     </li>
                 </t>
             </ul>

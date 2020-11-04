@@ -53,7 +53,7 @@ class TestBureaucratKnowledgeBase(ReduceLoggingMixin,
                 'Access Denied by record rules for operation'),
         ]))
     @hide_log_messages(
-        'odoo.addons.base.ir.ir_model',
+        'odoo.addons.base.models.ir_model',
         lambda r: not r.msg.strip().startswith(
             'Access Denied by ACLs for operation'))
     def run(self, *args, **kwargs):

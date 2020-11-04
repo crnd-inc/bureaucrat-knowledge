@@ -196,9 +196,10 @@ class BureaucratKnowledgeCategory(models.Model):
                        bkc_parent.id   AS parent_id
                 FROM bureaucrat_knowledge_category AS bkc
                 LEFT JOIN bureaucrat_knowledge_category AS bkc_parent ON (
-                                bkc_parent.parent_right > bkc.parent_right
-                                AND
-                                bkc_parent.parent_left < bkc.parent_left)
+                    bkc_parent.id::character varying IN (
+                        SELECT * FROM unnest(regexp_split_to_array(
+                            bkc.parent_path, '/')))
+                    AND bkc_parent.id != bkc.id)
             )
         """))
 

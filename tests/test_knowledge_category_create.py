@@ -132,7 +132,7 @@ class TestKnowledgeCategoryCreate(TestBureaucratKnowledgeBase):
         self.assertEqual(
             self.category_top_level.visibility_type, 'restricted')
         self.assertFalse(self.category_top_level.owner_group_ids)
-        self.assertEqual(len(self.category_top_level.owner_user_ids), 1)
+        self.assertEqual(len(self.category_top_level.owner_user_ids), 0)
 
         with self.assertRaises(AccessError):
             self.Category.sudo(self.demo_user).create({
@@ -142,7 +142,7 @@ class TestKnowledgeCategoryCreate(TestBureaucratKnowledgeBase):
         self.category_top_level.write({
             'owner_user_ids': [(4, self.demo_user.id)]})
 
-        self.assertEqual(len(self.category_top_level.owner_user_ids), 2)
+        self.assertEqual(len(self.category_top_level.owner_user_ids), 1)
         category = self.Category.sudo(self.demo_user).create({
             'name': 'Test Create',
             'parent_id': self.category_top_level.id})
@@ -160,7 +160,7 @@ class TestKnowledgeCategoryCreate(TestBureaucratKnowledgeBase):
         self.assertEqual(
             self.category_top_level.visibility_type, 'restricted')
         self.assertFalse(self.category_top_level.owner_group_ids)
-        self.assertEqual(len(self.category_top_level.owner_user_ids), 1)
+        self.assertEqual(len(self.category_top_level.owner_user_ids), 0)
 
         with self.assertRaises(AccessError):
             self.Category.sudo(self.demo_user).create({
@@ -459,15 +459,15 @@ class TestKnowledgeCategoryCreate(TestBureaucratKnowledgeBase):
             (self.category_subcat_2.actual_visibility_parent_id.
              visibility_type), 'restricted')
         self.assertFalse(self.category_top_level.owner_group_ids)
-        self.assertEqual(len(self.category_top_level.owner_user_ids), 1)
+        self.assertEqual(len(self.category_top_level.owner_user_ids), 0)
         self.assertFalse(self.category_subcat_1.owner_group_ids)
         self.assertEqual(len(self.category_subcat_1.owner_user_ids), 0)
         self.assertFalse(self.category_subcat_2.owner_group_ids)
         self.assertEqual(len(self.category_subcat_2.owner_user_ids), 0)
         self.assertFalse(self.category_subcat_1.actual_owner_group_ids)
-        self.assertEqual(len(self.category_subcat_1.actual_owner_user_ids), 1)
+        self.assertEqual(len(self.category_subcat_1.actual_owner_user_ids), 0)
         self.assertFalse(self.category_subcat_2.actual_owner_group_ids)
-        self.assertEqual(len(self.category_subcat_2.actual_owner_user_ids), 1)
+        self.assertEqual(len(self.category_subcat_2.actual_owner_user_ids), 0)
 
         with self.assertRaises(AccessError):
             self.Category.sudo(self.demo_user).create({
@@ -477,15 +477,15 @@ class TestKnowledgeCategoryCreate(TestBureaucratKnowledgeBase):
         self.category_top_level.write({
             'owner_user_ids': [(4, self.demo_user.id)]})
 
-        self.assertEqual(len(self.category_top_level.owner_user_ids), 2)
+        self.assertEqual(len(self.category_top_level.owner_user_ids), 1)
         self.assertFalse(self.category_subcat_1.owner_group_ids)
         self.assertEqual(len(self.category_subcat_1.owner_user_ids), 0)
         self.assertFalse(self.category_subcat_2.owner_group_ids)
         self.assertEqual(len(self.category_subcat_2.owner_user_ids), 0)
         self.assertFalse(self.category_subcat_1.actual_owner_group_ids)
-        self.assertEqual(len(self.category_subcat_1.actual_owner_user_ids), 2)
+        self.assertEqual(len(self.category_subcat_1.actual_owner_user_ids), 1)
         self.assertFalse(self.category_subcat_2.actual_owner_group_ids)
-        self.assertEqual(len(self.category_subcat_2.actual_owner_user_ids), 2)
+        self.assertEqual(len(self.category_subcat_2.actual_owner_user_ids), 1)
 
         category = self.Category.sudo(self.demo_user).create({
             'name': 'Test Create Sub 1',
@@ -511,15 +511,15 @@ class TestKnowledgeCategoryCreate(TestBureaucratKnowledgeBase):
             (self.category_subcat_2.actual_visibility_parent_id.
              visibility_type), 'restricted')
         self.assertFalse(self.category_top_level.owner_group_ids)
-        self.assertEqual(len(self.category_top_level.owner_user_ids), 1)
+        self.assertEqual(len(self.category_top_level.owner_user_ids), 0)
         self.assertFalse(self.category_subcat_1.owner_group_ids)
         self.assertEqual(len(self.category_subcat_1.owner_user_ids), 0)
         self.assertFalse(self.category_subcat_2.owner_group_ids)
         self.assertEqual(len(self.category_subcat_2.owner_user_ids), 0)
         self.assertFalse(self.category_subcat_1.actual_owner_group_ids)
-        self.assertEqual(len(self.category_subcat_1.actual_owner_user_ids), 1)
+        self.assertEqual(len(self.category_subcat_1.actual_owner_user_ids), 0)
         self.assertFalse(self.category_subcat_2.actual_owner_group_ids)
-        self.assertEqual(len(self.category_subcat_2.actual_owner_user_ids), 1)
+        self.assertEqual(len(self.category_subcat_2.actual_owner_user_ids), 0)
 
         with self.assertRaises(AccessError):
             self.Category.sudo(self.demo_user).create({
@@ -529,15 +529,15 @@ class TestKnowledgeCategoryCreate(TestBureaucratKnowledgeBase):
         self.category_top_level.write({
             'owner_group_ids': [(4, self.group_demo.id)]})
 
-        self.assertEqual(len(self.category_top_level.owner_user_ids), 1)
+        self.assertEqual(len(self.category_top_level.owner_user_ids), 0)
         self.assertFalse(self.category_subcat_1.owner_group_ids)
         self.assertEqual(len(self.category_subcat_1.owner_user_ids), 0)
         self.assertFalse(self.category_subcat_2.owner_group_ids)
         self.assertEqual(len(self.category_subcat_2.owner_user_ids), 0)
         self.assertEqual(len(self.category_subcat_1.actual_owner_group_ids), 1)
-        self.assertEqual(len(self.category_subcat_1.actual_owner_user_ids), 1)
+        self.assertEqual(len(self.category_subcat_1.actual_owner_user_ids), 0)
         self.assertEqual(len(self.category_subcat_2.actual_owner_group_ids), 1)
-        self.assertEqual(len(self.category_subcat_2.actual_owner_user_ids), 1)
+        self.assertEqual(len(self.category_subcat_2.actual_owner_user_ids), 0)
 
         category = self.Category.sudo(self.demo_user).create({
             'name': 'Test Create Sub 1',

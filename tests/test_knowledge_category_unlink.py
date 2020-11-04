@@ -85,7 +85,7 @@ class TestKnowledgeCategoryUnlink(TestBureaucratKnowledgeBase):
 
         self.assertEqual(category.visibility_type, 'restricted')
         self.assertFalse(category.owner_group_ids)
-        self.assertEqual(len(category.owner_user_ids), 1)
+        self.assertEqual(len(category.owner_user_ids), 0)
 
         with self.assertRaises(AccessError):
             category.sudo(self.demo_user).unlink()
@@ -93,7 +93,7 @@ class TestKnowledgeCategoryUnlink(TestBureaucratKnowledgeBase):
         category.write({
             'owner_user_ids': [(4, self.demo_user.id)]})
 
-        self.assertEqual(len(category.owner_user_ids), 2)
+        self.assertEqual(len(category.owner_user_ids), 1)
         category.sudo(self.demo_user).unlink()
 
     def test_category_restricted_owners_access_write_group(self):
@@ -105,7 +105,7 @@ class TestKnowledgeCategoryUnlink(TestBureaucratKnowledgeBase):
 
         self.assertEqual(category.visibility_type, 'restricted')
         self.assertFalse(category.owner_group_ids)
-        self.assertEqual(len(category.owner_user_ids), 1)
+        self.assertEqual(len(category.owner_user_ids), 0)
 
         with self.assertRaises(AccessError):
             category.sudo(self.demo_user).unlink()
@@ -371,15 +371,15 @@ class TestKnowledgeCategoryUnlink(TestBureaucratKnowledgeBase):
              visibility_type), 'restricted')
 
         self.assertFalse(category_top_level.owner_group_ids)
-        self.assertEqual(len(category_top_level.owner_user_ids), 1)
+        self.assertEqual(len(category_top_level.owner_user_ids), 0)
         self.assertFalse(category_subcat_1.owner_group_ids)
         self.assertEqual(len(category_subcat_1.owner_user_ids), 0)
         self.assertFalse(category_subcat_2.owner_group_ids)
         self.assertEqual(len(category_subcat_2.owner_user_ids), 0)
         self.assertFalse(category_subcat_1.actual_owner_group_ids)
-        self.assertEqual(len(category_subcat_1.actual_owner_user_ids), 1)
+        self.assertEqual(len(category_subcat_1.actual_owner_user_ids), 0)
         self.assertFalse(category_subcat_2.actual_owner_group_ids)
-        self.assertEqual(len(category_subcat_2.actual_owner_user_ids), 1)
+        self.assertEqual(len(category_subcat_2.actual_owner_user_ids), 0)
 
         with self.assertRaises(AccessError):
             category_subcat_2.sudo(self.demo_user).unlink()
@@ -393,15 +393,15 @@ class TestKnowledgeCategoryUnlink(TestBureaucratKnowledgeBase):
 
         self.assertEqual(category_subcat_1.parent_id, category_top_level)
         self.assertEqual(category_subcat_2.parent_id, category_subcat_1)
-        self.assertEqual(len(category_top_level.owner_user_ids), 2)
+        self.assertEqual(len(category_top_level.owner_user_ids), 1)
         self.assertFalse(category_subcat_1.owner_group_ids)
         self.assertEqual(len(category_subcat_1.owner_user_ids), 0)
         self.assertFalse(category_subcat_1.actual_owner_group_ids)
-        self.assertEqual(len(category_subcat_1.actual_owner_user_ids), 2)
+        self.assertEqual(len(category_subcat_1.actual_owner_user_ids), 1)
         self.assertFalse(category_subcat_2.owner_group_ids)
         self.assertEqual(len(category_subcat_2.owner_user_ids), 0)
         self.assertFalse(category_subcat_2.actual_owner_group_ids)
-        self.assertEqual(len(category_subcat_2.actual_owner_user_ids), 2)
+        self.assertEqual(len(category_subcat_2.actual_owner_user_ids), 1)
 
         category_subcat_2.sudo(self.demo_user).unlink()
         category_subcat_1.sudo(self.demo_user).unlink()
@@ -434,15 +434,15 @@ class TestKnowledgeCategoryUnlink(TestBureaucratKnowledgeBase):
              visibility_type), 'restricted')
 
         self.assertFalse(category_top_level.owner_group_ids)
-        self.assertEqual(len(category_top_level.owner_user_ids), 1)
+        self.assertEqual(len(category_top_level.owner_user_ids), 0)
         self.assertFalse(category_subcat_1.owner_group_ids)
         self.assertEqual(len(category_subcat_1.owner_user_ids), 0)
         self.assertFalse(category_subcat_2.owner_group_ids)
         self.assertEqual(len(category_subcat_2.owner_user_ids), 0)
         self.assertFalse(category_subcat_1.actual_owner_group_ids)
-        self.assertEqual(len(category_subcat_1.actual_owner_user_ids), 1)
+        self.assertEqual(len(category_subcat_1.actual_owner_user_ids), 0)
         self.assertFalse(category_subcat_2.actual_owner_group_ids)
-        self.assertEqual(len(category_subcat_2.actual_owner_user_ids), 1)
+        self.assertEqual(len(category_subcat_2.actual_owner_user_ids), 0)
 
         with self.assertRaises(AccessError):
             category_subcat_2.sudo(self.demo_user).unlink()
@@ -455,15 +455,15 @@ class TestKnowledgeCategoryUnlink(TestBureaucratKnowledgeBase):
             'owner_group_ids': [(4, self.group_demo.id)]})
 
         self.assertEqual(category_subcat_2.parent_id, category_subcat_1)
-        self.assertEqual(len(category_top_level.owner_user_ids), 1)
+        self.assertEqual(len(category_top_level.owner_user_ids), 0)
         self.assertEqual(len(category_top_level.owner_group_ids), 1)
         self.assertFalse(category_subcat_1.owner_group_ids)
         self.assertEqual(len(category_subcat_1.owner_user_ids), 0)
         self.assertEqual(len(category_subcat_1.actual_owner_group_ids), 1)
-        self.assertEqual(len(category_subcat_1.actual_owner_user_ids), 1)
+        self.assertEqual(len(category_subcat_1.actual_owner_user_ids), 0)
         self.assertFalse(category_subcat_2.owner_group_ids)
         self.assertEqual(len(category_subcat_2.owner_user_ids), 0)
-        self.assertEqual(len(category_subcat_1.actual_owner_user_ids), 1)
+        self.assertEqual(len(category_subcat_1.actual_owner_user_ids), 0)
         self.assertEqual(len(category_subcat_2.actual_owner_group_ids), 1)
 
         # category_subcat_2.sudo(self.demo_user).unlink()

@@ -959,11 +959,11 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
              owner_group_ids))
         self.assertEqual(
             len(self.document_subcat_2.actual_visibility_category_id.
-                owner_user_ids), 1)
+                owner_user_ids), 0)
         self.assertFalse(self.document_subcat_2.owner_group_ids)
         self.assertEqual(len(self.document_subcat_2.owner_user_ids), 0)
         self.assertFalse(self.document_subcat_2.actual_owner_group_ids)
-        self.assertEqual(len(self.document_subcat_2.actual_owner_user_ids), 1)
+        self.assertEqual(len(self.document_subcat_2.actual_owner_user_ids), 0)
 
         with self.assertRaises(AccessError):
             self.DocHist.sudo(self.demo_user).create({
@@ -980,9 +980,9 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         self.category_top_level.write({
             'owner_user_ids': [(4, self.demo_user.id)]})
 
-        self.assertEqual(len(self.category_top_level.owner_user_ids), 2)
+        self.assertEqual(len(self.category_top_level.owner_user_ids), 1)
         self.assertEqual(
-            len((self.document_subcat_2.actual_owner_user_ids)), 2)
+            len((self.document_subcat_2.actual_owner_user_ids)), 1)
         self.DocHist.sudo(self.demo_user).create({
             'document_id': self.document_subcat_2.id})
         self.document_subcat_2.latest_history_id.sudo(
@@ -1006,14 +1006,14 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         # Test owner subategory 1
         self.assertEqual(len(self.category_subcat_1.owner_user_ids), 0)
         self.assertEqual(
-            len((self.document_subcat_2.actual_owner_user_ids)), 1)
+            len((self.document_subcat_2.actual_owner_user_ids)), 0)
 
         self.category_subcat_1.write({
             'owner_user_ids': [(4, self.demo_user.id)]})
 
         self.assertEqual(len(self.category_subcat_1.owner_user_ids), 1)
         self.assertEqual(
-            len((self.document_subcat_2.actual_owner_user_ids)), 2)
+            len((self.document_subcat_2.actual_owner_user_ids)), 1)
         self.DocHist.sudo(self.demo_user).create({
             'document_id': self.document_subcat_2.id})
         self.document_subcat_2.latest_history_id.sudo(
@@ -1037,14 +1037,14 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         # Test owner subategory 2
         self.assertEqual(len(self.category_subcat_2.owner_user_ids), 0)
         self.assertEqual(
-            len((self.document_subcat_2.actual_owner_user_ids)), 1)
+            len((self.document_subcat_2.actual_owner_user_ids)), 0)
 
         self.category_subcat_2.write({
             'owner_user_ids': [(4, self.demo_user.id)]})
 
         self.assertEqual(len(self.category_subcat_2.owner_user_ids), 1)
         self.assertEqual(
-            len((self.document_subcat_2.actual_owner_user_ids)), 2)
+            len((self.document_subcat_2.actual_owner_user_ids)), 1)
         self.DocHist.sudo(self.demo_user).create({
             'document_id': self.document_subcat_2.id})
         self.document_subcat_2.latest_history_id.sudo(
@@ -1079,11 +1079,11 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
              owner_group_ids))
         self.assertEqual(
             len(self.document_subcat_2.actual_visibility_category_id.
-                owner_user_ids), 1)
+                owner_user_ids), 0)
         self.assertFalse(self.document_subcat_2.owner_group_ids)
         self.assertEqual(len(self.document_subcat_2.owner_user_ids), 0)
         self.assertFalse(self.document_subcat_2.actual_owner_group_ids)
-        self.assertEqual(len(self.document_subcat_2.actual_owner_user_ids), 1)
+        self.assertEqual(len(self.document_subcat_2.actual_owner_user_ids), 0)
 
         with self.assertRaises(AccessError):
             self.DocHist.sudo(self.demo_user).create({

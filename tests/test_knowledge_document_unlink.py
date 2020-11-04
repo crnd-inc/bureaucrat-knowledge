@@ -88,7 +88,7 @@ class TestKnowledgeDocumentUnlink(TestBureaucratKnowledgeBase):
         })
 
         self.assertFalse(document.owner_group_ids)
-        self.assertEqual(len(document.owner_user_ids), 1)
+        self.assertEqual(len(document.owner_user_ids), 0)
 
         document.visibility_type = 'restricted'
 
@@ -98,7 +98,7 @@ class TestKnowledgeDocumentUnlink(TestBureaucratKnowledgeBase):
         document.write({
             'owner_user_ids': [(4, self.demo_user.id)]})
 
-        self.assertEqual(len(document.owner_user_ids), 2)
+        self.assertEqual(len(document.owner_user_ids), 1)
         document.sudo(self.demo_user).unlink()
 
     def test_document_restricted_owners_access_unlink_group(self):
@@ -110,7 +110,7 @@ class TestKnowledgeDocumentUnlink(TestBureaucratKnowledgeBase):
         })
 
         self.assertFalse(document.owner_group_ids)
-        self.assertEqual(len(document.owner_user_ids), 1)
+        self.assertEqual(len(document.owner_user_ids), 0)
 
         self.document_subcat_2.visibility_type = 'restricted'
 
@@ -509,11 +509,11 @@ class TestKnowledgeDocumentUnlink(TestBureaucratKnowledgeBase):
              owner_group_ids))
         self.assertEqual(
             len(document_subcat_2.actual_visibility_category_id.
-                owner_user_ids), 1)
+                owner_user_ids), 0)
         self.assertFalse(document_subcat_2.owner_group_ids)
         self.assertEqual(len(document_subcat_2.owner_user_ids), 0)
         self.assertFalse(document_subcat_2.actual_owner_group_ids)
-        self.assertEqual(len(document_subcat_2.actual_owner_user_ids), 1)
+        self.assertEqual(len(document_subcat_2.actual_owner_user_ids), 0)
 
         with self.assertRaises(AccessError):
             document_subcat_2.sudo(self.demo_user).unlink()
@@ -522,9 +522,9 @@ class TestKnowledgeDocumentUnlink(TestBureaucratKnowledgeBase):
         self.category_top_level.write({
             'owner_user_ids': [(4, self.demo_user.id)]})
 
-        self.assertEqual(len(self.category_top_level.owner_user_ids), 2)
+        self.assertEqual(len(self.category_top_level.owner_user_ids), 1)
         self.assertEqual(
-            len((document_subcat_2.actual_owner_user_ids)), 2)
+            len((document_subcat_2.actual_owner_user_ids)), 1)
         document_subcat_2.sudo(self.demo_user).unlink()
 
         self.category_top_level.write({
@@ -540,14 +540,14 @@ class TestKnowledgeDocumentUnlink(TestBureaucratKnowledgeBase):
         # Test owner subategory 1
         self.assertEqual(len(self.category_subcat_1.owner_user_ids), 0)
         self.assertEqual(
-            len((self.document_subcat_2.actual_owner_user_ids)), 1)
+            len((self.document_subcat_2.actual_owner_user_ids)), 0)
 
         self.category_subcat_1.write({
             'owner_user_ids': [(4, self.demo_user.id)]})
 
         self.assertEqual(len(self.category_subcat_1.owner_user_ids), 1)
         self.assertEqual(
-            len((document_subcat_2.actual_owner_user_ids)), 2)
+            len((document_subcat_2.actual_owner_user_ids)), 1)
         document_subcat_2.sudo(self.demo_user).unlink()
 
         self.category_subcat_1.write({
@@ -563,14 +563,14 @@ class TestKnowledgeDocumentUnlink(TestBureaucratKnowledgeBase):
         # Test owner subategory 2
         self.assertEqual(len(self.category_subcat_2.owner_user_ids), 0)
         self.assertEqual(
-            len((document_subcat_2.actual_owner_user_ids)), 1)
+            len((document_subcat_2.actual_owner_user_ids)), 0)
 
         self.category_subcat_2.write({
             'owner_user_ids': [(4, self.demo_user.id)]})
 
         self.assertEqual(len(self.category_subcat_2.owner_user_ids), 1)
         self.assertEqual(
-            len((document_subcat_2.actual_owner_user_ids)), 2)
+            len((document_subcat_2.actual_owner_user_ids)), 1)
         document_subcat_2.sudo(self.demo_user).unlink()
 
         self.category_subcat_2.write({
@@ -607,11 +607,11 @@ class TestKnowledgeDocumentUnlink(TestBureaucratKnowledgeBase):
              owner_group_ids))
         self.assertEqual(
             len(document_subcat_2.actual_visibility_category_id.
-                owner_user_ids), 1)
+                owner_user_ids), 0)
         self.assertFalse(document_subcat_2.owner_group_ids)
         self.assertEqual(len(document_subcat_2.owner_user_ids), 0)
         self.assertFalse(document_subcat_2.actual_owner_group_ids)
-        self.assertEqual(len(document_subcat_2.actual_owner_user_ids), 1)
+        self.assertEqual(len(document_subcat_2.actual_owner_user_ids), 0)
 
         with self.assertRaises(AccessError):
             document_subcat_2.sudo(self.demo_user).unlink()

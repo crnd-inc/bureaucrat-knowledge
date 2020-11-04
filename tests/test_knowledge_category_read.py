@@ -81,7 +81,7 @@ class TestKnowledgeCategoryRead(TestBureaucratKnowledgeBase):
         self.assertEqual(
             self.category_top_level.visibility_type, 'restricted')
         self.assertFalse(self.category_top_level.owner_group_ids)
-        self.assertEqual(len(self.category_top_level.owner_user_ids), 1)
+        self.assertEqual(len(self.category_top_level.owner_user_ids), 0)
 
         with self.assertRaises(exceptions.AccessError):
             self.category_top_level.sudo(self.demo_user).read(['name'])
@@ -89,7 +89,7 @@ class TestKnowledgeCategoryRead(TestBureaucratKnowledgeBase):
         self.category_top_level.write({
             'owner_user_ids': [(4, self.demo_user.id)]})
 
-        self.assertEqual(len(self.category_top_level.owner_user_ids), 2)
+        self.assertEqual(len(self.category_top_level.owner_user_ids), 1)
         self.assertEqual(
             self.category_top_level.sudo(self.demo_user).name,
             'Top level category 1')
@@ -100,7 +100,7 @@ class TestKnowledgeCategoryRead(TestBureaucratKnowledgeBase):
         self.assertEqual(
             self.category_top_level.visibility_type, 'restricted')
         self.assertFalse(self.category_top_level.owner_group_ids)
-        self.assertEqual(len(self.category_top_level.owner_user_ids), 1)
+        self.assertEqual(len(self.category_top_level.owner_user_ids), 0)
 
         with self.assertRaises(exceptions.AccessError):
             self.category_top_level.sudo(self.demo_user).read(['name'])
@@ -627,15 +627,15 @@ class TestKnowledgeCategoryRead(TestBureaucratKnowledgeBase):
             (self.category_subcat_2.actual_visibility_parent_id.
              visibility_type), 'restricted')
         self.assertFalse(self.category_top_level.owner_group_ids)
-        self.assertEqual(len(self.category_top_level.owner_user_ids), 1)
+        self.assertEqual(len(self.category_top_level.owner_user_ids), 0)
         self.assertFalse(self.category_subcat_1.owner_group_ids)
         self.assertEqual(len(self.category_subcat_1.owner_user_ids), 0)
         self.assertFalse(self.category_subcat_2.owner_group_ids)
         self.assertEqual(len(self.category_subcat_2.owner_user_ids), 0)
         self.assertFalse(self.category_subcat_1.actual_owner_group_ids)
-        self.assertEqual(len(self.category_subcat_1.actual_owner_user_ids), 1)
+        self.assertEqual(len(self.category_subcat_1.actual_owner_user_ids), 0)
         self.assertFalse(self.category_subcat_2.actual_owner_group_ids)
-        self.assertEqual(len(self.category_subcat_2.actual_owner_user_ids), 1)
+        self.assertEqual(len(self.category_subcat_2.actual_owner_user_ids), 0)
 
         with self.assertRaises(exceptions.AccessError):
             self.category_top_level.sudo(self.demo_user).read(['name'])
@@ -647,15 +647,15 @@ class TestKnowledgeCategoryRead(TestBureaucratKnowledgeBase):
         self.category_top_level.write({
             'owner_user_ids': [(4, self.demo_user.id)]})
 
-        self.assertEqual(len(self.category_top_level.owner_user_ids), 2)
+        self.assertEqual(len(self.category_top_level.owner_user_ids), 1)
         self.assertFalse(self.category_subcat_1.owner_group_ids)
         self.assertEqual(len(self.category_subcat_1.owner_user_ids), 0)
         self.assertFalse(self.category_subcat_2.owner_group_ids)
         self.assertEqual(len(self.category_subcat_2.owner_user_ids), 0)
         self.assertFalse(self.category_subcat_1.actual_owner_group_ids)
-        self.assertEqual(len(self.category_subcat_1.actual_owner_user_ids), 2)
+        self.assertEqual(len(self.category_subcat_1.actual_owner_user_ids), 1)
         self.assertFalse(self.category_subcat_2.actual_owner_group_ids)
-        self.assertEqual(len(self.category_subcat_2.actual_owner_user_ids), 2)
+        self.assertEqual(len(self.category_subcat_2.actual_owner_user_ids), 1)
 
         self.assertEqual(
             self.category_top_level.sudo(self.demo_user).read(
@@ -702,15 +702,15 @@ class TestKnowledgeCategoryRead(TestBureaucratKnowledgeBase):
              visibility_type), 'restricted')
 
         self.assertFalse(self.category_top_level.owner_group_ids)
-        self.assertEqual(len(self.category_top_level.owner_user_ids), 1)
+        self.assertEqual(len(self.category_top_level.owner_user_ids), 0)
         self.assertFalse(self.category_subcat_1.owner_group_ids)
         self.assertEqual(len(self.category_subcat_1.owner_user_ids), 0)
         self.assertFalse(self.category_subcat_2.owner_group_ids)
         self.assertEqual(len(self.category_subcat_2.owner_user_ids), 0)
         self.assertFalse(self.category_subcat_1.actual_owner_group_ids)
-        self.assertEqual(len(self.category_subcat_1.actual_owner_user_ids), 1)
+        self.assertEqual(len(self.category_subcat_1.actual_owner_user_ids), 0)
         self.assertFalse(self.category_subcat_2.actual_owner_group_ids)
-        self.assertEqual(len(self.category_subcat_2.actual_owner_user_ids), 1)
+        self.assertEqual(len(self.category_subcat_2.actual_owner_user_ids), 0)
 
         with self.assertRaises(exceptions.AccessError):
             self.category_top_level.sudo(self.demo_user).read(['name'])
@@ -722,15 +722,15 @@ class TestKnowledgeCategoryRead(TestBureaucratKnowledgeBase):
         self.category_top_level.write({
             'owner_group_ids': [(4, self.group_demo.id)]})
 
-        self.assertEqual(len(self.category_top_level.owner_user_ids), 1)
+        self.assertEqual(len(self.category_top_level.owner_user_ids), 0)
         self.assertFalse(self.category_subcat_1.owner_group_ids)
         self.assertEqual(len(self.category_subcat_1.owner_user_ids), 0)
         self.assertFalse(self.category_subcat_2.owner_group_ids)
         self.assertEqual(len(self.category_subcat_2.owner_user_ids), 0)
         self.assertEqual(len(self.category_subcat_1.actual_owner_group_ids), 1)
-        self.assertEqual(len(self.category_subcat_1.actual_owner_user_ids), 1)
+        self.assertEqual(len(self.category_subcat_1.actual_owner_user_ids), 0)
         self.assertEqual(len(self.category_subcat_2.actual_owner_group_ids), 1)
-        self.assertEqual(len(self.category_subcat_2.actual_owner_user_ids), 1)
+        self.assertEqual(len(self.category_subcat_2.actual_owner_user_ids), 0)
 
         self.assertEqual(
             self.category_top_level.sudo(self.demo_user).read(

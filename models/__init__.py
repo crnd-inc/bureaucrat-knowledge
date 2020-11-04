@@ -1,3 +1,5 @@
-from . import bureaucrat_knowledge_category
-from . import bureaucrat_knowledge_document
-from . import bureaucrat_knowledge_document_history
+from . import (
+    bureaucrat_knowledge_category,
+    bureaucrat_knowledge_document,
+    bureaucrat_knowledge_document_history,
+)

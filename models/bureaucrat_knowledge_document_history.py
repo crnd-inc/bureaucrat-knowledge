@@ -21,4 +21,4 @@ class BureaucratKnowledgeDocumentHistory(models.Model):
         index=True, required=True, readony=True)
     document_id = fields.Many2one(
         'bureaucrat.knowledge.document',
-        index=True, required=True, readony=True)
+        ondelete='cascade', index=True, required=True, readony=True)

@@ -1,5 +1,9 @@
-from odoo import models, fields, api
+import logging
+from psycopg2 import sql
+from odoo import models, fields, api, tools
 from odoo.addons.generic_mixin import post_write
+
+_logger = logging.getLogger(__name__)
 
 
 class BureaucratKnowledgeCategory(models.Model):
@@ -36,6 +40,118 @@ class BureaucratKnowledgeCategory(models.Model):
     category_contents = fields.Html(
         compute='_compute_category_contents')
 
+    visibility_type = fields.Selection(
+        selection=[
+            ('public', 'Public'),
+            ('portal', 'Portal'),
+            ('internal', 'Internal'),
+            ('restricted', 'Restricted'),
+            ('parent', 'Parent')],
+    )
+
+    parent_ids = fields.Many2manyView(
+        comodel_name='bureaucrat.knowledge.category',
+        relation='bureaucrat_knowledge_category_parents_rel_view',
+        column1='child_id',
+        column2='parent_id',
+        string='Parents Categories',
+        readonly=True)
+
+    actual_visibility_parent_id = fields.Many2one(
+        'bureaucrat.knowledge.category',
+        compute='_compute_actual_visibility_parent_id',
+        store=True, index=True, compute_sudo=True)
+
+    visibility_group_ids = fields.Many2many(
+        comodel_name='res.groups',
+        relation='bureaucrat_knowledge_category_visibility_groups',
+        column1='knowledge_category_id',
+        column2='group_id',
+        string='Readers groups')
+    visibility_user_ids = fields.Many2many(
+        comodel_name='res.users',
+        relation='bureaucrat_knowledge_category_visibility_users',
+        column1='knowledge_category_id',
+        column2='user_id',
+        string='Readers')
+
+    editor_group_ids = fields.Many2many(
+        comodel_name='res.groups',
+        relation='bureaucrat_knowledge_category_editor_groups',
+        column1='knowledge_category_id',
+        column2='group_id',
+        string='Editors groups')
+    actual_editor_group_ids = fields.Many2manyView(
+        comodel_name='res.groups',
+        relation='bureaucrat_knowledge_category_actual_editor_groups_rel_view',
+        column1='knowledge_category_id',
+        column2='group_id',
+        string='Actual editors groups',
+        readonly=True)
+    editor_user_ids = fields.Many2many(
+        comodel_name='res.users',
+        relation='bureaucrat_knowledge_category_editor_users',
+        column1='knowledge_category_id',
+        column2='user_id',
+        string='Editors')
+    actual_editor_user_ids = fields.Many2manyView(
+        comodel_name='res.users',
+        relation='bureaucrat_knowledge_category_actual_editor_users_rel_view',
+        column1='knowledge_category_id',
+        column2='user_id',
+        string='Actual editors',
+        readonly=True)
+
+    owner_group_ids = fields.Many2many(
+        comodel_name='res.groups',
+        relation='bureaucrat_knowledge_category_owner_groups',
+        column1='knowledge_category_id',
+        column2='group_id',
+        string='Owners groups')
+    actual_owner_group_ids = fields.Many2manyView(
+        comodel_name='res.groups',
+        relation='bureaucrat_knowledge_category_actual_owner_groups_rev_view',
+        column1='knowledge_category_id',
+        column2='group_id',
+        string='Actual owners groups',
+        readonly=True)
+    owner_user_ids = fields.Many2many(
+        comodel_name='res.users',
+        relation='bureaucrat_knowledge_category_owner_users',
+        column1='knowledge_category_id',
+        column2='user_id',
+        string='Owners')
+    actual_owner_user_ids = fields.Many2manyView(
+        comodel_name='res.users',
+        relation='bureaucrat_knowledge_category_actual_owner_users_rel_view',
+        column1='knowledge_category_id',
+        column2='user_id',
+        string='Actual owners',
+        readonly=True)
+
+    _sql_constraints = [
+        ("check_visibility_type_parent_not_in_the_top_categories",
+         "CHECK (parent_id IS NOT NULL OR"
+         "(parent_id IS NULL AND visibility_type != 'parent'))",
+         "Category must have a parent category"
+         " to set Visibility Type 'Parent'"),
+    ]
+
+    @api.depends(
+        'visibility_type',
+        'parent_id',
+        'parent_id.visibility_type',
+        'parent_ids.parent_id',
+        'parent_ids.parent_id.visibility_type',
+    )
+    def _compute_actual_visibility_parent_id(self):
+        for rec in self:
+            parent = rec.sudo()
+            while parent.visibility_type == 'parent' and parent.parent_id:
+                parent = parent.parent_id
+
+            rec.actual_visibility_parent_id = parent
+
     @api.depends('child_ids')
     def _compute_child_category_count(self):
         for rec in self:
@@ -57,6 +173,164 @@ class BureaucratKnowledgeCategory(models.Model):
                 })
             else:
                 rec.category_contents = False
+
+    @api.onchange('parent_id', 'visibility_type')
+    def _onchange_parent_visibility_type(self):
+        for record in self:
+            if record.parent_id and not record.visibility_type:
+                record.visibility_type = 'parent'
+            elif record.visibility_type == 'parent' and not record.parent_id:
+                record.visibility_type = False
+
+    def init(self):
+        # Create relation (category_id <-> parent_category_id) as PG View
+        # This relation is used to compute field parent_ids
+
+        # Parent / child relation made flat
+        tools.drop_view_if_exists(
+            self.env.cr, 'bureaucrat_knowledge_category_parents_rel_view')
+        self.env.cr.execute(sql.SQL("""
+            CREATE or REPLACE VIEW
+                bureaucrat_knowledge_category_parents_rel_view AS (
+                SELECT bkc.id          AS child_id,
+                       bkc_parent.id   AS parent_id
+                FROM bureaucrat_knowledge_category AS bkc
+                LEFT JOIN bureaucrat_knowledge_category AS bkc_parent ON (
+                                bkc_parent.parent_right > bkc.parent_right
+                                AND
+                                bkc_parent.parent_left < bkc.parent_left)
+            )
+        """))
+
+        # Category m2m relations
+        tools.drop_view_if_exists(
+            self.env.cr,
+            'bureaucrat_knowledge_category_actual_owner_groups_rev_view')
+        self.env.cr.execute(sql.SQL("""
+           CREATE or REPLACE VIEW
+              bureaucrat_knowledge_category_actual_owner_groups_rev_view AS (
+               SELECT DISTINCT
+                    parent_ids.child_id AS knowledge_category_id,
+                    own_group.group_id     AS group_id
+               FROM bureaucrat_knowledge_category_parents_rel_view
+                    AS parent_ids
+               JOIN bureaucrat_knowledge_category_owner_groups AS own_group
+               ON (
+                    parent_ids.child_id = own_group.knowledge_category_id
+                    OR
+                    parent_ids.parent_id = own_group.knowledge_category_id)
+            )
+        """))
+        tools.drop_view_if_exists(
+            self.env.cr,
+            'bureaucrat_knowledge_category_actual_owner_users_rel_view')
+        self.env.cr.execute(sql.SQL("""
+           CREATE or REPLACE VIEW
+               bureaucrat_knowledge_category_actual_owner_users_rel_view AS (
+               SELECT DISTINCT
+                    parent_ids.child_id AS knowledge_category_id,
+                    own_usr.user_id     AS user_id
+               FROM bureaucrat_knowledge_category_parents_rel_view
+                    AS parent_ids
+               JOIN bureaucrat_knowledge_category_owner_users AS own_usr ON (
+                    parent_ids.child_id = own_usr.knowledge_category_id
+                    OR
+                    parent_ids.parent_id = own_usr.knowledge_category_id)
+            )
+        """))
+        tools.drop_view_if_exists(
+            self.env.cr,
+            'bureaucrat_knowledge_category_actual_editor_groups_rel_view')
+        self.env.cr.execute(sql.SQL("""
+           CREATE or REPLACE VIEW
+              bureaucrat_knowledge_category_actual_editor_groups_rel_view AS (
+               SELECT DISTINCT
+                    parent_ids.child_id AS knowledge_category_id,
+                    editor_group.group_id     AS group_id
+               FROM bureaucrat_knowledge_category_parents_rel_view
+                    AS parent_ids
+               JOIN bureaucrat_knowledge_category_editor_groups AS editor_group
+               ON (
+                    parent_ids.child_id = editor_group.knowledge_category_id
+                    OR
+                    parent_ids.parent_id = editor_group.knowledge_category_id)
+            )
+        """))
+        tools.drop_view_if_exists(
+            self.env.cr,
+            'bureaucrat_knowledge_category_actual_editor_users_rel_view')
+        self.env.cr.execute(sql.SQL("""
+           CREATE or REPLACE VIEW
+               bureaucrat_knowledge_category_actual_editor_users_rel_view AS (
+               SELECT DISTINCT
+                    parent_ids.child_id AS knowledge_category_id,
+                    editor_usr.user_id     AS user_id
+               FROM bureaucrat_knowledge_category_parents_rel_view
+                    AS parent_ids
+               JOIN bureaucrat_knowledge_category_editor_users AS editor_usr
+               ON (
+                    parent_ids.child_id = editor_usr.knowledge_category_id
+                    OR
+                    parent_ids.parent_id = editor_usr.knowledge_category_id)
+            )
+        """))
+
+    def _clean_caches_on_create_write(self, vals):
+        # Invalidate cache for 'parent_ids' field
+        if 'parent_id' in vals:
+            self.env.cache.invalidate(
+                [(self._fields['parent_ids'], None)])
+        if 'owner_group_ids' in vals:
+            self.env.cache.invalidate(
+                [(self._fields['actual_owner_group_ids'], None)])
+        if 'owner_user_ids' in vals:
+            self.env.cache.invalidate(
+                [(self._fields['actual_owner_user_ids'], None)])
+        if 'editor_group_ids' in vals:
+            self.env.cache.invalidate(
+                [(self._fields['actual_editor_group_ids'], None)])
+        if 'editor_user_ids' in vals:
+            self.env.cache.invalidate(
+                [(self._fields['actual_editor_user_ids'], None)])
+
+    @api.model
+    def create(self, vals):
+        self.check_access_rights('create')
+        # TODO: move this to defaults
+        if vals.get('parent_id', False):
+            vals['visibility_type'] = 'parent'
+        else:
+            vals['visibility_type'] = 'restricted'
+            vals['owner_user_ids'] = [(6, 0, [self.env.user.id])]
+
+        # create with sudo to avoid access rights error on creation, but check
+        # access rights later
+        category = super(BureaucratKnowledgeCategory, self.sudo()).create(vals)
+
+        # It is required to recompute parnt-store, because access rules relies
+        # on parent-store already computed
+        category._parent_store_compute()
+
+        # reference created category as self.env (because before this category
+        # is referenced as sudo)
+        category = category.with_env(self.env)
+
+        # Clean caches to enforce odoo to reread fields, instead of using
+        # cached (incorrect) value
+        self._clean_caches_on_create_write(vals)
+
+        # Enforce check of access rights after category created,
+        # to ensure that current user has access to create this category
+        category.check_access_rule('create')
+
+        return category
+
+    def write(self, vals):
+        res = super(BureaucratKnowledgeCategory, self).write(vals)
+
+        self._clean_caches_on_create_write(vals)
+
+        return res
 
     def action_view_subcategories(self):
         self.ensure_one()

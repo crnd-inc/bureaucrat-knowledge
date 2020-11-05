@@ -14,10 +14,10 @@
             <div class="oe_structure col-sm-12"/>
             <div class="col-xs-12 col-sm 12 col-md-6">
                 <ol class="breadcrumb">
-                    <li><a href="/"><i class="fa fa-home"/></a></li>
-                        <li><a href="/knowledge/">Bureaucrat Knowledge</a></li>
+                    <li class="breadcrumb-item"><a href="/"><i class="fa fa-home"/></a></li>
+                        <li class="breadcrumb-item"><a href="/knowledge/">Bureaucrat Knowledge</a></li>
                         <t t-foreach="parents" t-as="p">
-                            <li><a t-attf-href="/knowledge/{{ slug(p) }}"><t t-esc="p.name"/></a></li>
+                            <li class="breadcrumb-item"><a t-attf-href="/knowledge/{{ slug(p) }}"><t t-esc="p.name"/></a></li>
                         </t>
                 </ol>
             </div>

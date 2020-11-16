@@ -28,6 +28,7 @@ class BureaucratKnowledgeCategory(models.Model):
     parent_id = fields.Many2one(
         'bureaucrat.knowledge.category', index=True, ondelete='cascade')
     parent_path = fields.Char(index=True)
+
     child_ids = fields.One2many(
         'bureaucrat.knowledge.category', 'parent_id')
     child_category_count = fields.Integer(
@@ -142,7 +143,7 @@ class BureaucratKnowledgeCategory(models.Model):
         'parent_id',
         'parent_id.visibility_type',
         'parent_ids.parent_id',
-        'parent_ids.parent_id.visibility_type',
+        'parent_ids.visibility_type',
     )
     def _compute_actual_visibility_parent_id(self):
         for rec in self:
@@ -278,21 +279,24 @@ class BureaucratKnowledgeCategory(models.Model):
 
     def _clean_caches_on_create_write(self, vals):
         # Invalidate cache for 'parent_ids' field
+        to_invalidate = []
         if 'parent_id' in vals:
-            self.env.cache.invalidate(
-                [(self._fields['parent_ids'], None)])
+            to_invalidate += [
+                'parent_ids',
+                'actual_owner_group_ids',
+                'actual_owner_user_ids',
+                'actual_editor_group_ids',
+                'actual_editor_user_ids',
+            ]
         if 'owner_group_ids' in vals:
-            self.env.cache.invalidate(
-                [(self._fields['actual_owner_group_ids'], None)])
+            to_invalidate += ['actual_owner_group_ids']
         if 'owner_user_ids' in vals:
-            self.env.cache.invalidate(
-                [(self._fields['actual_owner_user_ids'], None)])
+            to_invalidate += ['actual_owner_user_ids']
         if 'editor_group_ids' in vals:
-            self.env.cache.invalidate(
-                [(self._fields['actual_editor_group_ids'], None)])
+            to_invalidate += ['actual_editor_group_ids']
         if 'editor_user_ids' in vals:
-            self.env.cache.invalidate(
-                [(self._fields['actual_editor_user_ids'], None)])
+            to_invalidate += ['actual_editor_user_ids']
+        self.invalidate_cache(list(set(to_invalidate)))
 
     @api.model
     def create(self, vals):

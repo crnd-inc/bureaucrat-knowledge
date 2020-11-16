@@ -13,12 +13,12 @@ class BureaucratKnowledgeDocumentHistory(models.Model):
     document_body = fields.Html()
     user_id = fields.Many2one(
         'res.users',
-        index=True, required=True, readony=True,
+        index=True, required=True, readonly=True,
         default=lambda self: self.env.user.id,
     )
     date_create = fields.Datetime(
         default=datetime.datetime.now(),
-        index=True, required=True, readony=True)
+        index=True, required=True, readonly=True)
     document_id = fields.Many2one(
         'bureaucrat.knowledge.document',
-        ondelete='cascade', index=True, required=True, readony=True)
+        ondelete='cascade', index=True, required=True, readonly=True)

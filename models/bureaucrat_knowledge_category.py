@@ -339,21 +339,17 @@ class BureaucratKnowledgeCategory(models.Model):
 
     def action_view_subcategories(self):
         self.ensure_one()
-        action = self.env.ref(
-            'bureaucrat_knowledge.action_bureaucrat_knowledge_category'
-        ).read()[0]
-        action['domain'] = [('parent_id', '=', self.id)]
-        action['context'] = {'default_parent_id': self.id}
-        return action
+        return self.env['generic.mixin.get.action'].get_action_by_xmlid(
+            'bureaucrat_knowledge.action_bureaucrat_knowledge_category',
+            context={'default_parent_id': self.id},
+            domain=[('parent_id', '=', self.id)])
 
     def action_view_documents(self):
         self.ensure_one()
-        action = self.env.ref(
-            'bureaucrat_knowledge.action_bureaucrat_knowledge_document'
-        ).read()[0]
-        action['domain'] = [('category_id', '=', self.id)]
-        action['context'] = {'default_category_id': self.id}
-        return action
+        return self.env['generic.mixin.get.action'].get_action_by_xmlid(
+            'bureaucrat_knowledge.action_bureaucrat_knowledge_document',
+            context={'default_category_id': self.id},
+            domain=[('category_id', '=', self.id)])
 
     @post_write('active')
     def _post_active_changed(self, changes):

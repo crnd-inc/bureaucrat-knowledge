@@ -19,6 +19,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.Document.sudo(self.demo_user).create({
                 'name': 'Test Create',
+                'document_type': 'html',
                 'category_id': self.category_top_level.id,
                 'document_body': 'Test Document'})
 
@@ -29,6 +30,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.Document.sudo(self.demo_user).create({
                 'name': 'Test Create',
+                'document_type': 'html',
                 'category_id': self.category_top_level.id,
                 'document_body': 'Test Document'})
 
@@ -41,6 +43,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.Document.sudo(self.demo_user).create({
                 'name': 'Test Create',
+                'document_type': 'html',
                 'category_id': self.category_top_level.id,
                 'document_body': 'Test Document',
                 'editor_user_ids': [(4, self.demo_user.id)]})
@@ -52,6 +55,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.Document.sudo(self.demo_user).create({
                 'name': 'Test Create',
+                'document_type': 'html',
                 'category_id': self.category_top_level.id,
                 'document_body': 'Test Document',
                 'editor_user_ids': [(4, self.demo_user.id)]})
@@ -65,6 +69,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.Document.sudo(self.demo_user).create({
                 'name': 'Test Create',
+                'document_type': 'html',
                 'category_id': self.category_top_level.id,
                 'document_body': 'Test Document',
                 'owner_user_ids': [(4, self.demo_user.id)]})
@@ -76,6 +81,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.Document.sudo(self.demo_user).create({
                 'name': 'Test Create',
+                'document_type': 'html',
                 'category_id': self.category_top_level.id,
                 'document_body': 'Test Document',
                 'owner_user_ids': [(4, self.demo_user.id)]})
@@ -91,6 +97,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.Document.sudo(self.demo_user).create({
                 'name': 'Test Create',
+                'document_type': 'html',
                 'category_id': self.category_top_level.id,
                 'document_body': 'Test Document'})
 
@@ -101,6 +108,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.Document.sudo(self.demo_user).create({
                 'name': 'Test Create',
+                'document_type': 'html',
                 'category_id': self.category_top_level.id,
                 'document_body': 'Test Document'})
 
@@ -115,6 +123,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.Document.sudo(self.demo_user).create({
                 'name': 'Test Create',
+                'document_type': 'html',
                 'category_id': self.category_top_level.id,
                 'document_body': 'Test Document',
                 'editor_group_ids': [(4, self.group_demo.id)]})
@@ -126,6 +135,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.Document.sudo(self.demo_user).create({
                 'name': 'Test Create',
+                'document_type': 'html',
                 'category_id': self.category_top_level.id,
                 'document_body': 'Test Document',
                 'editor_group_ids': [(4, self.group_demo.id)]})
@@ -141,6 +151,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.Document.sudo(self.demo_user).create({
                 'name': 'Test Create',
+                'document_type': 'html',
                 'category_id': self.category_top_level.id,
                 'document_body': 'Test Document',
                 'owner_group_ids': [(4, self.group_demo.id)]})
@@ -152,6 +163,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.Document.sudo(self.demo_user).create({
                 'name': 'Test Create',
+                'document_type': 'html',
                 'category_id': self.category_top_level.id,
                 'document_body': 'Test Document',
                 'owner_group_ids': [(4, self.group_demo.id)]})
@@ -165,6 +177,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.Document.sudo(self.demo_user).create({
                 'name': 'Test Create',
+                'document_type': 'html',
                 'category_id': self.category_top_level.id,
                 'document_body': 'Test Document'})
 
@@ -174,6 +187,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         self.assertEqual(len(self.category_top_level.editor_user_ids), 1)
         document = self.Document.sudo(self.demo_user).create({
             'name': 'Test Create',
+            'document_type': 'html',
             'category_id': self.category_top_level.id,
             'document_body': 'Test Document'})
         self.assertEqual(document.visibility_type, 'parent')
@@ -195,6 +209,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.Document.sudo(self.demo_user).create({
                 'name': 'Test Create',
+                'document_type': 'html',
                 'category_id': self.category_top_level.id,
                 'document_body': 'Test Document'})
 
@@ -204,6 +219,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         self.assertEqual(len(self.category_top_level.editor_group_ids), 1)
         document = self.Document.sudo(self.demo_user).create({
             'name': 'Test Create',
+            'document_type': 'html',
             'category_id': self.category_top_level.id,
             'document_body': 'Test Document'})
         self.assertEqual(document.visibility_type, 'parent')
@@ -223,6 +239,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.Document.sudo(self.demo_user).create({
                 'name': 'Test Create',
+                'document_type': 'html',
                 'category_id': self.category_top_level.id,
                 'document_body': 'Test Document'})
 
@@ -232,6 +249,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         self.assertEqual(len(self.category_top_level.owner_user_ids), 1)
         document = self.Document.sudo(self.demo_user).create({
             'name': 'Test Create',
+            'document_type': 'html',
             'category_id': self.category_top_level.id,
             'document_body': 'Test Document'})
         self.assertEqual(document.visibility_type, 'parent')
@@ -253,6 +271,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.Document.sudo(self.demo_user).create({
                 'name': 'Test Create',
+                'document_type': 'html',
                 'category_id': self.category_top_level.id,
                 'document_body': 'Test Document'})
 
@@ -262,6 +281,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         self.assertEqual(len(self.category_top_level.owner_group_ids), 1)
         document = self.Document.sudo(self.demo_user).create({
             'name': 'Test Create',
+            'document_type': 'html',
             'category_id': self.category_top_level.id,
             'document_body': 'Test Document'})
         self.assertEqual(document.visibility_type, 'parent')
@@ -275,6 +295,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
     def test_document_create_top_level(self):
         document = self.Document.sudo(self.demo_user).create({
             'name': 'Test Create',
+            'document_type': 'html',
             'document_body': 'Test Document'})
         self.assertEqual(document.visibility_type, 'restricted')
         self.assertFalse(document.visibility_user_ids)
@@ -292,6 +313,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.Document.sudo(self.public_user).create({
                 'name': 'Test Create',
+                'document_type': 'html',
                 'category_id': self.category_top_level.id,
                 'document_body': 'Test Document'})
 
@@ -299,6 +321,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.Document.sudo(self.public_user).create({
                 'name': 'Test Create',
+                'document_type': 'html',
                 'category_id': self.category_top_level.id,
                 'document_body': 'Test Document'})
 
@@ -306,6 +329,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.Document.sudo(self.public_user).create({
                 'name': 'Test Create',
+                'document_type': 'html',
                 'category_id': self.category_top_level.id,
                 'document_body': 'Test Document'})
 
@@ -314,6 +338,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.Document.sudo(self.public_user).create({
                 'name': 'Test Create',
+                'document_type': 'html',
                 'category_id': self.category_top_level.id,
                 'document_body': 'Test Document'})
 
@@ -325,6 +350,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.Document.sudo(self.portal_user).create({
                 'name': 'Test Create',
+                'document_type': 'html',
                 'category_id': self.category_top_level.id,
                 'document_body': 'Test Document'})
 
@@ -332,6 +358,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.Document.sudo(self.portal_user).create({
                 'name': 'Test Create',
+                'document_type': 'html',
                 'category_id': self.category_top_level.id,
                 'document_body': 'Test Document'})
 
@@ -339,6 +366,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.Document.sudo(self.portal_user).create({
                 'name': 'Test Create',
+                'document_type': 'html',
                 'category_id': self.category_top_level.id,
                 'document_body': 'Test Document'})
 
@@ -346,6 +374,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.Document.sudo(self.portal_user).create({
                 'name': 'Test Create',
+                'document_type': 'html',
                 'category_id': self.category_top_level.id,
                 'document_body': 'Test Document'})
 
@@ -357,6 +386,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.Document.sudo(self.demo_user).create({
                 'name': 'Test Create',
+                'document_type': 'html',
                 'category_id': self.category_top_level.id,
                 'document_body': 'Test Document'})
 
@@ -364,6 +394,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.Document.sudo(self.demo_user).create({
                 'name': 'Test Create',
+                'document_type': 'html',
                 'category_id': self.category_top_level.id,
                 'document_body': 'Test Document'})
 
@@ -371,6 +402,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.Document.sudo(self.demo_user).create({
                 'name': 'Test Create',
+                'document_type': 'html',
                 'category_id': self.category_top_level.id,
                 'document_body': 'Test Document'})
 
@@ -379,6 +411,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.Document.sudo(self.demo_user).create({
                 'name': 'Test Create',
+                'document_type': 'html',
                 'category_id': self.category_top_level.id,
                 'document_body': 'Test Document'})
 
@@ -403,6 +436,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.Document.sudo(self.demo_user).create({
                 'name': 'Test Create Sub 1',
+                'document_type': 'html',
                 'category_id': self.category_subcat_2.id,
                 'document_body': 'Test Document'})
 
@@ -413,6 +447,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.Document.sudo(self.demo_user).create({
                 'name': 'Test Create Sub 1',
+                'document_type': 'html',
                 'category_id': self.category_subcat_2.id,
                 'document_body': 'Test Document'})
 
@@ -438,6 +473,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.Document.sudo(self.demo_user).create({
                 'name': 'Test Create Sub 1',
+                'document_type': 'html',
                 'category_id': self.category_subcat_2.id,
                 'document_body': 'Test Document'})
 
@@ -448,6 +484,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.Document.sudo(self.demo_user).create({
                 'name': 'Test Create Sub 1',
+                'document_type': 'html',
                 'category_id': self.category_subcat_2.id,
                 'document_body': 'Test Document'})
 
@@ -475,6 +512,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.Document.sudo(self.demo_user).create({
                 'name': 'Test Create Sub 1',
+                'document_type': 'html',
                 'category_id': self.category_subcat_2.id,
                 'document_body': 'Test Document'})
 
@@ -493,6 +531,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
 
         document = self.Document.sudo(self.demo_user).create({
             'name': 'Test Create Sub 1',
+            'document_type': 'html',
             'category_id': self.category_subcat_2.id,
             'document_body': 'Test Document'})
         self.assertEqual(document.visibility_type, 'parent')
@@ -529,6 +568,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.Document.sudo(self.demo_user).create({
                 'name': 'Test Create Sub 1',
+                'document_type': 'html',
                 'category_id': self.category_subcat_2.id,
                 'document_body': 'Test Document'})
 
@@ -549,6 +589,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
 
         document = self.Document.sudo(self.demo_user).create({
             'name': 'Test Create Sub 1',
+            'document_type': 'html',
             'category_id': self.category_subcat_2.id,
             'document_body': 'Test Document'})
         self.assertEqual(document.visibility_type, 'parent')
@@ -583,6 +624,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.Document.sudo(self.demo_user).create({
                 'name': 'Test Create Sub 1',
+                'document_type': 'html',
                 'category_id': self.category_subcat_2.id,
                 'document_body': 'Test Document'})
 
@@ -601,6 +643,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
 
         document = self.Document.sudo(self.demo_user).create({
             'name': 'Test Create Sub 1',
+            'document_type': 'html',
             'category_id': self.category_subcat_2.id,
             'document_body': 'Test Document'})
         self.assertEqual(document.visibility_type, 'parent')
@@ -637,6 +680,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.Document.sudo(self.demo_user).create({
                 'name': 'Test Create Sub 1',
+                'document_type': 'html',
                 'category_id': self.category_subcat_2.id,
                 'document_body': 'Test Document'})
 
@@ -655,6 +699,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
 
         document = self.Document.sudo(self.demo_user).create({
             'name': 'Test Create Sub 1',
+            'document_type': 'html',
             'category_id': self.category_subcat_2.id,
             'document_body': 'Test Document'})
         self.assertEqual(document.visibility_type, 'parent')
@@ -680,6 +725,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.Document.sudo(self.demo_user).create({
                 'name': 'Test Create Sub 1',
+                'document_type': 'html',
                 'category_id': self.category_subcat_2.id,
                 'document_body': 'Test Document'})
 
@@ -687,6 +733,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.Document.sudo(self.demo_user).create({
                 'name': 'Test Create Sub 1',
+                'document_type': 'html',
                 'category_id': self.category_subcat_2.id,
                 'document_body': 'Test Document'})
 
@@ -694,6 +741,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.Document.sudo(self.demo_user).create({
                 'name': 'Test Create Sub 1',
+                'document_type': 'html',
                 'category_id': self.category_subcat_2.id,
                 'document_body': 'Test Document'})
 
@@ -702,6 +750,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.Document.sudo(self.demo_user).create({
                 'name': 'Test Create Sub 1',
+                'document_type': 'html',
                 'category_id': self.category_subcat_2.id,
                 'document_body': 'Test Document'})
 
@@ -720,6 +769,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.Document.sudo(self.demo_user).create({
                 'name': 'Test Create Sub 1',
+                'document_type': 'html',
                 'category_id': self.category_subcat_2.id,
                 'document_body': 'Test Document'})
 
@@ -727,6 +777,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.Document.sudo(self.demo_user).create({
                 'name': 'Test Create Sub 1',
+                'document_type': 'html',
                 'category_id': self.category_subcat_2.id,
                 'document_body': 'Test Document'})
 
@@ -734,6 +785,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.Document.sudo(self.demo_user).create({
                 'name': 'Test Create Sub 1',
+                'document_type': 'html',
                 'category_id': self.category_subcat_2.id,
                 'document_body': 'Test Document'})
 
@@ -742,6 +794,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.Document.sudo(self.demo_user).create({
                 'name': 'Test Create Sub 1',
+                'document_type': 'html',
                 'category_id': self.category_subcat_2.id,
                 'document_body': 'Test Document'})
 
@@ -760,6 +813,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.Document.sudo(self.demo_user).create({
                 'name': 'Test Create Sub 1',
+                'document_type': 'html',
                 'category_id': self.category_subcat_2.id,
                 'document_body': 'Test Document'})
 
@@ -767,6 +821,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.Document.sudo(self.demo_user).create({
                 'name': 'Test Create Sub 1',
+                'document_type': 'html',
                 'category_id': self.category_subcat_2.id,
                 'document_body': 'Test Document'})
 
@@ -774,6 +829,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.Document.sudo(self.demo_user).create({
                 'name': 'Test Create Sub 1',
+                'document_type': 'html',
                 'category_id': self.category_subcat_2.id,
                 'document_body': 'Test Document'})
 
@@ -781,5 +837,6 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         with self.assertRaises(AccessError):
             self.Document.sudo(self.demo_user).create({
                 'name': 'Test Create Sub 1',
+                'document_type': 'html',
                 'category_id': self.category_subcat_2.id,
                 'document_body': 'Test Document'})

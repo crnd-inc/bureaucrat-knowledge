@@ -84,6 +84,7 @@ class TestKnowledgeDocumentUnlink(TestBureaucratKnowledgeBase):
     def test_document_restricted_owners_access_unlink_user(self):
         Document = self.env['bureaucrat.knowledge.document']
         document = Document.create({
+            'document_type': 'html',
             'name': 'Test document',
         })
 
@@ -106,6 +107,7 @@ class TestKnowledgeDocumentUnlink(TestBureaucratKnowledgeBase):
 
         Document = self.env['bureaucrat.knowledge.document']
         document = Document.create({
+            'document_type': 'html',
             'name': 'Test document',
         })
 
@@ -496,6 +498,7 @@ class TestKnowledgeDocumentUnlink(TestBureaucratKnowledgeBase):
         Document = self.env['bureaucrat.knowledge.document']
         document_subcat_2 = Document.create({
             'name': 'Test document',
+            'document_type': 'html',
             'category_id': self.category_subcat_2.id,
         })
 
@@ -532,6 +535,7 @@ class TestKnowledgeDocumentUnlink(TestBureaucratKnowledgeBase):
 
         document_subcat_2 = Document.create({
             'name': 'Test document',
+            'document_type': 'html',
             'category_id': self.category_subcat_2.id,
         })
         with self.assertRaises(AccessError):
@@ -555,6 +559,7 @@ class TestKnowledgeDocumentUnlink(TestBureaucratKnowledgeBase):
 
         document_subcat_2 = Document.create({
             'name': 'Test document',
+            'document_type': 'html',
             'category_id': self.category_subcat_2.id,
         })
         with self.assertRaises(AccessError):
@@ -578,6 +583,7 @@ class TestKnowledgeDocumentUnlink(TestBureaucratKnowledgeBase):
 
         document_subcat_2 = Document.create({
             'name': 'Test document',
+            'document_type': 'html',
             'category_id': self.category_subcat_2.id,
         })
         with self.assertRaises(AccessError):
@@ -594,6 +600,7 @@ class TestKnowledgeDocumentUnlink(TestBureaucratKnowledgeBase):
         Document = self.env['bureaucrat.knowledge.document']
         document_subcat_2 = Document.create({
             'name': 'Test document',
+            'document_type': 'html',
             'category_id': self.category_subcat_2.id,
         })
 
@@ -630,6 +637,7 @@ class TestKnowledgeDocumentUnlink(TestBureaucratKnowledgeBase):
 
         document_subcat_2 = Document.create({
             'name': 'Test document',
+            'document_type': 'html',
             'category_id': self.category_subcat_2.id,
         })
         with self.assertRaises(AccessError):
@@ -652,6 +660,7 @@ class TestKnowledgeDocumentUnlink(TestBureaucratKnowledgeBase):
 
         document_subcat_2 = Document.create({
             'name': 'Test document',
+            'document_type': 'html',
             'category_id': self.category_subcat_2.id,
         })
         with self.assertRaises(AccessError):
@@ -674,6 +683,7 @@ class TestKnowledgeDocumentUnlink(TestBureaucratKnowledgeBase):
 
         document_subcat_2 = Document.create({
             'name': 'Test document',
+            'document_type': 'html',
             'category_id': self.category_subcat_2.id,
         })
         with self.assertRaises(AccessError):

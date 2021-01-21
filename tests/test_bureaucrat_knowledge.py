@@ -65,6 +65,7 @@ class TestBureaucratKnowledge(TestBureaucratKnowledgeBase):
         Document = self.env['bureaucrat.knowledge.document']
         document = Document.sudo(self.demo_user).create({
             'name': 'Test top level document',
+            'document_type': 'html',
         })
 
         self.assertEqual(document.visibility_type, 'restricted')
@@ -80,6 +81,7 @@ class TestBureaucratKnowledge(TestBureaucratKnowledgeBase):
         subdocument = Document.sudo(self.demo_user).create({
             'name': 'Test top level document',
             'category_id': category.id,
+            'document_type': 'html',
         })
 
         self.assertEqual(subdocument.visibility_type, 'parent')

@@ -41,46 +41,58 @@
             <form>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
-                        <button name="toggle_active" type="object" groups="base.group_user"
-                                class="oe_stat_button" icon="fa-archive">
-                            <field name="active" widget="boolean_button"
-                                   options='{"terminology": "archive"}'/>
-                        </button>
+                        <!-- <button name="toggle_active" type="object" groups="base.group_user"-->
+                        <!--         class="oe_stat_button" icon="fa-archive">-->
+                        <!--     <field name="active" widget="boolean_button"-->
+                        <!--            options='{"terminology": "archive"}'/>-->
+                        <!-- </button>-->
+
                     </div>
-                    <div name="title" class="oe_title">
-                        <h1>
+                    <group>
+                        <group>
+                        <!-- <div name="title" class="oe_title">-->
                             <field name="name" placeholder="Name..."/>
-                        </h1>
-                        <h3>
                             <field name="tag_ids"
                                    options="{'color_field': 'color'}"
                                    widget="many2many_tags"
                                    placeholder="Tags..."
                                    context="{'default_model': 'bureaucrat.knowledge.document'}"/>
-                        </h3>
-                    </div>
-                    <group>
+                        </group>
                         <group>
                             <field name="category_id"/>
+                            <field name="document_type" widget="selection"/>
                         </group>
-                        <group></group>
                     </group>
+                    <!--                    </div>-->
+                    <field name="document_body"
+                           attrs="{'invisible': [('document_type', '!=', 'html')]}"/>
+                    <field name="document_body_pdf"
+                           attrs="{'invisible': [('document_type', '!=', 'pdf')]}"
+                           widget="pdf_viewer"/>
+                    <field name="commit_summary" class="oe_edit_only" placeholder="Commit summary ..." required="True"/>
                     <notebook>
-                        <page name="document_body" string="Document">
+                        <!-- <page name="document_body" string="Document">-->
                             <field name="commit_summary" class="oe_edit_only" placeholder="Commit summary ..."/>
-                            <field name="document_body"/>
-                        </page>
+                        <!-- </page>-->
                         <page name="document_history" string="Document History" mode="tree, form">
-                            <field name="history_ids">
+                            <field name="history_ids" readonly="True">
                                 <tree create="0" delete="0">
+                                    <field name="document_type"/>
                                     <field name="commit_summary"/>
                                     <field name="user_id"/>
                                     <field name="date_create"/>
                                 </tree>
                                 <form>
                                     <field name="commit_summary"/>
-                                    <field name="document_body"/>
+                                    <field name="document_body"
+                                           attrs="{'invisible': [('document_type', '!=', 'html')]}"/>
+                                    <field name="document_body_pdf"
+                                           attrs="{'invisible': [('document_type', '!=', 'pdf')]}"
+                                           widget="pdf_viewer"/>
                                     <group>
+                                        <group>
+                                            <field name="document_type"/>
+                                        </group>
                                         <group>
                                             <field name="user_id" readonly="1"/>
                                         </group>
@@ -145,7 +157,7 @@
                                     <group string="Owner users" colspan="4">
                                         <group>
                                             <field name="owner_user_ids"
-                                                   string="Users" 
+                                                   string="Users"
                                                    widget="many2many_tags"/>
                                         </group>
                                         <group>

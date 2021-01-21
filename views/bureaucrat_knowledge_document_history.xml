@@ -25,7 +25,12 @@
                             <field name="commit_summary"/>
                         </group>
                     </group>
-                    <field name="document_body"/>
+                    <field name="document_type" invisible="True"/>
+                    <field name="document_body"
+                           attrs="{'invisible': [('document_type', '!=', 'html')]}"/>
+                    <field name="document_body_pdf"
+                           attrs="{'invisible': [('document_type', '!=', 'pdf')]}"
+                           widget="pdf_viewer"/>
                     <group>
                         <group>
                             <field name="user_id"/>

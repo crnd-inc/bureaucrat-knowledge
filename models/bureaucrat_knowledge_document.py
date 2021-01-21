@@ -1,7 +1,13 @@
 import logging
 from odoo import models, fields, api
+from odoo.addons.generic_mixin import post_write
 
 _logger = logging.getLogger(__name__)
+
+DOC_TYPE = [
+    ('html', 'html'),
+    ('pdf', 'pdf'),
+]
 
 
 class BureaucratKnowledgeDocument(models.Model):
@@ -18,10 +24,13 @@ class BureaucratKnowledgeDocument(models.Model):
     _auto_set_noupdate_on_write = True
 
     name = fields.Char(translate=True, index=True, required=True)
-    document_body = fields.Html(
-        compute='_compute_document_body',
-        inverse='_inverse_document_body',
-        search='_search_document_body')
+    document_type = fields.Selection(
+        default='html',
+        selection=DOC_TYPE,
+        required=True,
+    )
+    document_body = fields.Html()
+    document_body_pdf = fields.Binary()
     category_id = fields.Many2one(
         'bureaucrat.knowledge.category', index=True, ondelete='restrict')
     history_ids = fields.One2many(
@@ -30,7 +39,7 @@ class BureaucratKnowledgeDocument(models.Model):
         'bureaucrat.knowledge.document.history',
         compute='_compute_document_latest_history_id',
         readonly=True, store=True, auto_join=True, compute_sudo=True)
-    commit_summary = fields.Char(store=False)
+    commit_summary = fields.Char(store=True)
     active = fields.Boolean(default=True, index=True)
 
     visibility_type = fields.Selection(
@@ -211,18 +220,26 @@ class BureaucratKnowledgeDocument(models.Model):
     @api.depends('latest_history_id', 'latest_history_id.document_body')
     def _compute_document_body(self):
         for record in self:
+            record.document_type = record.latest_history_id.document_type
             record.document_body = record.latest_history_id.document_body
+            record.document_body_pdf = \
+                record.latest_history_id.document_body_pdf
 
     def _inverse_document_body(self):
         for record in self:
-            if record.document_body == record.latest_history_id.document_body:
-                # There is no sense to create new hisstory record if there is
+            if record.document_body == \
+                    record.latest_history_id.document_body and \
+                    record.document_body_pdf == \
+                    record.latest_history_id.document_body_pdf:
+                # There is no sense to create new history record if there is
                 # no changes (document body is same as in prev record)
                 continue
 
             self.env['bureaucrat.knowledge.document.history'].create({
                 'commit_summary': record.commit_summary,
+                'document_type': record.document_type,
                 'document_body': record.document_body,
+                'document_body_pdf': record.document_body_pdf,
                 'user_id': self.env.user.id,
                 'date_create': fields.Datetime.now(),
                 'document_id': record.id,
@@ -259,5 +276,42 @@ class BureaucratKnowledgeDocument(models.Model):
         # Enforce check of access rights after document created,
         # to ensure that current user has access to create this document
         document.check_access_rule('create')
-
+        history_obj = self.env['bureaucrat.knowledge.document.history']
+        if vals['document_type'] == 'pdf':
+            history_obj.create({
+                'document_id': document.id,
+                'document_type': 'pdf',
+                'document_body_pdf': document.document_body_pdf,
+                'commit_summary': vals.get('commit_summary'),
+            })
+        if vals['document_type'] == 'html':
+            history_obj.create({
+                'document_id': document.id,
+                'document_type': 'html',
+                'document_body': document.document_body,
+                'commit_summary': vals.get('commit_summary'),
+            })
+        # Clear commit_summary for next time
+        document.commit_summary = ''
         return document
+
+    @post_write('document_type', 'document_body', 'document_body_pdf')
+    def _post_document_changed(self, changes):
+        history_obj = self.env['bureaucrat.knowledge.document.history']
+        for rec in self:
+            if rec.document_type == 'pdf':
+                history_obj.create({
+                    'document_id': rec.id,
+                    'document_type': 'pdf',
+                    'document_body_pdf': rec.document_body_pdf,
+                    'commit_summary': rec.commit_summary
+                })
+            if rec.document_type == 'html':
+                history_obj.create({
+                    'document_id': rec.id,
+                    'document_type': 'html',
+                    'document_body': rec.document_body,
+                    'commit_summary': rec.commit_summary,
+                })
+            # Clear commit_summary for next time
+            rec.commit_summary = ''

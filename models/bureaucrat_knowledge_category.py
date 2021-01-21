@@ -14,7 +14,7 @@ class BureaucratKnowledgeCategory(models.Model):
     _parent_order = 'name'
     _inherit = [
         'generic.tag.mixin',
-        'generic.mixin.parent.names',
+        # 'generic.mixin.parent.names',
         'generic.mixin.track.changes',
         'generic.mixin.data.updatable',
         'mail.thread',
@@ -36,6 +36,7 @@ class BureaucratKnowledgeCategory(models.Model):
     document_ids = fields.One2many(
         'bureaucrat.knowledge.document', 'category_id')
     documents_count = fields.Integer(compute='_compute_documents_count')
+    documents_nr = fields.Integer(compute='_compute_documents_count')
     active = fields.Boolean(default=True, index=True)
 
     category_contents = fields.Html(

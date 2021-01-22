@@ -126,7 +126,7 @@
                     <t t-call="bureaucrat_knowledge_website.knowledge_category_navigation"/>
                     <div class="container">
                         <div id="document-text"
-                            t-raw="doc.document_body">
+                            t-raw="doc.document_body_html">
                         </div>
                     </div>
                 </div>

@@ -257,6 +257,18 @@ msgid "Created on"
 msgstr "Créé le"
 
 #. module: bureaucrat_knowledge
+#: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category__ir_model_data_id
+#: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document__ir_model_data_id
+msgid "Data record"
+msgstr ""
+
+#. module: bureaucrat_knowledge
+#: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category__ir_model_data_ids
+#: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document__ir_model_data_ids
+msgid "Data records"
+msgstr ""
+
+#. module: bureaucrat_knowledge
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document_history__date_create
 msgid "Date Create"
 msgstr ""
@@ -725,14 +737,6 @@ msgstr ""
 #: selection:bureaucrat.knowledge.category,visibility_type:0
 #: selection:bureaucrat.knowledge.document,visibility_type:0
 msgid "Internal"
-msgstr ""
-
-#. module: bureaucrat_knowledge
-#: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category__ir_model_data_id
-#: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category__ir_model_data_ids
-#: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document__ir_model_data_id
-#: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document__ir_model_data_ids
-msgid "Ir Model Data"
 msgstr ""
 
 #. module: bureaucrat_knowledge

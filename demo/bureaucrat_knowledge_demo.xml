@@ -25,8 +25,8 @@
 
     <record id="document_demo_top_1"
             model="bureaucrat.knowledge.document">
-        <field name="document_type">html</field>
         <field name="name">Demo Document Top Level</field>
+        <field name="document_type">html</field>
         <field name="document_body_html">
             <![CDATA[
                 <h1>Top level demo document text.</h1>
@@ -36,8 +36,8 @@
 
     <record id="document_demo_sub_2"
             model="bureaucrat.knowledge.document">
-        <field name="document_type">html</field>
         <field name="name">Demo Document For Subcategory 2</field>
+        <field name="document_type">html</field>
         <field name="category_id"
                ref="bureaucrat_demo_subcategory_2"/>
         <field name="document_body_html">Subcategory2 document content</field>

@@ -26,7 +26,7 @@
                         </group>
                     </group>
                     <field name="document_type" invisible="True"/>
-                    <field name="document_body"
+                    <field name="document_body_html"
                            attrs="{'invisible': [('document_type', '!=', 'html')]}"/>
                     <field name="document_body_pdf"
                            attrs="{'invisible': [('document_type', '!=', 'pdf')]}"

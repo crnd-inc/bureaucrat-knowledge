@@ -64,14 +64,14 @@
                         </group>
                     </group>
                     <!--                    </div>-->
-                    <field name="document_body"
+                    <field name="document_body_html"
                            attrs="{'invisible': [('document_type', '!=', 'html')]}"/>
                     <field name="document_body_pdf"
                            attrs="{'invisible': [('document_type', '!=', 'pdf')]}"
                            widget="pdf_viewer"/>
                     <field name="commit_summary" class="oe_edit_only" placeholder="Commit summary ..." required="True"/>
                     <notebook>
-                        <!-- <page name="document_body" string="Document">-->
+                        <!-- <page name="document_body_html" string="Document">-->
                             <field name="commit_summary" class="oe_edit_only" placeholder="Commit summary ..."/>
                         <!-- </page>-->
                         <page name="document_history" string="Document History" mode="tree, form">
@@ -84,7 +84,7 @@
                                 </tree>
                                 <form>
                                     <field name="commit_summary"/>
-                                    <field name="document_body"
+                                    <field name="document_body_html"
                                            attrs="{'invisible': [('document_type', '!=', 'html')]}"/>
                                     <field name="document_body_pdf"
                                            attrs="{'invisible': [('document_type', '!=', 'pdf')]}"

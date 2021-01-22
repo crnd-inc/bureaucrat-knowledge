@@ -21,7 +21,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'name': 'Test Create',
                 'document_type': 'html',
                 'category_id': self.category_top_level.id,
-                'document_body': 'Test Document'})
+                'document_body_html': 'Test Document'})
 
         self.category_top_level.write({
             'visibility_user_ids': [(4, self.demo_user.id)]})
@@ -32,7 +32,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'name': 'Test Create',
                 'document_type': 'html',
                 'category_id': self.category_top_level.id,
-                'document_body': 'Test Document'})
+                'document_body_html': 'Test Document'})
 
     def test_document_restricted_access_create_user2(self):
         self.assertEqual(
@@ -45,7 +45,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'name': 'Test Create',
                 'document_type': 'html',
                 'category_id': self.category_top_level.id,
-                'document_body': 'Test Document',
+                'document_body_html': 'Test Document',
                 'editor_user_ids': [(4, self.demo_user.id)]})
 
         self.category_top_level.write({
@@ -57,7 +57,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'name': 'Test Create',
                 'document_type': 'html',
                 'category_id': self.category_top_level.id,
-                'document_body': 'Test Document',
+                'document_body_html': 'Test Document',
                 'editor_user_ids': [(4, self.demo_user.id)]})
 
     def test_document_restricted_access_create_user3(self):
@@ -71,7 +71,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'name': 'Test Create',
                 'document_type': 'html',
                 'category_id': self.category_top_level.id,
-                'document_body': 'Test Document',
+                'document_body_html': 'Test Document',
                 'owner_user_ids': [(4, self.demo_user.id)]})
 
         self.category_top_level.write({
@@ -83,7 +83,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'name': 'Test Create',
                 'document_type': 'html',
                 'category_id': self.category_top_level.id,
-                'document_body': 'Test Document',
+                'document_body_html': 'Test Document',
                 'owner_user_ids': [(4, self.demo_user.id)]})
 
     def test_document_restricted_access_create_group(self):
@@ -99,7 +99,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'name': 'Test Create',
                 'document_type': 'html',
                 'category_id': self.category_top_level.id,
-                'document_body': 'Test Document'})
+                'document_body_html': 'Test Document'})
 
         self.category_top_level.write({
             'visibility_group_ids': [(4, self.group_demo.id)]})
@@ -110,7 +110,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'name': 'Test Create',
                 'document_type': 'html',
                 'category_id': self.category_top_level.id,
-                'document_body': 'Test Document'})
+                'document_body_html': 'Test Document'})
 
     def test_document_restricted_access_create_group2(self):
         self.demo_user.groups_id |= self.group_demo
@@ -125,7 +125,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'name': 'Test Create',
                 'document_type': 'html',
                 'category_id': self.category_top_level.id,
-                'document_body': 'Test Document',
+                'document_body_html': 'Test Document',
                 'editor_group_ids': [(4, self.group_demo.id)]})
 
         self.category_top_level.write({
@@ -137,7 +137,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'name': 'Test Create',
                 'document_type': 'html',
                 'category_id': self.category_top_level.id,
-                'document_body': 'Test Document',
+                'document_body_html': 'Test Document',
                 'editor_group_ids': [(4, self.group_demo.id)]})
 
     def test_document_restricted_access_create_group3(self):
@@ -153,7 +153,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'name': 'Test Create',
                 'document_type': 'html',
                 'category_id': self.category_top_level.id,
-                'document_body': 'Test Document',
+                'document_body_html': 'Test Document',
                 'owner_group_ids': [(4, self.group_demo.id)]})
 
         self.category_top_level.write({
@@ -165,7 +165,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'name': 'Test Create',
                 'document_type': 'html',
                 'category_id': self.category_top_level.id,
-                'document_body': 'Test Document',
+                'document_body_html': 'Test Document',
                 'owner_group_ids': [(4, self.group_demo.id)]})
 
     def test_document_restricted_editors_access_create_user(self):
@@ -179,7 +179,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'name': 'Test Create',
                 'document_type': 'html',
                 'category_id': self.category_top_level.id,
-                'document_body': 'Test Document'})
+                'document_body_html': 'Test Document'})
 
         self.category_top_level.write({
             'editor_user_ids': [(4, self.demo_user.id)]})
@@ -189,7 +189,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
             'name': 'Test Create',
             'document_type': 'html',
             'category_id': self.category_top_level.id,
-            'document_body': 'Test Document'})
+            'document_body_html': 'Test Document'})
         self.assertEqual(document.visibility_type, 'parent')
         self.assertFalse(document.visibility_user_ids)
         self.assertFalse(document.visibility_group_ids)
@@ -211,7 +211,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'name': 'Test Create',
                 'document_type': 'html',
                 'category_id': self.category_top_level.id,
-                'document_body': 'Test Document'})
+                'document_body_html': 'Test Document'})
 
         self.category_top_level.write({
             'editor_group_ids': [(4, self.group_demo.id)]})
@@ -221,7 +221,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
             'name': 'Test Create',
             'document_type': 'html',
             'category_id': self.category_top_level.id,
-            'document_body': 'Test Document'})
+            'document_body_html': 'Test Document'})
         self.assertEqual(document.visibility_type, 'parent')
         self.assertFalse(document.visibility_user_ids)
         self.assertFalse(document.visibility_group_ids)
@@ -241,7 +241,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'name': 'Test Create',
                 'document_type': 'html',
                 'category_id': self.category_top_level.id,
-                'document_body': 'Test Document'})
+                'document_body_html': 'Test Document'})
 
         self.category_top_level.write({
             'owner_user_ids': [(4, self.demo_user.id)]})
@@ -251,7 +251,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
             'name': 'Test Create',
             'document_type': 'html',
             'category_id': self.category_top_level.id,
-            'document_body': 'Test Document'})
+            'document_body_html': 'Test Document'})
         self.assertEqual(document.visibility_type, 'parent')
         self.assertFalse(document.visibility_user_ids)
         self.assertFalse(document.visibility_group_ids)
@@ -273,7 +273,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'name': 'Test Create',
                 'document_type': 'html',
                 'category_id': self.category_top_level.id,
-                'document_body': 'Test Document'})
+                'document_body_html': 'Test Document'})
 
         self.category_top_level.write({
             'owner_group_ids': [(4, self.group_demo.id)]})
@@ -283,7 +283,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
             'name': 'Test Create',
             'document_type': 'html',
             'category_id': self.category_top_level.id,
-            'document_body': 'Test Document'})
+            'document_body_html': 'Test Document'})
         self.assertEqual(document.visibility_type, 'parent')
         self.assertFalse(document.visibility_user_ids)
         self.assertFalse(document.visibility_group_ids)
@@ -296,7 +296,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         document = self.Document.sudo(self.demo_user).create({
             'name': 'Test Create',
             'document_type': 'html',
-            'document_body': 'Test Document'})
+            'document_body_html': 'Test Document'})
         self.assertEqual(document.visibility_type, 'restricted')
         self.assertFalse(document.visibility_user_ids)
         self.assertFalse(document.visibility_group_ids)
@@ -315,7 +315,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'name': 'Test Create',
                 'document_type': 'html',
                 'category_id': self.category_top_level.id,
-                'document_body': 'Test Document'})
+                'document_body_html': 'Test Document'})
 
         self.category_top_level.visibility_type = 'internal'
         with self.assertRaises(AccessError):
@@ -323,7 +323,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'name': 'Test Create',
                 'document_type': 'html',
                 'category_id': self.category_top_level.id,
-                'document_body': 'Test Document'})
+                'document_body_html': 'Test Document'})
 
         self.category_top_level.visibility_type = 'portal'
         with self.assertRaises(AccessError):
@@ -331,7 +331,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'name': 'Test Create',
                 'document_type': 'html',
                 'category_id': self.category_top_level.id,
-                'document_body': 'Test Document'})
+                'document_body_html': 'Test Document'})
 
         self.category_top_level.visibility_type = 'public'
 
@@ -340,7 +340,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'name': 'Test Create',
                 'document_type': 'html',
                 'category_id': self.category_top_level.id,
-                'document_body': 'Test Document'})
+                'document_body_html': 'Test Document'})
 
     # Testing Top level category for visibility_type = 'portal'
     def test_document_portal_access_create_user(self):
@@ -352,7 +352,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'name': 'Test Create',
                 'document_type': 'html',
                 'category_id': self.category_top_level.id,
-                'document_body': 'Test Document'})
+                'document_body_html': 'Test Document'})
 
         self.category_top_level.visibility_type = 'internal'
         with self.assertRaises(AccessError):
@@ -360,7 +360,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'name': 'Test Create',
                 'document_type': 'html',
                 'category_id': self.category_top_level.id,
-                'document_body': 'Test Document'})
+                'document_body_html': 'Test Document'})
 
         self.category_top_level.visibility_type = 'public'
         with self.assertRaises(AccessError):
@@ -368,7 +368,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'name': 'Test Create',
                 'document_type': 'html',
                 'category_id': self.category_top_level.id,
-                'document_body': 'Test Document'})
+                'document_body_html': 'Test Document'})
 
         self.category_top_level.visibility_type = 'portal'
         with self.assertRaises(AccessError):
@@ -376,7 +376,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'name': 'Test Create',
                 'document_type': 'html',
                 'category_id': self.category_top_level.id,
-                'document_body': 'Test Document'})
+                'document_body_html': 'Test Document'})
 
     # Testing Top level document for visibility_type = 'internal'
     def test_document_internal_access_create_user(self):
@@ -388,7 +388,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'name': 'Test Create',
                 'document_type': 'html',
                 'category_id': self.category_top_level.id,
-                'document_body': 'Test Document'})
+                'document_body_html': 'Test Document'})
 
         self.category_top_level.visibility_type = 'portal'
         with self.assertRaises(AccessError):
@@ -396,7 +396,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'name': 'Test Create',
                 'document_type': 'html',
                 'category_id': self.category_top_level.id,
-                'document_body': 'Test Document'})
+                'document_body_html': 'Test Document'})
 
         self.category_top_level.visibility_type = 'public'
         with self.assertRaises(AccessError):
@@ -404,7 +404,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'name': 'Test Create',
                 'document_type': 'html',
                 'category_id': self.category_top_level.id,
-                'document_body': 'Test Document'})
+                'document_body_html': 'Test Document'})
 
         self.category_top_level.visibility_type = 'internal'
 
@@ -413,7 +413,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'name': 'Test Create',
                 'document_type': 'html',
                 'category_id': self.category_top_level.id,
-                'document_body': 'Test Document'})
+                'document_body_html': 'Test Document'})
 
     # Testing subcategory 2nd level depth for visibility_type = 'restricted'
     def test_subcategory_2_restricted_access_create_user(self):
@@ -438,7 +438,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'name': 'Test Create Sub 1',
                 'document_type': 'html',
                 'category_id': self.category_subcat_2.id,
-                'document_body': 'Test Document'})
+                'document_body_html': 'Test Document'})
 
         self.category_top_level.write({
             'visibility_user_ids': [(4, self.demo_user.id)]})
@@ -449,7 +449,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'name': 'Test Create Sub 1',
                 'document_type': 'html',
                 'category_id': self.category_subcat_2.id,
-                'document_body': 'Test Document'})
+                'document_body_html': 'Test Document'})
 
     def test_subdocument_2_restricted_access_create_group(self):
         self.demo_user.groups_id |= self.group_demo
@@ -475,7 +475,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'name': 'Test Create Sub 1',
                 'document_type': 'html',
                 'category_id': self.category_subcat_2.id,
-                'document_body': 'Test Document'})
+                'document_body_html': 'Test Document'})
 
         self.category_top_level.write({
             'visibility_group_ids': [(4, self.group_demo.id)]})
@@ -486,7 +486,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'name': 'Test Create Sub 1',
                 'document_type': 'html',
                 'category_id': self.category_subcat_2.id,
-                'document_body': 'Test Document'})
+                'document_body_html': 'Test Document'})
 
     def test_subdocument_2_restricted_editors_access_create_user(self):
         self.assertEqual(
@@ -514,7 +514,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'name': 'Test Create Sub 1',
                 'document_type': 'html',
                 'category_id': self.category_subcat_2.id,
-                'document_body': 'Test Document'})
+                'document_body_html': 'Test Document'})
 
         self.category_top_level.write({
             'editor_user_ids': [(4, self.demo_user.id)]})
@@ -533,7 +533,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
             'name': 'Test Create Sub 1',
             'document_type': 'html',
             'category_id': self.category_subcat_2.id,
-            'document_body': 'Test Document'})
+            'document_body_html': 'Test Document'})
         self.assertEqual(document.visibility_type, 'parent')
         self.assertFalse(document.visibility_user_ids)
         self.assertFalse(document.visibility_group_ids)
@@ -570,7 +570,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'name': 'Test Create Sub 1',
                 'document_type': 'html',
                 'category_id': self.category_subcat_2.id,
-                'document_body': 'Test Document'})
+                'document_body_html': 'Test Document'})
 
         self.category_top_level.write({
             'editor_group_ids': [(4, self.group_demo.id)]})
@@ -591,7 +591,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
             'name': 'Test Create Sub 1',
             'document_type': 'html',
             'category_id': self.category_subcat_2.id,
-            'document_body': 'Test Document'})
+            'document_body_html': 'Test Document'})
         self.assertEqual(document.visibility_type, 'parent')
         self.assertFalse(document.visibility_user_ids)
         self.assertFalse(document.visibility_group_ids)
@@ -626,7 +626,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'name': 'Test Create Sub 1',
                 'document_type': 'html',
                 'category_id': self.category_subcat_2.id,
-                'document_body': 'Test Document'})
+                'document_body_html': 'Test Document'})
 
         self.category_top_level.write({
             'owner_user_ids': [(4, self.demo_user.id)]})
@@ -645,7 +645,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
             'name': 'Test Create Sub 1',
             'document_type': 'html',
             'category_id': self.category_subcat_2.id,
-            'document_body': 'Test Document'})
+            'document_body_html': 'Test Document'})
         self.assertEqual(document.visibility_type, 'parent')
         self.assertFalse(document.visibility_user_ids)
         self.assertFalse(document.visibility_group_ids)
@@ -682,7 +682,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'name': 'Test Create Sub 1',
                 'document_type': 'html',
                 'category_id': self.category_subcat_2.id,
-                'document_body': 'Test Document'})
+                'document_body_html': 'Test Document'})
 
         self.category_top_level.write({
             'owner_group_ids': [(4, self.group_demo.id)]})
@@ -701,7 +701,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
             'name': 'Test Create Sub 1',
             'document_type': 'html',
             'category_id': self.category_subcat_2.id,
-            'document_body': 'Test Document'})
+            'document_body_html': 'Test Document'})
         self.assertEqual(document.visibility_type, 'parent')
         self.assertFalse(document.visibility_user_ids)
         self.assertFalse(document.visibility_group_ids)
@@ -727,7 +727,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'name': 'Test Create Sub 1',
                 'document_type': 'html',
                 'category_id': self.category_subcat_2.id,
-                'document_body': 'Test Document'})
+                'document_body_html': 'Test Document'})
 
         self.category_top_level.visibility_type = 'internal'
         with self.assertRaises(AccessError):
@@ -735,7 +735,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'name': 'Test Create Sub 1',
                 'document_type': 'html',
                 'category_id': self.category_subcat_2.id,
-                'document_body': 'Test Document'})
+                'document_body_html': 'Test Document'})
 
         self.category_top_level.visibility_type = 'portal'
         with self.assertRaises(AccessError):
@@ -743,7 +743,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'name': 'Test Create Sub 1',
                 'document_type': 'html',
                 'category_id': self.category_subcat_2.id,
-                'document_body': 'Test Document'})
+                'document_body_html': 'Test Document'})
 
         self.category_top_level.visibility_type = 'public'
 
@@ -752,7 +752,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'name': 'Test Create Sub 1',
                 'document_type': 'html',
                 'category_id': self.category_subcat_2.id,
-                'document_body': 'Test Document'})
+                'document_body_html': 'Test Document'})
 
     # Testing subdocument 2nd level depth for visibility_type = 'portal'
     def test_subdocument_2_portal_access_create_user(self):
@@ -771,7 +771,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'name': 'Test Create Sub 1',
                 'document_type': 'html',
                 'category_id': self.category_subcat_2.id,
-                'document_body': 'Test Document'})
+                'document_body_html': 'Test Document'})
 
         self.category_top_level.visibility_type = 'internal'
         with self.assertRaises(AccessError):
@@ -779,7 +779,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'name': 'Test Create Sub 1',
                 'document_type': 'html',
                 'category_id': self.category_subcat_2.id,
-                'document_body': 'Test Document'})
+                'document_body_html': 'Test Document'})
 
         self.category_top_level.visibility_type = 'public'
         with self.assertRaises(AccessError):
@@ -787,7 +787,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'name': 'Test Create Sub 1',
                 'document_type': 'html',
                 'category_id': self.category_subcat_2.id,
-                'document_body': 'Test Document'})
+                'document_body_html': 'Test Document'})
 
         self.category_top_level.visibility_type = 'portal'
 
@@ -796,7 +796,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'name': 'Test Create Sub 1',
                 'document_type': 'html',
                 'category_id': self.category_subcat_2.id,
-                'document_body': 'Test Document'})
+                'document_body_html': 'Test Document'})
 
     # Testing subcategory 2nd level depth for visibility_type = 'internal'
     def test_subcategory_2_internal_access_read_user(self):
@@ -815,7 +815,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'name': 'Test Create Sub 1',
                 'document_type': 'html',
                 'category_id': self.category_subcat_2.id,
-                'document_body': 'Test Document'})
+                'document_body_html': 'Test Document'})
 
         self.category_top_level.visibility_type = 'portal'
         with self.assertRaises(AccessError):
@@ -823,7 +823,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'name': 'Test Create Sub 1',
                 'document_type': 'html',
                 'category_id': self.category_subcat_2.id,
-                'document_body': 'Test Document'})
+                'document_body_html': 'Test Document'})
 
         self.category_top_level.visibility_type = 'public'
         with self.assertRaises(AccessError):
@@ -831,7 +831,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'name': 'Test Create Sub 1',
                 'document_type': 'html',
                 'category_id': self.category_subcat_2.id,
-                'document_body': 'Test Document'})
+                'document_body_html': 'Test Document'})
 
         self.category_top_level.visibility_type = 'internal'
         with self.assertRaises(AccessError):
@@ -839,4 +839,4 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'name': 'Test Create Sub 1',
                 'document_type': 'html',
                 'category_id': self.category_subcat_2.id,
-                'document_body': 'Test Document'})
+                'document_body_html': 'Test Document'})

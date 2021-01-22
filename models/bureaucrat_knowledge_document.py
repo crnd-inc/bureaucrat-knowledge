@@ -29,7 +29,7 @@ class BureaucratKnowledgeDocument(models.Model):
         selection=DOC_TYPE,
         required=True,
     )
-    document_body = fields.Html()
+    document_body_html = fields.Html()
     document_body_pdf = fields.Binary()
     category_id = fields.Many2one(
         'bureaucrat.knowledge.category', index=True, ondelete='restrict')
@@ -217,36 +217,8 @@ class BureaucratKnowledgeDocument(models.Model):
                 record.latest_history_id = self.env[
                     'bureaucrat.knowledge.document.history'].browse()
 
-    @api.depends('latest_history_id', 'latest_history_id.document_body')
-    def _compute_document_body(self):
-        for record in self:
-            record.document_type = record.latest_history_id.document_type
-            record.document_body = record.latest_history_id.document_body
-            record.document_body_pdf = \
-                record.latest_history_id.document_body_pdf
-
-    def _inverse_document_body(self):
-        for record in self:
-            if record.document_body == \
-                    record.latest_history_id.document_body and \
-                    record.document_body_pdf == \
-                    record.latest_history_id.document_body_pdf:
-                # There is no sense to create new history record if there is
-                # no changes (document body is same as in prev record)
-                continue
-
-            self.env['bureaucrat.knowledge.document.history'].create({
-                'commit_summary': record.commit_summary,
-                'document_type': record.document_type,
-                'document_body': record.document_body,
-                'document_body_pdf': record.document_body_pdf,
-                'user_id': self.env.user.id,
-                'date_create': fields.Datetime.now(),
-                'document_id': record.id,
-            })
-
     def _search_document_body(self, operator, value):
-        return [('latest_history_id.document_body', operator, value)]
+        return [('latest_history_id.document_body_html', operator, value)]
 
     @api.onchange('category_id', 'visibility_type')
     def _onchange_categ_visibility_type(self):
@@ -288,14 +260,14 @@ class BureaucratKnowledgeDocument(models.Model):
             history_obj.create({
                 'document_id': document.id,
                 'document_type': 'html',
-                'document_body': document.document_body,
+                'document_body_html': document.document_body_html,
                 'commit_summary': vals.get('commit_summary'),
             })
         # Clear commit_summary for next time
         document.commit_summary = ''
         return document
 
-    @post_write('document_type', 'document_body', 'document_body_pdf')
+    @post_write('document_type', 'document_body_html', 'document_body_pdf')
     def _post_document_changed(self, changes):
         history_obj = self.env['bureaucrat.knowledge.document.history']
         for rec in self:
@@ -310,8 +282,9 @@ class BureaucratKnowledgeDocument(models.Model):
                 history_obj.create({
                     'document_id': rec.id,
                     'document_type': 'html',
-                    'document_body': rec.document_body,
+                    'document_body_html': rec.document_body_html,
                     'commit_summary': rec.commit_summary,
+
                 })
             # Clear commit_summary for next time
             rec.commit_summary = ''

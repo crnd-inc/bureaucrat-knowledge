@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <template id="assets_backend" name="Generic Request Assets" inherit_id="web.assets_frontend">
+    <template id="assets_frontend"
+              name="Bureaucrat Knowledge Website Assets" inherit_id="web.assets_frontend">
         <xpath expr="." position="inside">
             <link rel="stylesheet"
                   type="text/less"
-                  href='/bureaucrat_knowledge_website/static/src/less/knowledge_base_website.less'/>
+                  href='/bureaucrat_knowledge_website/static/src/scss/knowledge_base_website.scss'/>
         </xpath>
     </template>
         
@@ -124,11 +125,15 @@
             <div class="oe_structure">
                 <div class="container">
                     <t t-call="bureaucrat_knowledge_website.knowledge_category_navigation"/>
-                    <div class="container">
+                    <t t-if="doc.document_type == 'html'">
                         <div id="document-text"
                             t-raw="doc.document_body_html">
                         </div>
-                    </div>
+                    </t>
+                    <t t-if="doc.document_type == 'pdf'">
+                        <iframe class="o_knowledge_pdfviewer"
+                                t-att-src="doc.pdf_src_url"/>
+                    </t>
                 </div>
             </div>
         </t>

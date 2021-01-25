@@ -1,4 +1,6 @@
-from odoo import models
+from urllib.parse import urlencode, quote_plus
+
+from odoo import api, fields, models
 
 
 class BureaucratKnowledgeDocument(models.Model):
@@ -8,6 +10,22 @@ class BureaucratKnowledgeDocument(models.Model):
         'website.published.mixin',
         'website.seo.metadata',
     ]
+
+    pdf_src_url = fields.Char(compute='_compute_src_url', store=False)
+
+    @api.depends('document_type')
+    def _compute_src_url(self):
+        for record in self:
+            if record.document_type == 'pdf':
+                query_obj = {
+                    'model': 'bureaucrat.knowledge.document',
+                    'field': 'document_body_pdf',
+                    'id': record.id,
+                }
+                fileURI = '%s%s' % ('/web/image?', urlencode(
+                    query_obj, quote_via=quote_plus))
+                viewerURL = '/web/static/lib/pdfjs/web/viewer.html?'
+                record.pdf_src_url = viewerURL + urlencode({'file': fileURI})
 
     def _compute_website_url(self):
         res = super(BureaucratKnowledgeDocument, self)._compute_website_url()

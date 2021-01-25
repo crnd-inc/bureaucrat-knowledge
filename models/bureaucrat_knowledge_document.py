@@ -218,7 +218,9 @@ class BureaucratKnowledgeDocument(models.Model):
                     'bureaucrat.knowledge.document.history'].browse()
 
     def _search_document_body(self, operator, value):
-        return [('latest_history_id.document_body_html', operator, value)]
+        if self.document_type == 'html':
+            return [('latest_history_id.document_body_html', operator, value)]
+        # TODO: Need add index field for document_type == 'pdf'
 
     @api.onchange('category_id', 'visibility_type')
     def _onchange_categ_visibility_type(self):
@@ -227,6 +229,28 @@ class BureaucratKnowledgeDocument(models.Model):
                 record.visibility_type = 'parent'
             elif record.visibility_type == 'parent' and not record.category_id:
                 record.visibility_type = False
+
+    def _get_history_vals(self, document, vals=False):
+        history_vals = {
+            'document_id': document.id,
+        }
+        if vals:
+            history_vals.update({
+                'commit_summary': vals.get('commit_summary')})
+        else:
+            history_vals.update({
+                'commit_summary': document.commit_summary})
+        if vals['document_type'] == 'pdf':
+            history_vals.update({
+                'document_type': 'pdf',
+                'document_body_pdf': document.document_body_pdf,
+            })
+        if vals['document_type'] == 'html':
+            history_vals.update({
+                'document_type': 'html',
+                'document_body_html': document.document_body_html,
+            })
+        return history_vals
 
     @api.model
     def create(self, vals):
@@ -249,20 +273,8 @@ class BureaucratKnowledgeDocument(models.Model):
         # to ensure that current user has access to create this document
         document.check_access_rule('create')
         history_obj = self.env['bureaucrat.knowledge.document.history']
-        if vals['document_type'] == 'pdf':
-            history_obj.create({
-                'document_id': document.id,
-                'document_type': 'pdf',
-                'document_body_pdf': document.document_body_pdf,
-                'commit_summary': vals.get('commit_summary'),
-            })
-        if vals['document_type'] == 'html':
-            history_obj.create({
-                'document_id': document.id,
-                'document_type': 'html',
-                'document_body_html': document.document_body_html,
-                'commit_summary': vals.get('commit_summary'),
-            })
+        history_vals = self._get_history_vals(document)
+        history_obj.create(history_vals)
         # Clear commit_summary for next time
         document.commit_summary = ''
         return document
@@ -271,20 +283,7 @@ class BureaucratKnowledgeDocument(models.Model):
     def _post_document_changed(self, changes):
         history_obj = self.env['bureaucrat.knowledge.document.history']
         for rec in self:
-            if rec.document_type == 'pdf':
-                history_obj.create({
-                    'document_id': rec.id,
-                    'document_type': 'pdf',
-                    'document_body_pdf': rec.document_body_pdf,
-                    'commit_summary': rec.commit_summary
-                })
-            if rec.document_type == 'html':
-                history_obj.create({
-                    'document_id': rec.id,
-                    'document_type': 'html',
-                    'document_body_html': rec.document_body_html,
-                    'commit_summary': rec.commit_summary,
-
-                })
+            history_vals = self._get_history_vals(rec)
+            history_obj.create(history_vals)
             # Clear commit_summary for next time
             rec.commit_summary = ''

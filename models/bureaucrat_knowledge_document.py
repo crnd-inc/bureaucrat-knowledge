@@ -276,7 +276,7 @@ class BureaucratKnowledgeDocument(models.Model):
         """
         if self.document_type == 'html':
             return self._get_document_index_html()
-        elif self.document_type == 'pdf':
+        if self.document_type == 'pdf':
             return self._get_document_index_pdf()
         return ""
 
@@ -347,7 +347,7 @@ class BureaucratKnowledgeDocument(models.Model):
         __, old_doc_type = changes['document_type']
         if old_doc_type == 'html':
             return {'document_body_html': False}
-        elif old_doc_type == 'pdf':
+        if old_doc_type == 'pdf':
             return {'document_body_pdf': False}
 
     @post_write('document_type', 'document_body_html', 'document_body_pdf')

@@ -264,7 +264,7 @@ class BureaucratKnowledgeDocument(models.Model):
             return ""
         try:
             index_content = html.document_fromstring(
-                rec.document_body_html
+                self.document_body_html
             ).text_content()
         except (ValueError, TypeError):
             return ""

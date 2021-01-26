@@ -130,7 +130,7 @@
                             t-raw="doc.document_body_html">
                         </div>
                     </t>
-                    <t t-if="doc.document_type == 'pdf'">
+                    <t t-if="doc.document_type == 'pdf' and doc.document_body_pdf">
                         <iframe class="o_knowledge_pdfviewer"
                                 t-att-src="doc.pdf_src_url"/>
                     </t>

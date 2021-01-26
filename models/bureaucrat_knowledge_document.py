@@ -344,7 +344,7 @@ class BureaucratKnowledgeDocument(models.Model):
 
     @pre_write('document_type')
     def _before_document_changed(self, changes):
-        __, old_doc_type = changes['document_type']
+        old_doc_type, __ = changes['document_type']
         if old_doc_type == 'html':
             return {'document_body_html': False}
         if old_doc_type == 'pdf':

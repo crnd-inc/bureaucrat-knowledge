@@ -226,13 +226,19 @@ class BureaucratKnowledgeDocument(models.Model):
                 record.latest_history_id = self.env[
                     'bureaucrat.knowledge.document.history'].browse()
 
-    def _get_index_pdf(self, bin_data):
+    def _get_document_index_pdf(self):
         '''Index PDF documents'''
         # TODO: Maybe there is a better way to do pdf indexing
-        if not bin_data:
+        self.ensure_one()
+        if not self.document_body_pdf:
             return ''
+
+        # TODO: try to compute path to attachment file,
+        #       instead of computing base64 content of files
+        #       this way, possibly, we could optimize performance
+        #       for large PDF files
         try:
-            bin_data = base64.b64decode(bin_data)
+            bin_data = base64.b64decode(self.document_body_pdf)
         except Exception:
             _logger.warning('Error in decode data for pdf')
 
@@ -249,15 +255,35 @@ class BureaucratKnowledgeDocument(models.Model):
             _logger.warning('Error in get index data for pdf')
         return buf
 
+    def _get_document_index_html(self):
+        """ parse html content and remove all tags, keeping only words
+            to be searched
+        """
+        self.ensure_one()
+        if not self.document_body_html:
+            return ""
+        try:
+            index_content = html.document_fromstring(
+                rec.document_body_html
+            ).text_content()
+        except (ValueError, TypeError):
+            return ""
+        return index_content
+
+    def _get_document_index(self):
+        """ Compute index content for the document.
+            Could be used for searches
+        """
+        if self.document_type == 'html':
+            return self._get_document_index_html()
+        elif self.document_type == 'pdf':
+            return self._get_document_index_pdf()
+        return ""
+
     @api.depends('document_type', 'document_body_html', 'document_body_pdf')
     def _compute_index_body(self):
         for rec in self:
-            if rec.document_type == 'html':
-                rec.index_document_body = html.document_fromstring(
-                    rec.document_body_html).text_content()
-            elif rec.document_type == 'pdf':
-                rec.index_document_body = (
-                    rec._get_index_pdf(rec.document_body_pdf))
+            rec.index_document_body = rec._get_document_index()
 
     @api.onchange('category_id', 'visibility_type')
     def _onchange_categ_visibility_type(self):
@@ -272,21 +298,22 @@ class BureaucratKnowledgeDocument(models.Model):
 
         history_vals = {
             'document_id': self.id,
+            'commit_summary': self.commit_summary,
+            'document_type': self.document_type,
         }
-        history_vals.update({
-            'commit_summary': self.commit_summary})
 
         # Clear commit_summary for next time
         self.commit_summary = False
 
+        # TODO: move preparing data logic to separate method,
+        #       to simplify futher extension of knowledge base
+        #       with new document types
         if self.document_type == 'html':
             history_vals.update({
-                'document_type': 'html',
                 'document_body_html': self.document_body_html,
             })
-        if self.document_type == 'pdf':
+        elif self.document_type == 'pdf':
             history_vals.update({
-                'document_type': 'pdf',
                 'document_body_pdf': self.document_body_pdf,
             })
         return history_obj.create(history_vals)
@@ -317,11 +344,11 @@ class BureaucratKnowledgeDocument(models.Model):
 
     @pre_write('document_type')
     def _before_document_changed(self, changes):
-        new_document_type = changes['document_type'][1]  # (old, new)
-        if new_document_type == 'html':
-            return {'document_body_pdf': False}
-        if new_document_type == 'pdf':
+        __, old_doc_type = changes['document_type']
+        if old_doc_type == 'html':
             return {'document_body_html': False}
+        elif old_doc_type == 'pdf':
+            return {'document_body_pdf': False}
 
     @post_write('document_type', 'document_body_html', 'document_body_pdf')
     def _post_document_changed(self, changes):

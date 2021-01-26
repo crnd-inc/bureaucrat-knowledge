@@ -17,7 +17,7 @@ class BureaucratKnowledgeDocumentHistory(models.Model):
     document_type = fields.Selection(
         selection=DOC_TYPE, required=True)
     document_body_html = fields.Html()
-    document_body_pdf = fields.Binary()
+    document_body_pdf = fields.Binary(attachment=True)
     user_id = fields.Many2one(
         'res.users',
         index=True, required=True, readonly=True,

@@ -95,8 +95,7 @@ class TestBureaucratKnowledge(TestBureaucratKnowledgeBase):
         self.assertEqual(self.document_subcat_2_with_pdf.document_type, 'pdf')
         self.assertIn(
             'Lorem Ipsum',
-            Document._get_index_pdf(
-                self.document_subcat_2_with_pdf.document_body_pdf)
+            self.document_subcat_2_with_pdf._get_document_index()
         )
         documents = Document.search([
             ('index_document_body', 'ilike', 'lorem ipsum')])

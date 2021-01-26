@@ -1,10 +1,11 @@
 import io
 import logging
+import base64
 import PyPDF2
-from lxml import html
+from lxml import html  # nosec
 
 from odoo import models, fields, api
-from odoo.addons.generic_mixin import post_write
+from odoo.addons.generic_mixin import pre_write, post_write
 
 _logger = logging.getLogger(__name__)
 
@@ -34,7 +35,7 @@ class BureaucratKnowledgeDocument(models.Model):
         required=True,
     )
     document_body_html = fields.Html()
-    document_body_pdf = fields.Binary()
+    document_body_pdf = fields.Binary(attachment=True)
     category_id = fields.Many2one(
         'bureaucrat.knowledge.category', index=True, ondelete='restrict')
     history_ids = fields.One2many(
@@ -46,8 +47,7 @@ class BureaucratKnowledgeDocument(models.Model):
     commit_summary = fields.Char(store=True)
 
     index_document_body = fields.Text(
-        store=True, inddex=True,
-        compute='_compute_index_body_pdf')
+        store=True, compute='_compute_index_body')
 
     active = fields.Boolean(default=True, index=True)
 
@@ -229,25 +229,33 @@ class BureaucratKnowledgeDocument(models.Model):
     def _get_index_pdf(self, bin_data):
         '''Index PDF documents'''
         # TODO: Maybe there is a better way to do pdf indexing
-        buf = u""
-        if bin_data and bin_data.startswith(b'%PDF-'):
-            f = io.BytesIO(bin_data)
-            try:
-                pdf = PyPDF2.PdfFileReader(f, overwriteWarnings=False)
-                for page in pdf.pages:
-                    buf += page.extractText()
-            except Exception:
-                _logger.warning('Error in get index data for pdf')
+        if not bin_data:
+            return ''
+        try:
+            bin_data = base64.b64decode(bin_data)
+        except Exception:
+            _logger.warning('Error in decode data for pdf')
+
+        if not bin_data.startswith(b'%PDF-'):
+            return ''
+
+        f = io.BytesIO(bin_data)
+        buf = ''
+        try:
+            pdf = PyPDF2.PdfFileReader(f, overwriteWarnings=False)
+            for page in pdf.pages:
+                buf += page.extractText()
+        except Exception:
+            _logger.warning('Error in get index data for pdf')
         return buf
 
     @api.depends('document_type', 'document_body_html', 'document_body_pdf')
-    def _compute_index_body_pdf(self):
+    def _compute_index_body(self):
         for rec in self:
             if rec.document_type == 'html':
                 rec.index_document_body = html.document_fromstring(
                     rec.document_body_html).text_content()
-
-            if rec.document_type == 'pdf':
+            elif rec.document_type == 'pdf':
                 rec.index_document_body = (
                     rec._get_index_pdf(rec.document_body_pdf))
 
@@ -307,13 +315,13 @@ class BureaucratKnowledgeDocument(models.Model):
 
         return document
 
-    def write(self, vals):
-        # Overriden to clear not used fieds
-        if vals.get('document_type') == 'html':
-            vals.update({'document_body_pdf': False})
-        if vals.get('document_type') == 'pdf':
-            vals.update({'document_body_html': False})
-        return super(BureaucratKnowledgeDocument, self).write(vals)
+    @pre_write('document_type')
+    def _before_document_changed(self, changes):
+        new_document_type = changes['document_type'][1]  # (old, new)
+        if new_document_type == 'html':
+            return {'document_body_pdf': False}
+        if new_document_type == 'pdf':
+            return {'document_body_html': False}
 
     @post_write('document_type', 'document_body_html', 'document_body_pdf')
     def _post_document_changed(self, changes):

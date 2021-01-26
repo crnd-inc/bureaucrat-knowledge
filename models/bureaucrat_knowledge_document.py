@@ -1,6 +1,7 @@
 import io
 import logging
 import PyPDF2
+from lxml import html
 
 from odoo import models, fields, api
 from odoo.addons.generic_mixin import post_write
@@ -43,6 +44,11 @@ class BureaucratKnowledgeDocument(models.Model):
         compute='_compute_document_latest_history_id',
         readonly=True, store=True, auto_join=True, compute_sudo=True)
     commit_summary = fields.Char(store=True)
+
+    index_document_body = fields.Text(
+        store=True, inddex=True,
+        compute='_compute_index_body_pdf')
+
     active = fields.Boolean(default=True, index=True)
 
     visibility_type = fields.Selection(
@@ -220,11 +226,11 @@ class BureaucratKnowledgeDocument(models.Model):
                 record.latest_history_id = self.env[
                     'bureaucrat.knowledge.document.history'].browse()
 
-    def _get_index_document_body_pdf(self, bin_data):
+    def _get_index_pdf(self, bin_data):
         '''Index PDF documents'''
         # TODO: Maybe there is a better way to do pdf indexing
         buf = u""
-        if bin_data.startswith(b'%PDF-'):
+        if bin_data and bin_data.startswith(b'%PDF-'):
             f = io.BytesIO(bin_data)
             try:
                 pdf = PyPDF2.PdfFileReader(f, overwriteWarnings=False)
@@ -234,12 +240,16 @@ class BureaucratKnowledgeDocument(models.Model):
                 _logger.warning('Error in get index data for pdf')
         return buf
 
-    def _search_document_body(self, operator, value):
-        if self.document_type == 'html':
-            return [('latest_history_id.document_body_html', operator, value)]
-        if self.document_type == 'pdf':
-            return [('latest_history_id.index_document_body_pdf',
-                     operator, value)]
+    @api.depends('document_type', 'document_body_html', 'document_body_pdf')
+    def _compute_index_body_pdf(self):
+        for rec in self:
+            if rec.document_type == 'html':
+                rec.index_document_body = html.document_fromstring(
+                    rec.document_body_html).text_content()
+
+            if rec.document_type == 'pdf':
+                rec.index_document_body = (
+                    rec._get_index_pdf(rec.document_body_pdf))
 
     @api.onchange('category_id', 'visibility_type')
     def _onchange_categ_visibility_type(self):
@@ -249,32 +259,29 @@ class BureaucratKnowledgeDocument(models.Model):
             elif record.visibility_type == 'parent' and not record.category_id:
                 record.visibility_type = False
 
-    def _get_history_vals(self, document, vals=False):
+    def _save_document_history(self):
+        history_obj = self.env['bureaucrat.knowledge.document.history']
+
         history_vals = {
-            'document_id': document.id,
+            'document_id': self.id,
         }
-        if vals:
-            history_vals.update({
-                'commit_summary': vals.get('commit_summary')})
-        else:
-            history_vals.update({
-                'commit_summary': document.commit_summary})
-        if ((vals and vals['document_type'] == 'pdf')
-                or document.document_type == 'pdf'):
-            history_vals.update({
-                'document_type': 'pdf',
-                'document_body_pdf': document.document_body_pdf,
-                'index_document_body_pdf':
-                    self._get_index_document_body_pdf(
-                        document.document_body_pdf),
-            })
-        if ((vals and vals['document_type'] == 'html')
-                or document.document_type == 'html'):
+        history_vals.update({
+            'commit_summary': self.commit_summary})
+
+        # Clear commit_summary for next time
+        self.commit_summary = False
+
+        if self.document_type == 'html':
             history_vals.update({
                 'document_type': 'html',
-                'document_body_html': document.document_body_html,
+                'document_body_html': self.document_body_html,
             })
-        return history_vals
+        if self.document_type == 'pdf':
+            history_vals.update({
+                'document_type': 'pdf',
+                'document_body_pdf': self.document_body_pdf,
+            })
+        return history_obj.create(history_vals)
 
     @api.model
     def create(self, vals):
@@ -296,18 +303,18 @@ class BureaucratKnowledgeDocument(models.Model):
         # Enforce check of access rights after document created,
         # to ensure that current user has access to create this document
         document.check_access_rule('create')
-        history_obj = self.env['bureaucrat.knowledge.document.history']
-        history_vals = self._get_history_vals(document, vals)
-        history_obj.create(history_vals)
-        # Clear commit_summary for next time
-        document.commit_summary = ''
+        document._save_document_history()
+
         return document
+
+    def write(self, vals):
+        # Overriden to clear not used fieds
+        if vals.get('document_type') == 'html':
+            vals.update({'document_body_pdf': False})
+        if vals.get('document_type') == 'pdf':
+            vals.update({'document_body_html': False})
+        return super(BureaucratKnowledgeDocument, self).write(vals)
 
     @post_write('document_type', 'document_body_html', 'document_body_pdf')
     def _post_document_changed(self, changes):
-        history_obj = self.env['bureaucrat.knowledge.document.history']
-        for rec in self:
-            history_vals = self._get_history_vals(rec)
-            history_obj.create(history_vals)
-            # Clear commit_summary for next time
-            rec.commit_summary = ''
+        self._save_document_history()

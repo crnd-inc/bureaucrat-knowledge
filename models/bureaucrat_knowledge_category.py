@@ -36,10 +36,6 @@ class BureaucratKnowledgeCategory(models.Model):
     document_ids = fields.One2many(
         'bureaucrat.knowledge.document', 'category_id')
     documents_count = fields.Integer(compute='_compute_documents_count')
-
-    # TODO: Is this field needed? If so, it must be calculated
-    # in the _compute method
-    documents_nr = fields.Integer(compute='_compute_documents_count')
     active = fields.Boolean(default=True, index=True)
 
     category_contents = fields.Html(

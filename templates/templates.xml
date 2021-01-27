@@ -125,15 +125,20 @@
             <div class="oe_structure">
                 <div class="container">
                     <t t-call="bureaucrat_knowledge_website.knowledge_category_navigation"/>
-                    <t t-if="doc.document_type == 'html'">
-                        <div id="document-text"
-                            t-raw="doc.document_body_html">
+                    <div class="row">
+                        <div class="col-12">
+                            <t t-if="doc.document_type == 'html'">
+                                <div id="document-text"
+                                    t-raw="doc.document_body_html">
+                                </div>
+                            </t>
+                            <t t-if="doc.document_type == 'pdf' and doc.document_body_pdf">
+                                <div class="embed-responsive embed-responsive-4by3 embed-responsive-item mb8">
+                                    <iframe class="o_knowledge_pdfviewer" t-att-src="doc.pdf_src_url"/>
+                                </div>
+                            </t>
                         </div>
-                    </t>
-                    <t t-if="doc.document_type == 'pdf' and doc.document_body_pdf">
-                        <iframe class="o_knowledge_pdfviewer"
-                                t-att-src="doc.pdf_src_url"/>
-                    </t>
+                    </div>
                 </div>
             </div>
         </t>

@@ -24,6 +24,7 @@ class BureaucratKnowledgeCategory(models.Model):
     _auto_set_noupdate_on_write = True
 
     name = fields.Char(translate=True, index=True, required=True)
+    full_name = fields.Char(compute='_compute_full_name')
     description = fields.Html()
     parent_id = fields.Many2one(
         'bureaucrat.knowledge.category', index=True, ondelete='cascade')
@@ -362,3 +363,19 @@ class BureaucratKnowledgeCategory(models.Model):
                     [('category_id', 'child_of', rec.id),
                      ('active', '!=', rec.active)]).write(
                          {'active': rec.active})
+
+    def name_get(self):
+        return [(rec.id, rec.name) for rec in self]
+
+    def _compute_full_name(self):
+        def get_names(rec):
+            """ Return the list [rec.name, rec.parent_id.name, ...] """
+            res = []
+            name_field = self._rec_name_fallback()
+            while rec:
+                if rec[name_field]:
+                    res.append(rec[name_field])
+                rec = rec[self._parent_name]
+            return res
+        for rec in self:
+            rec.full_name = " / ".join(reversed(get_names(rec.sudo())))

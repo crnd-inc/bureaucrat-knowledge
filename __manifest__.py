@@ -10,6 +10,15 @@
     'version': '12.0.0.14.0',
     'category': 'Knowledge',
 
+    'external_dependencies': {
+        'python': [
+            'html2text',
+            'pdf2image',
+        ],
+        'bin': [
+            'pdftoppm',
+        ],
+    },
     # any module necessary for this one to work correctly
     'depends': [
         'base',
@@ -18,11 +27,6 @@
         'generic_tag',
         'mail',
     ],
-    'external_dependencies': {
-        'python': [
-            'pdf2image',
-        ],
-    },
 
     # always loaded
     'data': [

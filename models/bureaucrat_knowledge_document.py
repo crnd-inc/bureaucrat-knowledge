@@ -52,6 +52,7 @@ class BureaucratKnowledgeDocument(models.Model):
         store=True)
     category_id = fields.Many2one(
         'bureaucrat.knowledge.category', index=True, ondelete='restrict')
+    category_full_name = fields.Char(related='category_id.full_name')
     history_ids = fields.One2many(
         'bureaucrat.knowledge.document.history', 'document_id', auto_join=True)
     latest_history_id = fields.Many2one(
@@ -63,6 +64,12 @@ class BureaucratKnowledgeDocument(models.Model):
         store=True, compute='_compute_index_body')
 
     active = fields.Boolean(default=True, index=True)
+    color = fields.Integer('Color Index', readonly=False)
+
+    created_by_id = fields.Many2one(
+        'res.users', 'Created by',
+        readonly=True, ondelete='restrict', index=True,
+        help="Document was created by this user", copy=False)
 
     visibility_type = fields.Selection(
         selection=[
@@ -366,8 +373,10 @@ class BureaucratKnowledgeDocument(models.Model):
             vals['visibility_type'] = 'restricted'
             vals['owner_user_ids'] = [(4, self.env.user.id)]
 
-        document = super(BureaucratKnowledgeDocument, self.sudo()).create(vals)
+        # This is required to display the author of the document correctly
+        vals.update({'created_by_id': self.env.user.id})
 
+        document = super(BureaucratKnowledgeDocument, self.sudo()).create(vals)
         # reference created document as self.env (because before this document
         # is referenced as sudo)
         document = document.with_env(self.env)

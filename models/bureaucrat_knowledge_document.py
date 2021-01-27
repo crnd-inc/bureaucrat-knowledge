@@ -4,8 +4,11 @@ import base64
 import PyPDF2
 from lxml import html  # nosec
 
+import pdf2image
+
 from odoo import models, fields, api
 from odoo.addons.generic_mixin import pre_write, post_write
+from ..tools.utils import _get_preview_from_html
 
 _logger = logging.getLogger(__name__)
 
@@ -22,7 +25,10 @@ class BureaucratKnowledgeDocument(models.Model):
         'generic.tag.mixin',
         'generic.mixin.track.changes',
         'generic.mixin.data.updatable',
+        'generic.mixin.get.action',
         'mail.thread',
+        'mail.activity.mixin',
+        # 'image.mixin',
     ]
     _order = 'name, id'
 
@@ -36,6 +42,14 @@ class BureaucratKnowledgeDocument(models.Model):
     )
     document_body_html = fields.Html()
     document_body_pdf = fields.Binary(attachment=True)
+    document_preview_text = fields.Text(
+        compute='_compute_preview',
+        store=True)
+    document_preview_image = fields.Binary(
+        "Preview",
+        attachment=True,
+        compute='_compute_preview',
+        store=True)
     category_id = fields.Many2one(
         'bureaucrat.knowledge.category', index=True, ondelete='restrict')
     history_ids = fields.One2many(
@@ -45,7 +59,6 @@ class BureaucratKnowledgeDocument(models.Model):
         compute='_compute_document_latest_history_id',
         readonly=True, store=True, auto_join=True, compute_sudo=True)
     commit_summary = fields.Char(store=True)
-
     index_document_body = fields.Text(
         store=True, compute='_compute_index_body')
 
@@ -155,6 +168,16 @@ class BureaucratKnowledgeDocument(models.Model):
          "to set Visibility Type 'Parent'"),
     ]
 
+    @api.depends('document_body_html', 'document_body_pdf', 'document_type')
+    def _compute_preview(self):
+        for rec in self:
+            if rec.document_type == 'pdf':
+                rec.document_preview_image = \
+                    rec._get_preview_from_pdf()
+            if rec.document_type == 'html':
+                rec.document_preview_text = \
+                    _get_preview_from_html(rec.document_body_html)
+
     @api.depends(
         'visibility_type',
         'category_id',
@@ -168,7 +191,6 @@ class BureaucratKnowledgeDocument(models.Model):
             parent = rec.category_id.sudo()
             while parent.visibility_type == 'parent' and parent.parent_id:
                 parent = parent.parent_id
-
             rec.actual_visibility_category_id = parent
 
     @api.depends(
@@ -279,6 +301,21 @@ class BureaucratKnowledgeDocument(models.Model):
         if self.document_type == 'pdf':
             return self._get_document_index_pdf()
         return ''
+
+    def _get_preview_from_pdf(self):
+        self.ensure_one()
+        if not self.document_body_pdf:
+            return ''
+
+        try:
+            preview = pdf2image.convert_from_bytes(
+                base64.b64decode(self.document_body_pdf))
+        except Exception:
+            _logger.warning('Error in decode data for pdf')
+
+        byte_io = io.BytesIO()
+        preview[0].save(byte_io, 'PNG')
+        return base64.b64encode(byte_io.getvalue())
 
     @api.depends('document_type', 'document_body_html', 'document_body_pdf')
     def _compute_index_body(self):

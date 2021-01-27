@@ -261,13 +261,13 @@ class BureaucratKnowledgeDocument(models.Model):
         """
         self.ensure_one()
         if not self.document_body_html:
-            return ""
+            return ''
         try:
             index_content = html.document_fromstring(
                 self.document_body_html
             ).text_content()
         except (ValueError, TypeError):
-            return ""
+            return ''
         return index_content
 
     def _get_document_index(self):
@@ -278,7 +278,7 @@ class BureaucratKnowledgeDocument(models.Model):
             return self._get_document_index_html()
         if self.document_type == 'pdf':
             return self._get_document_index_pdf()
-        return ""
+        return ''
 
     @api.depends('document_type', 'document_body_html', 'document_body_pdf')
     def _compute_index_body(self):

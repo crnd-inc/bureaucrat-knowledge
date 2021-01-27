@@ -9,6 +9,8 @@
                 <field name="tag_ids"/>
                 <field name="search_tag_id"/>
                 <field name="search_no_tag_id"/>
+                <field name="index_document_body"
+                       string="Document Content"/>
                 <filter name="filter_archived"
                         string="Archived"
                         domain="[('active', '=', False)]"/>
@@ -61,7 +63,7 @@
                     <field name="document_body_pdf"
                            attrs="{'invisible': [('document_type', '!=', 'pdf')]}"
                            widget="pdf_viewer"/>
-                    <field name="commit_summary" class="oe_edit_only" placeholder="Commit summary ..." required="True"/>
+                    <field name="commit_summary" class="oe_edit_only" placeholder="Commit summary ..."/>
                     <notebook>
                         <page name="document_history" string="Document History" mode="tree, form">
                             <field name="history_ids" readonly="True">

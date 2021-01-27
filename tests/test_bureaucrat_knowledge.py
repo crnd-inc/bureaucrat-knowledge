@@ -90,7 +90,7 @@ class TestBureaucratKnowledge(TestBureaucratKnowledgeBase):
         self.assertEqual(len(subdocument.actual_editor_user_ids), 1)
         self.assertIn(self.demo_user, subdocument.actual_editor_user_ids)
 
-    def test_document_search_by_index_fied(self):
+    def test_document_search_by_index_field(self):
         Document = self.env['bureaucrat.knowledge.document']
         self.assertEqual(self.document_subcat_2_with_pdf.document_type, 'pdf')
         self.assertIn(

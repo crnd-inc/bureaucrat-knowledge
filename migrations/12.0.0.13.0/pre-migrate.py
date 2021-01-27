@@ -8,4 +8,7 @@ def migrate(cr, installed_version):
             SELECT document_body FROM bureaucrat_knowledge_document_history
             WHERE bureaucrat_knowledge_document_history.id = latest_history_id
         );
+
+        ALTER TABLE bureaucrat_knowledge_document_history
+        RENAME COLUMN document_body TO document_body_html;
     """)

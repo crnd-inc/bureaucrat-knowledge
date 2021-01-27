@@ -200,6 +200,12 @@
                 <field name="document_preview_image"/>
                 <field name="tag_ids"/>
                 <field name="created_by_id"/>
+                <searchpanel>
+                    <field name="category_id" string="Categories"/>
+                    <field name="tag_ids" string="Tags" select="multi"
+                           domain="[('model_id.model', '=', 'bureaucrat.knowledge.document')]"/>
+                    <field name="document_type" string="Types" expand="False"/>
+                </searchpanel>
                 <templates>
                     <t t-name="kanban-box">
                         <div t-attf-class="oe_kanban_card oe_kanban_global_click"

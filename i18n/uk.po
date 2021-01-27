@@ -34,6 +34,11 @@ msgid "Bureaucrat Knowledge: Document"
 msgstr ""
 
 #. module: bureaucrat_knowledge_website
+#: model:ir.model.fields,field_description:bureaucrat_knowledge_website.field_bureaucrat_knowledge_document__pdf_src_url
+msgid "Pdf Src Url"
+msgstr ""
+
+#. module: bureaucrat_knowledge_website
 #: model_terms:ir.ui.view,arch_db:bureaucrat_knowledge_website.bureaucrat_knowledge_category_view_form
 #: model_terms:ir.ui.view,arch_db:bureaucrat_knowledge_website.bureaucrat_knowledge_document_view_form
 msgid "View on Website"

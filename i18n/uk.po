@@ -279,6 +279,11 @@ msgid "Demo Document For Subcategory 2"
 msgstr ""
 
 #. module: bureaucrat_knowledge
+#: model:bureaucrat.knowledge.document,name:bureaucrat_knowledge.document_demo_sub_2_with_pdf
+msgid "Demo Document For Subcategory 2 With PDF"
+msgstr ""
+
+#. module: bureaucrat_knowledge
 #: model:bureaucrat.knowledge.document,name:bureaucrat_knowledge.document_demo_top_1
 msgid "Demo Document Top Level"
 msgstr ""
@@ -304,19 +309,35 @@ msgstr ""
 #. module: bureaucrat_knowledge
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category__document_ids
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document_history__document_id
-#: model_terms:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_document_view_form
 msgid "Document"
 msgstr ""
 
 #. module: bureaucrat_knowledge
-#: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document__document_body
-#: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document_history__document_body
-msgid "Document Body"
+#: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document__document_body_html
+#: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document_history__document_body_html
+msgid "Document Body Html"
+msgstr ""
+
+#. module: bureaucrat_knowledge
+#: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document__document_body_pdf
+#: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document_history__document_body_pdf
+msgid "Document Body Pdf"
+msgstr ""
+
+#. module: bureaucrat_knowledge
+#: model_terms:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_document_view_search
+msgid "Document Content"
 msgstr ""
 
 #. module: bureaucrat_knowledge
 #: model_terms:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_document_view_form
 msgid "Document History"
+msgstr ""
+
+#. module: bureaucrat_knowledge
+#: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document__document_type
+#: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document_history__document_type
+msgid "Document Type"
 msgstr ""
 
 #. module: bureaucrat_knowledge
@@ -720,6 +741,11 @@ msgid "Incident Life Cycle"
 msgstr ""
 
 #. module: bureaucrat_knowledge
+#: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document__index_document_body
+msgid "Index Document Body"
+msgstr ""
+
+#. module: bureaucrat_knowledge
 #: model:ir.model.fields,help:bureaucrat_knowledge.field_bureaucrat_knowledge_category__ir_model_data_no_update
 #: model:ir.model.fields,help:bureaucrat_knowledge.field_bureaucrat_knowledge_document__ir_model_data_no_update
 msgid ""
@@ -1097,4 +1123,16 @@ msgstr ""
 #: model:ir.model.fields,help:bureaucrat_knowledge.field_bureaucrat_knowledge_category__ir_model_data_xmlid
 #: model:ir.model.fields,help:bureaucrat_knowledge.field_bureaucrat_knowledge_document__ir_model_data_xmlid
 msgid "XML ID for this record."
+msgstr ""
+
+#. module: bureaucrat_knowledge
+#: selection:bureaucrat.knowledge.document,document_type:0
+#: selection:bureaucrat.knowledge.document.history,document_type:0
+msgid "html"
+msgstr ""
+
+#. module: bureaucrat_knowledge
+#: selection:bureaucrat.knowledge.document,document_type:0
+#: selection:bureaucrat.knowledge.document.history,document_type:0
+msgid "pdf"
 msgstr ""

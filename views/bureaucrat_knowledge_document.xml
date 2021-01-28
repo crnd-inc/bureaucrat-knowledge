@@ -73,35 +73,6 @@
                            widget="pdf_viewer"/>
                     <field name="commit_summary" class="oe_edit_only" placeholder="Commit summary ..."/>
                     <notebook>
-                        <page name="document_history" string="Document History" mode="tree, form">
-                            <field name="history_ids" readonly="True">
-                                <tree create="0" delete="0">
-                                    <field name="document_type"/>
-                                    <field name="commit_summary"/>
-                                    <field name="user_id"/>
-                                    <field name="date_create"/>
-                                </tree>
-                                <form>
-                                    <field name="commit_summary"/>
-                                    <field name="document_body_html"
-                                           attrs="{'invisible': [('document_type', '!=', 'html')]}"/>
-                                    <field name="document_body_pdf"
-                                           attrs="{'invisible': [('document_type', '!=', 'pdf')]}"
-                                           widget="pdf_viewer"/>
-                                    <group>
-                                        <group>
-                                            <field name="document_type"/>
-                                        </group>
-                                        <group>
-                                            <field name="user_id" readonly="1"/>
-                                        </group>
-                                        <group>
-                                            <field name="date_create" readonly="1"/>
-                                        </group>
-                                    </group>
-                                </form>
-                            </field>
-                        </page>
                         <page name="document_settings" string="Settings">
                             <!-- TODO: have to be visible only for owners -->
                             <div>

@@ -4,8 +4,8 @@
         <field name="model">bureaucrat.knowledge.document.history</field>
         <field name="arch" type="xml">
             <tree>
-                <field name="document_id"/>
                 <field name="commit_summary"/>
+                <field name="document_type"/>
                 <field name="user_id"/>
                 <field name="date_create"/>
             </tree>

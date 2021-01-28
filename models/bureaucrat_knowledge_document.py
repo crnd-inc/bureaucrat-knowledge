@@ -263,6 +263,7 @@ class BureaucratKnowledgeDocument(models.Model):
         return self.env['generic.mixin.get.action'].get_action_by_xmlid(
             'bureaucrat_knowledge'
             '.action_bureaucrat_knowledge_document_history',
+            context={'default_document_id': self.id},
             domain=[
                 ('document_id', '=', self.id)
             ],

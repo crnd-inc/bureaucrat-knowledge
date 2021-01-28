@@ -14,6 +14,7 @@ class BureaucratKnowledgeDocumentHistory(models.Model):
     _auto_set_noupdate_on_write = True
 
     commit_summary = fields.Char()
+    document_name = fields.Char()
     document_type = fields.Selection(
         selection=DOC_TYPE, required=True)
     document_body_html = fields.Html()
@@ -29,3 +30,11 @@ class BureaucratKnowledgeDocumentHistory(models.Model):
     document_id = fields.Many2one(
         'bureaucrat.knowledge.document',
         ondelete='cascade', index=True, required=True, readonly=True)
+
+    def name_get(self):
+        result = []
+        for rec in self:
+            result.append(
+                (rec.id, "%s [%s]" % (rec.document_id.name, rec.date_create))
+            )
+        return result

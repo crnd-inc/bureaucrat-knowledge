@@ -356,6 +356,7 @@ class BureaucratKnowledgeDocument(models.Model):
 
         history_vals = {
             'document_id': self.id,
+            'document_name': self.name,
             'commit_summary': self.commit_summary,
             'document_type': self.document_type,
         }
@@ -410,6 +411,10 @@ class BureaucratKnowledgeDocument(models.Model):
         if old_doc_type == 'pdf':
             return {'document_body_pdf': False}
 
-    @post_write('document_type', 'document_body_html', 'document_body_pdf')
+    @post_write(
+        'name',
+        'document_type',
+        'document_body_html',
+        'document_body_pdf')
     def _post_document_changed(self, changes):
         self._save_document_history()

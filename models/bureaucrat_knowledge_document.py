@@ -55,9 +55,11 @@ class BureaucratKnowledgeDocument(models.Model):
     category_full_name = fields.Char(related='category_id.full_name')
     history_ids = fields.One2many(
         'bureaucrat.knowledge.document.history', 'document_id', auto_join=True)
+    history_count = fields.Integer(
+        compute='_compute_document_history')
     latest_history_id = fields.Many2one(
         'bureaucrat.knowledge.document.history',
-        compute='_compute_document_latest_history_id',
+        compute='_compute_document_history',
         readonly=True, store=True, auto_join=True, compute_sudo=True)
     commit_summary = fields.Char(store=True)
     index_document_body = fields.Text(
@@ -247,13 +249,24 @@ class BureaucratKnowledgeDocument(models.Model):
             rec.actual_owner_group_ids = actual_owner_groups
 
     @api.depends('history_ids')
-    def _compute_document_latest_history_id(self):
+    def _compute_document_history(self):
         for record in self:
             if record.history_ids:
                 record.latest_history_id = record.history_ids.sorted()[0]
             else:
                 record.latest_history_id = self.env[
                     'bureaucrat.knowledge.document.history'].browse()
+            record.history_count = len(record.history_ids)
+
+    def action_view_history(self):
+        self.ensure_one()
+        return self.env['generic.mixin.get.action'].get_action_by_xmlid(
+            'bureaucrat_knowledge'
+            '.action_bureaucrat_knowledge_document_history',
+            domain=[
+                ('document_id', '=', self.id)
+            ],
+        )
 
     def _get_document_index_pdf(self):
         '''Index PDF documents'''

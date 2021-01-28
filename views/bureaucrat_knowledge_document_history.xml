@@ -43,4 +43,12 @@
             </form>
         </field>
     </record>
+
+    <record id="action_bureaucrat_knowledge_document_history" model="ir.actions.act_window">
+        <field name="name">Documents History</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">bureaucrat.knowledge.document.history</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
 </odoo>

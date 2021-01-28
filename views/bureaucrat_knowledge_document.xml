@@ -43,6 +43,14 @@
             <form>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button"
+                            name="action_view_history"
+                            type="object"
+                            icon="fa-history">
+                                <field name="history_count"
+                                       string="Changes"
+                                       widget="statinfo"/>
+                        </button>
                     </div>
                     <group>
                         <group>

@@ -44,6 +44,20 @@
                 <sheet>
                     <div class="oe_button_box" name="button_box">
                         <button class="oe_stat_button"
+                            name="action_related_document_manage"
+                            string="Manage Related Docs"
+                            type="object"
+                            icon="fa-book">
+                        </button>
+                        <button class="oe_stat_button"
+                            name="action_view_related_documents"
+                            type="object"
+                            icon="fa-link">
+                                <field name="related_document_total_count"
+                                       string="Related Docs"
+                                       widget="statinfo"/>
+                        </button>
+                        <button class="oe_stat_button"
                             name="action_view_history"
                             type="object"
                             icon="fa-history">

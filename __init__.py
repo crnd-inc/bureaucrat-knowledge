@@ -1,4 +1,1 @@
-from . import (
-    models,
-    wizard,
-)
+from . import models

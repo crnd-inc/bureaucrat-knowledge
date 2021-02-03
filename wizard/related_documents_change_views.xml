@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <record id="document_wizard_manage_related_documents_form_view" model="ir.ui.view">
-        <field name="name">document.wizard.manage.related.documents.form</field>
         <field name="model">document.wizard.manage.related.documents</field>
         <field name="arch" type="xml">
             <form>
@@ -27,7 +26,7 @@
         <field name="res_model">document.wizard.manage.related.documents</field>
         <field name="binding_model_id"
                ref="bureaucrat_knowledge.model_bureaucrat_knowledge_document"/>
-        <field name="name">Manage related documents</field>
+        <field name="name">Manage Related Documents</field>
         <field name="view_mode">form</field>
         <field name="target">new</field>
         <field name="context">{'default_document_id': active_id}</field>

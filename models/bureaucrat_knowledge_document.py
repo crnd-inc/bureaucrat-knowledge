@@ -2,8 +2,7 @@ from odoo import models, fields, api
 
 
 class BureaucratKnowledgeDocument(models.Model):
-    _name = 'bureaucrat.knowledge.document'
-    _inherit = ['bureaucrat.knowledge.document']
+    _inherit = 'bureaucrat.knowledge.document'
 
     related_document_ids = fields.Many2many(
         'bureaucrat.knowledge.document',

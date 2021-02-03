@@ -32,7 +32,6 @@
                        widget="many2many_tags"
                        placeholder="Tags..."
                        context="{'default_model': 'bureaucrat.knowledge.document'}"/>
-                <field name="active"/>
             </tree>
         </field>
     </record>
@@ -46,9 +45,10 @@
                         <button class="oe_stat_button"
                             name="action_view_history"
                             type="object"
+                            attrs="{'invisible': [('history_count', '&lt;=', 1)]}"
                             icon="fa-history">
                                 <field name="history_count"
-                                       string="Changes"
+                                       string="Versions"
                                        widget="statinfo"/>
                         </button>
                         <button name="toggle_active" type="object" groups="base.group_user"
@@ -57,27 +57,29 @@
                                    options='{"terminology": "archive"}'/>
                         </button>
                     </div>
-                    <group>
-                        <group>
+                    <group name="group_document_head">
+                        <group name="group_document_head_left">
                             <field name="name" placeholder="Name..."/>
+                            <field name="category_id"/>
+                        </group>
+                        <group name="group_document_head_right">
+                            <field name="document_type" widget="selection"/>
                             <field name="tag_ids"
                                    options="{'color_field': 'color'}"
                                    widget="many2many_tags"
                                    placeholder="Tags..."
                                    context="{'default_model': 'bureaucrat.knowledge.document'}"/>
                         </group>
-                        <group>
-                            <field name="category_id"/>
-                            <field name="document_type" widget="selection"/>
-                        </group>
                     </group>
-                    <field name="document_body_html"
-                           attrs="{'invisible': [('document_type', '!=', 'html')]}"/>
-                    <field name="document_body_pdf"
-                           attrs="{'invisible': [('document_type', '!=', 'pdf')]}"
-                           widget="pdf_viewer"/>
-                    <field name="commit_summary" class="oe_edit_only" placeholder="Commit summary ..."/>
                     <notebook>
+                        <page name="document_document" string="Document">
+                            <field name="document_body_html"
+                                attrs="{'invisible': [('document_type', '!=', 'html')]}"/>
+                            <field name="document_body_pdf"
+                                attrs="{'invisible': [('document_type', '!=', 'pdf')]}"
+                                widget="pdf_viewer"/>
+                            <field name="commit_summary" class="oe_edit_only" placeholder="Commit summary ..."/>
+                        </page>
                         <page name="document_settings" string="Settings">
                             <!-- TODO: have to be visible only for owners -->
                             <div>

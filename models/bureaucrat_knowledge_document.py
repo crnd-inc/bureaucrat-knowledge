@@ -28,7 +28,6 @@ class BureaucratKnowledgeDocument(models.Model):
         'generic.mixin.get.action',
         'mail.thread',
         'mail.activity.mixin',
-        # 'image.mixin',
     ]
     _order = 'name, id'
 
@@ -56,7 +55,8 @@ class BureaucratKnowledgeDocument(models.Model):
     history_ids = fields.One2many(
         'bureaucrat.knowledge.document.history', 'document_id', auto_join=True)
     history_count = fields.Integer(
-        compute='_compute_document_history')
+        compute='_compute_document_history', compute_sudo=True,
+        store=True, readonly=True)
     latest_history_id = fields.Many2one(
         'bureaucrat.knowledge.document.history',
         compute='_compute_document_history',

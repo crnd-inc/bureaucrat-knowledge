@@ -5,8 +5,8 @@
         <field name="arch" type="xml">
             <tree>
                 <field name="document_name"/>
-                <field name="commit_summary"/>
                 <field name="document_type"/>
+                <field name="commit_summary"/>
                 <field name="user_id"/>
                 <field name="date_create"/>
             </tree>
@@ -23,24 +23,31 @@
                             <field name="document_id"/>
                         </group>
                         <group>
+                            <field name="document_type" invisible="True"/>
                             <field name="commit_summary"/>
                         </group>
                     </group>
-                    <field name="document_type" invisible="True"/>
+
                     <field name="document_body_html"
                            attrs="{'invisible': [('document_type', '!=', 'html')]}"/>
                     <field name="document_body_pdf"
                            attrs="{'invisible': [('document_type', '!=', 'pdf')]}"
                            widget="pdf_viewer"/>
-                    <group>
+
+                    <group string="References">
                         <group>
-                            <field name="user_id"/>
+                            <field name="user_id" string="Created by"/>
                         </group>
                         <group>
-                            <field name="date_create"/>
+                            <field name="date_create" string="Created at"/>
                         </group>
                     </group>
                 </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
             </form>
         </field>
     </record>

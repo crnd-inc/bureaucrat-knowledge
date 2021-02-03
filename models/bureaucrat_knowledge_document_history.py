@@ -8,6 +8,11 @@ DOC_TYPE = [
 
 class BureaucratKnowledgeDocumentHistory(models.Model):
     _name = 'bureaucrat.knowledge.document.history'
+    _inherit = [
+        'mail.thread',
+        'mail.activity.mixin',
+    ]
+
     _description = 'Bureaucrat Knowledge: Document History'
     _order = 'date_create DESC'
 

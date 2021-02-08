@@ -3,8 +3,8 @@
     <template id="assets_backend" name="Generic Request Assets" inherit_id="web.assets_backend">
         <xpath expr="." position="inside">
             <link rel="stylesheet"
-                  type="text/less"
-                  href='/bureaucrat_knowledge/static/src/less/knowledge_base.less'/>
+                  type="text/scss"
+                  href='/bureaucrat_knowledge/static/src/scss/knowledge_base.scss'/>
         </xpath>
     </template>
 </odoo>

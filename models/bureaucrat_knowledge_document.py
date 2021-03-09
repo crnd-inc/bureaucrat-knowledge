@@ -410,6 +410,7 @@ class BureaucratKnowledgeDocument(models.Model):
             return {'document_body_html': False}
         if old_doc_type == 'pdf':
             return {'document_body_pdf': False}
+        return False
 
     @post_write(
         'name',

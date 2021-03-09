@@ -58,5 +58,5 @@ class TestBureaucratKnowledgeBase(ReduceLoggingMixin,
         'odoo.addons.base.models.ir_model',
         lambda r: not r.msg.strip().startswith(
             'Access Denied by ACLs for operation'))
-    def run(self, **kwargs):
-        return super(TestBureaucratKnowledgeBase, self).run(**kwargs)
+    def run(self, result=None):
+        return super(TestBureaucratKnowledgeBase, self).run(result=result)

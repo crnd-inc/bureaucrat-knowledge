@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-08-09 19:47+0000\n"
-"PO-Revision-Date: 2021-04-22 13:49+0000\n"
-"Last-Translator: Maksym Sharafutdinov <cino@crnd.pro>\n"
+"PO-Revision-Date: 2021-04-27 07:55+0000\n"
+"Last-Translator: Ostap Yakovenko <ceo@crnd.pro>\n"
 "Language-Team: Ukrainian <http://weblate.crnd.pro/projects/"
 "bureaucrat-itsm-12/bureaucrat_knowledge/uk/>\n"
 "Language: uk\n"
@@ -27,6 +27,10 @@ msgid ""
 "to knowledgebase.\n"
 "        "
 msgstr ""
+"\n"
+"            Менеджер бази знань. Користувачі цієї групи мають повний доступ "
+"до бази знань.\n"
+"        "
 
 #. module: bureaucrat_knowledge
 #: model:res.groups,comment:bureaucrat_knowledge.group_bureaucratic_knowledge_user_implicit
@@ -40,6 +44,13 @@ msgid ""
 "Knowledgebase.\n"
 "        "
 msgstr ""
+"\n"
+"            Користувач (неявно) має доступ лише до бази знань, не має "
+"доступу до меню знань.\n"
+"            Це право доступу потрібно використовувати у випадках, коли "
+"користувач має змогу читати документи бази знань\n"
+"            з пов’язаних об’єктів, але не має мати доступу до бази знань.\n"
+"        "
 
 #. module: bureaucrat_knowledge
 #: model:res.groups,comment:bureaucrat_knowledge.group_bureaucratic_knowledge_user
@@ -62,14 +73,14 @@ msgstr ""
 #. module: bureaucrat_knowledge
 #: model_terms:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_document_view_kanban
 msgid "#{record.name.value}"
-msgstr ""
+msgstr "#{record.name.value}"
 
 #. module: bureaucrat_knowledge
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category__message_needaction
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document__message_needaction
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document_history__message_needaction
 msgid "Action Needed"
-msgstr ""
+msgstr "Необхідні дії"
 
 #. module: bureaucrat_knowledge
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category__active
@@ -83,35 +94,35 @@ msgstr "Активно"
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document__activity_ids
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document_history__activity_ids
 msgid "Activities"
-msgstr ""
+msgstr "Дії"
 
 #. module: bureaucrat_knowledge
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document__activity_state
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document_history__activity_state
 msgid "Activity State"
-msgstr ""
+msgstr "Стан дії"
 
 #. module: bureaucrat_knowledge
 #: model_terms:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_category_view_form
 #: model_terms:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_document_view_form
 msgid "Actual Group"
-msgstr ""
+msgstr "Фактична група"
 
 #. module: bureaucrat_knowledge
 #: model_terms:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_category_view_form
 #: model_terms:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_document_view_form
 msgid "Actual Users"
-msgstr ""
+msgstr "Фактичні користувачі"
 
 #. module: bureaucrat_knowledge
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document__actual_visibility_category_id
 msgid "Actual Visibility Category"
-msgstr ""
+msgstr "Фактична видимість категорії"
 
 #. module: bureaucrat_knowledge
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category__actual_visibility_parent_id
 msgid "Actual Visibility Parent"
-msgstr ""
+msgstr "Фактична видимість батьків"
 
 #. module: bureaucrat_knowledge
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category__actual_editor_user_ids

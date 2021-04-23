@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-08-09 19:47+0000\n"
 "PO-Revision-Date: 2021-04-27 07:55+0000\n"
-"Last-Translator: Ostap Yakovenko <ceo@crnd.pro>\n"
+"Last-Translator: Maksym Sharafutdinov <cino@crnd.pro>\n"
 "Language-Team: Ukrainian <http://weblate.crnd.pro/projects/"
 "bureaucrat-itsm-12/bureaucrat_knowledge/uk/>\n"
 "Language: uk\n"
@@ -469,13 +469,13 @@ msgstr ""
 #: model:ir.model.fields,help:bureaucrat_knowledge.field_bureaucrat_knowledge_category__search_tag_id
 #: model:ir.model.fields,help:bureaucrat_knowledge.field_bureaucrat_knowledge_document__search_tag_id
 msgid "Find all records that contain this tag"
-msgstr ""
+msgstr "Знайдіть усі записи, що містять цей тег"
 
 #. module: bureaucrat_knowledge
 #: model:ir.model.fields,help:bureaucrat_knowledge.field_bureaucrat_knowledge_category__search_no_tag_id
 #: model:ir.model.fields,help:bureaucrat_knowledge.field_bureaucrat_knowledge_document__search_no_tag_id
 msgid "Find all records that have no this tag"
-msgstr ""
+msgstr "Знайдіть усі записи, у яких немає цього тегу"
 
 #. module: bureaucrat_knowledge
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category__message_follower_ids
@@ -948,13 +948,13 @@ msgstr ""
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category__search_no_tag_id
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document__search_no_tag_id
 msgid "No tag"
-msgstr ""
+msgstr "Немає тегу"
 
 #. module: bureaucrat_knowledge
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category__no_tag_id
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document__no_tag_id
 msgid "No tag (deprecated)"
-msgstr ""
+msgstr "Немає тегу (застаріло)"
 
 #. module: bureaucrat_knowledge
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category__ir_model_data_no_update

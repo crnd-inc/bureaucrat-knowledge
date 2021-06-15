@@ -11,11 +11,8 @@ Bureaucrat Knowledge
 .. |badge5| image:: https://img.shields.io/badge/maintainer-CR&D-purple.png
     :target: https://crnd.pro/
     
-.. |badge4| image:: https://img.shields.io/badge/docs-Generic_Request_Parent-yellowgreen.png
-    :target: https://crnd.pro/doc-bureaucrat-itsm/11.0/en/Generic_Request_Parent_admin_eng
 
-
-|badge2| |badge4| |badge5|
+|badge2| |badge5|
 
 Bureaucrat Knowledge base is module, that implements *Knowledgebase* concept,
 allowing you to easily manage company's knowledge.

@@ -28,5 +28,5 @@
 
     'installable': True,
     'application': True,
-    'license': 'OPL-1',
+    'license': 'LGPL-3',
 }

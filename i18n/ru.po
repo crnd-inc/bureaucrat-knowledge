@@ -161,11 +161,6 @@ msgid "Bureaucrat Documentation"
 msgstr ""
 
 #. module: bureaucrat_knowledge
-#: model:res.groups,name:bureaucrat_knowledge.group_demo_knowledge_base_test
-msgid "Bureaucrat Knowledge Demo Test"
-msgstr ""
-
-#. module: bureaucrat_knowledge
 #: model:generic.tag.model,name:bureaucrat_knowledge.bureaucrat_knowledge_category_tag_model
 #: model:ir.model,name:bureaucrat_knowledge.bureaucrat_knowledge_category_tag_model_ir_model
 msgid "Bureaucrat Knowledge: Category"
@@ -311,26 +306,6 @@ msgstr ""
 #. module: bureaucrat_knowledge
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document_history__date_create
 msgid "Date Create"
-msgstr ""
-
-#. module: bureaucrat_knowledge
-#: model:bureaucrat.knowledge.document,name:bureaucrat_knowledge.document_demo_sub_2
-msgid "Demo Document For Subcategory 2"
-msgstr ""
-
-#. module: bureaucrat_knowledge
-#: model:bureaucrat.knowledge.document,name:bureaucrat_knowledge.document_demo_sub_2_with_pdf
-msgid "Demo Document For Subcategory 2 With PDF"
-msgstr ""
-
-#. module: bureaucrat_knowledge
-#: model:bureaucrat.knowledge.document,name:bureaucrat_knowledge.document_demo_top_1
-msgid "Demo Document Top Level"
-msgstr ""
-
-#. module: bureaucrat_knowledge
-#: model:res.groups,comment:bureaucrat_knowledge.group_demo_knowledge_base_test
-msgid "Demo group, used in automated tests to test access rights"
 msgstr ""
 
 #. module: bureaucrat_knowledge
@@ -1143,16 +1118,6 @@ msgid "Subcategories"
 msgstr ""
 
 #. module: bureaucrat_knowledge
-#: model:bureaucrat.knowledge.category,name:bureaucrat_knowledge.bureaucrat_demo_subcategory_1
-msgid "Subcategory 1"
-msgstr ""
-
-#. module: bureaucrat_knowledge
-#: model:bureaucrat.knowledge.category,name:bureaucrat_knowledge.bureaucrat_demo_subcategory_2
-msgid "Subcategory 2"
-msgstr ""
-
-#. module: bureaucrat_knowledge
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category__search_tag_id
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document__search_tag_id
 msgid "Tag"
@@ -1182,11 +1147,6 @@ msgstr ""
 #. module: bureaucrat_knowledge
 #: model_terms:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_category_view_search
 msgid "Top Level"
-msgstr ""
-
-#. module: bureaucrat_knowledge
-#: model:bureaucrat.knowledge.category,name:bureaucrat_knowledge.bureaucrat_demo_top_level_1
-msgid "Top level category 1"
 msgstr ""
 
 #. module: bureaucrat_knowledge

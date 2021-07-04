@@ -30,6 +30,7 @@ class KnowledgeBase(http.Controller):
         parents = self.calc_parents(categ)
 
         values.update({
+            'main_object': categ,
             'categories': cats,
             'documents': docs,
             'parents': parents})
@@ -49,12 +50,17 @@ class KnowledgeBase(http.Controller):
         parents = self.calc_parents(doc.category_id)
         values.update({
             'doc': doc,
+            'main_object': doc,
             'parents': parents})
 
         return request.render(
             'bureaucrat_knowledge_website.knowledge_document', values)
 
     def calc_parents(self, parent):
+        """ Find list of parents of category,
+            when first item list is top-level parent category,
+            and last item is original category.
+        """
         parents = []
         while parent:
             parents += parent

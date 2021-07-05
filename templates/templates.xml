@@ -18,7 +18,10 @@
                     <li class="breadcrumb-item"><a href="/"><i class="fa fa-home"/></a></li>
                         <li class="breadcrumb-item"><a href="/knowledge/">Bureaucrat Knowledge</a></li>
                         <t t-foreach="parents" t-as="p">
-                            <li class="breadcrumb-item"><a t-attf-href="/knowledge/{{ slug(p) }}"><t t-esc="p.name"/></a></li>
+                            <li class="breadcrumb-item">
+                                <a t-attf-href="/knowledge/{{ slug(p) }}"
+                                   t-field="p.name"/>
+                            </li>
                         </t>
                 </ol>
             </div>
@@ -39,9 +42,8 @@
                         </t>
                         <li class="child_doc">
                             <i class="fa fa-file mr4"/>
-                            <a t-attf-href="/knowledge/doc/{{ slug(child_doc) }}">
-                                <t t-esc="child_doc.name"/>
-                            </a>
+                            <a t-attf-href="/knowledge/doc/{{ slug(child_doc) }}"
+                               t-esc="child_doc.name"/>
                         </li>
                     </p>
                 </t>
@@ -55,9 +57,8 @@
                 <t t-foreach="categories" t-as="category">
                     <li>
                         <i class="fa fa-folder mr4"/>
-                        <a t-attf-href="/knowledge/{{ slug(category) }}">
-                            <t t-esc="category.name"/>
-                        </a>
+                        <a t-attf-href="/knowledge/{{ slug(category) }}"
+                           t-esc="category.name"/>
                         <t t-if="category.child_ids">
                             <t t-set="categories" t-value="category.child_ids"/>
                             <t t-call="bureaucrat_knowledge_website.categories_list"/>
@@ -78,9 +79,8 @@
                 <t t-foreach="categories" t-as="category">
                     <li class="list-group-item">
                         <i class="fa fa-folder mr4"/>
-                        <a t-attf-href="/knowledge/{{ slug(category) }}">
-                            <t t-esc="category.name"/>
-                        </a>
+                        <a t-attf-href="/knowledge/{{ slug(category) }}"
+                           t-esc="category.name"/>
                     </li>
                 </t>
             </ul>
@@ -127,16 +127,13 @@
                     <t t-call="bureaucrat_knowledge_website.knowledge_category_navigation"/>
                     <div class="row">
                         <div class="col-12">
-                            <t t-if="doc.document_type == 'html'">
-                                <div id="document-text"
-                                    t-raw="doc.document_body_html">
-                                </div>
-                            </t>
-                            <t t-if="doc.document_type == 'pdf' and doc.document_body_pdf">
-                                <div class="embed-responsive embed-responsive-4by3 embed-responsive-item mb8">
-                                    <iframe class="o_knowledge_pdfviewer" t-att-src="doc.pdf_src_url"/>
-                                </div>
-                            </t>
+                            <div id="document-text"
+                                 t-if="doc.document_type == 'html'"
+                                 t-field="doc.document_body_html"/>
+                            <div t-if="doc.document_type == 'pdf' and doc.document_body_pdf"
+                                 class="embed-responsive embed-responsive-4by3 embed-responsive-item mb8">
+                                <iframe class="o_knowledge_pdfviewer" t-att-src="doc.pdf_src_url"/>
+                            </div>
                         </div>
                     </div>
                 </div>

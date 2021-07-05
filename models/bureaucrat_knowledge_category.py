@@ -1,14 +1,19 @@
-from odoo import models
+from odoo import models, fields, api
 
 
 class BureaucratKnowledgeCategory(models.Model):
     _name = 'bureaucrat.knowledge.category'
     _inherit = [
         'bureaucrat.knowledge.category',
-        'website.published.mixin',
         'website.seo.metadata',
     ]
 
+    website_url = fields.Char(
+        'Website URL',
+        compute='_compute_website_url',
+        help='The full URL to access the document through the website.')
+
+    @api.depends()
     def _compute_website_url(self):
         res = super(BureaucratKnowledgeCategory, self)._compute_website_url()
         for category in self:

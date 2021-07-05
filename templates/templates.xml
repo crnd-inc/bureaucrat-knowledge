@@ -43,7 +43,7 @@
                         <li class="child_doc">
                             <i class="fa fa-file mr4"/>
                             <a t-attf-href="/knowledge/doc/{{ slug(child_doc) }}"
-                               t-esc="child_doc.name"/>
+                               t-field="child_doc.name"/>
                         </li>
                     </p>
                 </t>
@@ -58,7 +58,7 @@
                     <li>
                         <i class="fa fa-folder mr4"/>
                         <a t-attf-href="/knowledge/{{ slug(category) }}"
-                           t-esc="category.name"/>
+                           t-field="category.name"/>
                         <t t-if="category.child_ids">
                             <t t-set="categories" t-value="category.child_ids"/>
                             <t t-call="bureaucrat_knowledge_website.categories_list"/>
@@ -80,7 +80,7 @@
                     <li class="list-group-item">
                         <i class="fa fa-folder mr4"/>
                         <a t-attf-href="/knowledge/{{ slug(category) }}"
-                           t-esc="category.name"/>
+                           t-field="category.name"/>
                     </li>
                 </t>
             </ul>

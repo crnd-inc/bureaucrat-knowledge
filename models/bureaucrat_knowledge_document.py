@@ -7,11 +7,15 @@ class BureaucratKnowledgeDocument(models.Model):
     _name = 'bureaucrat.knowledge.document'
     _inherit = [
         'bureaucrat.knowledge.document',
-        'website.published.mixin',
         'website.seo.metadata',
     ]
 
     pdf_src_url = fields.Char(compute='_compute_src_url', store=False)
+
+    website_url = fields.Char(
+        'Website URL',
+        compute='_compute_website_url',
+        help='The full URL to access the document through the website.')
 
     @api.depends('document_type')
     def _compute_src_url(self):
@@ -27,6 +31,7 @@ class BureaucratKnowledgeDocument(models.Model):
                 viewerURL = '/web/static/lib/pdfjs/web/viewer.html?'
                 record.pdf_src_url = viewerURL + urlencode({'file': fileURI})
 
+    @api.depends()
     def _compute_website_url(self):
         res = super(BureaucratKnowledgeDocument, self)._compute_website_url()
         for document in self:

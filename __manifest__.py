@@ -23,7 +23,7 @@
         'views/bureaucrat_knowledge_category.xml',
         'views/bureaucrat_knowledge_document.xml',
     ],
-    'images': [],
+    'images': ['static/description/banner.png'],
     'demo': [],
 
     'installable': True,

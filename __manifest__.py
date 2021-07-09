@@ -44,7 +44,7 @@
         'templates/templates.xml',
         'templates/category_content.xml',
     ],
-    'images': [],
+    'images': ['static/description/banner.png'],
     'demo': [
         'demo/res_groups.xml',
         'demo/bureaucrat_knowledge_demo.xml',

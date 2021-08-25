@@ -93,6 +93,7 @@
             <div class="oe_structure">
                 <div class="container">
                     <t t-call="bureaucrat_knowledge_website.knowledge_category_navigation"/>
+                    <t t-call="bureaucrat_knowledge_website.wsd_knowledge_search"/>
                     <div class="knowledge-base-website">
                         <t t-call="bureaucrat_knowledge_website.main_categories_list"/>
                     </div>
@@ -137,5 +138,20 @@
                 </div>
             </div>
         </t>
+    </template>
+
+    <template id="wsd_knowledge_search" name="Knowledge Search">
+        <div class="mb16">
+            <form id="wsd-knowledge-search" class="input-group" action="/search">
+                <input type="text" name="search"
+                       class="form-control"
+                       placeholder="Search by name"
+                       t-att-value="search"/>
+                <span id="wsd-knowledge-search-after"
+                      class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="submit"><span class="fa fa-search"/></button>
+                </span>
+            </form>
+        </div>
     </template>
 </odoo>

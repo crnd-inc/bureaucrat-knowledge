@@ -56,6 +56,11 @@ class KnowledgeBase(http.Controller):
         return request.render(
             'bureaucrat_knowledge_website.knowledge_document', values)
 
+    @http.route('/knowledge/search',
+                auth='public', website=True)
+    def knowledge_document(self, search):
+        docs = request.env['bureaucrat.knowledge.document'].search([()])
+
     def calc_parents(self, parent):
         """ Find list of parents of category,
             when first item list is top-level parent category,

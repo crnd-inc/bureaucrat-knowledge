@@ -102,6 +102,46 @@
         </t>
     </template>
 
+    <template id="knowledge_main_with_search_result" name="Bureaucrat knowledge main with search result">
+        <t t-call="website.layout">
+            <t t-set="title">Bureaucrat Knowledge</t>
+            <div class="oe_structure">
+                <div class="container">
+                    <t t-call="bureaucrat_knowledge_website.knowledge_category_navigation"/>
+                    <t t-call="bureaucrat_knowledge_website.wsd_knowledge_search"/>
+                    <t t-call="bureaucrat_knowledge_website.search_documents_list"/>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="search_documents_list" name="Render documents">
+        <t t-if="len(docs_list) == 0">
+            <div class="row">
+                <div class="oe_structure col-md-12 mb16" align="center">
+                    <h3>There are no matching documents.</h3>
+                </div>
+            </div>
+        </t>
+
+        <t t-else="">
+            <ul>
+                <t t-foreach="docs_list" t-as="doc">
+                    <p>
+                        <li class="child_doc">
+                            <i class="fa fa-file mr4"/>
+                            <a t-attf-href="/knowledge/doc/{{ slug(doc) }}"
+                               t-field="doc.name"/>
+                        </li>
+                    </p>
+                </t>
+            </ul>
+        </t>
+        <div align="center">
+            <t t-call="website.pager"/>
+        </div>
+    </template>
+
     <template id="knowledge_categories" name="Bureaucrat knowledge categories">
         <t t-call="website.layout">
             <div class="oe_structure">
@@ -142,7 +182,7 @@
 
     <template id="wsd_knowledge_search" name="Knowledge Search">
         <div class="mb16">
-            <form id="wsd-knowledge-search" class="input-group" action="/search">
+            <form id="wsd-knowledge-search" class="input-group" action="/knowledge/search">
                 <input type="text" name="search"
                        class="form-control"
                        placeholder="Search by name"

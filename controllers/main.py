@@ -1,5 +1,6 @@
 import logging
 from odoo import http
+from odoo.addons.website.controllers.main import QueryURL
 from odoo.http import request
 
 _logger = logging.getLogger(__name__)
@@ -56,10 +57,31 @@ class KnowledgeBase(http.Controller):
         return request.render(
             'bureaucrat_knowledge_website.knowledge_document', values)
 
-    @http.route('/knowledge/search',
-                auth='public', website=True)
-    def knowledge_document(self, search):
-        docs = request.env['bureaucrat.knowledge.document'].search([()])
+    @http.route(['/knowledge/search',
+                 '/knowledge/search/page/<int:page>',
+                 ], auth='public', website=True)
+    def knowledge_document_search(self, search="", page=0, **post):
+        domain = [('name', 'ilike', search)]
+        documents = request.env['bureaucrat.knowledge.document']
+        url = '/knowledge/search'
+        # keep = QueryURL(url, [], search=search, **post)
+        total = documents.search_count(domain)
+        pager = request.website.pager(
+            url=url, total=total, page=page,
+            step=20, url_args=dict(post, search=search))
+        docs = request.env['bureaucrat.knowledge.document'].search(
+            domain, limit=20, offset=pager['offset'])
+        values = {
+            'search': search,
+            'docs_list': docs,
+            'pager': pager,
+            'default_url': url,
+            'docs_count': total,
+            # 'keep': keep,
+        }
+        return request.render(
+            'bureaucrat_knowledge_website.knowledge_main_with_search_result',
+            values)
 
     def calc_parents(self, parent):
         """ Find list of parents of category,

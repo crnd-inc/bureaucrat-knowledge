@@ -185,7 +185,7 @@
             <form id="wsd-knowledge-search" class="input-group" action="/knowledge/search">
                 <input type="text" name="search"
                        class="form-control"
-                       placeholder="Search by name"
+                       placeholder="Search by name or tag name"
                        t-att-value="search"/>
                 <span id="wsd-knowledge-search-after"
                       class="input-group-append">

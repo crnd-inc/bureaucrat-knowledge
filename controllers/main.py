@@ -61,10 +61,11 @@ class KnowledgeBase(http.Controller):
                  '/knowledge/search/page/<int:page>',
                  ], auth='public', website=True)
     def knowledge_document_search(self, search="", page=0, **post):
-        domain = [('name', 'ilike', search)]
+        domain = ['|', ('name', 'ilike', search),
+                  ('tag_ids.name', 'ilike', search)]
         documents = request.env['bureaucrat.knowledge.document']
         url = '/knowledge/search'
-        # keep = QueryURL(url, [], search=search, **post)
+        keep = QueryURL(url, [], search=search, **post)
         total = documents.search_count(domain)
         pager = request.website.pager(
             url=url, total=total, page=page,
@@ -77,7 +78,7 @@ class KnowledgeBase(http.Controller):
             'pager': pager,
             'default_url': url,
             'docs_count': total,
-            # 'keep': keep,
+            'keep': keep,
         }
         return request.render(
             'bureaucrat_knowledge_website.knowledge_main_with_search_result',

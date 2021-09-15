@@ -33,10 +33,8 @@ class BureaucratKnowledgeDocument(models.Model):
 
     @api.depends()
     def _compute_website_url(self):
-        res = super(BureaucratKnowledgeDocument, self)._compute_website_url()
         for document in self:
             document.website_url = '/knowledge/doc/%s' % document.id
-        return res
 
     def action_show_on_website(self):
         self.ensure_one()

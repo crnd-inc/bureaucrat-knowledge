@@ -89,7 +89,7 @@
 
     <template id="knowledge_main" name="Bureaucrat knowledge main">
         <t t-call="website.layout">
-            <t t-set="title">Bureaucrat Knowledge</t>
+            <t t-set="additional_title">Bureaucrat Knowledge</t>
             <div class="oe_structure">
                 <div class="container">
                     <t t-call="bureaucrat_knowledge_website.knowledge_category_navigation"/>
@@ -103,7 +103,6 @@
 
     <template id="knowledge_categories" name="Bureaucrat knowledge categories">
         <t t-call="website.layout">
-            <t t-set="title"><t t-esc="parents[-1].name"/></t>
             <div class="oe_structure">
                 <div class="container">
                     <t t-call="bureaucrat_knowledge_website.knowledge_category_navigation"/>
@@ -121,7 +120,6 @@
 
     <template id="knowledge_document" name="Bureaucrat knowledge document">
         <t t-call="website.layout">
-            <t t-set="title"><t t-esc="doc.name"/></t>
             <div class="oe_structure">
                 <div class="container">
                     <t t-call="bureaucrat_knowledge_website.knowledge_category_navigation"/>

@@ -1,5 +1,4 @@
 from .common import TestTourKnowledge
-from odoo.tests.common import tagged
 
 
 class TestSearch(TestTourKnowledge):

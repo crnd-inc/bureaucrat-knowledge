@@ -26,7 +26,9 @@
         'views/bureaucrat_knowledge_document.xml',
     ],
     'images': ['static/description/banner.png'],
-    'demo': [],
+    'demo': [
+        'demo/demo_res_users.xml',
+    ],
 
     'installable': True,
     'application': True,

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Demo request users and groups -->
+    <record id="user_demo_service_desk_website" model="res.users"
+            context="{'no_reset_password': True}">
+        <!-- This user can only view request, no settings -->
+        <field name="name">Demo Service Desk Website User</field>
+        <field name="email">demo-sd-website@demo.demo</field>
+        <field name="login">demo-sd-website</field>
+        <field name="password">demo-sd-website</field>
+        <field name="signature">--
+Mr Demo Service Desk Website</field>
+        <field name="company_id" ref="base.main_company"/>
+        <field name="groups_id" eval="[(6,0,[ref('base.group_portal')])]"/>
+    </record>
+</odoo>
+

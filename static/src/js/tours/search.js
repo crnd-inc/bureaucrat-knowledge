@@ -9,13 +9,13 @@ odoo.define('bureaucrat_knowledge_website.search', function (require) {
     }, [
         {
             content: "Search for 'generic'",
-            trigger: "form#wsd-knowledge-search" +
-                " input[name='search']",
+            trigger: "#wsd-knowledge-search" +
+                "input[name='search']",
             run:     "generic",
         },
         {
             content: "Click on 'search' button",
-            trigger: "form#wsd-knowledge-search" +
+            trigger: "#wsd-knowledge-search-after" +
                 "button[type='submit']",
         },
     ]);

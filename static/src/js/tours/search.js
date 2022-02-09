@@ -8,15 +8,13 @@ odoo.define('bureaucrat_knowledge_website.search', function (require) {
         url: '/knowledge',
     }, [
         {
-            content: "Search for 'generic'",
-            trigger: "#wsd-knowledge-search" +
-                "input[name='search']",
-            run:     "generic",
+            content: "Search",
+            trigger: "form#wsd-knowledge-search input[name='search']",
+            run: "text Generic",
         },
         {
             content: "Click on 'search' button",
-            trigger: "#wsd-knowledge-search-after" +
-                "button[type='submit']",
+            trigger: ".btn.btn-outline-secondary",
         },
     ]);
     return {};

@@ -194,4 +194,11 @@
             </form>
         </div>
     </template>
+    <template id="knowledge_search_tests"
+              name="Knowledge search test"
+              inherit_id="web.assets_common">
+        <xpath expr="." position="inside">
+            <script type="text/javascript" src="/bureaucrat_knowledge_website/static/src/js/tours/search.js"></script>
+        </xpath>
+    </template>
 </odoo>

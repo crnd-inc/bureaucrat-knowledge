@@ -16,6 +16,7 @@
     'depends': [
         'website',
         'bureaucrat_knowledge',
+        'web_tour',
     ],
 
     # always loaded

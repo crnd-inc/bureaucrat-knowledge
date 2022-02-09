@@ -11,5 +11,5 @@ class TestSearch(TestTourKnowledge):
 
     def test_tour(self):
         self._test_phantom_tour(
-            '/knowledge', 'bureaucrat_knowledge_website_search',
+            '/', 'bureaucrat_knowledge_website_search',
             login=self.user_demo.login)

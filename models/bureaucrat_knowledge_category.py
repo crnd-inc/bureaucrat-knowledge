@@ -19,7 +19,7 @@ class BureaucratKnowledgeCategory(models.Model):
         'generic.mixin.data.updatable',
         'mail.thread',
     ]
-    _order = 'name, id'
+    _order = 'sequence, name, id'
 
     _auto_set_noupdate_on_write = True
 
@@ -130,6 +130,7 @@ class BureaucratKnowledgeCategory(models.Model):
         column2='user_id',
         string='Actual owners',
         readonly=True)
+    sequence = fields.Integer(default=1000, index=True)
 
     _sql_constraints = [
         ("check_visibility_type_parent_not_in_the_top_categories",

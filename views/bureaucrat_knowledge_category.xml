@@ -109,6 +109,7 @@
                                         <field name="visibility_user_ids"
                                                string="Reader User"
                                                widget="many2many_tags"/>
+                                        <field name="sequence"/>
                                     </group>
                                     <group string="Editor groups" colspan="4">
                                         <group>

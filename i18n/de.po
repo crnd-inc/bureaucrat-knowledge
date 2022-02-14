@@ -1088,6 +1088,12 @@ msgid "Restricted"
 msgstr ""
 
 #. module: bureaucrat_knowledge
+#: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category__sequence
+#: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document__sequence
+msgid "Sequence"
+msgstr ""
+
+#. module: bureaucrat_knowledge
 #: model:bureaucrat.knowledge.document,name:bureaucrat_knowledge.setting_up_a_request_only_assigned_person_or_system_administrator_can_move_requests_by_the_route
 msgid ""
 "Setting Up a Request. Only Assigned Person or System Administrator Can Move "

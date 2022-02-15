@@ -23,8 +23,7 @@ odoo.define('bureaucrat_knowledge_website.search', function (require) {
         },
         {
             content: "Check that specific article was found",
-            trigger: "main .container .child_doc a"
-                // " [data-oe-model='bureaucrat.knowledge.document']",
+            trigger: "main .container .child_doc a",
         },
         {
             content: 'Waiting for result',

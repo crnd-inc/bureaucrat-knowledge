@@ -36,7 +36,7 @@ odoo.define('bureaucrat_knowledge_website.search', function (require) {
         },
         {
             content: "Try to search for unexisting article",
-            trigger: "form#wsd-knowledge-search input[name='search']",
+            trigger: ".form-control",
             run: "text There are no documents must be found",
         },
         {

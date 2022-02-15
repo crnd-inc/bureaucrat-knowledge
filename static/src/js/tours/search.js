@@ -14,7 +14,7 @@ odoo.define('bureaucrat_knowledge_website.search', function (require) {
 
         {
             content: "Fill search text 'Generic' in searchbar",
-            trigger: "form#wsd-knowledge-search input[name='search']",
+            trigger: ".form-control",
             run: "text Generic",
         },
         {
@@ -23,8 +23,8 @@ odoo.define('bureaucrat_knowledge_website.search', function (require) {
         },
         {
             content: "Check that specific article was found",
-            trigger: ".child_doc" +
-                " [data-oe-model='bureaucrat.knowledge.document']",
+            trigger: "main .container .child_doc a"
+                // " [data-oe-model='bureaucrat.knowledge.document']",
         },
         {
             content: 'Waiting for result',

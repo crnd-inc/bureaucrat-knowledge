@@ -9,7 +9,7 @@ odoo.define('bureaucrat_knowledge_website.search', function (require) {
     }, [
         {
             content: 'Navigate to knowledge base page',
-            trigger: "#top_menu > li:nth-child(3) > a > span",
+            trigger: "a[href='/knowledge']",
         },
 
         {

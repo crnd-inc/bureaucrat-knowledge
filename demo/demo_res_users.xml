@@ -11,7 +11,7 @@
         <field name="signature">--
 Mr Demo Knowledge Website</field>
         <field name="company_id" ref="base.main_company"/>
-        <field name="groups_id" eval="[(6,0,[ref('base.group_portal')])]"/>
+        <field name="groups_id" eval="[(6,0,[ref('bureaucrat_knowledge.group_bureaucratic_knowledge_manager')])]"/>
     </record>
 </odoo>
 

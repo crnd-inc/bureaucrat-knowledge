@@ -23,7 +23,7 @@ odoo.define('bureaucrat_knowledge_website.search', function (require) {
         },
         {
             content: "Wait for loading",
-            trigger: "#wrapwrap"
+            trigger: "#wrapwrap",
         },
         {
             content: "Check that specific article was found",

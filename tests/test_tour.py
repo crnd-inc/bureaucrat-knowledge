@@ -1,6 +1,8 @@
 from .common import TestTourKnowledge
+from odoo.tests.common import tagged
 
 
+@tagged('post_install', '-at_install')
 class TestSearch(TestTourKnowledge):
 
     def setUp(self):

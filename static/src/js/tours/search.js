@@ -44,7 +44,7 @@ odoo.define('bureaucrat_knowledge_website.search', function (require) {
         },
         {
             content: "Check that nothing finded",
-            trigger: "h3:containsExact('There are no matching documents.')"
+            trigger: "h3:containsExact('There are no matching documents.')",
         },
     ]);
     return {};

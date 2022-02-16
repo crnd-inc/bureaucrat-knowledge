@@ -15,7 +15,7 @@ odoo.define('bureaucrat_knowledge_website.search', function (require) {
         {
             content: "Fill search text 'Generic' in searchbar",
             trigger: ".form-control",
-            run: "text Generic",
+            run: "text Generic Assignment HR",
         },
         {
             content: "Click on 'search' button",
@@ -23,7 +23,7 @@ odoo.define('bureaucrat_knowledge_website.search', function (require) {
         },
         {
             content: "Check that specific article was found",
-            trigger: "main .container .child_doc a",
+            trigger: "a:containsExact('Generic Assignment HR')",
         },
         {
             content: 'Waiting for result',
@@ -41,6 +41,10 @@ odoo.define('bureaucrat_knowledge_website.search', function (require) {
         {
             content: "Click on 'search' button",
             trigger: ".btn.btn-outline-secondary",
+        },
+        {
+            content: "Check that nothing finded",
+            trigger: "h3:containsExact('There are no matching documents.')"
         },
     ]);
     return {};

@@ -1,8 +1,7 @@
 from odoo.tests import HttpCase
 
 
-class TestTourKnowledge(HttpCase):
-
+class TestPhantomTour(HttpCase):
     def _test_phantom_tour(self, start_url, tour_name, **kw):
         """ Wrapper to run web tours
         """

@@ -11,9 +11,8 @@ odoo.define('bureaucrat_knowledge_website.search', function (require) {
             content: 'Navigate to knowledge base page',
             trigger: "a[href='/knowledge']",
         },
-
         {
-            content: "Fill search text 'Generic' in searchbar",
+            content: "Fill search text in searchbar",
             trigger: "#wsd-knowledge-search input",
             run: "text Generic Assignment HR",
         },
@@ -30,7 +29,7 @@ odoo.define('bureaucrat_knowledge_website.search', function (require) {
             trigger: "a:containsExact('Generic Assignment HR')",
         },
         {
-            content: 'Waiting for result',
+            content: 'Navigate to result',
             trigger: "#genenric-assignment-hr",
         },
         {
@@ -47,8 +46,17 @@ odoo.define('bureaucrat_knowledge_website.search', function (require) {
             trigger: "#wsd-knowledge-search-after button[type='submit']",
         },
         {
-            content: "Check that nothing finded",
+            content: "Check that nothing found",
             trigger: "h3:containsExact('There are no matching documents.')",
+        },
+        {
+            content: "Navigate back to root of knowledge base",
+            trigger: ".breadcrumb-item a[href='/knowledge/']",
+        },
+        {
+            content: "Navigate category 'Bureaucrat Documentation'",
+            trigger: ".knowledge-base-website" +
+                " a[href='/knowledge/bureaucrat-documentation-1']",
         },
     ]);
     return {};

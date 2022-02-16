@@ -1,17 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- Demo request users and groups -->
-    <record id="user_demo_knowledge_website" model="res.users"
+    <record id="user_demo_knowledge_website_manager" model="res.users"
             context="{'no_reset_password': True}">
-        <!-- This user can only view request, no settings -->
-        <field name="name">Demo User Knowledge Website</field>
-        <field name="email">demo-knowledge@demo.demo</field>
-        <field name="login">demo-knowledge-website</field>
-        <field name="password">demo-knowledge-website</field>
-        <field name="signature">--
-Mr Demo Knowledge Website</field>
+        <field name="name">Demo User Knowledge Website Manager</field>
+        <field name="email">demo-knowledge-manager@demo.demo</field>
+        <field name="login">demo-knowledge-website-manager</field>
+        <field name="password">demo-knowledge-website-manager</field>
         <field name="company_id" ref="base.main_company"/>
         <field name="groups_id" eval="[(6,0,[ref('bureaucrat_knowledge.group_bureaucratic_knowledge_manager')])]"/>
     </record>
 </odoo>
-

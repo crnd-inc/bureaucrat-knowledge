@@ -14,12 +14,16 @@ odoo.define('bureaucrat_knowledge_website.search', function (require) {
 
         {
             content: "Fill search text 'Generic' in searchbar",
-            trigger: ".form-control",
+            trigger: "#wsd-knowledge-search input",
             run: "text Generic Assignment HR",
         },
         {
             content: "Click on 'search' button",
-            trigger: ".btn.btn-outline-secondary",
+            trigger: "#wsd-knowledge-search-after button[type='submit']",
+        },
+        {
+            content: "Wait for loading",
+            trigger: "#wrapwrap"
         },
         {
             content: "Check that specific article was found",
@@ -35,12 +39,12 @@ odoo.define('bureaucrat_knowledge_website.search', function (require) {
         },
         {
             content: "Try to search for unexisting article",
-            trigger: ".form-control",
+            trigger: "#wsd-knowledge-search input",
             run: "text There are no documents must be found",
         },
         {
             content: "Click on 'search' button",
-            trigger: ".btn.btn-outline-secondary",
+            trigger: "#wsd-knowledge-search-after button[type='submit']",
         },
         {
             content: "Check that nothing finded",

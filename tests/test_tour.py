@@ -1,5 +1,5 @@
-from .common import TestTourKnowledge
 from odoo.tests.common import tagged
+from .common import TestTourKnowledge
 
 
 @tagged('post_install', '-at_install')

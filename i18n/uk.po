@@ -19,6 +19,7 @@ msgstr ""
 #. module: bureaucrat_knowledge_website
 #: model_terms:ir.ui.view,arch_db:bureaucrat_knowledge_website.knowledge_category_navigation
 #: model_terms:ir.ui.view,arch_db:bureaucrat_knowledge_website.knowledge_main
+#: model_terms:ir.ui.view,arch_db:bureaucrat_knowledge_website.knowledge_main_with_search_result
 #: model:website.menu,name:bureaucrat_knowledge_website.menu_bureaucrat_knowledge
 msgid "Bureaucrat Knowledge"
 msgstr ""
@@ -39,9 +40,19 @@ msgid "Pdf Src Url"
 msgstr ""
 
 #. module: bureaucrat_knowledge_website
+#: model_terms:ir.ui.view,arch_db:bureaucrat_knowledge_website.wsd_knowledge_search
+msgid "Search by name or tag name"
+msgstr ""
+
+#. module: bureaucrat_knowledge_website
 #: model:ir.model.fields,help:bureaucrat_knowledge_website.field_bureaucrat_knowledge_category__website_url
 #: model:ir.model.fields,help:bureaucrat_knowledge_website.field_bureaucrat_knowledge_document__website_url
 msgid "The full URL to access the document through the website."
+msgstr ""
+
+#. module: bureaucrat_knowledge_website
+#: model_terms:ir.ui.view,arch_db:bureaucrat_knowledge_website.search_documents_list
+msgid "There are no matching documents."
 msgstr ""
 
 #. module: bureaucrat_knowledge_website

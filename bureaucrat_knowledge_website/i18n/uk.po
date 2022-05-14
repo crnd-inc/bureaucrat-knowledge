@@ -7,20 +7,23 @@ msgstr ""
 "Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-11-16 21:51+0000\n"
-"PO-Revision-Date: 2020-11-16 21:51+0000\n"
-"Last-Translator: \n"
-"Language-Team: \n"
-"Language: \n"
+"PO-Revision-Date: 2022-01-25 13:01+0000\n"
+"Last-Translator: Валерия <valittle@ukr.net>\n"
+"Language-Team: Ukrainian <http://weblate.crnd.pro/projects/bureaucrat-"
+"itsm-14-0/bureaucrat_knowledge_website/uk/>\n"
+"Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: \n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 4.3.2\n"
 
 #. module: bureaucrat_knowledge_website
+#: model:website.menu,name:bureaucrat_knowledge_website.menu_bureaucrat_knowledge
 #: model_terms:ir.ui.view,arch_db:bureaucrat_knowledge_website.knowledge_category_navigation
 #: model_terms:ir.ui.view,arch_db:bureaucrat_knowledge_website.knowledge_main
 #: model_terms:ir.ui.view,arch_db:bureaucrat_knowledge_website.knowledge_main_with_search_result
-#: model:website.menu,name:bureaucrat_knowledge_website.menu_bureaucrat_knowledge
 msgid "Bureaucrat Knowledge"
 msgstr ""
 
@@ -35,13 +38,43 @@ msgid "Bureaucrat Knowledge: Document"
 msgstr ""
 
 #. module: bureaucrat_knowledge_website
+#: model:ir.model.fields,field_description:bureaucrat_knowledge_website.field_bureaucrat_knowledge_category__display_name
+#: model:ir.model.fields,field_description:bureaucrat_knowledge_website.field_bureaucrat_knowledge_document__display_name
+msgid "Display Name"
+msgstr "Відображуване ім’я"
+
+#. module: bureaucrat_knowledge_website
+#: model:ir.model.fields,field_description:bureaucrat_knowledge_website.field_bureaucrat_knowledge_category__id
+#: model:ir.model.fields,field_description:bureaucrat_knowledge_website.field_bureaucrat_knowledge_document__id
+msgid "ID"
+msgstr "ID"
+
+#. module: bureaucrat_knowledge_website
+#: model:ir.model.fields,field_description:bureaucrat_knowledge_website.field_bureaucrat_knowledge_category____last_update
+#: model:ir.model.fields,field_description:bureaucrat_knowledge_website.field_bureaucrat_knowledge_document____last_update
+msgid "Last Modified on"
+msgstr "Остання модифікація"
+
+#. module: bureaucrat_knowledge_website
 #: model:ir.model.fields,field_description:bureaucrat_knowledge_website.field_bureaucrat_knowledge_document__pdf_src_url
 msgid "Pdf Src Url"
 msgstr ""
 
 #. module: bureaucrat_knowledge_website
+#: model:ir.model.fields,field_description:bureaucrat_knowledge_website.field_bureaucrat_knowledge_category__is_seo_optimized
+#: model:ir.model.fields,field_description:bureaucrat_knowledge_website.field_bureaucrat_knowledge_document__is_seo_optimized
+msgid "SEO optimized"
+msgstr ""
+
+#. module: bureaucrat_knowledge_website
 #: model_terms:ir.ui.view,arch_db:bureaucrat_knowledge_website.wsd_knowledge_search
 msgid "Search by name or tag name"
+msgstr ""
+
+#. module: bureaucrat_knowledge_website
+#: model:ir.model.fields,field_description:bureaucrat_knowledge_website.field_bureaucrat_knowledge_category__seo_name
+#: model:ir.model.fields,field_description:bureaucrat_knowledge_website.field_bureaucrat_knowledge_document__seo_name
+msgid "Seo name"
 msgstr ""
 
 #. module: bureaucrat_knowledge_website
@@ -65,4 +98,28 @@ msgstr ""
 #: model:ir.model.fields,field_description:bureaucrat_knowledge_website.field_bureaucrat_knowledge_category__website_url
 #: model:ir.model.fields,field_description:bureaucrat_knowledge_website.field_bureaucrat_knowledge_document__website_url
 msgid "Website URL"
+msgstr ""
+
+#. module: bureaucrat_knowledge_website
+#: model:ir.model.fields,field_description:bureaucrat_knowledge_website.field_bureaucrat_knowledge_category__website_meta_description
+#: model:ir.model.fields,field_description:bureaucrat_knowledge_website.field_bureaucrat_knowledge_document__website_meta_description
+msgid "Website meta description"
+msgstr ""
+
+#. module: bureaucrat_knowledge_website
+#: model:ir.model.fields,field_description:bureaucrat_knowledge_website.field_bureaucrat_knowledge_category__website_meta_keywords
+#: model:ir.model.fields,field_description:bureaucrat_knowledge_website.field_bureaucrat_knowledge_document__website_meta_keywords
+msgid "Website meta keywords"
+msgstr ""
+
+#. module: bureaucrat_knowledge_website
+#: model:ir.model.fields,field_description:bureaucrat_knowledge_website.field_bureaucrat_knowledge_category__website_meta_title
+#: model:ir.model.fields,field_description:bureaucrat_knowledge_website.field_bureaucrat_knowledge_document__website_meta_title
+msgid "Website meta title"
+msgstr ""
+
+#. module: bureaucrat_knowledge_website
+#: model:ir.model.fields,field_description:bureaucrat_knowledge_website.field_bureaucrat_knowledge_category__website_meta_og_img
+#: model:ir.model.fields,field_description:bureaucrat_knowledge_website.field_bureaucrat_knowledge_document__website_meta_og_img
+msgid "Website opengraph image"
 msgstr ""

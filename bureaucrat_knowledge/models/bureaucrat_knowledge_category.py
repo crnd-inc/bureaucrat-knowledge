@@ -167,11 +167,11 @@ class BureaucratKnowledgeCategory(models.Model):
 
     @api.depends('child_ids', 'document_ids')
     def _compute_category_contents(self):
-        tmpl = self.env.ref(
+        tmpl = self.sudo().env.ref(
             'bureaucrat_knowledge.knowledge_category_content_template')
         for rec in self:
             if rec.child_ids or rec.document_ids:
-                rec.category_contents = tmpl.render({
+                rec.category_contents = tmpl._render({
                     'category': rec,
                 })
             else:

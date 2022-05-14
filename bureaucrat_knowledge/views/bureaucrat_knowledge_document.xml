@@ -170,9 +170,9 @@
 
                 </sheet>
                 <div class="oe_chatter">
-                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
-                    <field name="activity_ids" widget="mail_activity"/>
-                    <field name="message_ids" widget="mail_thread"/>
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
                 </div>
             </form>
         </field>
@@ -204,7 +204,7 @@
                              style="width:180px; justify-content: flex-start;">
                             <div class="o_dropdown_kanban dropdown mt-1" groups="base.group_user">
                                 <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#">
-                                    <span class="fa fa-bars fa-lg"/>
+                                    <span class="fa fa-bars fa-lg" title="Settings"/>
                                 </a>
                                 <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
                                     <t t-if="widget.editable"><li><a type="edit">Edit Document</a></li></t>

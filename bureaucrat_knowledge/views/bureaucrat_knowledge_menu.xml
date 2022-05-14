@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <menuitem id="bureaucrat_knowledge_menu"
+              name="Knowledge"
+              groups="bureaucrat_knowledge.group_bureaucratic_knowledge_user"
+              sequence="50"
+              web_icon="bureaucrat_knowledge,static/description/icon.png"/>
+
+    <menuitem id="bureaucrat_knowledge_category_menu"
+              parent="bureaucrat_knowledge_menu" sequence="30"
+              action="action_bureaucrat_knowledge_category"/>
+
+    <menuitem id="bureaucrat_knowledge_document_document_menu"
+              parent="bureaucrat_knowledge_menu" sequence="10"
+              action="action_bureaucrat_knowledge_document"/>
+
+</odoo>

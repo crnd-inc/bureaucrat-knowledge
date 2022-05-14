@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="bureaucrat_knowledge_document_view_search" model="ir.ui.view">
+        <field name="model">bureaucrat.knowledge.document</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="category_id"/>
+                <field name="tag_ids"/>
+                <field name="search_tag_id"/>
+                <field name="search_no_tag_id"/>
+                <field name="index_document_body"
+                       string="Document Content"/>
+                <filter name="filter_archived"
+                        string="Archived"
+                        domain="[('active', '=', False)]"/>
+                <filter name="filter_active"
+                        string="Active"
+                        domain="[('active', '=', True)]"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="bureaucrat_knowledge_document_view_tree" model="ir.ui.view">
+        <field name="model">bureaucrat.knowledge.document</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="category_id"/>
+                <field name="tag_ids"
+                       options="{'color_field': 'color'}"
+                       widget="many2many_tags"
+                       placeholder="Tags..."
+                       context="{'default_model': 'bureaucrat.knowledge.document'}"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="bureaucrat_knowledge_document_view_form" model="ir.ui.view">
+        <field name="model">bureaucrat.knowledge.document</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button"
+                            name="action_view_history"
+                            type="object"
+                            attrs="{'invisible': [('history_count', '&lt;=', 1)]}"
+                            icon="fa-history">
+                                <field name="history_count"
+                                       string="Versions"
+                                       widget="statinfo"/>
+                        </button>
+                        <button name="toggle_active" type="object" groups="base.group_user"
+                                class="oe_stat_button" icon="fa-archive">
+                            <field name="active" widget="boolean_button"
+                                   options='{"terminology": "archive"}'/>
+                        </button>
+                    </div>
+                    <group name="group_document_head">
+                        <group name="group_document_head_left">
+                            <field name="name" placeholder="Name..."/>
+                            <field name="category_id"/>
+                        </group>
+                        <group name="group_document_head_right">
+                            <field name="document_type" widget="selection"/>
+                            <field name="tag_ids"
+                                   options="{'color_field': 'color'}"
+                                   widget="many2many_tags"
+                                   placeholder="Tags..."
+                                   context="{'default_model': 'bureaucrat.knowledge.document'}"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="document_document" string="Document">
+                            <field name="document_body_html"
+                                attrs="{'invisible': [('document_type', '!=', 'html')]}"/>
+                            <field name="document_body_pdf"
+                                attrs="{'invisible': [('document_type', '!=', 'pdf')]}"
+                                widget="pdf_viewer"/>
+                            <field name="commit_summary" class="oe_edit_only" placeholder="Commit summary ..."/>
+                        </page>
+                        <page name="document_settings" string="Settings">
+                            <!-- TODO: have to be visible only for owners -->
+                            <div>
+                                <group>
+                                    <group string="Visibility settings">
+                                        <field name="visibility_type"/>
+                                        <field name="actual_visibility_category_id"
+                                               attrs="{'invisible': [('visibility_type', '!=', 'parent')]}"/>
+                                        <field name="visibility_group_ids"
+                                               string="Reader Group"
+                                               widget="many2many_tags"/>
+                                        <field name="visibility_user_ids"
+                                               string="Reader User"
+                                               widget="many2many_tags"/>
+                                        <field name="sequence"/>
+                                    </group>
+                                    <group string="Editor groups" colspan="4">
+                                        <group>
+                                            <field name="editor_group_ids"
+                                                   string="Group"
+                                                   widget="many2many_tags"/>
+                                        </group>
+                                        <group>
+                                            <field name="actual_editor_group_ids"
+                                                   string="Actual Group"
+                                                   widget="many2many_tags"/>
+                                        </group>
+                                    </group>
+                                    <group string="Editor users" colspan="4">
+                                        <group>
+                                            <field name="editor_user_ids"
+                                                   string="Users"
+                                                   widget="many2many_tags"/>
+                                        </group>
+                                        <group>
+                                            <field name="actual_editor_user_ids"
+                                                   string="Actual Users"
+                                                   widget="many2many_tags"/>
+                                        </group>
+                                    </group>
+                                    <group string="Owner groups" colspan="4">
+                                        <group>
+                                            <field name="owner_group_ids"
+                                                   string="Group"
+                                                   widget="many2many_tags"/>
+                                        </group>
+                                        <group>
+                                            <field name="actual_owner_group_ids"
+                                                   string="Actual Group"
+                                                   widget="many2many_tags"/>
+                                        </group>
+                                    </group>
+                                    <group string="Owner users" colspan="4">
+                                        <group>
+                                            <field name="owner_user_ids"
+                                                   string="Users"
+                                                   widget="many2many_tags"/>
+                                        </group>
+                                        <group>
+                                            <field name="actual_owner_user_ids"
+                                                   string="Actual Users"
+                                                   widget="many2many_tags"/>
+                                        </group>
+                                    </group>
+                                </group>
+                            </div>
+                        </page>
+                        <page name="page_other" string="Other">
+                            <group name="group_other_root">
+                                <group name="group_other_left">
+                                    <field name="ir_model_data_id"
+                                           groups="base.group_no_one"/>
+                                    <field name="ir_model_data_xmlid"/>
+                                    <field name="ir_model_data_no_update"
+                                           widget="boolean_toggle"/>
+                                </group>
+                                <group name="group_other_right">
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="bureaucrat_knowledge_document_view_kanban">
+        <field name="model">bureaucrat.knowledge.document</field>
+        <field name="arch" type="xml">
+            <kanban edit="false" delete="false" group_create="false" quick_create="false" group_edit="false"
+                    group_delete="false" sample="1"
+                    class="oe_background_grey o_kanban_dashboard o_project_kanban o_emphasize_colors">
+                <field name="id"/>
+                <field name="name"/>
+                <field name="color"/>
+                <field name="category_id"/>
+                <field name="category_full_name"/>
+                <field name="document_type"/>
+                <field name="document_preview_text"/>
+                <field name="document_preview_image"/>
+                <field name="tag_ids"/>
+                <field name="created_by_id"/>
+                <field name="activity_ids"/>
+                <field name="activity_state"/>
+                <progressbar field="activity_state"
+                             colors='{"planned": "success", "today": "warning", "overdue": "danger"}'/>
+                <searchpanel>
+                    <field name="category_id" string="Categories"/>
+                    <field name="tag_ids" string="Tags" select="multi"
+                           domain="[('model_id.model', '=', 'bureaucrat.knowledge.document')]"/>
+                    <field name="document_type" string="Types" expand="False"/>
+                </searchpanel>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_color_#{kanban_getcolor(record.color.raw_value)} oe_kanban_card oe_kanban_global_click"
+                             style="width:180px; justify-content: flex-start;">
+                            <div class="o_dropdown_kanban dropdown mt-1" groups="base.group_user">
+                                <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#">
+                                    <span class="fa fa-bars fa-lg"/>
+                                </a>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                    <t t-if="widget.editable"><li><a type="edit">Edit Document</a></li></t>
+                                    <li><ul class="oe_kanban_colorpicker" data-field="color"/></li>
+                                </ul>
+                            </div>
+                            <div class="o_kanban_record_title font-weight-bold border-bottom border-primary text-primary mt-1"
+                                 t-attf-title="#{record.name.value}">
+                                <t t-esc="record.name.value"/>
+                            </div>
+                            <div class="o_kanban_record_subtitle border-bottom text-primary border-primary font-italic"
+                                 t-attf-title="#{record.category_full_name.value}">
+                                <t t-esc="record.category_full_name.value"/>
+                            </div>
+                            <div class="oe_kanban_details mt-2">
+                                <div>
+                                    <field name="tag_ids" options="{'color_field': 'color'}"/>
+                                </div>
+                                <div class="">
+                                    <t t-if="record.document_type.value=='pdf'">
+                                        <div class="" style="width:165px;">
+                                            <img t-att-src="kanban_image('bureaucrat.knowledge.document', 'document_preview_image', record.id.raw_value)"
+                                                 class="img-fluid" style="width:180px;"
+                                                 alt="Document"/>
+                                        </div>
+                                    </t>
+                                    <t t-if="record.document_type.value=='html'">
+                                        <div class="overflow-hidden" style="width:165px; max-height: 250px">
+                                            <span class="text-black-50 font-weight-light"
+                                                  t-esc="record.document_preview_text.value"/>
+                                        </div>
+                                    </t>
+                                </div>
+                            </div>
+                            <div class="o_kanban_record_bottom mt-auto border-top border-primary">
+                                <div class="oe_kanban_bottom_left mt-2">
+                                    <div class="o_kanban_inline_block">
+                                        <field name="activity_ids" widget="kanban_activity"/>
+                                    </div>
+                                </div>
+                                <div class="oe_kanban_bottom_right mt-2">
+                                    <field name="created_by_id" widget="many2one_avatar_user"/>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="action_bureaucrat_knowledge_document" model="ir.actions.act_window">
+        <field name="name">Documents</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">bureaucrat.knowledge.document</field>
+        <field name="view_mode">kanban,tree,form,activity</field>
+    </record>
+</odoo>

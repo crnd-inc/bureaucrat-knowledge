@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Demo categories for tests.-->
+
+    <record id="bureaucrat_demo_top_level_1"
+            model="bureaucrat.knowledge.category">
+        <field name="name">Top level category 1</field>
+    </record>
+
+    
+    <record id="bureaucrat_demo_subcategory_1"
+            model="bureaucrat.knowledge.category">
+        <field name="name">Subcategory 1</field>
+        <field name="parent_id"
+               ref="bureaucrat_demo_top_level_1"/>
+    </record>
+
+    <record id="bureaucrat_demo_subcategory_2"
+            model="bureaucrat.knowledge.category">
+        <field name="name">Subcategory 2</field>
+        <field name="parent_id"
+               ref="bureaucrat_demo_subcategory_1"/>
+    </record>
+
+    <record id="document_demo_top_1"
+            model="bureaucrat.knowledge.document">
+        <field name="name">Demo Document Top Level</field>
+        <field name="document_type">html</field>
+        <field name="document_body_html">
+            <![CDATA[
+                <h1>Top level demo document text.</h1>
+            ]]>
+        </field>
+    </record>
+
+    <record id="document_demo_sub_2"
+            model="bureaucrat.knowledge.document">
+        <field name="name">Demo Document For Subcategory 2</field>
+        <field name="document_type">html</field>
+        <field name="category_id"
+               ref="bureaucrat_demo_subcategory_2"/>
+        <field name="document_body_html">Subcategory2 document content</field>
+    </record>
+
+    <record id="document_demo_sub_2_with_pdf"
+            model="bureaucrat.knowledge.document">
+        <field name="name">Demo Document For Subcategory 2 With PDF</field>
+        <field name="document_type">pdf</field>
+        <field name="category_id"
+               ref="bureaucrat_demo_subcategory_2"/>
+        <field name="document_body_pdf" type="base64" file="bureaucrat_knowledge/demo/demo-pdf/sample-pdf-file.pdf"/>
+    </record>
+
+</odoo>

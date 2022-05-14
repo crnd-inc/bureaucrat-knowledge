@@ -1,0 +1,592 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record model="ir.module.category" id="module_category_bureaucratic_knowledge">
+        <field name="name">Bureaucratic Knowledge</field>
+        <field name="sequence">100</field>
+        <field name="visible" eval="1" />
+    </record>
+
+    <record id="group_bureaucratic_knowledge_user_implicit" model="res.groups">
+        <field name="name">Bureaucratic Knowledge / User (implicit)</field>
+        <field name="category_id" ref="bureaucrat_knowledge.module_category_bureaucratic_knowledge"/>
+        <field name="comment">
+            User (implicit) has readonly access to knowledge base, has no access to Knowledge menu.
+            This access right have to be used for cases, when user have to be able to read knowledgebase documents
+            from related objects, but does not have to have access to Knowledgebase.
+        </field>
+    </record>
+
+    <record id="group_bureaucratic_knowledge_user" model="res.groups">
+        <field name="name">Bureaucratic Knowledge / User</field>
+        <field name="implied_ids"
+               eval="[
+               (4, ref('bureaucrat_knowledge.group_bureaucratic_knowledge_user_implicit')),
+               (4, ref('base.group_user'))]"/>
+        <field name="category_id" ref="bureaucrat_knowledge.module_category_bureaucratic_knowledge"/>
+        <field name="comment">
+            Users un this group have regular access to knowledge base.
+            If they are mentioned in editors or owners of document or categ,
+            then they can edit that document or category, and if such user
+            is owner of document or category, he can delete that document or category.
+        </field>
+    </record>
+
+    <record id="group_bureaucratic_knowledge_manager" model="res.groups">
+        <field name="name">Bureaucratic Knowledge / Manager</field>
+        <field name="implied_ids" eval="[(4, ref('bureaucrat_knowledge.group_bureaucratic_knowledge_user'))]"/>
+        <field name="category_id" ref="bureaucrat_knowledge.module_category_bureaucratic_knowledge"/>
+        <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+        <field name="comment">
+            Manager of knowledge base. Users in this group have full access to knowledgebase.
+        </field>
+    </record>
+
+    <!-- Enable knowledge base (implicitly) for all users by default -->
+    <record id="base.group_user" model="res.groups">
+        <field name="implied_ids"
+               eval="[(4, ref('group_bureaucratic_knowledge_user_implicit'))]"/>
+    </record>
+    <record id="base.group_portal" model="res.groups">
+        <field name="implied_ids"
+               eval="[(4, ref('group_bureaucratic_knowledge_user_implicit'))]"/>
+    </record>
+    <record id="base.group_public" model="res.groups">
+        <field name="implied_ids"
+               eval="[(4, ref('group_bureaucratic_knowledge_user_implicit'))]"/>
+    </record>
+
+    <!-- Access rights for knowlege base implicit user
+         - write/create/unlink access rights are allowed by ir.model.access.csv
+         - and restricted in these rules
+    -->
+
+    <!-- Access rights for categories -->
+    <record id="rule_bureaucrat_knowledge_category_visibility_restrirced_for_users" model="ir.rule">
+        <field name="name">knowledge categories for users (restricted)</field>
+        <field name="model_id" ref="bureaucrat_knowledge.model_bureaucrat_knowledge_category"/>
+        <field name="domain_force">[
+                '|',
+                '&amp;',
+                ('visibility_type', '=', 'restricted'),
+                ('visibility_user_ids.id', '=', user.id),
+                '&amp;',
+                '&amp;',
+                ('visibility_type', '=', 'parent'),
+                ('actual_visibility_parent_id.visibility_type', '=', 'restricted'),
+                ('actual_visibility_parent_id.visibility_user_ids.id', '=', user.id)
+            ]</field>
+        <field name="groups" eval="[(4, ref('bureaucrat_knowledge.group_bureaucratic_knowledge_user_implicit'))]"/>
+        <field eval="0" name="perm_unlink"/>
+        <field eval="0" name="perm_write"/>
+        <field eval="1" name="perm_read"/>
+        <field eval="0" name="perm_create"/>
+    </record>
+
+    <record id="rule_bureaucrat_knowledge_category_visibility_restrirced_for_group" model="ir.rule">
+        <field name="name">knowledge categories for groups (restricted)</field>
+        <field name="model_id" ref="bureaucrat_knowledge.model_bureaucrat_knowledge_category"/>
+        <field name="domain_force">[
+                '|',
+                '&amp;',
+                ('visibility_type', '=', 'restricted'),
+                ('visibility_group_ids.users.id', '=', user.id),
+                '&amp;',
+                '&amp;',
+                ('visibility_type', '=', 'parent'),
+                ('actual_visibility_parent_id.visibility_type', '=', 'restricted'),
+                ('actual_visibility_parent_id.visibility_group_ids.users.id', '=', user.id),
+            ]</field>
+        <field name="groups" eval="[(4, ref('bureaucrat_knowledge.group_bureaucratic_knowledge_user_implicit'))]"/>
+        <field eval="0" name="perm_unlink"/>
+        <field eval="0" name="perm_write"/>
+        <field eval="1" name="perm_read"/>
+        <field eval="0" name="perm_create"/>
+    </record>
+
+    <record id="rule_bureaucrat_knowledge_category_editors" model="ir.rule">
+        <field name="name">knowledge categories by editors</field>
+        <field name="model_id" ref="bureaucrat_knowledge.model_bureaucrat_knowledge_category"/>
+        <field name="domain_force">[
+                '|',
+                ('editor_user_ids.id', '=', user.id),
+                ('actual_editor_user_ids.id', '=', user.id),
+            ]</field>
+        <field name="groups" eval="[(4, ref('bureaucrat_knowledge.group_bureaucratic_knowledge_user_implicit'))]"/>
+        <field eval="0" name="perm_unlink"/>
+        <field eval="1" name="perm_write"/>
+        <field eval="1" name="perm_read"/>
+        <field eval="0" name="perm_create"/>
+    </record>
+ 
+    <record id="rule_bureaucrat_knowledge_category_create" model="ir.rule">
+        <field name="name">knowledge categories by editors (create)</field>
+        <field name="model_id" ref="bureaucrat_knowledge.model_bureaucrat_knowledge_category"/>
+        <field name="domain_force">[
+                '|', '|', '|', '|',
+                ('parent_id', '=', False),
+                ('parent_id.actual_editor_user_ids.id', '=', user.id),
+                ('parent_id.actual_editor_group_ids', 'in', user.groups_id.ids),
+                ('parent_id.actual_owner_user_ids.id', '=', user.id),
+                ('parent_id.actual_owner_group_ids', 'in', user.groups_id.ids),
+            ]</field>
+        <field name="groups" eval="[(4, ref('bureaucrat_knowledge.group_bureaucratic_knowledge_user_implicit'))]"/>
+        <field eval="0" name="perm_unlink"/>
+        <field eval="0" name="perm_write"/>
+        <field eval="0" name="perm_read"/>
+        <field eval="1" name="perm_create"/>
+    </record>
+ 
+    <record id="rule_bureaucrat_knowledge_category_group_editors" model="ir.rule">
+        <field name="name">knowledge categories by group editors</field>
+        <field name="model_id" ref="bureaucrat_knowledge.model_bureaucrat_knowledge_category"/>
+        <field name="domain_force">[
+                '|',
+                ('editor_group_ids', 'in', user.groups_id.ids),
+                ('actual_editor_group_ids', 'in', user.groups_id.ids),
+            ]</field>
+        <field name="groups" eval="[(4, ref('bureaucrat_knowledge.group_bureaucratic_knowledge_user_implicit'))]"/>
+        <field eval="0" name="perm_unlink"/>
+        <field eval="1" name="perm_write"/>
+        <field eval="1" name="perm_read"/>
+        <field eval="0" name="perm_create"/>
+    </record>
+
+    <record id="rule_bureaucrat_knowledge_category_owners" model="ir.rule">
+        <field name="name">knowledge categories by owners</field>
+        <field name="model_id" ref="bureaucrat_knowledge.model_bureaucrat_knowledge_category"/>
+        <field name="domain_force">[
+                '|',
+                ('owner_user_ids.id', '=', user.id),
+                ('actual_owner_user_ids.id', '=', user.id)
+            ]</field>
+        <field name="groups" eval="[(4, ref('bureaucrat_knowledge.group_bureaucratic_knowledge_user_implicit'))]"/>
+        <field eval="1" name="perm_unlink"/>
+        <field eval="1" name="perm_write"/>
+        <field eval="1" name="perm_read"/>
+        <field eval="0" name="perm_create"/>
+    </record>
+
+    <record id="rule_bureaucrat_knowledge_category_group_owners" model="ir.rule">
+        <field name="name">knowledge categories by group owners</field>
+        <field name="model_id" ref="bureaucrat_knowledge.model_bureaucrat_knowledge_category"/>
+        <field name="domain_force">[
+                '|',
+                ('owner_group_ids', 'in', user.groups_id.ids),
+                ('actual_owner_group_ids', 'in', user.groups_id.ids),
+            ]</field>
+        <field name="groups" eval="[(4, ref('bureaucrat_knowledge.group_bureaucratic_knowledge_user_implicit'))]"/>
+        <field eval="1" name="perm_unlink"/>
+        <field eval="1" name="perm_write"/>
+        <field eval="1" name="perm_read"/>
+        <field eval="0" name="perm_create"/>
+    </record>
+
+    <record id="rule_bureaucrat_knowledge_category_group_public" model="ir.rule">
+        <field name="name">knowledge categories by group public</field>
+        <field name="model_id" ref="bureaucrat_knowledge.model_bureaucrat_knowledge_category"/>
+        <field name="domain_force">[
+                '|',
+                ('visibility_type', '=', 'public'),
+                '&amp;',
+                ('visibility_type', '=', 'parent'),
+                ('actual_visibility_parent_id.visibility_type', '=', 'public'),
+            ]</field>
+        <field name="groups" eval="[(4, ref('base.group_public')), (4, ref('base.group_portal')),(4, ref('base.group_user'))]"/>
+        <field eval="0" name="perm_unlink"/>
+        <field eval="0" name="perm_write"/>
+        <field eval="1" name="perm_read"/>
+        <field eval="0" name="perm_create"/>
+    </record>
+
+    <record id="rule_bureaucrat_knowledge_category_group_portal" model="ir.rule">
+        <field name="name">knowledge categories by group portal</field>
+        <field name="model_id" ref="bureaucrat_knowledge.model_bureaucrat_knowledge_category"/>
+        <field name="domain_force">[
+                '|',
+                ('visibility_type', '=', 'portal'),
+                '&amp;',
+                ('visibility_type', '=', 'parent'),
+                ('actual_visibility_parent_id.visibility_type', '=', 'portal'),
+            ]</field>
+        <field name="groups" eval="[(4, ref('base.group_portal')),(4, ref('base.group_user'))]"/>
+        <field eval="0" name="perm_unlink"/>
+        <field eval="0" name="perm_write"/>
+        <field eval="1" name="perm_read"/>
+        <field eval="0" name="perm_create"/>
+    </record>
+
+    <record id="rule_bureaucrat_knowledge_category_group_user" model="ir.rule">
+        <field name="name">knowledge categories by group internal</field>
+        <field name="model_id" ref="bureaucrat_knowledge.model_bureaucrat_knowledge_category"/>
+        <field name="domain_force">[
+                '|',
+                ('visibility_type', '=', 'internal'),
+                '&amp;',
+                ('visibility_type', '=', 'parent'),
+                ('actual_visibility_parent_id.visibility_type', '=', 'internal'),
+            ]</field>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+        <field eval="0" name="perm_unlink"/>
+        <field eval="0" name="perm_write"/>
+        <field eval="1" name="perm_read"/>
+        <field eval="0" name="perm_create"/>
+    </record>
+
+    <!-- Access rights for documents -->
+    <record id="rule_bureaucrat_knowledge_document_visibility_restrirced_for_users" model="ir.rule">
+        <field name="name">knowledge documents for users (restricted)</field>
+        <field name="model_id" ref="bureaucrat_knowledge.model_bureaucrat_knowledge_document"/>
+        <field name="domain_force">[
+                '|',
+                '&amp;',
+                ('visibility_type', '=', 'restricted'),
+                ('visibility_user_ids.id', '=', user.id),
+                '&amp;',
+                '&amp;',
+                ('visibility_type', '=', 'parent'),
+                ('actual_visibility_category_id.visibility_type', '=', 'restricted'),
+                ('actual_visibility_category_id.visibility_user_ids.id', '=', user.id)
+            ]</field>
+        <field name="groups" eval="[(4, ref('bureaucrat_knowledge.group_bureaucratic_knowledge_user_implicit'))]"/>
+        <field eval="0" name="perm_unlink"/>
+        <field eval="0" name="perm_write"/>
+        <field eval="1" name="perm_read"/>
+        <field eval="0" name="perm_create"/>
+    </record>
+
+    <record id="rule_bureaucrat_knowledge_document_visibility_restrirced_for_group" model="ir.rule">
+        <field name="name">knowledge documents for groups (restricted)</field>
+        <field name="model_id" ref="bureaucrat_knowledge.model_bureaucrat_knowledge_document"/>
+        <field name="domain_force">[
+                '|',
+                '&amp;',
+                ('visibility_type', '=', 'restricted'),
+                ('visibility_group_ids', 'in', user.groups_id.ids),
+                '&amp;',
+                '&amp;',
+                ('visibility_type', '=', 'parent'),
+                ('actual_visibility_category_id.visibility_type', '=', 'restricted'),
+                ('actual_visibility_category_id.visibility_group_ids', 'in', user.groups_id.ids),
+            ]</field>
+        <field name="groups" eval="[(4, ref('bureaucrat_knowledge.group_bureaucratic_knowledge_user_implicit'))]"/>
+        <field eval="0" name="perm_unlink"/>
+        <field eval="0" name="perm_write"/>
+        <field eval="1" name="perm_read"/>
+        <field eval="0" name="perm_create"/>
+    </record>
+
+    <record id="rule_bureaucrat_knowledge_document_editors_create" model="ir.rule">
+        <field name="name">knowledge documents by editors (create)</field>
+        <field name="model_id" ref="bureaucrat_knowledge.model_bureaucrat_knowledge_document"/>
+        <field name="domain_force">[
+                '|', '|', '|', '|', 
+                ('category_id', '=', False),
+                ('category_id.actual_editor_user_ids.id', '=', user.id),
+                ('category_id.actual_editor_group_ids', 'in', user.groups_id.ids),
+                ('category_id.actual_owner_user_ids.id', '=', user.id),
+                ('category_id.actual_owner_group_ids', 'in', user.groups_id.ids),
+            ]</field>
+        <field name="groups" eval="[(4, ref('bureaucrat_knowledge.group_bureaucratic_knowledge_user_implicit'))]"/>
+        <field eval="0" name="perm_unlink"/>
+        <field eval="0" name="perm_write"/>
+        <field eval="0" name="perm_read"/>
+        <field eval="1" name="perm_create"/>
+    </record>
+
+    <record id="rule_bureaucrat_knowledge_document_editors" model="ir.rule">
+        <field name="name">knowledge documents by editors</field>
+        <field name="model_id" ref="bureaucrat_knowledge.model_bureaucrat_knowledge_document"/>
+        <field name="domain_force">[
+                '|',
+                ('editor_user_ids.id', '=', user.id),
+                ('actual_editor_user_ids.id', '=', user.id)
+            ]</field>
+        <field name="groups" eval="[(4, ref('bureaucrat_knowledge.group_bureaucratic_knowledge_user_implicit'))]"/>
+        <field eval="0" name="perm_unlink"/>
+        <field eval="1" name="perm_write"/>
+        <field eval="1" name="perm_read"/>
+        <field eval="0" name="perm_create"/>
+    </record>
+
+    <record id="rule_bureaucrat_knowledge_document_group_editors" model="ir.rule">
+        <field name="name">knowledge documents by group editors</field>
+        <field name="model_id" ref="bureaucrat_knowledge.model_bureaucrat_knowledge_document"/>
+        <field name="domain_force">[
+                '|',
+                ('editor_group_ids', 'in', user.groups_id.ids),
+                ('actual_editor_group_ids', 'in', user.groups_id.ids),
+            ]</field>
+        <field name="groups" eval="[(4, ref('bureaucrat_knowledge.group_bureaucratic_knowledge_user_implicit'))]"/>
+        <field eval="0" name="perm_unlink"/>
+        <field eval="1" name="perm_write"/>
+        <field eval="1" name="perm_read"/>
+        <field eval="0" name="perm_create"/>
+    </record>
+
+    <record id="rule_bureaucrat_knowledge_document_owners" model="ir.rule">
+        <field name="name">knowledge documents by owners</field>
+        <field name="model_id" ref="bureaucrat_knowledge.model_bureaucrat_knowledge_document"/>
+        <field name="domain_force">[
+                '|',
+                ('owner_user_ids.id', '=', user.id),
+                ('actual_owner_user_ids.id', '=', user.id)
+            ]</field>
+        <field name="groups" eval="[(4, ref('bureaucrat_knowledge.group_bureaucratic_knowledge_user_implicit'))]"/>
+        <field eval="1" name="perm_unlink"/>
+        <field eval="1" name="perm_write"/>
+        <field eval="1" name="perm_read"/>
+        <field eval="0" name="perm_create"/>
+    </record>
+
+    <record id="rule_bureaucrat_knowledge_document_group_owners" model="ir.rule">
+        <field name="name">knowledge documents by group owners</field>
+        <field name="model_id" ref="bureaucrat_knowledge.model_bureaucrat_knowledge_document"/>
+        <field name="domain_force">[
+                '|',
+                ('owner_group_ids', 'in', user.groups_id.ids),
+                ('actual_owner_group_ids', 'in', user.groups_id.ids),
+            ]</field>
+        <field name="groups" eval="[(4, ref('bureaucrat_knowledge.group_bureaucratic_knowledge_user_implicit'))]"/>
+        <field eval="1" name="perm_unlink"/>
+        <field eval="1" name="perm_write"/>
+        <field eval="1" name="perm_read"/>
+        <field eval="0" name="perm_create"/>
+    </record>
+
+    <record id="rule_bureaucrat_knowledge_document_group_public" model="ir.rule">
+        <field name="name">knowledge documents by group public</field>
+        <field name="model_id" ref="bureaucrat_knowledge.model_bureaucrat_knowledge_document"/>
+        <field name="domain_force">[
+                '|',
+                ('visibility_type', '=', 'public'),
+                '&amp;',
+                ('visibility_type', '=', 'parent'),
+                ('actual_visibility_category_id.visibility_type', '=', 'public'),
+            ]</field>
+        <field name="groups" eval="[(4, ref('base.group_public')), (4, ref('base.group_portal')), (4, ref('base.group_user'))]"/>
+        <field eval="0" name="perm_unlink"/>
+        <field eval="0" name="perm_write"/>
+        <field eval="1" name="perm_read"/>
+        <field eval="0" name="perm_create"/>
+    </record>
+
+    <record id="rule_bureaucrat_knowledge_document_group_portal" model="ir.rule">
+        <field name="name">knowledge documents by group portal</field>
+        <field name="model_id" ref="bureaucrat_knowledge.model_bureaucrat_knowledge_document"/>
+        <field name="domain_force">[
+                '|',
+                ('visibility_type', '=', 'portal'),
+                '&amp;',
+                ('visibility_type', '=', 'parent'),
+                ('actual_visibility_category_id.visibility_type', '=', 'portal'),
+            ]</field>
+        <field name="groups" eval="[(4, ref('base.group_portal')), (4, ref('base.group_user'))]"/>
+        <field eval="0" name="perm_unlink"/>
+        <field eval="0" name="perm_write"/>
+        <field eval="1" name="perm_read"/>
+        <field eval="0" name="perm_create"/>
+    </record>
+
+    <record id="rule_bureaucrat_knowledge_document_group_user" model="ir.rule">
+        <field name="name">knowledge documents by group internal</field>
+        <field name="model_id" ref="bureaucrat_knowledge.model_bureaucrat_knowledge_document"/>
+        <field name="domain_force">[
+                '|',
+                ('visibility_type', '=', 'internal'),
+                '&amp;',
+                ('visibility_type', '=', 'parent'),
+                ('actual_visibility_category_id.visibility_type', '=', 'internal'),
+            ]</field>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+        <field eval="0" name="perm_unlink"/>
+        <field eval="0" name="perm_write"/>
+        <field eval="1" name="perm_read"/>
+        <field eval="0" name="perm_create"/>
+    </record>
+
+    <!-- Access rights for document history records -->
+    <record id="rule_bureaucrat_knowledge_document_history_visibility_restrirced_for_users" model="ir.rule">
+        <field name="name">knowledge documents for users (restricted)</field>
+        <field name="model_id" ref="bureaucrat_knowledge.model_bureaucrat_knowledge_document_history"/>
+        <field name="domain_force">[
+                '|',
+                '&amp;',
+                ('document_id.visibility_type', '=', 'restricted'),
+                ('document_id.visibility_user_ids.id', '=', user.id),
+                '&amp;',
+                '&amp;',
+                ('document_id.visibility_type', '=', 'parent'),
+                ('document_id.actual_visibility_category_id.visibility_type', '=', 'restricted'),
+                ('document_id.actual_visibility_category_id.visibility_user_ids.id', '=', user.id)
+            ]</field>
+        <field name="groups" eval="[(4, ref('bureaucrat_knowledge.group_bureaucratic_knowledge_user_implicit'))]"/>
+        <field eval="0" name="perm_unlink"/>
+        <field eval="0" name="perm_write"/>
+        <field eval="1" name="perm_read"/>
+        <field eval="0" name="perm_create"/>
+    </record>
+
+    <record id="rule_bureaucrat_knowledge_document_history_visibility_restrirced_for_group" model="ir.rule">
+        <field name="name">knowledge documents for groups (restricted)</field>
+        <field name="model_id" ref="bureaucrat_knowledge.model_bureaucrat_knowledge_document_history"/>
+        <field name="domain_force">[
+                '|',
+                '&amp;',
+                ('document_id.visibility_type', '=', 'restricted'),
+                ('document_id.visibility_group_ids', 'in', user.groups_id.ids),
+                '&amp;',
+                '&amp;',
+                ('document_id.visibility_type', '=', 'parent'),
+                ('document_id.actual_visibility_category_id.visibility_type', '=', 'restricted'),
+                ('document_id.actual_visibility_category_id.visibility_group_ids', 'in', user.groups_id.ids),
+            ]</field>
+        <field name="groups" eval="[(4, ref('bureaucrat_knowledge.group_bureaucratic_knowledge_user_implicit'))]"/>
+        <field eval="0" name="perm_unlink"/>
+        <field eval="0" name="perm_write"/>
+        <field eval="1" name="perm_read"/>
+        <field eval="0" name="perm_create"/>
+    </record>
+
+    <record id="rule_bureaucrat_knowledge_document_history_editors" model="ir.rule">
+        <field name="name">knowledge documents by editors</field>
+        <field name="model_id" ref="bureaucrat_knowledge.model_bureaucrat_knowledge_document_history"/>
+        <field name="domain_force">[
+                '|',
+                ('document_id.editor_user_ids.id', '=', user.id),
+                ('document_id.actual_editor_user_ids.id', '=', user.id)
+            ]</field>
+        <field name="groups" eval="[(4, ref('bureaucrat_knowledge.group_bureaucratic_knowledge_user_implicit'))]"/>
+        <field eval="0" name="perm_unlink"/>
+        <field eval="0" name="perm_write"/>
+        <field eval="1" name="perm_read"/>
+        <field eval="1" name="perm_create"/>
+    </record>
+
+    <record id="rule_bureaucrat_knowledge_document_history_group_editors" model="ir.rule">
+        <field name="name">knowledge documents by group editors</field>
+        <field name="model_id" ref="bureaucrat_knowledge.model_bureaucrat_knowledge_document_history"/>
+        <field name="domain_force">[
+                '|',
+                ('document_id.editor_group_ids', 'in', user.groups_id.ids),
+                ('document_id.actual_editor_group_ids', 'in', user.groups_id.ids),
+            ]</field>
+        <field name="groups" eval="[(4, ref('bureaucrat_knowledge.group_bureaucratic_knowledge_user_implicit'))]"/>
+        <field eval="0" name="perm_unlink"/>
+        <field eval="0" name="perm_write"/>
+        <field eval="1" name="perm_read"/>
+        <field eval="1" name="perm_create"/>
+    </record>
+
+    <record id="rule_bureaucrat_knowledge_document_history_owners" model="ir.rule">
+        <field name="name">knowledge documents by owners</field>
+        <field name="model_id" ref="bureaucrat_knowledge.model_bureaucrat_knowledge_document_history"/>
+        <field name="domain_force">[
+                '|',
+                ('document_id.owner_user_ids.id', '=', user.id),
+                ('document_id.actual_owner_user_ids.id', '=', user.id)
+            ]</field>
+        <field name="groups" eval="[(4, ref('bureaucrat_knowledge.group_bureaucratic_knowledge_user_implicit'))]"/>
+        <field eval="1" name="perm_unlink"/>
+        <field eval="1" name="perm_write"/>
+        <field eval="1" name="perm_read"/>
+        <field eval="1" name="perm_create"/>
+    </record>
+
+    <record id="rule_bureaucrat_knowledge_document_history_group_owners" model="ir.rule">
+        <field name="name">knowledge documents by group owners</field>
+        <field name="model_id" ref="bureaucrat_knowledge.model_bureaucrat_knowledge_document_history"/>
+        <field name="domain_force">[
+                '|',
+                ('document_id.owner_group_ids', 'in', user.groups_id.ids),
+                ('document_id.actual_owner_group_ids', 'in', user.groups_id.ids),
+            ]</field>
+        <field name="groups" eval="[(4, ref('bureaucrat_knowledge.group_bureaucratic_knowledge_user_implicit'))]"/>
+        <field eval="1" name="perm_unlink"/>
+        <field eval="1" name="perm_write"/>
+        <field eval="1" name="perm_read"/>
+        <field eval="1" name="perm_create"/>
+    </record>
+
+    <record id="rule_bureaucrat_knowledge_document_history_group_public" model="ir.rule">
+        <field name="name">knowledge documents by group public</field>
+        <field name="model_id" ref="bureaucrat_knowledge.model_bureaucrat_knowledge_document_history"/>
+        <field name="domain_force">[
+                '|',
+                ('document_id.visibility_type', '=', 'public'),
+                '&amp;',
+                ('document_id.visibility_type', '=', 'parent'),
+                ('document_id.actual_visibility_category_id.visibility_type', '=', 'public'),
+            ]</field>
+        <field name="groups" eval="[(4, ref('base.group_public')), (4, ref('base.group_portal')), (4, ref('base.group_user'))]"/>
+        <field eval="0" name="perm_unlink"/>
+        <field eval="0" name="perm_write"/>
+        <field eval="1" name="perm_read"/>
+        <field eval="0" name="perm_create"/>
+    </record>
+
+    <record id="rule_bureaucrat_knowledge_document_history_group_portal" model="ir.rule">
+        <field name="name">knowledge documents by group portal</field>
+        <field name="model_id" ref="bureaucrat_knowledge.model_bureaucrat_knowledge_document_history"/>
+        <field name="domain_force">[
+                '|',
+                ('document_id.visibility_type', '=', 'portal'),
+                '&amp;',
+                ('document_id.visibility_type', '=', 'parent'),
+                ('document_id.actual_visibility_category_id.visibility_type', '=', 'portal'),
+            ]</field>
+        <field name="groups" eval="[(4, ref('base.group_portal')), (4, ref('base.group_user'))]"/>
+        <field eval="0" name="perm_unlink"/>
+        <field eval="0" name="perm_write"/>
+        <field eval="1" name="perm_read"/>
+        <field eval="0" name="perm_create"/>
+    </record>
+
+    <record id="rule_bureaucrat_knowledge_document_history_group_user" model="ir.rule">
+        <field name="name">knowledge documents by group internal</field>
+        <field name="model_id" ref="bureaucrat_knowledge.model_bureaucrat_knowledge_document_history"/>
+        <field name="domain_force">[
+                '|',
+                ('document_id.visibility_type', '=', 'internal'),
+                '&amp;',
+                ('document_id.visibility_type', '=', 'parent'),
+                ('document_id.actual_visibility_category_id.visibility_type', '=', 'internal'),
+            ]</field>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+        <field eval="0" name="perm_unlink"/>
+        <field eval="0" name="perm_write"/>
+        <field eval="1" name="perm_read"/>
+        <field eval="0" name="perm_create"/>
+    </record>
+
+    <!-- Manager access rights -->
+    <record id="rule_bureaucrat_knowledge_category_group_manager" model="ir.rule">
+        <field name="name">knowledge category (manager)</field>
+        <field name="model_id" ref="bureaucrat_knowledge.model_bureaucrat_knowledge_category"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('bureaucrat_knowledge.group_bureaucratic_knowledge_manager'))]"/>
+        <field eval="1" name="perm_unlink"/>
+        <field eval="1" name="perm_write"/>
+        <field eval="1" name="perm_read"/>
+        <field eval="1" name="perm_create"/>
+    </record>
+    <record id="rule_bureaucrat_knowledge_document_group_manager" model="ir.rule">
+        <field name="name">knowledge document (manager)</field>
+        <field name="model_id" ref="bureaucrat_knowledge.model_bureaucrat_knowledge_document"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('bureaucrat_knowledge.group_bureaucratic_knowledge_manager'))]"/>
+        <field eval="1" name="perm_unlink"/>
+        <field eval="1" name="perm_write"/>
+        <field eval="1" name="perm_read"/>
+        <field eval="1" name="perm_create"/>
+    </record>
+    <record id="rule_bureaucrat_knowledge_document_history_group_manager" model="ir.rule">
+        <field name="name">knowledge document histories (manager)</field>
+        <field name="model_id" ref="bureaucrat_knowledge.model_bureaucrat_knowledge_document_history"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('bureaucrat_knowledge.group_bureaucratic_knowledge_manager'))]"/>
+        <field eval="1" name="perm_unlink"/>
+        <field eval="1" name="perm_write"/>
+        <field eval="1" name="perm_read"/>
+        <field eval="1" name="perm_create"/>
+    </record>
+</odoo>

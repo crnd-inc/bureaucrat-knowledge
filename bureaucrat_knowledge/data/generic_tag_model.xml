@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="bureaucrat_knowledge_category_tag_model" model="generic.tag.model">
+        <field name="res_model_id" ref="bureaucrat_knowledge.model_bureaucrat_knowledge_category"/>
+    </record>
+    <record id="bureaucrat_knowledge_document_tag_model" model="generic.tag.model">
+        <field name="res_model_id" ref="bureaucrat_knowledge.model_bureaucrat_knowledge_document"/>
+    </record>
+</odoo>

@@ -1,0 +1,133 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* bureaucrat_knowledge_rel_docs
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-02-12 17:52+0000\n"
+"PO-Revision-Date: 2021-02-12 17:52+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: bureaucrat_knowledge_rel_docs
+#: model:ir.model,name:bureaucrat_knowledge_rel_docs.model_bureaucrat_knowledge_document
+msgid "Bureaucrat Knowledge: Document"
+msgstr ""
+
+#. module: bureaucrat_knowledge_rel_docs
+#: model_terms:ir.ui.view,arch_db:bureaucrat_knowledge_rel_docs.document_wizard_manage_related_documents_form_view
+msgid "Cancel"
+msgstr ""
+
+#. module: bureaucrat_knowledge_rel_docs
+#: model:ir.model.fields,field_description:bureaucrat_knowledge_rel_docs.field_document_wizard_manage_related_documents__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: bureaucrat_knowledge_rel_docs
+#: model:ir.model.fields,field_description:bureaucrat_knowledge_rel_docs.field_document_wizard_manage_related_documents__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: bureaucrat_knowledge_rel_docs
+#: model:ir.model.fields,field_description:bureaucrat_knowledge_rel_docs.field_document_wizard_manage_related_documents__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: bureaucrat_knowledge_rel_docs
+#: model:ir.model.fields,field_description:bureaucrat_knowledge_rel_docs.field_document_wizard_manage_related_documents__document_id
+msgid "Document"
+msgstr ""
+
+#. module: bureaucrat_knowledge_rel_docs
+#: model:ir.model,name:bureaucrat_knowledge_rel_docs.model_document_wizard_manage_related_documents
+msgid "Documents Wizard: Manage related documents"
+msgstr ""
+
+#. module: bureaucrat_knowledge_rel_docs
+#: model:ir.model.fields,help:bureaucrat_knowledge_rel_docs.field_bureaucrat_knowledge_document__related_reverse_document_ids
+msgid "Documents that have references to this document"
+msgstr ""
+
+#. module: bureaucrat_knowledge_rel_docs
+#: model:ir.model.fields,field_description:bureaucrat_knowledge_rel_docs.field_document_wizard_manage_related_documents__id
+msgid "ID"
+msgstr ""
+
+#. module: bureaucrat_knowledge_rel_docs
+#: model:ir.model.fields,field_description:bureaucrat_knowledge_rel_docs.field_document_wizard_manage_related_documents____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: bureaucrat_knowledge_rel_docs
+#: model:ir.model.fields,field_description:bureaucrat_knowledge_rel_docs.field_document_wizard_manage_related_documents__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: bureaucrat_knowledge_rel_docs
+#: model:ir.model.fields,field_description:bureaucrat_knowledge_rel_docs.field_document_wizard_manage_related_documents__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: bureaucrat_knowledge_rel_docs
+#: model_terms:ir.ui.view,arch_db:bureaucrat_knowledge_rel_docs.bureaucrat_knowledge_document_view_form
+msgid "Manage Related Docs"
+msgstr ""
+
+#. module: bureaucrat_knowledge_rel_docs
+#: model:ir.actions.act_window,name:bureaucrat_knowledge_rel_docs.document_wizard_manage_related_documents_action
+msgid "Manage Related Documents"
+msgstr ""
+
+#. module: bureaucrat_knowledge_rel_docs
+#: model_terms:ir.ui.view,arch_db:bureaucrat_knowledge_rel_docs.document_wizard_manage_related_documents_form_view
+msgid "OK"
+msgstr ""
+
+#. module: bureaucrat_knowledge_rel_docs
+#: model:ir.model.fields,help:bureaucrat_knowledge_rel_docs.field_bureaucrat_knowledge_document__related_document_ids
+msgid "Other documents referenced from this document"
+msgstr ""
+
+#. module: bureaucrat_knowledge_rel_docs
+#: model_terms:ir.ui.view,arch_db:bureaucrat_knowledge_rel_docs.bureaucrat_knowledge_document_view_form
+msgid "Related Docs"
+msgstr ""
+
+#. module: bureaucrat_knowledge_rel_docs
+#: model:ir.model.fields,field_description:bureaucrat_knowledge_rel_docs.field_bureaucrat_knowledge_document__related_document_count
+msgid "Related Document Count"
+msgstr ""
+
+#. module: bureaucrat_knowledge_rel_docs
+#: model:ir.model.fields,field_description:bureaucrat_knowledge_rel_docs.field_bureaucrat_knowledge_document__related_document_total_count
+msgid "Related Document Total Count"
+msgstr ""
+
+#. module: bureaucrat_knowledge_rel_docs
+#: model:ir.model.fields,field_description:bureaucrat_knowledge_rel_docs.field_bureaucrat_knowledge_document__related_document_ids
+msgid "Related Documents"
+msgstr ""
+
+#. module: bureaucrat_knowledge_rel_docs
+#: model:ir.model.fields,field_description:bureaucrat_knowledge_rel_docs.field_bureaucrat_knowledge_document__related_reverse_document_count
+msgid "Related Reverse Document Count"
+msgstr ""
+
+#. module: bureaucrat_knowledge_rel_docs
+#: model:ir.model.fields,field_description:bureaucrat_knowledge_rel_docs.field_document_wizard_manage_related_documents__related_document_ids
+#: model_terms:ir.ui.view,arch_db:bureaucrat_knowledge_rel_docs.document_wizard_manage_related_documents_form_view
+msgid "Related documents"
+msgstr ""
+
+#. module: bureaucrat_knowledge_rel_docs
+#: model:ir.model.fields,field_description:bureaucrat_knowledge_rel_docs.field_bureaucrat_knowledge_document__related_reverse_document_ids
+msgid "Related to documents"
+msgstr ""

@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="assets_frontend"
+              name="Bureaucrat Knowledge Website Assets" inherit_id="web.assets_frontend">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet"
+                  type="text/scss"
+                  href='/bureaucrat_knowledge_website/static/src/scss/knowledge_base_website.scss'/>
+        </xpath>
+    </template>
+        
+    <template id="knowledge_category_navigation">
+        <div class="row mt16">
+            <div class="oe_structure col-sm-12"/>
+            <div class="col-xs-12 col-sm 12 col-md-6">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/"><i class="fa fa-home"/></a></li>
+                        <li class="breadcrumb-item"><a href="/knowledge/">Bureaucrat Knowledge</a></li>
+                        <t t-foreach="parents" t-as="p">
+                            <li class="breadcrumb-item">
+                                <a t-attf-href="/knowledge/{{ slug(p) }}"
+                                   t-field="p.name"/>
+                            </li>
+                        </t>
+                </ol>
+            </div>
+            <div class="oe_structure col-sm-12"/>
+        </div>
+    </template>
+
+    <template id="documents_list" name="Render documents">
+        <t t-if="docs_list">
+            <ul>
+                <t t-foreach="docs_list" t-as="child_doc">
+                    <p>
+                        <t t-if="category">
+                            <t t-set="category_id" t-value="category.id"/>
+                        </t>
+                        <t t-else="">
+                            <t t-set="category_id" t-value="child_doc.category_id.id"/>
+                        </t>
+                        <li class="child_doc">
+                            <i class="fa fa-file mr4"/>
+                            <a t-attf-href="/knowledge/doc/{{ slug(child_doc) }}"
+                               t-field="child_doc.name"/>
+                        </li>
+                    </p>
+                </t>
+            </ul>
+        </t>
+    </template>
+
+    <template id="categories_list" name="Render Page">
+        <t t-if="categories">
+            <ul>
+                <t t-foreach="categories" t-as="category">
+                    <li>
+                        <i class="fa fa-folder mr4"/>
+                        <a t-attf-href="/knowledge/{{ slug(category) }}"
+                           t-field="category.name"/>
+                        <t t-if="category.child_ids">
+                            <t t-set="categories" t-value="category.child_ids"/>
+                            <t t-call="bureaucrat_knowledge_website.categories_list"/>
+                        </t>
+                        <t t-if="category.document_ids">
+                            <t t-set="docs_list" t-value="category.document_ids"/>
+                            <t t-call="bureaucrat_knowledge_website.documents_list"/>
+                        </t>
+                    </li>
+                </t>
+            </ul>
+        </t>
+    </template>
+
+    <template id="main_categories_list" name="Render Page">
+        <t t-if="categories">
+            <ul class="list-group">
+                <t t-foreach="categories" t-as="category">
+                    <li class="list-group-item">
+                        <i class="fa fa-folder mr4"/>
+                        <a t-attf-href="/knowledge/{{ slug(category) }}"
+                           t-field="category.name"/>
+                    </li>
+                </t>
+            </ul>
+        </t>
+    </template>
+
+    <template id="knowledge_main" name="Bureaucrat knowledge main">
+        <t t-call="website.layout">
+            <t t-set="additional_title">Bureaucrat Knowledge</t>
+            <div class="oe_structure">
+                <div class="container">
+                    <t t-call="bureaucrat_knowledge_website.knowledge_category_navigation"/>
+                    <t t-call="bureaucrat_knowledge_website.wsd_knowledge_search"/>
+                    <div class="knowledge-base-website">
+                        <t t-call="bureaucrat_knowledge_website.main_categories_list"/>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="knowledge_main_with_search_result" name="Bureaucrat knowledge main with search result">
+        <t t-call="website.layout">
+            <t t-set="title">Bureaucrat Knowledge</t>
+            <div class="oe_structure">
+                <div class="container">
+                    <t t-call="bureaucrat_knowledge_website.knowledge_category_navigation"/>
+                    <t t-call="bureaucrat_knowledge_website.wsd_knowledge_search"/>
+                    <t t-call="bureaucrat_knowledge_website.search_documents_list"/>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="search_documents_list" name="Render documents">
+        <t t-if="len(docs_list) == 0">
+            <div class="row">
+                <div class="oe_structure col-md-12 mb16" align="center">
+                    <h3>There are no matching documents.</h3>
+                </div>
+            </div>
+        </t>
+
+        <t t-else="">
+            <ul>
+                <t t-foreach="docs_list" t-as="doc">
+                    <p>
+                        <li class="child_doc">
+                            <i class="fa fa-file mr4"/>
+                            <a t-attf-href="/knowledge/doc/{{ slug(doc) }}"
+                               t-field="doc.name"/>
+                        </li>
+                    </p>
+                </t>
+            </ul>
+        </t>
+        <div align="center">
+            <t t-call="website.pager"/>
+        </div>
+    </template>
+
+    <template id="knowledge_categories" name="Bureaucrat knowledge categories">
+        <t t-call="website.layout">
+            <div class="oe_structure">
+                <div class="container">
+                    <t t-call="bureaucrat_knowledge_website.knowledge_category_navigation"/>
+                    <div class="knowledge-base-website">
+                        <t t-call="bureaucrat_knowledge_website.categories_list"/>
+                        <t t-if="documents">
+                            <t t-set="docs_list" t-value="documents"/>
+                            <t t-call="bureaucrat_knowledge_website.documents_list"/>
+                        </t>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="knowledge_document" name="Bureaucrat knowledge document">
+        <t t-call="website.layout">
+            <div class="oe_structure">
+                <div class="container">
+                    <t t-call="bureaucrat_knowledge_website.knowledge_category_navigation"/>
+                    <div class="row">
+                        <div class="col-12">
+                            <div id="document-text"
+                                 t-if="doc.document_type == 'html'"
+                                 t-field="doc.document_body_html"/>
+                            <div t-if="doc.document_type == 'pdf' and doc.document_body_pdf"
+                                 class="embed-responsive embed-responsive-4by3 embed-responsive-item mb8">
+                                <iframe class="o_knowledge_pdfviewer" t-att-src="doc.pdf_src_url"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="wsd_knowledge_search" name="Knowledge Search">
+        <div class="mb16">
+            <form id="wsd-knowledge-search" class="input-group" action="/knowledge/search">
+                <input type="text" name="search"
+                       class="form-control"
+                       placeholder="Search by name or tag name"
+                       t-att-value="search"/>
+                <span id="wsd-knowledge-search-after"
+                      class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="submit"><span class="fa fa-search"/></button>
+                </span>
+            </form>
+        </div>
+    </template>
+    <template id="knowledge_search_tests"
+              name="Knowledge search test"
+              inherit_id="web.assets_common">
+        <xpath expr="." position="inside">
+            <script type="text/javascript" src="/bureaucrat_knowledge_website/static/src/js/tours/search.js"></script>
+        </xpath>
+    </template>
+</odoo>

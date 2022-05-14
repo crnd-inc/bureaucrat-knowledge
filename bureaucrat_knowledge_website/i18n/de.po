@@ -1,0 +1,68 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* bureaucrat_knowledge_website
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-11-04 19:50+0000\n"
+"PO-Revision-Date: 2020-11-04 19:50+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: bureaucrat_knowledge_website
+#: model_terms:ir.ui.view,arch_db:bureaucrat_knowledge_website.knowledge_category_navigation
+#: model_terms:ir.ui.view,arch_db:bureaucrat_knowledge_website.knowledge_main
+#: model_terms:ir.ui.view,arch_db:bureaucrat_knowledge_website.knowledge_main_with_search_result
+#: model:website.menu,name:bureaucrat_knowledge_website.menu_bureaucrat_knowledge
+msgid "Bureaucrat Knowledge"
+msgstr ""
+
+#. module: bureaucrat_knowledge_website
+#: model:ir.model,name:bureaucrat_knowledge_website.model_bureaucrat_knowledge_category
+msgid "Bureaucrat Knowledge: Category"
+msgstr ""
+
+#. module: bureaucrat_knowledge_website
+#: model:ir.model,name:bureaucrat_knowledge_website.model_bureaucrat_knowledge_document
+msgid "Bureaucrat Knowledge: Document"
+msgstr ""
+
+#. module: bureaucrat_knowledge_website
+#: model:ir.model.fields,field_description:bureaucrat_knowledge_website.field_bureaucrat_knowledge_document__pdf_src_url
+msgid "Pdf Src Url"
+msgstr ""
+
+#. module: bureaucrat_knowledge_website
+#: model_terms:ir.ui.view,arch_db:bureaucrat_knowledge_website.wsd_knowledge_search
+msgid "Search by name or tag name"
+msgstr ""
+
+#. module: bureaucrat_knowledge_website
+#: model:ir.model.fields,help:bureaucrat_knowledge_website.field_bureaucrat_knowledge_category__website_url
+#: model:ir.model.fields,help:bureaucrat_knowledge_website.field_bureaucrat_knowledge_document__website_url
+msgid "The full URL to access the document through the website."
+msgstr ""
+
+#. module: bureaucrat_knowledge_website
+#: model_terms:ir.ui.view,arch_db:bureaucrat_knowledge_website.search_documents_list
+msgid "There are no matching documents."
+msgstr ""
+
+#. module: bureaucrat_knowledge_website
+#: model_terms:ir.ui.view,arch_db:bureaucrat_knowledge_website.bureaucrat_knowledge_category_view_form
+#: model_terms:ir.ui.view,arch_db:bureaucrat_knowledge_website.bureaucrat_knowledge_document_view_form
+msgid "View on Website"
+msgstr ""
+
+#. module: bureaucrat_knowledge_website
+#: model:ir.model.fields,field_description:bureaucrat_knowledge_website.field_bureaucrat_knowledge_category__website_url
+#: model:ir.model.fields,field_description:bureaucrat_knowledge_website.field_bureaucrat_knowledge_document__website_url
+msgid "Website URL"
+msgstr ""

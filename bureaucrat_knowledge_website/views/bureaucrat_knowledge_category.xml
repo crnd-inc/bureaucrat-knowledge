@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="bureaucrat_knowledge_category_view_form">
+        <field name="model">bureaucrat.knowledge.category</field>
+        <field name="inherit_id" ref="bureaucrat_knowledge.bureaucrat_knowledge_category_view_form"/>
+        <field name="arch" type="xml">
+            <div name="button_box" position="inside">
+                <button class="oe_stat_button"
+                        name="action_show_on_website"
+                        type="object"
+                        string="View on Website"
+                        icon="fa-globe">
+                </button>
+            </div>
+        </field>
+    </record>
+</odoo>

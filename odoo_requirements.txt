@@ -1,0 +1,2 @@
+--github crnd-inc/crnd-web.git
+--github crnd-inc/generic-addons.git

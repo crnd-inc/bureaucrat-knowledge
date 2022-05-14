@@ -22,8 +22,8 @@ Bureaucrat knowledge allows you to store document in following formats:
 - HTML
 - PDF
 
-Also, bureaucrat knowledge base proviced most flexible access rights management model.
-For example, you can easily create knowledgebase structure like following:
+Also, bureaucrat knowledge base provides most flexible access rights management model.
+For example, you can easily create knowledge base structure like following:
 
 - Public documentation (visible for public users)
     - Documentation on your product (visible for public users)
@@ -31,7 +31,7 @@ For example, you can easily create knowledgebase structure like following:
     - Sales documentation (visible only for sales department)
         - Instructions (visible only for sales department)
         - Sale scripts (visible only for sales department)
-        - Managment (visible only for sales managers)
+        - Management (visible only for sales managers)
     - Developer's documentation (visible only for developers)
         - Migration notes for Odoo (visible only for developers)
         - Readme template (visible only for developers)
@@ -65,4 +65,3 @@ This module is maintained by the Center of Research & Development company.
 We can provide you further Odoo Support, Odoo implementation, Odoo customization, Odoo 3rd Party development and integration software, consulting services. Our main goal is to provide the best quality product for you. 
 
 For any questions `contact us <mailto:info@crnd.pro>`__.
-

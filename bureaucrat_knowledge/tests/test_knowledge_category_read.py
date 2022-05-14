@@ -12,14 +12,14 @@ class TestKnowledgeCategoryRead(TestBureaucratKnowledgeBase):
         self.assertFalse(self.category_top_level.visibility_user_ids)
 
         with self.assertRaises(exceptions.AccessError):
-            self.category_top_level.sudo(self.demo_user).read(['name'])
+            self.category_top_level.with_user(self.demo_user).read(['name'])
 
         self.category_top_level.write({
             'visibility_user_ids': [(4, self.demo_user.id)]})
 
         self.assertEqual(len(self.category_top_level.visibility_user_ids), 1)
         self.assertEqual(
-            self.category_top_level.sudo(self.demo_user).name,
+            self.category_top_level.with_user(self.demo_user).name,
             'Top level category 1')
 
     def test_category_restricted_access_read_group(self):
@@ -31,14 +31,14 @@ class TestKnowledgeCategoryRead(TestBureaucratKnowledgeBase):
         self.assertFalse(self.category_top_level.visibility_user_ids)
 
         with self.assertRaises(exceptions.AccessError):
-            self.category_top_level.sudo(self.demo_user).read(['name'])
+            self.category_top_level.with_user(self.demo_user).read(['name'])
 
         self.category_top_level.write({
             'visibility_group_ids': [(4, self.group_demo.id)]})
 
         self.assertEqual(len(self.category_top_level.visibility_group_ids), 1)
         self.assertEqual(
-            self.category_top_level.sudo(self.demo_user).name,
+            self.category_top_level.with_user(self.demo_user).name,
             'Top level category 1')
 
     def test_category_restricted_editors_access_read_user(self):
@@ -48,14 +48,14 @@ class TestKnowledgeCategoryRead(TestBureaucratKnowledgeBase):
         self.assertFalse(self.category_top_level.editor_user_ids)
 
         with self.assertRaises(exceptions.AccessError):
-            self.category_top_level.sudo(self.demo_user).read(['name'])
+            self.category_top_level.with_user(self.demo_user).read(['name'])
 
         self.category_top_level.write({
             'editor_user_ids': [(4, self.demo_user.id)]})
 
         self.assertEqual(len(self.category_top_level.editor_user_ids), 1)
         self.assertEqual(
-            self.category_top_level.sudo(self.demo_user).name,
+            self.category_top_level.with_user(self.demo_user).name,
             'Top level category 1')
 
     def test_category_restricted_editors_access_read_group(self):
@@ -67,14 +67,14 @@ class TestKnowledgeCategoryRead(TestBureaucratKnowledgeBase):
         self.assertFalse(self.category_top_level.editor_user_ids)
 
         with self.assertRaises(exceptions.AccessError):
-            self.category_top_level.sudo(self.demo_user).read(['name'])
+            self.category_top_level.with_user(self.demo_user).read(['name'])
 
         self.category_top_level.write({
             'editor_group_ids': [(4, self.group_demo.id)]})
 
         self.assertEqual(len(self.category_top_level.editor_group_ids), 1)
         self.assertEqual(
-            self.category_top_level.sudo(self.demo_user).name,
+            self.category_top_level.with_user(self.demo_user).name,
             'Top level category 1')
 
     def test_category_restricted_owners_access_read_user(self):
@@ -84,14 +84,14 @@ class TestKnowledgeCategoryRead(TestBureaucratKnowledgeBase):
         self.assertEqual(len(self.category_top_level.owner_user_ids), 0)
 
         with self.assertRaises(exceptions.AccessError):
-            self.category_top_level.sudo(self.demo_user).read(['name'])
+            self.category_top_level.with_user(self.demo_user).read(['name'])
 
         self.category_top_level.write({
             'owner_user_ids': [(4, self.demo_user.id)]})
 
         self.assertEqual(len(self.category_top_level.owner_user_ids), 1)
         self.assertEqual(
-            self.category_top_level.sudo(self.demo_user).name,
+            self.category_top_level.with_user(self.demo_user).name,
             'Top level category 1')
 
     def test_category_restricted_owners_access_read_group(self):
@@ -103,14 +103,14 @@ class TestKnowledgeCategoryRead(TestBureaucratKnowledgeBase):
         self.assertEqual(len(self.category_top_level.owner_user_ids), 0)
 
         with self.assertRaises(exceptions.AccessError):
-            self.category_top_level.sudo(self.demo_user).read(['name'])
+            self.category_top_level.with_user(self.demo_user).read(['name'])
 
         self.category_top_level.write({
             'owner_group_ids': [(4, self.group_demo.id)]})
 
         self.assertEqual(len(self.category_top_level.owner_group_ids), 1)
         self.assertEqual(
-            self.category_top_level.sudo(self.demo_user).name,
+            self.category_top_level.with_user(self.demo_user).name,
             'Top level category 1')
 
     def test_category_public_portal_internal_access_read_user(self):
@@ -128,101 +128,101 @@ class TestKnowledgeCategoryRead(TestBureaucratKnowledgeBase):
 
         # Nobody can access restricted category
         with self.assertRaises(exceptions.AccessError):
-            self.category_top_level.sudo(self.demo_user).read(['name'])
+            self.category_top_level.with_user(self.demo_user).read(['name'])
         with self.assertRaises(exceptions.AccessError):
-            self.category_top_level.sudo(self.portal_user).read(['name'])
+            self.category_top_level.with_user(self.portal_user).read(['name'])
         with self.assertRaises(exceptions.AccessError):
-            self.category_top_level.sudo(self.public_user).read(['name'])
+            self.category_top_level.with_user(self.public_user).read(['name'])
 
         # Nobody can access subcategory of restricted categ with visibility
         # type parent
         with self.assertRaises(exceptions.AccessError):
-            self.category_subcat_1.sudo(self.demo_user).read(['name'])
+            self.category_subcat_1.with_user(self.demo_user).read(['name'])
         with self.assertRaises(exceptions.AccessError):
-            self.category_subcat_1.sudo(self.portal_user).read(['name'])
+            self.category_subcat_1.with_user(self.portal_user).read(['name'])
         with self.assertRaises(exceptions.AccessError):
-            self.category_subcat_1.sudo(self.public_user).read(['name'])
+            self.category_subcat_1.with_user(self.public_user).read(['name'])
 
         # Nobody can access subcategory of restricted categ with visibility
         # type parent (nesting level 2)
         with self.assertRaises(exceptions.AccessError):
-            self.category_subcat_2.sudo(self.demo_user).read(['name'])
+            self.category_subcat_2.with_user(self.demo_user).read(['name'])
         with self.assertRaises(exceptions.AccessError):
-            self.category_subcat_2.sudo(self.portal_user).read(['name'])
+            self.category_subcat_2.with_user(self.portal_user).read(['name'])
         with self.assertRaises(exceptions.AccessError):
-            self.category_subcat_2.sudo(self.public_user).read(['name'])
+            self.category_subcat_2.with_user(self.public_user).read(['name'])
 
         # Change visibility to internal
         self.category_top_level.visibility_type = 'internal'
 
         # And check that employees could see this category
         self.assertEqual(
-            self.category_top_level.sudo(self.demo_user).read(
+            self.category_top_level.with_user(self.demo_user).read(
                 ['name'])[0]['name'],
             'Top level category 1')
         with self.assertRaises(exceptions.AccessError):
-            self.category_top_level.sudo(self.public_user).read(['name'])
+            self.category_top_level.with_user(self.public_user).read(['name'])
         with self.assertRaises(exceptions.AccessError):
-            self.category_top_level.sudo(self.portal_user).read(['name'])
+            self.category_top_level.with_user(self.portal_user).read(['name'])
 
         # And check that employees could see subcategory (level 1)
         self.assertEqual(
-            self.category_subcat_1.sudo(self.demo_user).read(
+            self.category_subcat_1.with_user(self.demo_user).read(
                 ['name'])[0]['name'],
             'Subcategory 1')
         with self.assertRaises(exceptions.AccessError):
-            self.category_subcat_1.sudo(self.public_user).read(['name'])
+            self.category_subcat_1.with_user(self.public_user).read(['name'])
         with self.assertRaises(exceptions.AccessError):
-            self.category_subcat_1.sudo(self.portal_user).read(['name'])
+            self.category_subcat_1.with_user(self.portal_user).read(['name'])
 
         # And check that employees could see subcategory (level 2)
         self.assertEqual(
-            self.category_subcat_2.sudo(self.demo_user).read(
+            self.category_subcat_2.with_user(self.demo_user).read(
                 ['name'])[0]['name'],
             'Subcategory 2')
         with self.assertRaises(exceptions.AccessError):
-            self.category_subcat_2.sudo(self.public_user).read(['name'])
+            self.category_subcat_2.with_user(self.public_user).read(['name'])
         with self.assertRaises(exceptions.AccessError):
-            self.category_subcat_2.sudo(self.portal_user).read(['name'])
+            self.category_subcat_2.with_user(self.portal_user).read(['name'])
 
         # Change visibility to portal
         self.category_top_level.visibility_type = 'portal'
 
         # And check that employees and portal users could see this category
         self.assertEqual(
-            self.category_top_level.sudo(self.demo_user).read(
+            self.category_top_level.with_user(self.demo_user).read(
                 ['name'])[0]['name'],
             'Top level category 1')
         self.assertEqual(
-            self.category_top_level.sudo(self.portal_user).read(
+            self.category_top_level.with_user(self.portal_user).read(
                 ['name'])[0]['name'],
             'Top level category 1')
         with self.assertRaises(exceptions.AccessError):
-            self.category_top_level.sudo(self.public_user).read(['name'])
+            self.category_top_level.with_user(self.public_user).read(['name'])
 
         # And check that employees and portal users could see subcategory (l1)
         self.assertEqual(
-            self.category_subcat_1.sudo(self.demo_user).read(
+            self.category_subcat_1.with_user(self.demo_user).read(
                 ['name'])[0]['name'],
             'Subcategory 1')
         self.assertEqual(
-            self.category_subcat_1.sudo(self.portal_user).read(
+            self.category_subcat_1.with_user(self.portal_user).read(
                 ['name'])[0]['name'],
             'Subcategory 1')
         with self.assertRaises(exceptions.AccessError):
-            self.category_subcat_1.sudo(self.public_user).read(['name'])
+            self.category_subcat_1.with_user(self.public_user).read(['name'])
 
         # And check that employees and portal users could see subcategory (l2)
         self.assertEqual(
-            self.category_subcat_2.sudo(self.demo_user).read(
+            self.category_subcat_2.with_user(self.demo_user).read(
                 ['name'])[0]['name'],
             'Subcategory 2')
         self.assertEqual(
-            self.category_subcat_2.sudo(self.portal_user).read(
+            self.category_subcat_2.with_user(self.portal_user).read(
                 ['name'])[0]['name'],
             'Subcategory 2')
         with self.assertRaises(exceptions.AccessError):
-            self.category_subcat_2.sudo(self.public_user).read(['name'])
+            self.category_subcat_2.with_user(self.public_user).read(['name'])
 
         # Change visibility to public
         self.category_top_level.visibility_type = 'public'
@@ -230,108 +230,109 @@ class TestKnowledgeCategoryRead(TestBureaucratKnowledgeBase):
         # And check that employees, portal and public users could see
         # this category
         self.assertEqual(
-            self.category_top_level.sudo(self.demo_user).read(
+            self.category_top_level.with_user(self.demo_user).read(
                 ['name'])[0]['name'],
             'Top level category 1')
         self.assertEqual(
-            self.category_top_level.sudo(self.portal_user).read(
+            self.category_top_level.with_user(self.portal_user).read(
                 ['name'])[0]['name'],
             'Top level category 1')
         self.assertEqual(
-            self.category_top_level.sudo(self.public_user).read(
+            self.category_top_level.with_user(self.public_user).read(
                 ['name'])[0]['name'],
             'Top level category 1')
 
         # And check that employees, portal and public users could see
         # this category
         self.assertEqual(
-            self.category_subcat_1.sudo(self.demo_user).read(
+            self.category_subcat_1.with_user(self.demo_user).read(
                 ['name'])[0]['name'],
             'Subcategory 1')
         self.assertEqual(
-            self.category_subcat_1.sudo(self.portal_user).read(
+            self.category_subcat_1.with_user(self.portal_user).read(
                 ['name'])[0]['name'],
             'Subcategory 1')
         self.assertEqual(
-            self.category_subcat_1.sudo(self.public_user).read(
+            self.category_subcat_1.with_user(self.public_user).read(
                 ['name'])[0]['name'],
             'Subcategory 1')
 
         # And check that employees, portal and public users could see
         # this category
         self.assertEqual(
-            self.category_subcat_2.sudo(self.demo_user).read(
+            self.category_subcat_2.with_user(self.demo_user).read(
                 ['name'])[0]['name'],
             'Subcategory 2')
         self.assertEqual(
-            self.category_subcat_2.sudo(self.portal_user).read(
+            self.category_subcat_2.with_user(self.portal_user).read(
                 ['name'])[0]['name'],
             'Subcategory 2')
         self.assertEqual(
-            self.category_subcat_2.sudo(self.public_user).read(
+            self.category_subcat_2.with_user(self.public_user).read(
                 ['name'])[0]['name'],
             'Subcategory 2')
 
         # Change visibility time of subcategory level 1 to 'internal'
         self.category_subcat_1.visibility_type = 'internal'
+        self.env['bureaucrat.knowledge.category'].flush()
 
         # And check that employees, portal and public users could see
         # top-level category (it has visibility type public)
         self.assertEqual(
-            self.category_top_level.sudo(self.demo_user).read(
+            self.category_top_level.with_user(self.demo_user).read(
                 ['name'])[0]['name'],
             'Top level category 1')
         self.assertEqual(
-            self.category_top_level.sudo(self.portal_user).read(
+            self.category_top_level.with_user(self.portal_user).read(
                 ['name'])[0]['name'],
             'Top level category 1')
         self.assertEqual(
-            self.category_top_level.sudo(self.public_user).read(
+            self.category_top_level.with_user(self.public_user).read(
                 ['name'])[0]['name'],
             'Top level category 1')
 
         # And check that only employees can see subcategory (level 1)
         self.assertEqual(
-            self.category_subcat_1.sudo(self.demo_user).read(
+            self.category_subcat_1.with_user(self.demo_user).read(
                 ['name'])[0]['name'],
             'Subcategory 1')
         with self.assertRaises(exceptions.AccessError):
-            self.category_subcat_1.sudo(self.public_user).read(['name'])
+            self.category_subcat_1.with_user(self.public_user).read(['name'])
         with self.assertRaises(exceptions.AccessError):
-            self.category_subcat_1.sudo(self.portal_user).read(['name'])
+            self.category_subcat_1.with_user(self.portal_user).read(['name'])
 
         # And check that only employees can see subcategory (level 2)
         self.assertEqual(
-            self.category_subcat_2.sudo(self.demo_user).read(
+            self.category_subcat_2.with_user(self.demo_user).read(
                 ['name'])[0]['name'],
             'Subcategory 2')
         with self.assertRaises(exceptions.AccessError):
-            self.category_subcat_2.sudo(self.public_user).read(['name'])
+            self.category_subcat_2.with_user(self.public_user).read(['name'])
         with self.assertRaises(exceptions.AccessError):
-            self.category_subcat_2.sudo(self.portal_user).read(['name'])
+            self.category_subcat_2.with_user(self.portal_user).read(['name'])
 
         # Change visibility type to 'restricted' for subcategory level 2
         self.category_subcat_2.visibility_type = 'restricted'
 
         # And check that nobody can see subcategory (level 2)
         with self.assertRaises(exceptions.AccessError):
-            self.category_subcat_2.sudo(self.demo_user).read(['name'])
+            self.category_subcat_2.with_user(self.demo_user).read(['name'])
         with self.assertRaises(exceptions.AccessError):
-            self.category_subcat_2.sudo(self.public_user).read(['name'])
+            self.category_subcat_2.with_user(self.public_user).read(['name'])
         with self.assertRaises(exceptions.AccessError):
-            self.category_subcat_2.sudo(self.portal_user).read(['name'])
+            self.category_subcat_2.with_user(self.portal_user).read(['name'])
 
         # We can add demo_user to visibility_users and see that he can read
         # this category now
         self.category_subcat_2.visibility_user_ids |= self.demo_user
         self.assertEqual(
-            self.category_subcat_2.sudo(self.demo_user).read(
+            self.category_subcat_2.with_user(self.demo_user).read(
                 ['name'])[0]['name'],
             'Subcategory 2')
         with self.assertRaises(exceptions.AccessError):
-            self.category_subcat_2.sudo(self.public_user).read(['name'])
+            self.category_subcat_2.with_user(self.public_user).read(['name'])
         with self.assertRaises(exceptions.AccessError):
-            self.category_subcat_2.sudo(self.portal_user).read(['name'])
+            self.category_subcat_2.with_user(self.portal_user).read(['name'])
 
     # Testing subcategory 2nd level depth for visibility_type = 'restricted'
     def test_subcategory_2_restricted_access_read_user(self):
@@ -352,32 +353,32 @@ class TestKnowledgeCategoryRead(TestBureaucratKnowledgeBase):
         self.assertFalse(self.category_subcat_2.visibility_user_ids)
 
         with self.assertRaises(exceptions.AccessError):
-            self.category_top_level.sudo(self.demo_user).read(['name'])
+            self.category_top_level.with_user(self.demo_user).read(['name'])
         with self.assertRaises(exceptions.AccessError):
-            self.category_subcat_1.sudo(self.demo_user).read(['name'])
+            self.category_subcat_1.with_user(self.demo_user).read(['name'])
         with self.assertRaises(exceptions.AccessError):
-            self.category_subcat_2.sudo(self.demo_user).read(['name'])
+            self.category_subcat_2.with_user(self.demo_user).read(['name'])
 
         self.category_subcat_1.write({
             'visibility_user_ids': [(4, self.demo_user.id)]})
 
         with self.assertRaises(exceptions.AccessError):
-            self.category_top_level.sudo(self.demo_user).read(['name'])
+            self.category_top_level.with_user(self.demo_user).read(['name'])
         with self.assertRaises(exceptions.AccessError):
-            self.category_subcat_1.sudo(self.demo_user).read(['name'])
+            self.category_subcat_1.with_user(self.demo_user).read(['name'])
         with self.assertRaises(exceptions.AccessError):
-            self.category_subcat_2.sudo(self.demo_user).read(['name'])
+            self.category_subcat_2.with_user(self.demo_user).read(['name'])
 
         self.category_subcat_1.visibility_type = 'restricted'
 
         with self.assertRaises(exceptions.AccessError):
-            self.category_top_level.sudo(self.demo_user).read(['name'])
+            self.category_top_level.with_user(self.demo_user).read(['name'])
         self.assertEqual(
-            self.category_subcat_1.sudo(self.demo_user).read(
+            self.category_subcat_1.with_user(self.demo_user).read(
                 ['name'])[0]['name'],
             'Subcategory 1')
         self.assertEqual(
-            self.category_subcat_2.sudo(self.demo_user).read(
+            self.category_subcat_2.with_user(self.demo_user).read(
                 ['name'])[0]['name'],
             'Subcategory 2')
 
@@ -386,17 +387,18 @@ class TestKnowledgeCategoryRead(TestBureaucratKnowledgeBase):
         self.category_subcat_1.write({
             'visibility_user_ids': [(5, 0)],
             'visibility_type': 'parent'})
+        self.env['bureaucrat.knowledge.category'].flush()
 
         self.assertEqual(
-            self.category_top_level.sudo(self.demo_user).read(
+            self.category_top_level.with_user(self.demo_user).read(
                 ['name'])[0]['name'],
             'Top level category 1')
         self.assertEqual(
-            self.category_subcat_1.sudo(self.demo_user).read(
+            self.category_subcat_1.with_user(self.demo_user).read(
                 ['name'])[0]['name'],
             'Subcategory 1')
         self.assertEqual(
-            self.category_subcat_2.sudo(self.demo_user).read(
+            self.category_subcat_2.with_user(self.demo_user).read(
                 ['name'])[0]['name'],
             'Subcategory 2')
 
@@ -420,32 +422,32 @@ class TestKnowledgeCategoryRead(TestBureaucratKnowledgeBase):
         self.assertFalse(self.category_subcat_2.visibility_user_ids)
 
         with self.assertRaises(exceptions.AccessError):
-            self.category_top_level.sudo(self.demo_user).read(['name'])
+            self.category_top_level.with_user(self.demo_user).read(['name'])
         with self.assertRaises(exceptions.AccessError):
-            self.category_subcat_1.sudo(self.demo_user).read(['name'])
+            self.category_subcat_1.with_user(self.demo_user).read(['name'])
         with self.assertRaises(exceptions.AccessError):
-            self.category_subcat_2.sudo(self.demo_user).read(['name'])
+            self.category_subcat_2.with_user(self.demo_user).read(['name'])
 
         self.category_subcat_1.write({
             'visibility_group_ids': [(4, self.group_demo.id)]})
 
         with self.assertRaises(exceptions.AccessError):
-            self.category_top_level.sudo(self.demo_user).read(['name'])
+            self.category_top_level.with_user(self.demo_user).read(['name'])
         with self.assertRaises(exceptions.AccessError):
-            self.category_subcat_1.sudo(self.demo_user).read(['name'])
+            self.category_subcat_1.with_user(self.demo_user).read(['name'])
         with self.assertRaises(exceptions.AccessError):
-            self.category_subcat_2.sudo(self.demo_user).read(['name'])
+            self.category_subcat_2.with_user(self.demo_user).read(['name'])
 
         self.category_subcat_1.visibility_type = 'restricted'
 
         with self.assertRaises(exceptions.AccessError):
-            self.category_top_level.sudo(self.demo_user).read(['name'])
+            self.category_top_level.with_user(self.demo_user).read(['name'])
         self.assertEqual(
-            self.category_subcat_1.sudo(self.demo_user).read(
+            self.category_subcat_1.with_user(self.demo_user).read(
                 ['name'])[0]['name'],
             'Subcategory 1')
         self.assertEqual(
-            self.category_subcat_2.sudo(self.demo_user).read(
+            self.category_subcat_2.with_user(self.demo_user).read(
                 ['name'])[0]['name'],
             'Subcategory 2')
 
@@ -454,17 +456,18 @@ class TestKnowledgeCategoryRead(TestBureaucratKnowledgeBase):
         self.category_subcat_1.write({
             'visibility_group_ids': [(5, 0)],
             'visibility_type': 'parent'})
+        self.env['bureaucrat.knowledge.category'].flush()
 
         self.assertEqual(
-            self.category_top_level.sudo(self.demo_user).read(
+            self.category_top_level.with_user(self.demo_user).read(
                 ['name'])[0]['name'],
             'Top level category 1')
         self.assertEqual(
-            self.category_subcat_1.sudo(self.demo_user).read(
+            self.category_subcat_1.with_user(self.demo_user).read(
                 ['name'])[0]['name'],
             'Subcategory 1')
         self.assertEqual(
-            self.category_subcat_2.sudo(self.demo_user).read(
+            self.category_subcat_2.with_user(self.demo_user).read(
                 ['name'])[0]['name'],
             'Subcategory 2')
 
@@ -490,11 +493,11 @@ class TestKnowledgeCategoryRead(TestBureaucratKnowledgeBase):
         self.assertFalse(self.category_subcat_2.actual_editor_user_ids)
 
         with self.assertRaises(exceptions.AccessError):
-            self.category_top_level.sudo(self.demo_user).read(['name'])
+            self.category_top_level.with_user(self.demo_user).read(['name'])
         with self.assertRaises(exceptions.AccessError):
-            self.category_subcat_1.sudo(self.demo_user).read(['name'])
+            self.category_subcat_1.with_user(self.demo_user).read(['name'])
         with self.assertRaises(exceptions.AccessError):
-            self.category_subcat_2.sudo(self.demo_user).read(['name'])
+            self.category_subcat_2.with_user(self.demo_user).read(['name'])
 
         self.category_top_level.write({
             'editor_user_ids': [(4, self.demo_user.id)]})
@@ -510,15 +513,15 @@ class TestKnowledgeCategoryRead(TestBureaucratKnowledgeBase):
         self.assertEqual(len(self.category_subcat_2.actual_editor_user_ids), 1)
 
         self.assertEqual(
-            self.category_top_level.sudo(self.demo_user).read(
+            self.category_top_level.with_user(self.demo_user).read(
                 ['name'])[0]['name'],
             'Top level category 1')
         self.assertEqual(
-            self.category_subcat_1.sudo(self.demo_user).read(
+            self.category_subcat_1.with_user(self.demo_user).read(
                 ['name'])[0]['name'],
             'Subcategory 1')
         self.assertEqual(
-            self.category_subcat_2.sudo(self.demo_user).read(
+            self.category_subcat_2.with_user(self.demo_user).read(
                 ['name'])[0]['name'],
             'Subcategory 2')
 
@@ -528,15 +531,15 @@ class TestKnowledgeCategoryRead(TestBureaucratKnowledgeBase):
         self.category_subcat_2.visibility_type = 'restricted'
 
         self.assertEqual(
-            self.category_top_level.sudo(self.demo_user).read(
+            self.category_top_level.with_user(self.demo_user).read(
                 ['name'])[0]['name'],
             'Top level category 1')
         self.assertEqual(
-            self.category_subcat_1.sudo(self.demo_user).read(
+            self.category_subcat_1.with_user(self.demo_user).read(
                 ['name'])[0]['name'],
             'Subcategory 1')
         self.assertEqual(
-            self.category_subcat_2.sudo(self.demo_user).read(
+            self.category_subcat_2.with_user(self.demo_user).read(
                 ['name'])[0]['name'],
             'Subcategory 2')
 
@@ -564,11 +567,11 @@ class TestKnowledgeCategoryRead(TestBureaucratKnowledgeBase):
         self.assertFalse(self.category_subcat_2.actual_editor_user_ids)
 
         with self.assertRaises(exceptions.AccessError):
-            self.category_top_level.sudo(self.demo_user).read(['name'])
+            self.category_top_level.with_user(self.demo_user).read(['name'])
         with self.assertRaises(exceptions.AccessError):
-            self.category_subcat_1.sudo(self.demo_user).read(['name'])
+            self.category_subcat_1.with_user(self.demo_user).read(['name'])
         with self.assertRaises(exceptions.AccessError):
-            self.category_subcat_2.sudo(self.demo_user).read(['name'])
+            self.category_subcat_2.with_user(self.demo_user).read(['name'])
 
         self.category_top_level.write({
             'editor_group_ids': [(4, self.group_demo.id)]})
@@ -586,15 +589,15 @@ class TestKnowledgeCategoryRead(TestBureaucratKnowledgeBase):
         self.assertFalse(self.category_subcat_2.actual_editor_user_ids)
 
         self.assertEqual(
-            self.category_top_level.sudo(self.demo_user).read(
+            self.category_top_level.with_user(self.demo_user).read(
                 ['name'])[0]['name'],
             'Top level category 1')
         self.assertEqual(
-            self.category_subcat_1.sudo(self.demo_user).read(
+            self.category_subcat_1.with_user(self.demo_user).read(
                 ['name'])[0]['name'],
             'Subcategory 1')
         self.assertEqual(
-            self.category_subcat_2.sudo(self.demo_user).read(
+            self.category_subcat_2.with_user(self.demo_user).read(
                 ['name'])[0]['name'],
             'Subcategory 2')
 
@@ -604,15 +607,15 @@ class TestKnowledgeCategoryRead(TestBureaucratKnowledgeBase):
         self.category_subcat_2.visibility_type = 'restricted'
 
         self.assertEqual(
-            self.category_top_level.sudo(self.demo_user).read(
+            self.category_top_level.with_user(self.demo_user).read(
                 ['name'])[0]['name'],
             'Top level category 1')
         self.assertEqual(
-            self.category_subcat_1.sudo(self.demo_user).read(
+            self.category_subcat_1.with_user(self.demo_user).read(
                 ['name'])[0]['name'],
             'Subcategory 1')
         self.assertEqual(
-            self.category_subcat_2.sudo(self.demo_user).read(
+            self.category_subcat_2.with_user(self.demo_user).read(
                 ['name'])[0]['name'],
             'Subcategory 2')
 
@@ -638,11 +641,11 @@ class TestKnowledgeCategoryRead(TestBureaucratKnowledgeBase):
         self.assertEqual(len(self.category_subcat_2.actual_owner_user_ids), 0)
 
         with self.assertRaises(exceptions.AccessError):
-            self.category_top_level.sudo(self.demo_user).read(['name'])
+            self.category_top_level.with_user(self.demo_user).read(['name'])
         with self.assertRaises(exceptions.AccessError):
-            self.category_subcat_1.sudo(self.demo_user).read(['name'])
+            self.category_subcat_1.with_user(self.demo_user).read(['name'])
         with self.assertRaises(exceptions.AccessError):
-            self.category_subcat_2.sudo(self.demo_user).read(['name'])
+            self.category_subcat_2.with_user(self.demo_user).read(['name'])
 
         self.category_top_level.write({
             'owner_user_ids': [(4, self.demo_user.id)]})
@@ -658,15 +661,15 @@ class TestKnowledgeCategoryRead(TestBureaucratKnowledgeBase):
         self.assertEqual(len(self.category_subcat_2.actual_owner_user_ids), 1)
 
         self.assertEqual(
-            self.category_top_level.sudo(self.demo_user).read(
+            self.category_top_level.with_user(self.demo_user).read(
                 ['name'])[0]['name'],
             'Top level category 1')
         self.assertEqual(
-            self.category_subcat_1.sudo(self.demo_user).read(
+            self.category_subcat_1.with_user(self.demo_user).read(
                 ['name'])[0]['name'],
             'Subcategory 1')
         self.assertEqual(
-            self.category_subcat_2.sudo(self.demo_user).read(
+            self.category_subcat_2.with_user(self.demo_user).read(
                 ['name'])[0]['name'],
             'Subcategory 2')
 
@@ -676,15 +679,15 @@ class TestKnowledgeCategoryRead(TestBureaucratKnowledgeBase):
         self.category_subcat_2.visibility_type = 'restricted'
 
         self.assertEqual(
-            self.category_top_level.sudo(self.demo_user).read(
+            self.category_top_level.with_user(self.demo_user).read(
                 ['name'])[0]['name'],
             'Top level category 1')
         self.assertEqual(
-            self.category_subcat_1.sudo(self.demo_user).read(
+            self.category_subcat_1.with_user(self.demo_user).read(
                 ['name'])[0]['name'],
             'Subcategory 1')
         self.assertEqual(
-            self.category_subcat_2.sudo(self.demo_user).read(
+            self.category_subcat_2.with_user(self.demo_user).read(
                 ['name'])[0]['name'],
             'Subcategory 2')
 
@@ -713,11 +716,11 @@ class TestKnowledgeCategoryRead(TestBureaucratKnowledgeBase):
         self.assertEqual(len(self.category_subcat_2.actual_owner_user_ids), 0)
 
         with self.assertRaises(exceptions.AccessError):
-            self.category_top_level.sudo(self.demo_user).read(['name'])
+            self.category_top_level.with_user(self.demo_user).read(['name'])
         with self.assertRaises(exceptions.AccessError):
-            self.category_subcat_1.sudo(self.demo_user).read(['name'])
+            self.category_subcat_1.with_user(self.demo_user).read(['name'])
         with self.assertRaises(exceptions.AccessError):
-            self.category_subcat_2.sudo(self.demo_user).read(['name'])
+            self.category_subcat_2.with_user(self.demo_user).read(['name'])
 
         self.category_top_level.write({
             'owner_group_ids': [(4, self.group_demo.id)]})
@@ -733,15 +736,15 @@ class TestKnowledgeCategoryRead(TestBureaucratKnowledgeBase):
         self.assertEqual(len(self.category_subcat_2.actual_owner_user_ids), 0)
 
         self.assertEqual(
-            self.category_top_level.sudo(self.demo_user).read(
+            self.category_top_level.with_user(self.demo_user).read(
                 ['name'])[0]['name'],
             'Top level category 1')
         self.assertEqual(
-            self.category_subcat_1.sudo(self.demo_user).read(
+            self.category_subcat_1.with_user(self.demo_user).read(
                 ['name'])[0]['name'],
             'Subcategory 1')
         self.assertEqual(
-            self.category_subcat_2.sudo(self.demo_user).read(
+            self.category_subcat_2.with_user(self.demo_user).read(
                 ['name'])[0]['name'],
             'Subcategory 2')
 
@@ -751,14 +754,14 @@ class TestKnowledgeCategoryRead(TestBureaucratKnowledgeBase):
         self.category_subcat_2.visibility_type = 'restricted'
 
         self.assertEqual(
-            self.category_top_level.sudo(self.demo_user).read(
+            self.category_top_level.with_user(self.demo_user).read(
                 ['name'])[0]['name'],
             'Top level category 1')
         self.assertEqual(
-            self.category_subcat_1.sudo(self.demo_user).read(
+            self.category_subcat_1.with_user(self.demo_user).read(
                 ['name'])[0]['name'],
             'Subcategory 1')
         self.assertEqual(
-            self.category_subcat_2.sudo(self.demo_user).read(
+            self.category_subcat_2.with_user(self.demo_user).read(
                 ['name'])[0]['name'],
             'Subcategory 2')

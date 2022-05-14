@@ -17,7 +17,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         self.assertFalse(self.category_top_level.visibility_user_ids)
 
         with self.assertRaises(AccessError):
-            self.Document.sudo(self.demo_user).create({
+            self.Document.with_user(self.demo_user).create({
                 'name': 'Test Create',
                 'document_type': 'html',
                 'category_id': self.category_top_level.id,
@@ -28,7 +28,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
 
         self.assertEqual(len(self.category_top_level.visibility_user_ids), 1)
         with self.assertRaises(AccessError):
-            self.Document.sudo(self.demo_user).create({
+            self.Document.with_user(self.demo_user).create({
                 'name': 'Test Create',
                 'document_type': 'html',
                 'category_id': self.category_top_level.id,
@@ -41,7 +41,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         self.assertFalse(self.category_top_level.visibility_user_ids)
 
         with self.assertRaises(AccessError):
-            self.Document.sudo(self.demo_user).create({
+            self.Document.with_user(self.demo_user).create({
                 'name': 'Test Create',
                 'document_type': 'html',
                 'category_id': self.category_top_level.id,
@@ -53,7 +53,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
 
         self.assertEqual(len(self.category_top_level.visibility_user_ids), 1)
         with self.assertRaises(AccessError):
-            self.Document.sudo(self.demo_user).create({
+            self.Document.with_user(self.demo_user).create({
                 'name': 'Test Create',
                 'document_type': 'html',
                 'category_id': self.category_top_level.id,
@@ -67,7 +67,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         self.assertFalse(self.category_top_level.visibility_user_ids)
 
         with self.assertRaises(AccessError):
-            self.Document.sudo(self.demo_user).create({
+            self.Document.with_user(self.demo_user).create({
                 'name': 'Test Create',
                 'document_type': 'html',
                 'category_id': self.category_top_level.id,
@@ -79,7 +79,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
 
         self.assertEqual(len(self.category_top_level.visibility_user_ids), 1)
         with self.assertRaises(AccessError):
-            self.Document.sudo(self.demo_user).create({
+            self.Document.with_user(self.demo_user).create({
                 'name': 'Test Create',
                 'document_type': 'html',
                 'category_id': self.category_top_level.id,
@@ -95,7 +95,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         self.assertFalse(self.category_top_level.visibility_user_ids)
 
         with self.assertRaises(AccessError):
-            self.Document.sudo(self.demo_user).create({
+            self.Document.with_user(self.demo_user).create({
                 'name': 'Test Create',
                 'document_type': 'html',
                 'category_id': self.category_top_level.id,
@@ -106,7 +106,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
 
         self.assertEqual(len(self.category_top_level.visibility_group_ids), 1)
         with self.assertRaises(AccessError):
-            self.Document.sudo(self.demo_user).create({
+            self.Document.with_user(self.demo_user).create({
                 'name': 'Test Create',
                 'document_type': 'html',
                 'category_id': self.category_top_level.id,
@@ -121,7 +121,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         self.assertFalse(self.category_top_level.visibility_user_ids)
 
         with self.assertRaises(AccessError):
-            self.Document.sudo(self.demo_user).create({
+            self.Document.with_user(self.demo_user).create({
                 'name': 'Test Create',
                 'document_type': 'html',
                 'category_id': self.category_top_level.id,
@@ -133,7 +133,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
 
         self.assertEqual(len(self.category_top_level.visibility_group_ids), 1)
         with self.assertRaises(AccessError):
-            self.Document.sudo(self.demo_user).create({
+            self.Document.with_user(self.demo_user).create({
                 'name': 'Test Create',
                 'document_type': 'html',
                 'category_id': self.category_top_level.id,
@@ -149,7 +149,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         self.assertFalse(self.category_top_level.visibility_user_ids)
 
         with self.assertRaises(AccessError):
-            self.Document.sudo(self.demo_user).create({
+            self.Document.with_user(self.demo_user).create({
                 'name': 'Test Create',
                 'document_type': 'html',
                 'category_id': self.category_top_level.id,
@@ -161,7 +161,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
 
         self.assertEqual(len(self.category_top_level.visibility_group_ids), 1)
         with self.assertRaises(AccessError):
-            self.Document.sudo(self.demo_user).create({
+            self.Document.with_user(self.demo_user).create({
                 'name': 'Test Create',
                 'document_type': 'html',
                 'category_id': self.category_top_level.id,
@@ -175,7 +175,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         self.assertFalse(self.category_top_level.editor_user_ids)
 
         with self.assertRaises(AccessError):
-            self.Document.sudo(self.demo_user).create({
+            self.Document.with_user(self.demo_user).create({
                 'name': 'Test Create',
                 'document_type': 'html',
                 'category_id': self.category_top_level.id,
@@ -185,7 +185,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
             'editor_user_ids': [(4, self.demo_user.id)]})
 
         self.assertEqual(len(self.category_top_level.editor_user_ids), 1)
-        document = self.Document.sudo(self.demo_user).create({
+        document = self.Document.with_user(self.demo_user).create({
             'name': 'Test Create',
             'document_type': 'html',
             'category_id': self.category_top_level.id,
@@ -207,7 +207,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         self.assertFalse(self.category_top_level.editor_user_ids)
 
         with self.assertRaises(AccessError):
-            self.Document.sudo(self.demo_user).create({
+            self.Document.with_user(self.demo_user).create({
                 'name': 'Test Create',
                 'document_type': 'html',
                 'category_id': self.category_top_level.id,
@@ -217,7 +217,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
             'editor_group_ids': [(4, self.group_demo.id)]})
 
         self.assertEqual(len(self.category_top_level.editor_group_ids), 1)
-        document = self.Document.sudo(self.demo_user).create({
+        document = self.Document.with_user(self.demo_user).create({
             'name': 'Test Create',
             'document_type': 'html',
             'category_id': self.category_top_level.id,
@@ -237,7 +237,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         self.assertEqual(len(self.category_top_level.owner_user_ids), 0)
 
         with self.assertRaises(AccessError):
-            self.Document.sudo(self.demo_user).create({
+            self.Document.with_user(self.demo_user).create({
                 'name': 'Test Create',
                 'document_type': 'html',
                 'category_id': self.category_top_level.id,
@@ -247,7 +247,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
             'owner_user_ids': [(4, self.demo_user.id)]})
 
         self.assertEqual(len(self.category_top_level.owner_user_ids), 1)
-        document = self.Document.sudo(self.demo_user).create({
+        document = self.Document.with_user(self.demo_user).create({
             'name': 'Test Create',
             'document_type': 'html',
             'category_id': self.category_top_level.id,
@@ -269,7 +269,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         self.assertEqual(len(self.category_top_level.owner_user_ids), 0)
 
         with self.assertRaises(AccessError):
-            self.Document.sudo(self.demo_user).create({
+            self.Document.with_user(self.demo_user).create({
                 'name': 'Test Create',
                 'document_type': 'html',
                 'category_id': self.category_top_level.id,
@@ -279,7 +279,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
             'owner_group_ids': [(4, self.group_demo.id)]})
 
         self.assertEqual(len(self.category_top_level.owner_group_ids), 1)
-        document = self.Document.sudo(self.demo_user).create({
+        document = self.Document.with_user(self.demo_user).create({
             'name': 'Test Create',
             'document_type': 'html',
             'category_id': self.category_top_level.id,
@@ -293,7 +293,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         self.assertFalse(document.owner_user_ids)
 
     def test_document_create_top_level(self):
-        document = self.Document.sudo(self.demo_user).create({
+        document = self.Document.with_user(self.demo_user).create({
             'name': 'Test Create',
             'document_type': 'html',
             'document_body_html': 'Test Document'})
@@ -311,7 +311,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
             self.category_top_level.visibility_type, 'restricted')
 
         with self.assertRaises(AccessError):
-            self.Document.sudo(self.public_user).create({
+            self.Document.with_user(self.public_user).create({
                 'name': 'Test Create',
                 'document_type': 'html',
                 'category_id': self.category_top_level.id,
@@ -319,7 +319,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
 
         self.category_top_level.visibility_type = 'internal'
         with self.assertRaises(AccessError):
-            self.Document.sudo(self.public_user).create({
+            self.Document.with_user(self.public_user).create({
                 'name': 'Test Create',
                 'document_type': 'html',
                 'category_id': self.category_top_level.id,
@@ -327,7 +327,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
 
         self.category_top_level.visibility_type = 'portal'
         with self.assertRaises(AccessError):
-            self.Document.sudo(self.public_user).create({
+            self.Document.with_user(self.public_user).create({
                 'name': 'Test Create',
                 'document_type': 'html',
                 'category_id': self.category_top_level.id,
@@ -336,7 +336,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         self.category_top_level.visibility_type = 'public'
 
         with self.assertRaises(AccessError):
-            self.Document.sudo(self.public_user).create({
+            self.Document.with_user(self.public_user).create({
                 'name': 'Test Create',
                 'document_type': 'html',
                 'category_id': self.category_top_level.id,
@@ -348,7 +348,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
             self.category_top_level.visibility_type, 'restricted')
 
         with self.assertRaises(AccessError):
-            self.Document.sudo(self.portal_user).create({
+            self.Document.with_user(self.portal_user).create({
                 'name': 'Test Create',
                 'document_type': 'html',
                 'category_id': self.category_top_level.id,
@@ -356,7 +356,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
 
         self.category_top_level.visibility_type = 'internal'
         with self.assertRaises(AccessError):
-            self.Document.sudo(self.portal_user).create({
+            self.Document.with_user(self.portal_user).create({
                 'name': 'Test Create',
                 'document_type': 'html',
                 'category_id': self.category_top_level.id,
@@ -364,7 +364,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
 
         self.category_top_level.visibility_type = 'public'
         with self.assertRaises(AccessError):
-            self.Document.sudo(self.portal_user).create({
+            self.Document.with_user(self.portal_user).create({
                 'name': 'Test Create',
                 'document_type': 'html',
                 'category_id': self.category_top_level.id,
@@ -372,7 +372,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
 
         self.category_top_level.visibility_type = 'portal'
         with self.assertRaises(AccessError):
-            self.Document.sudo(self.portal_user).create({
+            self.Document.with_user(self.portal_user).create({
                 'name': 'Test Create',
                 'document_type': 'html',
                 'category_id': self.category_top_level.id,
@@ -384,7 +384,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
             self.category_top_level.visibility_type, 'restricted')
 
         with self.assertRaises(AccessError):
-            self.Document.sudo(self.demo_user).create({
+            self.Document.with_user(self.demo_user).create({
                 'name': 'Test Create',
                 'document_type': 'html',
                 'category_id': self.category_top_level.id,
@@ -392,7 +392,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
 
         self.category_top_level.visibility_type = 'portal'
         with self.assertRaises(AccessError):
-            self.Document.sudo(self.demo_user).create({
+            self.Document.with_user(self.demo_user).create({
                 'name': 'Test Create',
                 'document_type': 'html',
                 'category_id': self.category_top_level.id,
@@ -400,7 +400,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
 
         self.category_top_level.visibility_type = 'public'
         with self.assertRaises(AccessError):
-            self.Document.sudo(self.demo_user).create({
+            self.Document.with_user(self.demo_user).create({
                 'name': 'Test Create',
                 'document_type': 'html',
                 'category_id': self.category_top_level.id,
@@ -409,7 +409,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         self.category_top_level.visibility_type = 'internal'
 
         with self.assertRaises(AccessError):
-            self.Document.sudo(self.demo_user).create({
+            self.Document.with_user(self.demo_user).create({
                 'name': 'Test Create',
                 'document_type': 'html',
                 'category_id': self.category_top_level.id,
@@ -434,7 +434,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         self.assertFalse(self.category_subcat_2.visibility_user_ids)
 
         with self.assertRaises(AccessError):
-            self.Document.sudo(self.demo_user).create({
+            self.Document.with_user(self.demo_user).create({
                 'name': 'Test Create Sub 1',
                 'document_type': 'html',
                 'category_id': self.category_subcat_2.id,
@@ -445,7 +445,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
 
         self.assertEqual(len(self.category_top_level.visibility_user_ids), 1)
         with self.assertRaises(AccessError):
-            self.Document.sudo(self.demo_user).create({
+            self.Document.with_user(self.demo_user).create({
                 'name': 'Test Create Sub 1',
                 'document_type': 'html',
                 'category_id': self.category_subcat_2.id,
@@ -471,7 +471,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         self.assertFalse(self.category_subcat_2.visibility_user_ids)
 
         with self.assertRaises(AccessError):
-            self.Document.sudo(self.demo_user).create({
+            self.Document.with_user(self.demo_user).create({
                 'name': 'Test Create Sub 1',
                 'document_type': 'html',
                 'category_id': self.category_subcat_2.id,
@@ -482,7 +482,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
 
         self.assertEqual(len(self.category_top_level.visibility_group_ids), 1)
         with self.assertRaises(AccessError):
-            self.Document.sudo(self.demo_user).create({
+            self.Document.with_user(self.demo_user).create({
                 'name': 'Test Create Sub 1',
                 'document_type': 'html',
                 'category_id': self.category_subcat_2.id,
@@ -510,7 +510,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         self.assertFalse(self.category_subcat_2.actual_editor_user_ids)
 
         with self.assertRaises(AccessError):
-            self.Document.sudo(self.demo_user).create({
+            self.Document.with_user(self.demo_user).create({
                 'name': 'Test Create Sub 1',
                 'document_type': 'html',
                 'category_id': self.category_subcat_2.id,
@@ -529,7 +529,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         self.assertFalse(self.category_subcat_2.actual_editor_group_ids)
         self.assertEqual(len(self.category_subcat_2.actual_editor_user_ids), 1)
 
-        document = self.Document.sudo(self.demo_user).create({
+        document = self.Document.with_user(self.demo_user).create({
             'name': 'Test Create Sub 1',
             'document_type': 'html',
             'category_id': self.category_subcat_2.id,
@@ -566,7 +566,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         self.assertFalse(self.category_subcat_2.actual_editor_user_ids)
 
         with self.assertRaises(AccessError):
-            self.Document.sudo(self.demo_user).create({
+            self.Document.with_user(self.demo_user).create({
                 'name': 'Test Create Sub 1',
                 'document_type': 'html',
                 'category_id': self.category_subcat_2.id,
@@ -587,7 +587,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
             len(self.category_subcat_2.actual_editor_group_ids), 1)
         self.assertFalse(self.category_subcat_2.actual_editor_user_ids)
 
-        document = self.Document.sudo(self.demo_user).create({
+        document = self.Document.with_user(self.demo_user).create({
             'name': 'Test Create Sub 1',
             'document_type': 'html',
             'category_id': self.category_subcat_2.id,
@@ -622,7 +622,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         self.assertEqual(len(self.category_subcat_2.actual_owner_user_ids), 0)
 
         with self.assertRaises(AccessError):
-            self.Document.sudo(self.demo_user).create({
+            self.Document.with_user(self.demo_user).create({
                 'name': 'Test Create Sub 1',
                 'document_type': 'html',
                 'category_id': self.category_subcat_2.id,
@@ -641,7 +641,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         self.assertFalse(self.category_subcat_2.actual_owner_group_ids)
         self.assertEqual(len(self.category_subcat_2.actual_owner_user_ids), 1)
 
-        document = self.Document.sudo(self.demo_user).create({
+        document = self.Document.with_user(self.demo_user).create({
             'name': 'Test Create Sub 1',
             'document_type': 'html',
             'category_id': self.category_subcat_2.id,
@@ -678,7 +678,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         self.assertEqual(len(self.category_subcat_2.actual_owner_user_ids), 0)
 
         with self.assertRaises(AccessError):
-            self.Document.sudo(self.demo_user).create({
+            self.Document.with_user(self.demo_user).create({
                 'name': 'Test Create Sub 1',
                 'document_type': 'html',
                 'category_id': self.category_subcat_2.id,
@@ -697,7 +697,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         self.assertEqual(len(self.category_subcat_2.actual_owner_group_ids), 1)
         self.assertEqual(len(self.category_subcat_2.actual_owner_user_ids), 0)
 
-        document = self.Document.sudo(self.demo_user).create({
+        document = self.Document.with_user(self.demo_user).create({
             'name': 'Test Create Sub 1',
             'document_type': 'html',
             'category_id': self.category_subcat_2.id,
@@ -723,7 +723,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
              visibility_type), 'restricted')
 
         with self.assertRaises(AccessError):
-            self.Document.sudo(self.demo_user).create({
+            self.Document.with_user(self.demo_user).create({
                 'name': 'Test Create Sub 1',
                 'document_type': 'html',
                 'category_id': self.category_subcat_2.id,
@@ -731,7 +731,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
 
         self.category_top_level.visibility_type = 'internal'
         with self.assertRaises(AccessError):
-            self.Document.sudo(self.demo_user).create({
+            self.Document.with_user(self.demo_user).create({
                 'name': 'Test Create Sub 1',
                 'document_type': 'html',
                 'category_id': self.category_subcat_2.id,
@@ -739,7 +739,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
 
         self.category_top_level.visibility_type = 'portal'
         with self.assertRaises(AccessError):
-            self.Document.sudo(self.demo_user).create({
+            self.Document.with_user(self.demo_user).create({
                 'name': 'Test Create Sub 1',
                 'document_type': 'html',
                 'category_id': self.category_subcat_2.id,
@@ -748,7 +748,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         self.category_top_level.visibility_type = 'public'
 
         with self.assertRaises(AccessError):
-            self.Document.sudo(self.demo_user).create({
+            self.Document.with_user(self.demo_user).create({
                 'name': 'Test Create Sub 1',
                 'document_type': 'html',
                 'category_id': self.category_subcat_2.id,
@@ -767,7 +767,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
              visibility_type), 'restricted')
 
         with self.assertRaises(AccessError):
-            self.Document.sudo(self.demo_user).create({
+            self.Document.with_user(self.demo_user).create({
                 'name': 'Test Create Sub 1',
                 'document_type': 'html',
                 'category_id': self.category_subcat_2.id,
@@ -775,7 +775,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
 
         self.category_top_level.visibility_type = 'internal'
         with self.assertRaises(AccessError):
-            self.Document.sudo(self.demo_user).create({
+            self.Document.with_user(self.demo_user).create({
                 'name': 'Test Create Sub 1',
                 'document_type': 'html',
                 'category_id': self.category_subcat_2.id,
@@ -783,7 +783,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
 
         self.category_top_level.visibility_type = 'public'
         with self.assertRaises(AccessError):
-            self.Document.sudo(self.demo_user).create({
+            self.Document.with_user(self.demo_user).create({
                 'name': 'Test Create Sub 1',
                 'document_type': 'html',
                 'category_id': self.category_subcat_2.id,
@@ -792,7 +792,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         self.category_top_level.visibility_type = 'portal'
 
         with self.assertRaises(AccessError):
-            self.Document.sudo(self.demo_user).create({
+            self.Document.with_user(self.demo_user).create({
                 'name': 'Test Create Sub 1',
                 'document_type': 'html',
                 'category_id': self.category_subcat_2.id,
@@ -811,7 +811,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
              visibility_type), 'restricted')
 
         with self.assertRaises(AccessError):
-            self.Document.sudo(self.demo_user).create({
+            self.Document.with_user(self.demo_user).create({
                 'name': 'Test Create Sub 1',
                 'document_type': 'html',
                 'category_id': self.category_subcat_2.id,
@@ -819,7 +819,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
 
         self.category_top_level.visibility_type = 'portal'
         with self.assertRaises(AccessError):
-            self.Document.sudo(self.demo_user).create({
+            self.Document.with_user(self.demo_user).create({
                 'name': 'Test Create Sub 1',
                 'document_type': 'html',
                 'category_id': self.category_subcat_2.id,
@@ -827,7 +827,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
 
         self.category_top_level.visibility_type = 'public'
         with self.assertRaises(AccessError):
-            self.Document.sudo(self.demo_user).create({
+            self.Document.with_user(self.demo_user).create({
                 'name': 'Test Create Sub 1',
                 'document_type': 'html',
                 'category_id': self.category_subcat_2.id,
@@ -835,7 +835,7 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
 
         self.category_top_level.visibility_type = 'internal'
         with self.assertRaises(AccessError):
-            self.Document.sudo(self.demo_user).create({
+            self.Document.with_user(self.demo_user).create({
                 'name': 'Test Create Sub 1',
                 'document_type': 'html',
                 'category_id': self.category_subcat_2.id,

@@ -17,7 +17,7 @@ class TestKnowledgeCategoryCreate(TestBureaucratKnowledgeBase):
         self.assertFalse(self.category_top_level.visibility_user_ids)
 
         with self.assertRaises(AccessError):
-            self.Category.sudo(self.demo_user).create({
+            self.Category.with_user(self.demo_user).create({
                 'name': 'Test Create',
                 'parent_id': self.category_top_level.id})
 
@@ -26,7 +26,7 @@ class TestKnowledgeCategoryCreate(TestBureaucratKnowledgeBase):
 
         self.assertEqual(len(self.category_top_level.visibility_user_ids), 1)
         with self.assertRaises(AccessError):
-            self.Category.sudo(self.demo_user).create({
+            self.Category.with_user(self.demo_user).create({
                 'name': 'Test Create',
                 'parent_id': self.category_top_level.id})
 
@@ -37,7 +37,7 @@ class TestKnowledgeCategoryCreate(TestBureaucratKnowledgeBase):
         self.assertFalse(self.category_top_level.visibility_user_ids)
 
         with self.assertRaises(AccessError):
-            self.Category.sudo(self.demo_user).create({
+            self.Category.with_user(self.demo_user).create({
                 'name': 'Test Create',
                 'parent_id': self.category_top_level.id,
                 'owner_user_ids': [(4, self.demo_user.id)]})
@@ -47,7 +47,7 @@ class TestKnowledgeCategoryCreate(TestBureaucratKnowledgeBase):
 
         self.assertEqual(len(self.category_top_level.visibility_user_ids), 1)
         with self.assertRaises(AccessError):
-            self.Category.sudo(self.demo_user).create({
+            self.Category.with_user(self.demo_user).create({
                 'name': 'Test Create',
                 'parent_id': self.category_top_level.id,
                 'owner_user_ids': [(4, self.demo_user.id)]})
@@ -61,7 +61,7 @@ class TestKnowledgeCategoryCreate(TestBureaucratKnowledgeBase):
         self.assertFalse(self.category_top_level.visibility_user_ids)
 
         with self.assertRaises(AccessError):
-            self.Category.sudo(self.demo_user).create({
+            self.Category.with_user(self.demo_user).create({
                 'name': 'Test Create',
                 'parent_id': self.category_top_level.id})
 
@@ -70,7 +70,7 @@ class TestKnowledgeCategoryCreate(TestBureaucratKnowledgeBase):
 
         self.assertEqual(len(self.category_top_level.visibility_group_ids), 1)
         with self.assertRaises(AccessError):
-            self.Category.sudo(self.demo_user).create({
+            self.Category.with_user(self.demo_user).create({
                 'name': 'Test Create',
                 'parent_id': self.category_top_level.id})
 
@@ -81,7 +81,7 @@ class TestKnowledgeCategoryCreate(TestBureaucratKnowledgeBase):
         self.assertFalse(self.category_top_level.editor_user_ids)
 
         with self.assertRaises(AccessError):
-            self.Category.sudo(self.demo_user).create({
+            self.Category.with_user(self.demo_user).create({
                 'name': 'Test Create',
                 'parent_id': self.category_top_level.id})
 
@@ -89,7 +89,7 @@ class TestKnowledgeCategoryCreate(TestBureaucratKnowledgeBase):
             'editor_user_ids': [(4, self.demo_user.id)]})
 
         self.assertEqual(len(self.category_top_level.editor_user_ids), 1)
-        category = self.Category.sudo(self.demo_user).create({
+        category = self.Category.with_user(self.demo_user).create({
             'name': 'Test Create',
             'parent_id': self.category_top_level.id})
         self.assertEqual(category.visibility_type, 'parent')
@@ -109,7 +109,7 @@ class TestKnowledgeCategoryCreate(TestBureaucratKnowledgeBase):
         self.assertFalse(self.category_top_level.editor_user_ids)
 
         with self.assertRaises(AccessError):
-            self.Category.sudo(self.demo_user).create({
+            self.Category.with_user(self.demo_user).create({
                 'name': 'Test Create',
                 'parent_id': self.category_top_level.id})
 
@@ -117,7 +117,7 @@ class TestKnowledgeCategoryCreate(TestBureaucratKnowledgeBase):
             'editor_group_ids': [(4, self.group_demo.id)]})
 
         self.assertEqual(len(self.category_top_level.editor_group_ids), 1)
-        category = self.Category.sudo(self.demo_user).create({
+        category = self.Category.with_user(self.demo_user).create({
             'name': 'Test Create',
             'parent_id': self.category_top_level.id})
         self.assertEqual(category.visibility_type, 'parent')
@@ -135,7 +135,7 @@ class TestKnowledgeCategoryCreate(TestBureaucratKnowledgeBase):
         self.assertEqual(len(self.category_top_level.owner_user_ids), 0)
 
         with self.assertRaises(AccessError):
-            self.Category.sudo(self.demo_user).create({
+            self.Category.with_user(self.demo_user).create({
                 'name': 'Test Create',
                 'parent_id': self.category_top_level.id})
 
@@ -143,7 +143,7 @@ class TestKnowledgeCategoryCreate(TestBureaucratKnowledgeBase):
             'owner_user_ids': [(4, self.demo_user.id)]})
 
         self.assertEqual(len(self.category_top_level.owner_user_ids), 1)
-        category = self.Category.sudo(self.demo_user).create({
+        category = self.Category.with_user(self.demo_user).create({
             'name': 'Test Create',
             'parent_id': self.category_top_level.id})
         self.assertEqual(category.visibility_type, 'parent')
@@ -163,7 +163,7 @@ class TestKnowledgeCategoryCreate(TestBureaucratKnowledgeBase):
         self.assertEqual(len(self.category_top_level.owner_user_ids), 0)
 
         with self.assertRaises(AccessError):
-            self.Category.sudo(self.demo_user).create({
+            self.Category.with_user(self.demo_user).create({
                 'name': 'Test Create',
                 'parent_id': self.category_top_level.id})
 
@@ -171,7 +171,7 @@ class TestKnowledgeCategoryCreate(TestBureaucratKnowledgeBase):
             'owner_group_ids': [(4, self.group_demo.id)]})
 
         self.assertEqual(len(self.category_top_level.owner_group_ids), 1)
-        category = self.Category.sudo(self.demo_user).create({
+        category = self.Category.with_user(self.demo_user).create({
             'name': 'Test Create',
             'parent_id': self.category_top_level.id})
         self.assertEqual(category.visibility_type, 'parent')
@@ -183,7 +183,7 @@ class TestKnowledgeCategoryCreate(TestBureaucratKnowledgeBase):
         self.assertFalse(category.owner_user_ids)
 
     def test_category_create_top_level(self):
-        category = self.Category.sudo(self.demo_user).create({
+        category = self.Category.with_user(self.demo_user).create({
             'name': 'Test Create'})
         self.assertEqual(category.visibility_type, 'restricted')
         self.assertFalse(category.visibility_user_ids)
@@ -199,26 +199,26 @@ class TestKnowledgeCategoryCreate(TestBureaucratKnowledgeBase):
             self.category_top_level.visibility_type, 'restricted')
 
         with self.assertRaises(AccessError):
-            self.Category.sudo(self.public_user).create({
+            self.Category.with_user(self.public_user).create({
                 'name': 'Test Create',
                 'parent_id': self.category_top_level.id})
 
         self.category_top_level.visibility_type = 'internal'
         with self.assertRaises(AccessError):
-            self.Category.sudo(self.public_user).create({
+            self.Category.with_user(self.public_user).create({
                 'name': 'Test Create',
                 'parent_id': self.category_top_level.id})
 
         self.category_top_level.visibility_type = 'portal'
         with self.assertRaises(AccessError):
-            self.Category.sudo(self.public_user).create({
+            self.Category.with_user(self.public_user).create({
                 'name': 'Test Create',
                 'parent_id': self.category_top_level.id})
 
         self.category_top_level.visibility_type = 'public'
 
         with self.assertRaises(AccessError):
-            self.Category.sudo(self.public_user).create({
+            self.Category.with_user(self.public_user).create({
                 'name': 'Test Create',
                 'parent_id': self.category_top_level.id})
 
@@ -228,25 +228,25 @@ class TestKnowledgeCategoryCreate(TestBureaucratKnowledgeBase):
             self.category_top_level.visibility_type, 'restricted')
 
         with self.assertRaises(AccessError):
-            self.Category.sudo(self.portal_user).create({
+            self.Category.with_user(self.portal_user).create({
                 'name': 'Test Create',
                 'parent_id': self.category_top_level.id})
 
         self.category_top_level.visibility_type = 'internal'
         with self.assertRaises(AccessError):
-            self.Category.sudo(self.portal_user).create({
+            self.Category.with_user(self.portal_user).create({
                 'name': 'Test Create',
                 'parent_id': self.category_top_level.id})
 
         self.category_top_level.visibility_type = 'public'
         with self.assertRaises(AccessError):
-            self.Category.sudo(self.portal_user).create({
+            self.Category.with_user(self.portal_user).create({
                 'name': 'Test Create',
                 'parent_id': self.category_top_level.id})
 
         self.category_top_level.visibility_type = 'portal'
         with self.assertRaises(AccessError):
-            self.Category.sudo(self.portal_user).create({
+            self.Category.with_user(self.portal_user).create({
                 'name': 'Test Create',
                 'parent_id': self.category_top_level.id})
 
@@ -256,26 +256,26 @@ class TestKnowledgeCategoryCreate(TestBureaucratKnowledgeBase):
             self.category_top_level.visibility_type, 'restricted')
 
         with self.assertRaises(AccessError):
-            self.Category.sudo(self.demo_user).create({
+            self.Category.with_user(self.demo_user).create({
                 'name': 'Test Create',
                 'parent_id': self.category_top_level.id})
 
         self.category_top_level.visibility_type = 'portal'
         with self.assertRaises(AccessError):
-            self.Category.sudo(self.demo_user).create({
+            self.Category.with_user(self.demo_user).create({
                 'name': 'Test Create',
                 'parent_id': self.category_top_level.id})
 
         self.category_top_level.visibility_type = 'public'
         with self.assertRaises(AccessError):
-            self.Category.sudo(self.demo_user).create({
+            self.Category.with_user(self.demo_user).create({
                 'name': 'Test Create',
                 'parent_id': self.category_top_level.id})
 
         self.category_top_level.visibility_type = 'internal'
 
         with self.assertRaises(AccessError):
-            self.Category.sudo(self.demo_user).create({
+            self.Category.with_user(self.demo_user).create({
                 'name': 'Test Create',
                 'parent_id': self.category_top_level.id})
 
@@ -298,7 +298,7 @@ class TestKnowledgeCategoryCreate(TestBureaucratKnowledgeBase):
         self.assertFalse(self.category_subcat_2.visibility_user_ids)
 
         with self.assertRaises(AccessError):
-            self.Category.sudo(self.demo_user).create({
+            self.Category.with_user(self.demo_user).create({
                 'name': 'Test Create Sub 1',
                 'parent_id': self.category_subcat_2.id})
 
@@ -307,7 +307,7 @@ class TestKnowledgeCategoryCreate(TestBureaucratKnowledgeBase):
 
         self.assertEqual(len(self.category_top_level.visibility_user_ids), 1)
         with self.assertRaises(AccessError):
-            self.Category.sudo(self.demo_user).create({
+            self.Category.with_user(self.demo_user).create({
                 'name': 'Test Create Sub 1',
                 'parent_id': self.category_subcat_2.id})
 
@@ -331,7 +331,7 @@ class TestKnowledgeCategoryCreate(TestBureaucratKnowledgeBase):
         self.assertFalse(self.category_subcat_2.visibility_user_ids)
 
         with self.assertRaises(AccessError):
-            self.Category.sudo(self.demo_user).create({
+            self.Category.with_user(self.demo_user).create({
                 'name': 'Test Create Sub 1',
                 'parent_id': self.category_subcat_2.id})
 
@@ -340,7 +340,7 @@ class TestKnowledgeCategoryCreate(TestBureaucratKnowledgeBase):
 
         self.assertEqual(len(self.category_top_level.visibility_group_ids), 1)
         with self.assertRaises(AccessError):
-            self.Category.sudo(self.demo_user).create({
+            self.Category.with_user(self.demo_user).create({
                 'name': 'Test Create Sub 1',
                 'parent_id': self.category_subcat_2.id})
 
@@ -366,7 +366,7 @@ class TestKnowledgeCategoryCreate(TestBureaucratKnowledgeBase):
         self.assertFalse(self.category_subcat_2.actual_editor_user_ids)
 
         with self.assertRaises(AccessError):
-            self.Category.sudo(self.demo_user).create({
+            self.Category.with_user(self.demo_user).create({
                 'name': 'Test Create Sub 1',
                 'parent_id': self.category_subcat_2.id})
 
@@ -383,7 +383,7 @@ class TestKnowledgeCategoryCreate(TestBureaucratKnowledgeBase):
         self.assertFalse(self.category_subcat_2.actual_editor_group_ids)
         self.assertEqual(len(self.category_subcat_2.actual_editor_user_ids), 1)
 
-        category = self.Category.sudo(self.demo_user).create({
+        category = self.Category.with_user(self.demo_user).create({
             'name': 'Test Create Sub 1',
             'parent_id': self.category_subcat_2.id})
         self.assertEqual(category.visibility_type, 'parent')
@@ -418,7 +418,7 @@ class TestKnowledgeCategoryCreate(TestBureaucratKnowledgeBase):
         self.assertFalse(self.category_subcat_2.actual_editor_user_ids)
 
         with self.assertRaises(AccessError):
-            self.Category.sudo(self.demo_user).create({
+            self.Category.with_user(self.demo_user).create({
                 'name': 'Test Create Sub 1',
                 'parent_id': self.category_subcat_2.id})
 
@@ -437,7 +437,7 @@ class TestKnowledgeCategoryCreate(TestBureaucratKnowledgeBase):
             len(self.category_subcat_2.actual_editor_group_ids), 1)
         self.assertFalse(self.category_subcat_2.actual_editor_user_ids)
 
-        category = self.Category.sudo(self.demo_user).create({
+        category = self.Category.with_user(self.demo_user).create({
             'name': 'Test Create Sub 1',
             'parent_id': self.category_subcat_2.id})
         self.assertEqual(category.visibility_type, 'parent')
@@ -470,7 +470,7 @@ class TestKnowledgeCategoryCreate(TestBureaucratKnowledgeBase):
         self.assertEqual(len(self.category_subcat_2.actual_owner_user_ids), 0)
 
         with self.assertRaises(AccessError):
-            self.Category.sudo(self.demo_user).create({
+            self.Category.with_user(self.demo_user).create({
                 'name': 'Test Create Sub 1',
                 'parent_id': self.category_subcat_2.id})
 
@@ -487,7 +487,7 @@ class TestKnowledgeCategoryCreate(TestBureaucratKnowledgeBase):
         self.assertFalse(self.category_subcat_2.actual_owner_group_ids)
         self.assertEqual(len(self.category_subcat_2.actual_owner_user_ids), 1)
 
-        category = self.Category.sudo(self.demo_user).create({
+        category = self.Category.with_user(self.demo_user).create({
             'name': 'Test Create Sub 1',
             'parent_id': self.category_subcat_2.id})
         self.assertEqual(category.visibility_type, 'parent')
@@ -522,7 +522,7 @@ class TestKnowledgeCategoryCreate(TestBureaucratKnowledgeBase):
         self.assertEqual(len(self.category_subcat_2.actual_owner_user_ids), 0)
 
         with self.assertRaises(AccessError):
-            self.Category.sudo(self.demo_user).create({
+            self.Category.with_user(self.demo_user).create({
                 'name': 'Test Create Sub 1',
                 'parent_id': self.category_subcat_2.id})
 
@@ -539,7 +539,7 @@ class TestKnowledgeCategoryCreate(TestBureaucratKnowledgeBase):
         self.assertEqual(len(self.category_subcat_2.actual_owner_group_ids), 1)
         self.assertEqual(len(self.category_subcat_2.actual_owner_user_ids), 0)
 
-        category = self.Category.sudo(self.demo_user).create({
+        category = self.Category.with_user(self.demo_user).create({
             'name': 'Test Create Sub 1',
             'parent_id': self.category_subcat_2.id})
         self.assertEqual(category.visibility_type, 'parent')
@@ -563,26 +563,26 @@ class TestKnowledgeCategoryCreate(TestBureaucratKnowledgeBase):
              visibility_type), 'restricted')
 
         with self.assertRaises(AccessError):
-            self.Category.sudo(self.demo_user).create({
+            self.Category.with_user(self.demo_user).create({
                 'name': 'Test Create Sub 1',
                 'parent_id': self.category_subcat_2.id})
 
         self.category_top_level.visibility_type = 'internal'
         with self.assertRaises(AccessError):
-            self.Category.sudo(self.demo_user).create({
+            self.Category.with_user(self.demo_user).create({
                 'name': 'Test Create Sub 1',
                 'parent_id': self.category_subcat_2.id})
 
         self.category_top_level.visibility_type = 'portal'
         with self.assertRaises(AccessError):
-            self.Category.sudo(self.demo_user).create({
+            self.Category.with_user(self.demo_user).create({
                 'name': 'Test Create Sub 1',
                 'parent_id': self.category_subcat_2.id})
 
         self.category_top_level.visibility_type = 'public'
 
         with self.assertRaises(AccessError):
-            self.Category.sudo(self.demo_user).create({
+            self.Category.with_user(self.demo_user).create({
                 'name': 'Test Create Sub 1',
                 'parent_id': self.category_subcat_2.id})
 
@@ -599,26 +599,26 @@ class TestKnowledgeCategoryCreate(TestBureaucratKnowledgeBase):
              visibility_type), 'restricted')
 
         with self.assertRaises(AccessError):
-            self.Category.sudo(self.demo_user).create({
+            self.Category.with_user(self.demo_user).create({
                 'name': 'Test Create Sub 1',
                 'parent_id': self.category_subcat_2.id})
 
         self.category_top_level.visibility_type = 'internal'
         with self.assertRaises(AccessError):
-            self.Category.sudo(self.demo_user).create({
+            self.Category.with_user(self.demo_user).create({
                 'name': 'Test Create Sub 1',
                 'parent_id': self.category_subcat_2.id})
 
         self.category_top_level.visibility_type = 'public'
         with self.assertRaises(AccessError):
-            self.Category.sudo(self.demo_user).create({
+            self.Category.with_user(self.demo_user).create({
                 'name': 'Test Create Sub 1',
                 'parent_id': self.category_subcat_2.id})
 
         self.category_top_level.visibility_type = 'portal'
 
         with self.assertRaises(AccessError):
-            self.Category.sudo(self.demo_user).create({
+            self.Category.with_user(self.demo_user).create({
                 'name': 'Test Create Sub 1',
                 'parent_id': self.category_subcat_2.id})
 
@@ -635,24 +635,24 @@ class TestKnowledgeCategoryCreate(TestBureaucratKnowledgeBase):
              visibility_type), 'restricted')
 
         with self.assertRaises(AccessError):
-            self.Category.sudo(self.demo_user).create({
+            self.Category.with_user(self.demo_user).create({
                 'name': 'Test Create Sub 1',
                 'parent_id': self.category_subcat_2.id})
 
         self.category_top_level.visibility_type = 'portal'
         with self.assertRaises(AccessError):
-            self.Category.sudo(self.demo_user).create({
+            self.Category.with_user(self.demo_user).create({
                 'name': 'Test Create Sub 1',
                 'parent_id': self.category_subcat_2.id})
 
         self.category_top_level.visibility_type = 'public'
         with self.assertRaises(AccessError):
-            self.Category.sudo(self.demo_user).create({
+            self.Category.with_user(self.demo_user).create({
                 'name': 'Test Create Sub 1',
                 'parent_id': self.category_subcat_2.id})
 
         self.category_top_level.visibility_type = 'internal'
         with self.assertRaises(AccessError):
-            self.Category.sudo(self.demo_user).create({
+            self.Category.with_user(self.demo_user).create({
                 'name': 'Test Create Sub 1',
                 'parent_id': self.category_subcat_2.id})

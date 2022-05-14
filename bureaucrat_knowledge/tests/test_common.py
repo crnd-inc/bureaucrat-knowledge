@@ -51,6 +51,10 @@ class TestBureaucratKnowledgeBase(ReduceLoggingMixin,
         lambda r: not any([
             r.msg.strip().startswith(
                 'The requested operation cannot be completed'),
+        ]))
+    @hide_log_messages(
+        'odoo.addons.base.models.ir_rule',
+        lambda r: not any([
             r.msg.strip().startswith(
                 'Access Denied by record rules for operation'),
         ]))

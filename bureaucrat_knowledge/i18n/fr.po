@@ -4,11 +4,11 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 12.0+e\n"
+"Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-21 16:41+0000\n"
-"PO-Revision-Date: 2020-05-21 16:41+0000\n"
-"Last-Translator: <>\n"
+"POT-Creation-Date: 2020-07-27 15:59+0000\n"
+"PO-Revision-Date: 2020-07-27 15:59+0000\n"
+"Last-Translator: \n"
 "Language-Team: \n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -66,7 +66,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document__message_needaction
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document_history__message_needaction
 msgid "Action Needed"
-msgstr "Nécessite une action"
+msgstr ""
 
 #. module: bureaucrat_knowledge
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category__active
@@ -80,6 +80,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document__activity_ids
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document_history__activity_ids
 msgid "Activities"
+msgstr ""
+
+#. module: bureaucrat_knowledge
+#: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document__activity_exception_decoration
+#: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document_history__activity_exception_decoration
+msgid "Activity Exception Decoration"
 msgstr ""
 
 #. module: bureaucrat_knowledge
@@ -140,7 +146,9 @@ msgid "Admin Guides"
 msgstr ""
 
 #. module: bureaucrat_knowledge
+#: model_terms:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_category_view_form
 #: model_terms:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_category_view_search
+#: model_terms:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_document_view_form
 #: model_terms:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_document_view_search
 msgid "Archived"
 msgstr ""
@@ -150,7 +158,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document__message_attachment_count
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document_history__message_attachment_count
 msgid "Attachment Count"
-msgstr "Nombre de pièces jointes"
+msgstr ""
 
 #. module: bureaucrat_knowledge
 #: model:bureaucrat.knowledge.category,name:bureaucrat_knowledge.bureaucrat_documentation
@@ -197,14 +205,14 @@ msgstr ""
 #. module: bureaucrat_knowledge
 #: model:ir.actions.act_window,name:bureaucrat_knowledge.action_bureaucrat_knowledge_category
 #: model:ir.ui.menu,name:bureaucrat_knowledge.bureaucrat_knowledge_category_menu
-#: model_terms:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_document_view_kanban
+#: model_terms:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_document_view_search
 msgid "Categories"
 msgstr ""
 
 #. module: bureaucrat_knowledge
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document__category_id
 msgid "Category"
-msgstr "Catégorie"
+msgstr ""
 
 #. module: bureaucrat_knowledge
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category__category_contents
@@ -212,7 +220,7 @@ msgid "Category Contents"
 msgstr ""
 
 #. module: bureaucrat_knowledge
-#: sql_constraint:bureaucrat.knowledge.category:0
+#: model:ir.model.constraint,message:bureaucrat_knowledge.constraint_bureaucrat_knowledge_category_check_visibility_type_parent_not_in_the_top_categories
 msgid "Category must have a parent category to set Visibility Type 'Parent'"
 msgstr ""
 
@@ -279,14 +287,14 @@ msgstr ""
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document_history__create_uid
 #: model_terms:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_document_history_view_form
 msgid "Created by"
-msgstr "Créé par"
+msgstr ""
 
 #. module: bureaucrat_knowledge
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category__create_date
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document__create_date
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document_history__create_date
 msgid "Created on"
-msgstr "Créé le"
+msgstr ""
 
 #. module: bureaucrat_knowledge
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category__ir_model_data_id
@@ -316,7 +324,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document__display_name
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document_history__display_name
 msgid "Display Name"
-msgstr "Nom affiché"
+msgstr ""
 
 #. module: bureaucrat_knowledge
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category__document_ids
@@ -365,7 +373,7 @@ msgid "Document Type"
 msgstr ""
 
 #. module: bureaucrat_knowledge
-#: sql_constraint:bureaucrat.knowledge.document:0
+#: model:ir.model.constraint,message:bureaucrat_knowledge.constraint_bureaucrat_knowledge_document_check_visibility_type_parent_not_in_the_top_categories
 msgid "Document must have a parent category to set Visibility Type 'Parent'"
 msgstr ""
 
@@ -443,21 +451,21 @@ msgstr ""
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document__message_follower_ids
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document_history__message_follower_ids
 msgid "Followers"
-msgstr "Abonnés"
+msgstr ""
 
 #. module: bureaucrat_knowledge
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category__message_channel_ids
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document__message_channel_ids
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document_history__message_channel_ids
 msgid "Followers (Channels)"
-msgstr "Abonnés (Canaux)"
+msgstr ""
 
 #. module: bureaucrat_knowledge
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category__message_partner_ids
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document__message_partner_ids
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document_history__message_partner_ids
 msgid "Followers (Partners)"
-msgstr "Abonnés (Partenaires)"
+msgstr ""
 
 #. module: bureaucrat_knowledge
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category__full_name
@@ -766,25 +774,33 @@ msgid "ID"
 msgstr ""
 
 #. module: bureaucrat_knowledge
-#: model:ir.model.fields,help:bureaucrat_knowledge.field_bureaucrat_knowledge_category__message_unread
-#: model:ir.model.fields,help:bureaucrat_knowledge.field_bureaucrat_knowledge_document__message_unread
-#: model:ir.model.fields,help:bureaucrat_knowledge.field_bureaucrat_knowledge_document_history__message_unread
-msgid "If checked new messages require your attention."
-msgstr "Si coché, de nouveaux messages demandent votre attention."
+#: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document__activity_exception_icon
+#: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document_history__activity_exception_icon
+msgid "Icon"
+msgstr ""
+
+#. module: bureaucrat_knowledge
+#: model:ir.model.fields,help:bureaucrat_knowledge.field_bureaucrat_knowledge_document__activity_exception_icon
+#: model:ir.model.fields,help:bureaucrat_knowledge.field_bureaucrat_knowledge_document_history__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr ""
 
 #. module: bureaucrat_knowledge
 #: model:ir.model.fields,help:bureaucrat_knowledge.field_bureaucrat_knowledge_category__message_needaction
+#: model:ir.model.fields,help:bureaucrat_knowledge.field_bureaucrat_knowledge_category__message_unread
 #: model:ir.model.fields,help:bureaucrat_knowledge.field_bureaucrat_knowledge_document__message_needaction
+#: model:ir.model.fields,help:bureaucrat_knowledge.field_bureaucrat_knowledge_document__message_unread
 #: model:ir.model.fields,help:bureaucrat_knowledge.field_bureaucrat_knowledge_document_history__message_needaction
+#: model:ir.model.fields,help:bureaucrat_knowledge.field_bureaucrat_knowledge_document_history__message_unread
 msgid "If checked, new messages require your attention."
-msgstr "Si coché, de nouveaux messages demandent votre attention."
+msgstr ""
 
 #. module: bureaucrat_knowledge
 #: model:ir.model.fields,help:bureaucrat_knowledge.field_bureaucrat_knowledge_category__message_has_error
 #: model:ir.model.fields,help:bureaucrat_knowledge.field_bureaucrat_knowledge_document__message_has_error
 #: model:ir.model.fields,help:bureaucrat_knowledge.field_bureaucrat_knowledge_document_history__message_has_error
 msgid "If checked, some messages have a delivery error."
-msgstr "Si actif, certains messages ont une erreur de livraison."
+msgstr ""
 
 #. module: bureaucrat_knowledge
 #: model:bureaucrat.knowledge.document,name:bureaucrat_knowledge.incident_life_cycle
@@ -811,8 +827,8 @@ msgid "Info"
 msgstr ""
 
 #. module: bureaucrat_knowledge
-#: selection:bureaucrat.knowledge.category,visibility_type:0
-#: selection:bureaucrat.knowledge.document,visibility_type:0
+#: model:ir.model.fields.selection,name:bureaucrat_knowledge.selection__bureaucrat_knowledge_category__visibility_type__internal
+#: model:ir.model.fields.selection,name:bureaucrat_knowledge.selection__bureaucrat_knowledge_document__visibility_type__internal
 msgid "Internal"
 msgstr ""
 
@@ -821,7 +837,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document__message_is_follower
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document_history__message_is_follower
 msgid "Is Follower"
-msgstr "Est un abonné"
+msgstr ""
 
 #. module: bureaucrat_knowledge
 #: model:ir.ui.menu,name:bureaucrat_knowledge.bureaucrat_knowledge_menu
@@ -833,21 +849,21 @@ msgstr ""
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document____last_update
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document_history____last_update
 msgid "Last Modified on"
-msgstr "Dernière modification le"
+msgstr ""
 
 #. module: bureaucrat_knowledge
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category__write_uid
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document__write_uid
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document_history__write_uid
 msgid "Last Updated by"
-msgstr "Dernière mise à jour par"
+msgstr ""
 
 #. module: bureaucrat_knowledge
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category__write_date
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document__write_date
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document_history__write_date
 msgid "Last Updated on"
-msgstr "Dernière mise à jour le"
+msgstr ""
 
 #. module: bureaucrat_knowledge
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document__latest_history_id
@@ -859,14 +875,14 @@ msgstr ""
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document__message_main_attachment_id
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document_history__message_main_attachment_id
 msgid "Main Attachment"
-msgstr "Pièce jointe principale"
+msgstr ""
 
 #. module: bureaucrat_knowledge
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category__message_has_error
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document__message_has_error
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document_history__message_has_error
 msgid "Message Delivery error"
-msgstr "Erreur d'envoi du message"
+msgstr ""
 
 #. module: bureaucrat_knowledge
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category__message_ids
@@ -879,7 +895,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category__name
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document__name
 msgid "Name"
-msgstr "Nom"
+msgstr ""
 
 #. module: bureaucrat_knowledge
 #: model_terms:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_category_view_form
@@ -912,12 +928,6 @@ msgid "No tag"
 msgstr ""
 
 #. module: bureaucrat_knowledge
-#: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category__no_tag_id
-#: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document__no_tag_id
-msgid "No tag (deprecated)"
-msgstr ""
-
-#. module: bureaucrat_knowledge
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category__ir_model_data_no_update
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document__ir_model_data_no_update
 msgid "Non Updatable"
@@ -928,35 +938,35 @@ msgstr ""
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document__message_needaction_counter
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document_history__message_needaction_counter
 msgid "Number of Actions"
-msgstr "Nombre d'actions"
+msgstr ""
 
 #. module: bureaucrat_knowledge
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category__message_has_error_counter
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document__message_has_error_counter
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document_history__message_has_error_counter
-msgid "Number of error"
-msgstr "Nombre d'erreurs"
+msgid "Number of errors"
+msgstr ""
 
 #. module: bureaucrat_knowledge
 #: model:ir.model.fields,help:bureaucrat_knowledge.field_bureaucrat_knowledge_category__message_needaction_counter
 #: model:ir.model.fields,help:bureaucrat_knowledge.field_bureaucrat_knowledge_document__message_needaction_counter
 #: model:ir.model.fields,help:bureaucrat_knowledge.field_bureaucrat_knowledge_document_history__message_needaction_counter
 msgid "Number of messages which requires an action"
-msgstr "Nombre de messages exigeant une action"
+msgstr ""
 
 #. module: bureaucrat_knowledge
 #: model:ir.model.fields,help:bureaucrat_knowledge.field_bureaucrat_knowledge_category__message_has_error_counter
 #: model:ir.model.fields,help:bureaucrat_knowledge.field_bureaucrat_knowledge_document__message_has_error_counter
 #: model:ir.model.fields,help:bureaucrat_knowledge.field_bureaucrat_knowledge_document_history__message_has_error_counter
 msgid "Number of messages with delivery error"
-msgstr "Nombre de messages avec des erreurs d'envoi"
+msgstr ""
 
 #. module: bureaucrat_knowledge
 #: model:ir.model.fields,help:bureaucrat_knowledge.field_bureaucrat_knowledge_category__message_unread_counter
 #: model:ir.model.fields,help:bureaucrat_knowledge.field_bureaucrat_knowledge_document__message_unread_counter
 #: model:ir.model.fields,help:bureaucrat_knowledge.field_bureaucrat_knowledge_document_history__message_unread_counter
 msgid "Number of unread messages"
-msgstr "Nombre de messages non lus"
+msgstr ""
 
 #. module: bureaucrat_knowledge
 #: model:bureaucrat.knowledge.document,name:bureaucrat_knowledge.odoo_notification_management
@@ -967,12 +977,6 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_category_view_form
 #: model_terms:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_document_view_form
 msgid "Other"
-msgstr ""
-
-#. module: bureaucrat_knowledge
-#: selection:bureaucrat.knowledge.document,activity_state:0
-#: selection:bureaucrat.knowledge.document.history,activity_state:0
-msgid "Overdue"
 msgstr ""
 
 #. module: bureaucrat_knowledge
@@ -1000,16 +1004,16 @@ msgid "Owners groups"
 msgstr ""
 
 #. module: bureaucrat_knowledge
-#: selection:bureaucrat.knowledge.category,visibility_type:0
-#: selection:bureaucrat.knowledge.document,visibility_type:0
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category__parent_id
+#: model:ir.model.fields.selection,name:bureaucrat_knowledge.selection__bureaucrat_knowledge_category__visibility_type__parent
+#: model:ir.model.fields.selection,name:bureaucrat_knowledge.selection__bureaucrat_knowledge_document__visibility_type__parent
 msgid "Parent"
 msgstr ""
 
 #. module: bureaucrat_knowledge
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category__parent_path
 msgid "Parent Path"
-msgstr "Chemin parent"
+msgstr ""
 
 #. module: bureaucrat_knowledge
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category__parent_ids
@@ -1017,14 +1021,8 @@ msgid "Parents Categories"
 msgstr ""
 
 #. module: bureaucrat_knowledge
-#: selection:bureaucrat.knowledge.document,activity_state:0
-#: selection:bureaucrat.knowledge.document.history,activity_state:0
-msgid "Planned"
-msgstr ""
-
-#. module: bureaucrat_knowledge
-#: selection:bureaucrat.knowledge.category,visibility_type:0
-#: selection:bureaucrat.knowledge.document,visibility_type:0
+#: model:ir.model.fields.selection,name:bureaucrat_knowledge.selection__bureaucrat_knowledge_category__visibility_type__portal
+#: model:ir.model.fields.selection,name:bureaucrat_knowledge.selection__bureaucrat_knowledge_document__visibility_type__portal
 msgid "Portal"
 msgstr ""
 
@@ -1034,8 +1032,8 @@ msgid "Preview"
 msgstr ""
 
 #. module: bureaucrat_knowledge
-#: selection:bureaucrat.knowledge.category,visibility_type:0
-#: selection:bureaucrat.knowledge.document,visibility_type:0
+#: model:ir.model.fields.selection,name:bureaucrat_knowledge.selection__bureaucrat_knowledge_category__visibility_type__public
+#: model:ir.model.fields.selection,name:bureaucrat_knowledge.selection__bureaucrat_knowledge_document__visibility_type__public
 msgid "Public"
 msgstr ""
 
@@ -1080,8 +1078,8 @@ msgid "Responsible User"
 msgstr ""
 
 #. module: bureaucrat_knowledge
-#: selection:bureaucrat.knowledge.category,visibility_type:0
-#: selection:bureaucrat.knowledge.document,visibility_type:0
+#: model:ir.model.fields.selection,name:bureaucrat_knowledge.selection__bureaucrat_knowledge_category__visibility_type__restricted
+#: model:ir.model.fields.selection,name:bureaucrat_knowledge.selection__bureaucrat_knowledge_document__visibility_type__restricted
 msgid "Restricted"
 msgstr ""
 
@@ -1129,9 +1127,9 @@ msgstr ""
 #. module: bureaucrat_knowledge
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category__tag_ids
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document__tag_ids
-#: model_terms:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_document_view_kanban
+#: model_terms:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_document_view_search
 msgid "Tags"
-msgstr "Étiquettes"
+msgstr ""
 
 #. module: bureaucrat_knowledge
 #: model_terms:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_category_view_form
@@ -1139,12 +1137,6 @@ msgstr "Étiquettes"
 #: model_terms:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_document_view_form
 #: model_terms:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_document_view_tree
 msgid "Tags..."
-msgstr ""
-
-#. module: bureaucrat_knowledge
-#: selection:bureaucrat.knowledge.document,activity_state:0
-#: selection:bureaucrat.knowledge.document.history,activity_state:0
-msgid "Today"
 msgstr ""
 
 #. module: bureaucrat_knowledge
@@ -1158,7 +1150,13 @@ msgid "Troubleshooting"
 msgstr ""
 
 #. module: bureaucrat_knowledge
-#: model_terms:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_document_view_kanban
+#: model:ir.model.fields,help:bureaucrat_knowledge.field_bureaucrat_knowledge_document__activity_exception_decoration
+#: model:ir.model.fields,help:bureaucrat_knowledge.field_bureaucrat_knowledge_document_history__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr ""
+
+#. module: bureaucrat_knowledge
+#: model_terms:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_document_view_search
 msgid "Types"
 msgstr ""
 
@@ -1167,14 +1165,14 @@ msgstr ""
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document__message_unread
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document_history__message_unread
 msgid "Unread Messages"
-msgstr "Messages non lus"
+msgstr ""
 
 #. module: bureaucrat_knowledge
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category__message_unread_counter
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document__message_unread_counter
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document_history__message_unread_counter
 msgid "Unread Messages Counter"
-msgstr "Compteur de messages non lus"
+msgstr ""
 
 #. module: bureaucrat_knowledge
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document_history__user_id
@@ -1252,13 +1250,13 @@ msgid "XML ID for this record."
 msgstr ""
 
 #. module: bureaucrat_knowledge
-#: selection:bureaucrat.knowledge.document,document_type:0
-#: selection:bureaucrat.knowledge.document.history,document_type:0
+#: model:ir.model.fields.selection,name:bureaucrat_knowledge.selection__bureaucrat_knowledge_document__document_type__html
+#: model:ir.model.fields.selection,name:bureaucrat_knowledge.selection__bureaucrat_knowledge_document_history__document_type__html
 msgid "html"
 msgstr ""
 
 #. module: bureaucrat_knowledge
-#: selection:bureaucrat.knowledge.document,document_type:0
-#: selection:bureaucrat.knowledge.document.history,document_type:0
+#: model:ir.model.fields.selection,name:bureaucrat_knowledge.selection__bureaucrat_knowledge_document__document_type__pdf
+#: model:ir.model.fields.selection,name:bureaucrat_knowledge.selection__bureaucrat_knowledge_document_history__document_type__pdf
 msgid "pdf"
 msgstr ""

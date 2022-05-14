@@ -11,7 +11,7 @@ class TestBureaucratKnowledge(TestBureaucratKnowledgeBase):
             'bureaucrat_knowledge.group_bureaucratic_knowledge_user')
 
         Category = self.env['bureaucrat.knowledge.category']
-        category = Category.sudo(self.demo_user).create({
+        category = Category.with_user(self.demo_user).create({
             'name': 'Test top level category',
         })
 
@@ -23,7 +23,7 @@ class TestBureaucratKnowledge(TestBureaucratKnowledgeBase):
         category.write({
             'editor_user_ids': [(6, 0, [self.demo_user.id])]})
 
-        subcategory = Category.sudo(self.demo_user).create({
+        subcategory = Category.with_user(self.demo_user).create({
             'name': 'Test subcategory',
             'parent_id': category.id,
         })
@@ -43,7 +43,7 @@ class TestBureaucratKnowledge(TestBureaucratKnowledgeBase):
         self.assertEqual(len(subcategory.actual_editor_user_ids), 1)
         self.assertIn(self.demo_user, subcategory.actual_editor_user_ids)
 
-        subcategory2 = Category.sudo(self.demo_user).create({
+        subcategory2 = Category.with_user(self.demo_user).create({
             'name': 'Test subcategory2',
             'parent_id': subcategory.id,
         })
@@ -63,7 +63,7 @@ class TestBureaucratKnowledge(TestBureaucratKnowledgeBase):
             'bureaucrat_knowledge.group_bureaucratic_knowledge_user')
 
         Document = self.env['bureaucrat.knowledge.document']
-        document = Document.sudo(self.demo_user).create({
+        document = Document.with_user(self.demo_user).create({
             'name': 'Test top level document',
             'document_type': 'html',
         })
@@ -73,12 +73,12 @@ class TestBureaucratKnowledge(TestBureaucratKnowledgeBase):
         self.assertIn(self.demo_user, document.owner_user_ids)
 
         Category = self.env['bureaucrat.knowledge.category']
-        category = Category.sudo(self.demo_user).create({
+        category = Category.with_user(self.demo_user).create({
             'name': 'Test top level category2',
             'editor_user_ids': [(4, self.demo_user.id)],
         })
 
-        subdocument = Document.sudo(self.demo_user).create({
+        subdocument = Document.with_user(self.demo_user).create({
             'name': 'Test top level document',
             'category_id': category.id,
             'document_type': 'html',

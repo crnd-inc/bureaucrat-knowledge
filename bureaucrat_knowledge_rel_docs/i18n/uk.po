@@ -9,8 +9,8 @@ msgstr ""
 "POT-Creation-Date: 2021-05-05 13:07+0000\n"
 "PO-Revision-Date: 2022-01-25 13:01+0000\n"
 "Last-Translator: Валерия <valittle@ukr.net>\n"
-"Language-Team: Ukrainian <http://weblate.crnd.pro/projects/"
-"bureaucrat-itsm-14-0/bureaucrat_knowledge_rel_docs/uk/>\n"
+"Language-Team: Ukrainian <http://weblate.crnd.pro/projects/bureaucrat-"
+"itsm-14-0/bureaucrat_knowledge_rel_docs/uk/>\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -40,7 +40,6 @@ msgid "Created on"
 msgstr "Дата створення"
 
 #. module: bureaucrat_knowledge_rel_docs
-#: model:ir.model.fields,field_description:bureaucrat_knowledge_rel_docs.field_bureaucrat_knowledge_document__display_name
 #: model:ir.model.fields,field_description:bureaucrat_knowledge_rel_docs.field_document_wizard_manage_related_documents__display_name
 msgid "Display Name"
 msgstr "Відображуване ім’я"
@@ -61,13 +60,11 @@ msgid "Documents that have references to this document"
 msgstr ""
 
 #. module: bureaucrat_knowledge_rel_docs
-#: model:ir.model.fields,field_description:bureaucrat_knowledge_rel_docs.field_bureaucrat_knowledge_document__id
 #: model:ir.model.fields,field_description:bureaucrat_knowledge_rel_docs.field_document_wizard_manage_related_documents__id
 msgid "ID"
 msgstr "ID"
 
 #. module: bureaucrat_knowledge_rel_docs
-#: model:ir.model.fields,field_description:bureaucrat_knowledge_rel_docs.field_bureaucrat_knowledge_document____last_update
 #: model:ir.model.fields,field_description:bureaucrat_knowledge_rel_docs.field_document_wizard_manage_related_documents____last_update
 msgid "Last Modified on"
 msgstr "Остання модифікація"

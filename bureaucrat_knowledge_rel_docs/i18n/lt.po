@@ -37,7 +37,6 @@ msgid "Created on"
 msgstr ""
 
 #. module: bureaucrat_knowledge_rel_docs
-#: model:ir.model.fields,field_description:bureaucrat_knowledge_rel_docs.field_bureaucrat_knowledge_document__display_name
 #: model:ir.model.fields,field_description:bureaucrat_knowledge_rel_docs.field_document_wizard_manage_related_documents__display_name
 msgid "Display Name"
 msgstr ""
@@ -58,13 +57,11 @@ msgid "Documents that have references to this document"
 msgstr ""
 
 #. module: bureaucrat_knowledge_rel_docs
-#: model:ir.model.fields,field_description:bureaucrat_knowledge_rel_docs.field_bureaucrat_knowledge_document__id
 #: model:ir.model.fields,field_description:bureaucrat_knowledge_rel_docs.field_document_wizard_manage_related_documents__id
 msgid "ID"
 msgstr ""
 
 #. module: bureaucrat_knowledge_rel_docs
-#: model:ir.model.fields,field_description:bureaucrat_knowledge_rel_docs.field_bureaucrat_knowledge_document____last_update
 #: model:ir.model.fields,field_description:bureaucrat_knowledge_rel_docs.field_document_wizard_manage_related_documents____last_update
 msgid "Last Modified on"
 msgstr ""

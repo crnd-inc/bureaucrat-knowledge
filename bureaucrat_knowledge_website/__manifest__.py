@@ -31,6 +31,8 @@
     'assets': {
         'web.assets_frontend': [
             'bureaucrat_knowledge_website/static/src/scss/knowledge_base_website.scss',
+        ],
+        'web.assets_tests': [
             'bureaucrat_knowledge_website/static/src/js/tours/search.js',
         ],
     },

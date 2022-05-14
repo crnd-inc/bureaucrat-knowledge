@@ -23,7 +23,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
 
         with self.assertRaises(AccessError):
             self.DocHist.sudo(self.demo_user).create({
-                'document_type': 'html',
+                'document_format': 'html',
                 'document_id': self.document_subcat_2.id})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
@@ -40,7 +40,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         self.assertEqual(len(self.document_subcat_2.visibility_user_ids), 1)
         with self.assertRaises(AccessError):
             self.DocHist.sudo(self.demo_user).create({
-                'document_type': 'html',
+                'document_format': 'html',
                 'document_id': self.document_subcat_2.id})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
@@ -61,7 +61,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
 
         with self.assertRaises(AccessError):
             self.DocHist.sudo(self.demo_user).create({
-                'document_type': 'html',
+                'document_format': 'html',
                 'document_id': self.document_subcat_2.id})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
@@ -78,7 +78,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         self.assertEqual(len(self.document_subcat_2.visibility_group_ids), 1)
         with self.assertRaises(AccessError):
             self.DocHist.sudo(self.demo_user).create({
-                'document_type': 'html',
+                'document_format': 'html',
                 'document_id': self.document_subcat_2.id})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
@@ -97,7 +97,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
 
         with self.assertRaises(AccessError):
             self.DocHist.sudo(self.demo_user).create({
-                'document_type': 'html',
+                'document_format': 'html',
                 'document_id': self.document_subcat_2.id})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
@@ -113,7 +113,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         self.assertEqual(len(self.document_subcat_2.editor_user_ids), 1)
 
         self.DocHist.sudo(self.demo_user).create({
-            'document_type': 'html',
+            'document_format': 'html',
             'document_id': self.document_subcat_2.id})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
@@ -133,7 +133,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
 
         with self.assertRaises(AccessError):
             self.DocHist.sudo(self.demo_user).create({
-                'document_type': 'html',
+                'document_format': 'html',
                 'document_id': self.document_subcat_2.id})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
@@ -149,7 +149,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         self.assertEqual(len(self.document_subcat_2.editor_group_ids), 1)
 
         self.DocHist.sudo(self.demo_user).create({
-            'document_type': 'html',
+            'document_format': 'html',
             'document_id': self.document_subcat_2.id})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
@@ -167,7 +167,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
 
         with self.assertRaises(AccessError):
             self.DocHist.sudo(self.demo_user).create({
-                'document_type': 'html',
+                'document_format': 'html',
                 'document_id': self.document_subcat_2.id})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
@@ -182,7 +182,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
 
         self.assertEqual(len(self.document_subcat_2.owner_user_ids), 1)
         self.DocHist.sudo(self.demo_user).create({
-            'document_type': 'html',
+            'document_format': 'html',
             'document_id': self.document_subcat_2.id})
         self.document_subcat_2.latest_history_id.sudo(
             self.demo_user).write({
@@ -199,7 +199,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
 
         with self.assertRaises(AccessError):
             self.DocHist.sudo(self.demo_user).create({
-                'document_type': 'html',
+                'document_format': 'html',
                 'document_id': self.document_subcat_2.id})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
@@ -214,7 +214,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
 
         self.assertEqual(len(self.document_subcat_2.owner_group_ids), 1)
         self.DocHist.sudo(self.demo_user).create({
-            'document_type': 'html',
+            'document_format': 'html',
             'document_id': self.document_subcat_2.id})
         self.document_subcat_2.latest_history_id.sudo(
             self.demo_user).write({
@@ -231,7 +231,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
 
         with self.assertRaises(AccessError):
             self.DocHist.sudo(self.public_user).create({
-                'document_type': 'html',
+                'document_format': 'html',
                 'document_id': self.document_subcat_2.id})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
@@ -244,7 +244,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         self.document_subcat_2.visibility_type = 'restricted'
         with self.assertRaises(AccessError):
             self.DocHist.sudo(self.public_user).create({
-                'document_type': 'html',
+                'document_format': 'html',
                 'document_id': self.document_subcat_2.id})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
@@ -257,7 +257,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         self.document_subcat_2.visibility_type = 'internal'
         with self.assertRaises(AccessError):
             self.DocHist.sudo(self.public_user).create({
-                'document_type': 'html',
+                'document_format': 'html',
                 'document_id': self.document_subcat_2.id})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
@@ -270,7 +270,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         self.document_subcat_2.visibility_type = 'portal'
         with self.assertRaises(AccessError):
             self.DocHist.sudo(self.public_user).create({
-                'document_type': 'html',
+                'document_format': 'html',
                 'document_id': self.document_subcat_2.id})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
@@ -283,7 +283,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         self.document_subcat_2.visibility_type = 'public'
         with self.assertRaises(AccessError):
             self.DocHist.sudo(self.public_user).create({
-                'document_type': 'html',
+                'document_format': 'html',
                 'document_id': self.document_subcat_2.id})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
@@ -303,7 +303,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
 
         with self.assertRaises(AccessError):
             self.DocHist.sudo(self.public_user).create({
-                'document_type': 'html',
+                'document_format': 'html',
                 'document_id': self.document_subcat_2.id})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
@@ -316,7 +316,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         self.category_top_level.visibility_type = 'restricted'
         with self.assertRaises(AccessError):
             self.DocHist.sudo(self.public_user).create({
-                'document_type': 'html',
+                'document_format': 'html',
                 'document_id': self.document_subcat_2.id})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
@@ -329,7 +329,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         self.category_top_level.visibility_type = 'internal'
         with self.assertRaises(AccessError):
             self.DocHist.sudo(self.public_user).create({
-                'document_type': 'html',
+                'document_format': 'html',
                 'document_id': self.document_subcat_2.id})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
@@ -342,7 +342,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         self.category_top_level.visibility_type = 'portal'
         with self.assertRaises(AccessError):
             self.DocHist.sudo(self.public_user).create({
-                'document_type': 'html',
+                'document_format': 'html',
                 'document_id': self.document_subcat_2.id})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
@@ -355,7 +355,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         self.document_subcat_2.visibility_type = 'public'
         with self.assertRaises(AccessError):
             self.DocHist.sudo(self.public_user).create({
-                'document_type': 'html',
+                'document_format': 'html',
                 'document_id': self.document_subcat_2.id})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
@@ -375,7 +375,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
 
         with self.assertRaises(AccessError):
             self.DocHist.sudo(self.portal_user).create({
-                'document_type': 'html',
+                'document_format': 'html',
                 'document_id': self.document_subcat_2.id})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
@@ -388,7 +388,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         self.document_subcat_2.visibility_type = 'restricted'
         with self.assertRaises(AccessError):
             self.DocHist.sudo(self.portal_user).create({
-                'document_type': 'html',
+                'document_format': 'html',
                 'document_id': self.document_subcat_2.id})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
@@ -401,7 +401,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         self.document_subcat_2.visibility_type = 'internal'
         with self.assertRaises(AccessError):
             self.DocHist.sudo(self.portal_user).create({
-                'document_type': 'html',
+                'document_format': 'html',
                 'document_id': self.document_subcat_2.id})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
@@ -414,7 +414,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         self.document_subcat_2.visibility_type = 'public'
         with self.assertRaises(AccessError):
             self.DocHist.sudo(self.portal_user).create({
-                'document_type': 'html',
+                'document_format': 'html',
                 'document_id': self.document_subcat_2.id})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
@@ -427,7 +427,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         self.document_subcat_2.visibility_type = 'portal'
         with self.assertRaises(AccessError):
             self.DocHist.sudo(self.portal_user).create({
-                'document_type': 'html',
+                'document_format': 'html',
                 'document_id': self.document_subcat_2.id})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
@@ -447,7 +447,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
 
         with self.assertRaises(AccessError):
             self.DocHist.sudo(self.portal_user).create({
-                'document_type': 'html',
+                'document_format': 'html',
                 'document_id': self.document_subcat_2.id})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
@@ -460,7 +460,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         self.category_top_level.visibility_type = 'restricted'
         with self.assertRaises(AccessError):
             self.DocHist.sudo(self.portal_user).create({
-                'document_type': 'html',
+                'document_format': 'html',
                 'document_id': self.document_subcat_2.id})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
@@ -473,7 +473,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         self.category_top_level.visibility_type = 'internal'
         with self.assertRaises(AccessError):
             self.DocHist.sudo(self.portal_user).create({
-                'document_type': 'html',
+                'document_format': 'html',
                 'document_id': self.document_subcat_2.id})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
@@ -486,7 +486,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         self.category_top_level.visibility_type = 'public'
         with self.assertRaises(AccessError):
             self.DocHist.sudo(self.portal_user).create({
-                'document_type': 'html',
+                'document_format': 'html',
                 'document_id': self.document_subcat_2.id})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
@@ -499,7 +499,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         self.document_subcat_2.visibility_type = 'portal'
         with self.assertRaises(AccessError):
             self.DocHist.sudo(self.portal_user).create({
-                'document_type': 'html',
+                'document_format': 'html',
                 'document_id': self.document_subcat_2.id})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
@@ -519,12 +519,12 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
 
         with self.assertRaises(AccessError):
             self.DocHist.sudo(self.demo_user).create({
-                'document_type': 'html',
+                'document_format': 'html',
                 'document_id': self.document_subcat_2.id})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
                 self.demo_user).write({
-                    'document_type': 'html',
+                    'document_format': 'html',
                     'document_body_html': 'Demo Document For Subcategory 2 e'})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
@@ -533,12 +533,12 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         self.document_subcat_2.visibility_type = 'restricted'
         with self.assertRaises(AccessError):
             self.DocHist.sudo(self.demo_user).create({
-                'document_type': 'html',
+                'document_format': 'html',
                 'document_id': self.document_subcat_2.id})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
                 self.demo_user).write({
-                    'document_type': 'html',
+                    'document_format': 'html',
                     'document_body_html': 'Demo Document For Subcategory 2 e'})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
@@ -547,12 +547,12 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         self.document_subcat_2.visibility_type = 'portal'
         with self.assertRaises(AccessError):
             self.DocHist.sudo(self.demo_user).create({
-                'document_type': 'html',
+                'document_format': 'html',
                 'document_id': self.document_subcat_2.id})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
                 self.demo_user).write({
-                    'document_type': 'html',
+                    'document_format': 'html',
                     'document_body_html': 'Demo Document For Subcategory 2 e'})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
@@ -561,12 +561,12 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         self.document_subcat_2.visibility_type = 'public'
         with self.assertRaises(AccessError):
             self.DocHist.sudo(self.demo_user).create({
-                'document_type': 'html',
+                'document_format': 'html',
                 'document_id': self.document_subcat_2.id})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
                 self.demo_user).write({
-                    'document_type': 'html',
+                    'document_format': 'html',
                     'document_body_html': 'Demo Document For Subcategory 2 e'})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
@@ -575,12 +575,12 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         self.document_subcat_2.visibility_type = 'internal'
         with self.assertRaises(AccessError):
             self.DocHist.sudo(self.demo_user).create({
-                'document_type': 'html',
+                'document_format': 'html',
                 'document_id': self.document_subcat_2.id})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
                 self.demo_user).write({
-                    'document_type': 'html',
+                    'document_format': 'html',
                     'document_body_html': 'Demo Document For Subcategory 2 e'})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
@@ -596,7 +596,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
 
         with self.assertRaises(AccessError):
             self.DocHist.sudo(self.demo_user).create({
-                'document_type': 'html',
+                'document_format': 'html',
                 'document_id': self.document_subcat_2.id})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
@@ -614,7 +614,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         self.category_top_level.visibility_type = 'portal'
         with self.assertRaises(AccessError):
             self.DocHist.sudo(self.demo_user).create({
-                'document_type': 'html',
+                'document_format': 'html',
                 'document_id': self.document_subcat_2.id})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
@@ -627,7 +627,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         self.category_top_level.visibility_type = 'public'
         with self.assertRaises(AccessError):
             self.DocHist.sudo(self.demo_user).create({
-                'document_type': 'html',
+                'document_format': 'html',
                 'document_id': self.document_subcat_2.id})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
@@ -640,7 +640,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         self.document_subcat_2.visibility_type = 'internal'
         with self.assertRaises(AccessError):
             self.DocHist.sudo(self.demo_user).create({
-                'document_type': 'html',
+                'document_format': 'html',
                 'document_id': self.document_subcat_2.id})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
@@ -668,7 +668,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
 
         with self.assertRaises(AccessError):
             self.DocHist.sudo(self.demo_user).create({
-                'document_type': 'html',
+                'document_format': 'html',
                 'document_id': self.document_subcat_2.id})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
@@ -687,7 +687,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
                  visibility_user_ids)), 1)
         with self.assertRaises(AccessError):
             self.DocHist.sudo(self.demo_user).create({
-                'document_type': 'html',
+                'document_format': 'html',
                 'document_id': self.document_subcat_2.id})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
@@ -716,7 +716,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
 
         with self.assertRaises(AccessError):
             self.DocHist.sudo(self.demo_user).create({
-                'document_type': 'html',
+                'document_format': 'html',
                 'document_id': self.document_subcat_2.id})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
@@ -735,7 +735,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
                  visibility_group_ids)), 1)
         with self.assertRaises(AccessError):
             self.DocHist.sudo(self.demo_user).create({
-                'document_type': 'html',
+                'document_format': 'html',
                 'document_id': self.document_subcat_2.id})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
@@ -765,7 +765,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
 
         with self.assertRaises(AccessError):
             self.DocHist.sudo(self.demo_user).create({
-                'document_type': 'html',
+                'document_format': 'html',
                 'document_id': self.document_subcat_2.id})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
@@ -782,7 +782,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         self.assertEqual(
             len((self.document_subcat_2.actual_editor_user_ids)), 1)
         self.DocHist.sudo(self.demo_user).create({
-            'document_type': 'html',
+            'document_format': 'html',
             'document_id': self.document_subcat_2.id})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
@@ -796,7 +796,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
             'editor_user_ids': [(3, self.demo_user.id)]})
         with self.assertRaises(AccessError):
             self.DocHist.sudo(self.demo_user).create({
-                'document_type': 'html',
+                'document_format': 'html',
                 'document_id': self.document_subcat_2.id})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
@@ -817,7 +817,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         self.assertEqual(
             len((self.document_subcat_2.actual_editor_user_ids)), 1)
         self.DocHist.sudo(self.demo_user).create({
-            'document_type': 'html',
+            'document_format': 'html',
             'document_id': self.document_subcat_2.id})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
@@ -831,7 +831,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
             'editor_user_ids': [(3, self.demo_user.id)]})
         with self.assertRaises(AccessError):
             self.DocHist.sudo(self.demo_user).create({
-                'document_type': 'html',
+                'document_format': 'html',
                 'document_id': self.document_subcat_2.id})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
@@ -852,7 +852,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         self.assertEqual(
             len((self.document_subcat_2.actual_editor_user_ids)), 1)
         self.DocHist.sudo(self.demo_user).create({
-            'document_type': 'html',
+            'document_format': 'html',
             'document_id': self.document_subcat_2.id})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
@@ -866,7 +866,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
             'editor_user_ids': [(3, self.demo_user.id)]})
         with self.assertRaises(AccessError):
             self.DocHist.sudo(self.demo_user).create({
-                'document_type': 'html',
+                'document_format': 'html',
                 'document_id': self.document_subcat_2.id})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
@@ -899,7 +899,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
 
         with self.assertRaises(AccessError):
             self.DocHist.sudo(self.demo_user).create({
-                'document_type': 'html',
+                'document_format': 'html',
                 'document_id': self.document_subcat_2.id})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
@@ -917,7 +917,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
             len((self.document_subcat_2.actual_visibility_category_id.
                  editor_group_ids)), 1)
         self.DocHist.sudo(self.demo_user).create({
-            'document_type': 'html',
+            'document_format': 'html',
             'document_id': self.document_subcat_2.id})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
@@ -931,7 +931,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
             'editor_group_ids': [(3, self.group_demo.id)]})
         with self.assertRaises(AccessError):
             self.DocHist.sudo(self.demo_user).create({
-                'document_type': 'html',
+                'document_format': 'html',
                 'document_id': self.document_subcat_2.id})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
@@ -952,7 +952,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         self.assertEqual(
             len((self.document_subcat_2.actual_editor_group_ids)), 1)
         self.DocHist.sudo(self.demo_user).create({
-            'document_type': 'html',
+            'document_format': 'html',
             'document_id': self.document_subcat_2.id})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
@@ -966,7 +966,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
             'editor_group_ids': [(3, self.group_demo.id)]})
         with self.assertRaises(AccessError):
             self.DocHist.sudo(self.demo_user).create({
-                'document_type': 'html',
+                'document_format': 'html',
                 'document_id': self.document_subcat_2.id})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
@@ -987,7 +987,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         self.assertEqual(
             len((self.document_subcat_2.actual_editor_group_ids)), 1)
         self.DocHist.sudo(self.demo_user).create({
-            'document_type': 'html',
+            'document_format': 'html',
             'document_id': self.document_subcat_2.id})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
@@ -1001,7 +1001,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
             'editor_group_ids': [(3, self.group_demo.id)]})
         with self.assertRaises(AccessError):
             self.DocHist.sudo(self.demo_user).create({
-                'document_type': 'html',
+                'document_format': 'html',
                 'document_id': self.document_subcat_2.id})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
@@ -1031,7 +1031,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
 
         with self.assertRaises(AccessError):
             self.DocHist.sudo(self.demo_user).create({
-                'document_type': 'html',
+                'document_format': 'html',
                 'document_id': self.document_subcat_2.id})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
@@ -1049,7 +1049,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         self.assertEqual(
             len((self.document_subcat_2.actual_owner_user_ids)), 1)
         self.DocHist.sudo(self.demo_user).create({
-            'document_type': 'html',
+            'document_format': 'html',
             'document_id': self.document_subcat_2.id})
         self.document_subcat_2.latest_history_id.sudo(
             self.demo_user).write({
@@ -1060,7 +1060,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
             'owner_user_ids': [(3, self.demo_user.id)]})
         with self.assertRaises(AccessError):
             self.DocHist.sudo(self.demo_user).create({
-                'document_type': 'html',
+                'document_format': 'html',
                 'document_id': self.document_subcat_2.id})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
@@ -1082,7 +1082,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         self.assertEqual(
             len((self.document_subcat_2.actual_owner_user_ids)), 1)
         self.DocHist.sudo(self.demo_user).create({
-            'document_type': 'html',
+            'document_format': 'html',
             'document_id': self.document_subcat_2.id})
         self.document_subcat_2.latest_history_id.sudo(
             self.demo_user).write({
@@ -1093,7 +1093,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
             'owner_user_ids': [(3, self.demo_user.id)]})
         with self.assertRaises(AccessError):
             self.DocHist.sudo(self.demo_user).create({
-                'document_type': 'html',
+                'document_format': 'html',
                 'document_id': self.document_subcat_2.id})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
@@ -1115,7 +1115,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         self.assertEqual(
             len((self.document_subcat_2.actual_owner_user_ids)), 1)
         self.DocHist.sudo(self.demo_user).create({
-            'document_type': 'html',
+            'document_format': 'html',
             'document_id': self.document_subcat_2.id})
         self.document_subcat_2.latest_history_id.sudo(
             self.demo_user).write({
@@ -1126,7 +1126,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
             'owner_user_ids': [(3, self.demo_user.id)]})
         with self.assertRaises(AccessError):
             self.DocHist.sudo(self.demo_user).create({
-                'document_type': 'html',
+                'document_format': 'html',
                 'document_id': self.document_subcat_2.id})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
@@ -1158,7 +1158,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
 
         with self.assertRaises(AccessError):
             self.DocHist.sudo(self.demo_user).create({
-                'document_type': 'html',
+                'document_format': 'html',
                 'document_id': self.document_subcat_2.id})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
@@ -1176,7 +1176,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         self.assertEqual(
             len((self.document_subcat_2.actual_owner_group_ids)), 1)
         self.DocHist.sudo(self.demo_user).create({
-            'document_type': 'html',
+            'document_format': 'html',
             'document_id': self.document_subcat_2.id})
         self.document_subcat_2.latest_history_id.sudo(
             self.demo_user).write({
@@ -1187,7 +1187,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
             'owner_group_ids': [(3, self.group_demo.id)]})
         with self.assertRaises(AccessError):
             self.DocHist.sudo(self.demo_user).create({
-                'document_type': 'html',
+                'document_format': 'html',
                 'document_id': self.document_subcat_2.id})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
@@ -1208,7 +1208,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         self.assertEqual(
             len((self.document_subcat_2.actual_owner_group_ids)), 1)
         self.DocHist.sudo(self.demo_user).create({
-            'document_type': 'html',
+            'document_format': 'html',
             'document_id': self.document_subcat_2.id})
         self.document_subcat_2.latest_history_id.sudo(
             self.demo_user).write({
@@ -1219,7 +1219,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
             'owner_group_ids': [(3, self.group_demo.id)]})
         with self.assertRaises(AccessError):
             self.DocHist.sudo(self.demo_user).create({
-                'document_type': 'html',
+                'document_format': 'html',
                 'document_id': self.document_subcat_2.id})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(
@@ -1240,7 +1240,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         self.assertEqual(
             len((self.document_subcat_2.actual_owner_group_ids)), 1)
         self.DocHist.sudo(self.demo_user).create({
-            'document_type': 'html',
+            'document_format': 'html',
             'document_id': self.document_subcat_2.id})
         self.document_subcat_2.latest_history_id.sudo(
             self.demo_user).write({
@@ -1251,7 +1251,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
             'owner_group_ids': [(3, self.group_demo.id)]})
         with self.assertRaises(AccessError):
             self.DocHist.sudo(self.demo_user).create({
-                'document_type': 'html',
+                'document_format': 'html',
                 'document_id': self.document_subcat_2.id})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.sudo(

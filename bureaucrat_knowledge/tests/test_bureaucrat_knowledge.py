@@ -68,7 +68,7 @@ class TestBureaucratKnowledge(TestBureaucratKnowledgeBase):
         Document = self.env['bureaucrat.knowledge.document']
         document = Document.sudo(self.demo_user).create({
             'name': 'Test top level document',
-            'document_type': 'html',
+            'document_format': 'html',
         })
 
         self.assertEqual(document.visibility_type, 'restricted')
@@ -85,7 +85,7 @@ class TestBureaucratKnowledge(TestBureaucratKnowledgeBase):
         subdocument = Document.sudo(self.demo_user).create({
             'name': 'Test top level document1',
             'category_id': category.id,
-            'document_type': 'html',
+            'document_format': 'html',
         })
 
         self.assertEqual(subdocument.visibility_type, 'parent')
@@ -96,7 +96,8 @@ class TestBureaucratKnowledge(TestBureaucratKnowledgeBase):
 
     def test_document_search_by_index_field(self):
         Document = self.env['bureaucrat.knowledge.document']
-        self.assertEqual(self.document_subcat_2_with_pdf.document_type, 'pdf')
+        self.assertEqual(self.document_subcat_2_with_pdf.document_format,
+                         'pdf')
         self.assertIn(
             'Lorem Ipsum',
             self.document_subcat_2_with_pdf._get_document_index()

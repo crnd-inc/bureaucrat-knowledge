@@ -34,11 +34,15 @@ class BureaucratKnowledgeDocument(models.Model):
     _auto_set_noupdate_on_write = True
 
     name = fields.Char(translate=True, index=True, required=True)
-    document_type = fields.Selection(
+    document_format = fields.Selection(
         default='html',
         selection=DOC_TYPE,
         required=True,
+        inverse='_inverse_document_type',
+        compute='_compute_document_type',
     )
+    document_type = fields.Char(ldname='document_format')
+
     document_body_html = fields.Html()
     document_body_pdf = fields.Binary(attachment=True)
     document_preview_text = fields.Text(
@@ -178,13 +182,13 @@ class BureaucratKnowledgeDocument(models.Model):
          "to set Visibility Type 'Parent'"),
     ]
 
-    @api.depends('document_body_html', 'document_body_pdf', 'document_type')
+    @api.depends('document_body_html', 'document_body_pdf', 'document_format')
     def _compute_preview(self):
         for rec in self:
-            if rec.document_type == 'pdf':
+            if rec.document_format == 'pdf':
                 rec.document_preview_image = \
                     rec._get_preview_from_pdf()
-            if rec.document_type == 'html':
+            if rec.document_format == 'html':
                 rec.document_preview_text = \
                     _get_preview_from_html(rec.document_body_html)
 
@@ -318,9 +322,9 @@ class BureaucratKnowledgeDocument(models.Model):
         """ Compute index content for the document.
             Could be used for searches
         """
-        if self.document_type == 'html':
+        if self.document_format == 'html':
             return self._get_document_index_html()
-        if self.document_type == 'pdf':
+        if self.document_format == 'pdf':
             return self._get_document_index_pdf()
         return ''
 
@@ -339,7 +343,7 @@ class BureaucratKnowledgeDocument(models.Model):
         preview[0].save(byte_io, 'PNG')
         return base64.b64encode(byte_io.getvalue())
 
-    @api.depends('document_type', 'document_body_html', 'document_body_pdf')
+    @api.depends('document_format', 'document_body_html', 'document_body_pdf')
     def _compute_index_body(self):
         for rec in self:
             rec.index_document_body = rec._get_document_index()
@@ -359,7 +363,7 @@ class BureaucratKnowledgeDocument(models.Model):
             'document_id': self.id,
             'document_name': self.name,
             'commit_summary': self.commit_summary,
-            'document_type': self.document_type,
+            'document_format': self.document_format,
         }
 
         # Clear commit_summary for next time
@@ -368,11 +372,11 @@ class BureaucratKnowledgeDocument(models.Model):
         # TODO: move preparing data logic to separate method,
         #       to simplify futher extension of knowledge base
         #       with new document types
-        if self.document_type == 'html':
+        if self.document_format == 'html':
             history_vals.update({
                 'document_body_html': self.document_body_html,
             })
-        elif self.document_type == 'pdf':
+        elif self.document_format == 'pdf':
             history_vals.update({
                 'document_body_pdf': self.document_body_pdf,
             })
@@ -404,9 +408,9 @@ class BureaucratKnowledgeDocument(models.Model):
 
         return document
 
-    @pre_write('document_type')
+    @pre_write('document_format')
     def _before_document_changed(self, changes):
-        old_doc_type, __ = changes['document_type']
+        old_doc_type, __ = changes['document_format']
         if old_doc_type == 'html':
             return {'document_body_html': False}
         if old_doc_type == 'pdf':
@@ -415,8 +419,18 @@ class BureaucratKnowledgeDocument(models.Model):
 
     @post_write(
         'name',
-        'document_type',
+        'document_format',
         'document_body_html',
         'document_body_pdf')
     def _post_document_changed(self, changes):
         self._save_document_history()
+
+    @api.depends('document_format')
+    def _compute_document_type(self):
+        for rec in self:
+            rec.document_type = rec.sudo().document_format.document_type
+
+    @api.multi
+    def _inverse_document_type(self):
+        for this in self:
+            this.document_type = this.document_format

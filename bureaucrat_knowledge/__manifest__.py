@@ -7,7 +7,7 @@
 
     'author': "Center of Research and Development",
     'website': "https://crnd.pro",
-    'version': '14.0.0.24.0',
+    'version': '15.0.0.24.0',
     'category': 'Knowledge',
 
     'external_dependencies': {
@@ -40,9 +40,13 @@
         'views/bureaucrat_knowledge_menu.xml',
         'views/bureaucrat_knowledge_document_history.xml',
 
-        'templates/templates.xml',
         'templates/category_content.xml',
     ],
+    'assets': {
+        'web.assets_backend': [
+            'bureaucrat_knowledge/static/src/scss/knowledge_base.scss',
+        ],
+    },
     'images': ['static/description/banner.png'],
     'demo': [
         'demo/res_groups.xml',

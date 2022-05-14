@@ -1,15 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <template id="assets_frontend"
-              name="Bureaucrat Knowledge Website Assets" inherit_id="web.assets_frontend">
-        <xpath expr="." position="inside">
-            <link rel="stylesheet"
-                  type="text/scss"
-                  href='/bureaucrat_knowledge_website/static/src/scss/knowledge_base_website.scss'/>
-        </xpath>
-    </template>
-        
     <template id="knowledge_category_navigation">
         <div class="row mt16">
             <div class="oe_structure col-sm-12"/>
@@ -193,12 +184,5 @@
                 </span>
             </form>
         </div>
-    </template>
-    <template id="knowledge_search_tests"
-              name="Knowledge search test"
-              inherit_id="web.assets_common">
-        <xpath expr="." position="inside">
-            <script type="text/javascript" src="/bureaucrat_knowledge_website/static/src/js/tours/search.js"></script>
-        </xpath>
     </template>
 </odoo>

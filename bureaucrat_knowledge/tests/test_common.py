@@ -1,4 +1,4 @@
-from odoo.tests.common import SavepointCase
+from odoo.tests.common import TransactionCase
 from odoo.addons.generic_mixin.tests.common import (
     ReduceLoggingMixin,
     AccessRulesFixMixinST,
@@ -8,7 +8,7 @@ from odoo.addons.generic_mixin.tests.common import (
 
 class TestBureaucratKnowledgeBase(ReduceLoggingMixin,
                                   AccessRulesFixMixinST,
-                                  SavepointCase):
+                                  TransactionCase):
     @classmethod
     def setUpClass(cls):
         super(TestBureaucratKnowledgeBase, cls).setUpClass()

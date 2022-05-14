@@ -1,3 +1,4 @@
+# flake8: noqa: E501
 {
     'name': "Bureaucrat Knowledge Website",
 
@@ -8,7 +9,7 @@
     'author': "Center of Research and Development",
     'website': "https://crnd.pro",
 
-    'version': '14.0.0.12.0',
+    'version': '15.0.0.12.0',
 
     'category': 'Knowledge',
 
@@ -27,6 +28,13 @@
         'views/bureaucrat_knowledge_document.xml',
     ],
     'images': ['static/description/banner.png'],
+    'assets': {
+        'web.assets_frontend': [
+            'bureaucrat_knowledge_website/static/src/scss/knowledge_base_website.scss',
+            'bureaucrat_knowledge_website/static/src/js/tours/search.js',
+        ],
+    },
+
     'demo': [
         'demo/demo_res_users.xml',
     ],

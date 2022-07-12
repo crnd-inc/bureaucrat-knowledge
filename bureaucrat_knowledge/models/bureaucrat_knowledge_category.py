@@ -18,10 +18,12 @@ class BureaucratKnowledgeCategory(models.Model):
         'generic.mixin.track.changes',
         'generic.mixin.data.updatable',
         'mail.thread',
+        'generic.mixin.name.by.sequence',
+        'generic.mixin.name_with_code',
+
     ]
     _order = 'sequence, name, id'
-
-    _auto_set_noupdate_on_write = True
+    _name_by_sequence_sequence_code = 'bureaucrat.knowledge.category.sequence'
 
     name = fields.Char(translate=True, index=True, required=True)
     full_name = fields.Char(compute='_compute_full_name')
@@ -138,6 +140,12 @@ class BureaucratKnowledgeCategory(models.Model):
          "(parent_id IS NULL AND visibility_type != 'parent'))",
          "Category must have a parent category"
          " to set Visibility Type 'Parent'"),
+        ('code_uniq',
+         'UNIQUE (code)',
+         'CODE must be unique.'),
+        ('code_ascii_only',
+         r"CHECK (code ~ '^[a-zA-Z0-9\-_]*$')",
+         'Code must be ascii only'),
     ]
 
     @api.depends(

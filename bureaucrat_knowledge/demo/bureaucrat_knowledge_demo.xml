@@ -6,12 +6,14 @@
     <record id="bureaucrat_demo_top_level_1"
             model="bureaucrat.knowledge.category">
         <field name="name">Top level category 1</field>
+        <field name="code">DEMOT1</field>
     </record>
 
     
     <record id="bureaucrat_demo_subcategory_1"
             model="bureaucrat.knowledge.category">
         <field name="name">Subcategory 1</field>
+        <field name="code">subcategory-1</field>
         <field name="parent_id"
                ref="bureaucrat_demo_top_level_1"/>
     </record>
@@ -19,6 +21,7 @@
     <record id="bureaucrat_demo_subcategory_2"
             model="bureaucrat.knowledge.category">
         <field name="name">Subcategory 2</field>
+        <field name="code">DEMOT1S1S2</field>
         <field name="parent_id"
                ref="bureaucrat_demo_subcategory_1"/>
     </record>

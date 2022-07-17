@@ -1,3 +1,2 @@
 --github crnd-inc/crnd-web.git
 --github crnd-inc/generic-addons.git
---oca web -m web_view_searchpanel

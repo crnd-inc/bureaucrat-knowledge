@@ -86,6 +86,8 @@ class TestKnowledgeDocumentUnlink(TestBureaucratKnowledgeBase):
         document = Document.create({
             'document_format': 'html',
             'name': 'Test document',
+            'document_type_id': self.env.ref(
+                'bureaucrat_knowledge.bureaucrat_document_type_art').id
         })
 
         self.assertFalse(document.owner_group_ids)
@@ -109,6 +111,8 @@ class TestKnowledgeDocumentUnlink(TestBureaucratKnowledgeBase):
         document = Document.create({
             'document_format': 'html',
             'name': 'Test document',
+            'document_type_id': self.env.ref(
+                'bureaucrat_knowledge.bureaucrat_document_type_art').id
         })
 
         self.assertFalse(document.owner_group_ids)
@@ -500,6 +504,8 @@ class TestKnowledgeDocumentUnlink(TestBureaucratKnowledgeBase):
             'name': 'Test document',
             'document_format': 'html',
             'category_id': self.category_subcat_2.id,
+            'document_type_id': self.env.ref(
+                'bureaucrat_knowledge.bureaucrat_document_type_art').id
         })
 
         self.assertEqual(
@@ -537,6 +543,8 @@ class TestKnowledgeDocumentUnlink(TestBureaucratKnowledgeBase):
             'name': 'Test document',
             'document_format': 'html',
             'category_id': self.category_subcat_2.id,
+            'document_type_id': self.env.ref(
+                'bureaucrat_knowledge.bureaucrat_document_type_art').id
         })
         with self.assertRaises(AccessError):
             self.document_subcat_2.sudo(self.demo_user).unlink()
@@ -561,6 +569,8 @@ class TestKnowledgeDocumentUnlink(TestBureaucratKnowledgeBase):
             'name': 'Test document',
             'document_format': 'html',
             'category_id': self.category_subcat_2.id,
+            'document_type_id': self.env.ref(
+                'bureaucrat_knowledge.bureaucrat_document_type_art').id
         })
         with self.assertRaises(AccessError):
             document_subcat_2.sudo(self.demo_user).unlink()
@@ -585,6 +595,8 @@ class TestKnowledgeDocumentUnlink(TestBureaucratKnowledgeBase):
             'name': 'Test document',
             'document_format': 'html',
             'category_id': self.category_subcat_2.id,
+            'document_type_id': self.env.ref(
+                'bureaucrat_knowledge.bureaucrat_document_type_art').id
         })
         with self.assertRaises(AccessError):
             document_subcat_2.sudo(self.demo_user).unlink()
@@ -602,6 +614,8 @@ class TestKnowledgeDocumentUnlink(TestBureaucratKnowledgeBase):
             'name': 'Test document',
             'document_format': 'html',
             'category_id': self.category_subcat_2.id,
+            'document_type_id': self.env.ref(
+                'bureaucrat_knowledge.bureaucrat_document_type_art').id
         })
 
         self.assertEqual(
@@ -639,6 +653,8 @@ class TestKnowledgeDocumentUnlink(TestBureaucratKnowledgeBase):
             'name': 'Test document',
             'document_format': 'html',
             'category_id': self.category_subcat_2.id,
+            'document_type_id': self.env.ref(
+                'bureaucrat_knowledge.bureaucrat_document_type_art').id
         })
         with self.assertRaises(AccessError):
             document_subcat_2.sudo(self.demo_user).unlink()
@@ -662,6 +678,8 @@ class TestKnowledgeDocumentUnlink(TestBureaucratKnowledgeBase):
             'name': 'Test document',
             'document_format': 'html',
             'category_id': self.category_subcat_2.id,
+            'document_type_id': self.env.ref(
+                'bureaucrat_knowledge.bureaucrat_document_type_art').id
         })
         with self.assertRaises(AccessError):
             document_subcat_2.sudo(self.demo_user).unlink()
@@ -685,6 +703,8 @@ class TestKnowledgeDocumentUnlink(TestBureaucratKnowledgeBase):
             'name': 'Test document',
             'document_format': 'html',
             'category_id': self.category_subcat_2.id,
+            'document_type_id': self.env.ref(
+                'bureaucrat_knowledge.bureaucrat_document_type_art').id
         })
         with self.assertRaises(AccessError):
             document_subcat_2.sudo(self.demo_user).unlink()

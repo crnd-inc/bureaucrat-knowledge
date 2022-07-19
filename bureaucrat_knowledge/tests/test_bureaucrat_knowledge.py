@@ -69,6 +69,8 @@ class TestBureaucratKnowledge(TestBureaucratKnowledgeBase):
         document = Document.sudo(self.demo_user).create({
             'name': 'Test top level document',
             'document_format': 'html',
+            'document_type_id': self.env.ref(
+                'bureaucrat_knowledge.bureaucrat_document_type_art').id
         })
 
         self.assertEqual(document.visibility_type, 'restricted')
@@ -86,6 +88,8 @@ class TestBureaucratKnowledge(TestBureaucratKnowledgeBase):
             'name': 'Test top level document1',
             'category_id': category.id,
             'document_format': 'html',
+            'document_type_id': self.env.ref(
+                'bureaucrat_knowledge.bureaucrat_document_type_art').id
         })
 
         self.assertEqual(subdocument.visibility_type, 'parent')

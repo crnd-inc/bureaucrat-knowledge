@@ -27,7 +27,6 @@
             <tree>
                 <field name="name"/>
                 <field name="category_id"/>
-                <field name="document_type_id" string="Document Type"/>
                 <field name="tag_ids"
                        options="{'color_field': 'color'}"
                        widget="many2many_tags"
@@ -201,7 +200,7 @@
                            domain="[('model_id.model', '=', 'bureaucrat.knowledge.document')]"/>
                     <field name="document_format" string="Types" expand="False"/>
                     <field name="document_type" string="Format" expand="False"/>
-                    <field name="document_type_ids" string="Document Types" expand="False"/>
+                    <field name="document_type_id" string="Document Types" expand="False"/>
                 </searchpanel>
                 <templates>
                     <t t-name="kanban-box">

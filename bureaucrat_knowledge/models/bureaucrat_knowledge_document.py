@@ -70,6 +70,11 @@ class BureaucratKnowledgeDocument(models.Model):
     commit_summary = fields.Char(store=True)
     index_document_body = fields.Text(
         store=True, compute='_compute_index_body')
+    document_type_id = fields.Many2one('bureaucrat.document.type', index=True,
+                                       required=True, ondelete='restrict',
+                                       auto_join=True)
+    document_type_ids = fields.Selection(
+        related='document_type_id.document_type')
 
     active = fields.Boolean(default=True, index=True)
     color = fields.Integer('Color Index', readonly=False)

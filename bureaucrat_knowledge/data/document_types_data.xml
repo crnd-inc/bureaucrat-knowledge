@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="bureaucrat_document_type_art"
+            model="bureaucrat.document.type">
+        <field name="name">Article</field>
+        <field name="code">art</field>
+        <field name="number_generator_id">1</field>
+    </record>
+
+        <record id="bureaucrat_document_type_rfc"
+            model="bureaucrat.document.type">
+        <field name="name">Change request</field>
+        <field name="code">rfc</field>
+        <field name="number_generator_id">2</field>
+    </record>
+    <record id="bureaucrat_document_type_fs"
+            model="bureaucrat.document.type">
+        <field name="name">Act of change</field>
+        <field name="code">fs</field>
+        <field name="number_generator_id">3</field>
+    </record>
+    <record id="bureaucrat_document_type_ts"
+            model="bureaucrat.document.type">
+        <field name="name">Functional specification</field>
+        <field name="code">ts</field>
+        <field name="number_generator_id">4</field>
+    </record>
+    <record id="bureaucrat_document_type_sop"
+            model="bureaucrat.document.type">
+        <field name="name">Standard operating procedure</field>
+        <field name="code">sop</field>
+        <field name="number_generator_id">5</field>
+    </record>
+    <record id="bureaucrat_document_type_bmp"
+            model="bureaucrat.document.type">
+        <field name="name">Business Process Model</field>
+        <field name="code">bmp</field>
+        <field name="number_generator_id">5</field>
+    </record>
+</odoo>

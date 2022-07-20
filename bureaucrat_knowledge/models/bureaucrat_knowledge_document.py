@@ -43,6 +43,12 @@ class BureaucratKnowledgeDocument(models.Model):
         return res
 
     name = fields.Char(translate=True, index=True, required=True)
+    code = fields.Char(compute='_compute_code_document')
+    document_number = fields.Char(required=True, index=True)
+    category_code = fields.Char(index=True, related='category_id.code')
+    document_type_code = fields.Char(
+        index=True, related='document_type_id.code')
+
     document_format = fields.Selection(
         default='html',
         selection=DOC_TYPE,
@@ -195,6 +201,16 @@ class BureaucratKnowledgeDocument(models.Model):
          "(category_id IS NULL AND visibility_type != 'parent'))",
          "Document must have a parent category "
          "to set Visibility Type 'Parent'"),
+        ('category_code_uniq',
+         'UNIQUE (category_code)',
+         'Category CODE must be unique.'),
+        ('document_type_code_uniq',
+         'UNIQUE (document_type_code)',
+         'document type code must be unique.'),
+        ('code_ascii_only',
+         r"CHECK (code ~ '^[a-zA-Z0-9\-_]*$')",
+         'Code must be ascii only'),
+
     ]
 
     @api.depends('document_body_html', 'document_body_pdf', 'document_format')
@@ -450,3 +466,14 @@ class BureaucratKnowledgeDocument(models.Model):
             rec.document_format = rec.document_type
             _logger.warning(
                 "Field Device type is deprecated and should be removed.")
+
+    @api.depends('category_code', 'document_type_code',
+                 'document_number')
+    def _compute_code_document(self):
+        for rec in self:
+            if rec.code:
+                if rec.category_code_document_type_code_document_number:
+                        rec.code =\
+                        rec.category_code_document_type_code_document_number.code
+                else:
+                    rec.code = False

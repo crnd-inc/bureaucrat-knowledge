@@ -28,10 +28,13 @@ class BureaucratKnowledgeDocument(models.Model):
         'generic.mixin.get.action',
         'mail.thread',
         'mail.activity.mixin',
+        'generic.mixin.name.by.sequence',
     ]
     _order = 'sequence, name, id'
 
     _auto_set_noupdate_on_write = True
+    _name_by_sequence_name_field = 'document_number'
+    _name_by_sequence_sequence_code = 'bureaucrat.knowledge.document.sequence'
 
     @api.model
     def default_get(self, default_fields):
@@ -43,12 +46,11 @@ class BureaucratKnowledgeDocument(models.Model):
         return res
 
     name = fields.Char(translate=True, index=True, required=True)
-    code = fields.Char(compute='_compute_code_document')
     document_number = fields.Char(required=True, index=True)
     category_code = fields.Char(index=True, related='category_id.code')
     document_type_code = fields.Char(
         index=True, related='document_type_id.code')
-
+    code = fields.Char(compute='_compute_code', store=True, index=True)
     document_format = fields.Selection(
         default='html',
         selection=DOC_TYPE,
@@ -210,10 +212,19 @@ class BureaucratKnowledgeDocument(models.Model):
         ('code_ascii_only',
          r"CHECK (code ~ '^[a-zA-Z0-9\-_]*$')",
          'Code must be ascii only'),
-
+        ('document_number_ascii_only',
+         r"CHECK (document_number ~ '^[a-zA-Z0-9\-_]*$')",
+         'document number must be ascii only'),
     ]
 
-    @api.depends('document_body_html', 'document_body_pdf', 'document_format')
+    @api.depends('category_code', 'document_type_code', 'document_number')
+    def _compute_code(self):
+        for rec in self:
+            rec.code = '%s_%s_%s' % (
+                rec.category_code, rec.document_type_code,
+                rec.document_number)
+
+    @api.depends('document_body_html', 'document_body_pdf', 'document_type')
     def _compute_preview(self):
         for rec in self:
             if rec.document_format == 'pdf':

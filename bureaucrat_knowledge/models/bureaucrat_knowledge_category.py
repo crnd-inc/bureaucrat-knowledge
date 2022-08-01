@@ -18,14 +18,13 @@ class BureaucratKnowledgeCategory(models.Model):
         'generic.mixin.track.changes',
         'generic.mixin.data.updatable',
         'mail.thread',
-        'generic.mixin.name.by.sequence',
-        'generic.mixin.name_with_code',
 
     ]
     _order = 'sequence, name, id'
-    _name_by_sequence_sequence_code = 'bureaucrat.knowledge.category.sequence'
+    _auto_set_noupdate_on_write = True
 
     name = fields.Char(translate=True, index=True, required=True)
+    code = fields.Char(index=True, size=10, copy=False)
     full_name = fields.Char(compute='_compute_full_name')
     description = fields.Html()
     parent_id = fields.Many2one(

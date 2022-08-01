@@ -34,7 +34,6 @@
         'security/security.xml',
         'security/ir.model.access.csv',
 
-        'data/ir_sequence_category.xml',
         'data/generic_tag_model.xml',
         'data/bureaucrat_knowledge_base_data.xml',
         'data/bureaucrat_knowledge_base_documents_data.xml',

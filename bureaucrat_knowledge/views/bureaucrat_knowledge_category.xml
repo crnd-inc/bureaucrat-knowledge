@@ -48,7 +48,7 @@
     <record id="bureaucrat_knowledge_category_view_form" model="ir.ui.view">
         <field name="model">bureaucrat.knowledge.category</field>
         <field name="arch" type="xml">
-            <form>
+            <form class="form-bureaucrat-knowledge-category">
                 <sheet>
                     <div class="oe_button_box" name="button_box">
                         <button name="action_view_subcategories"
@@ -79,15 +79,13 @@
                                    domain="[('model_id.model', '=', 'bureaucrat.knowledge.category')]"
                                    context="{'default_model': 'bureaucrat.knowledge.category'}"/>
                         </h3>
-                        <field name="code"/>
-                        <h2>
-                            <field name="parent_id" class="oe_inline"/>
-                            <span class="ml4 mr4"
-                                  attrs="{'invisible': [('parent_id', '=', False)]}">
-                                /
-                            </span>
+                        <h2 class="title-name-and-code">
+                            <field name="code" class="field-right-border oe_inline" placeholder="Code..."/>
                             <field name="name" placeholder="Name..."/>
                         </h2>
+                        <h4>
+                            <field name="parent_id" placeholder="Parent cagtegory..."/>
+                        </h4>
                     </div>
                     <notebook>
                         <page name="page_info" string="Info">

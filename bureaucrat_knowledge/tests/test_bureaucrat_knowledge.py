@@ -13,6 +13,7 @@ class TestBureaucratKnowledge(TestBureaucratKnowledgeBase):
         Category = self.env['bureaucrat.knowledge.category']
         category = Category.sudo(self.demo_user).create({
             'name': 'Test top level category',
+            'code': 'test-top',
         })
 
         self.assertEqual(category.visibility_type, 'restricted')
@@ -26,6 +27,7 @@ class TestBureaucratKnowledge(TestBureaucratKnowledgeBase):
         subcategory = Category.sudo(self.demo_user).create({
             'name': 'Test subcategory',
             'parent_id': category.id,
+            'code': 'test-cat',
         })
 
         # Without this test does not pass. It seems that parent left/right are
@@ -46,6 +48,7 @@ class TestBureaucratKnowledge(TestBureaucratKnowledgeBase):
         subcategory2 = Category.sudo(self.demo_user).create({
             'name': 'Test subcategory2',
             'parent_id': subcategory.id,
+            'code': 'test-cat2',
         })
 
         # Without this test does not pass. It seems that parent left/right are
@@ -75,11 +78,12 @@ class TestBureaucratKnowledge(TestBureaucratKnowledgeBase):
         Category = self.env['bureaucrat.knowledge.category']
         category = Category.sudo(self.demo_user).create({
             'name': 'Test top level category2',
+            'code': 'top_l2',
             'editor_user_ids': [(4, self.demo_user.id)],
         })
 
         subdocument = Document.sudo(self.demo_user).create({
-            'name': 'Test top level document',
+            'name': 'Test top level document1',
             'category_id': category.id,
             'document_type': 'html',
         })

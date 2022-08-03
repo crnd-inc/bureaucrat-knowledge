@@ -7,7 +7,7 @@
 
     'author': "Center of Research and Development",
     'website': "https://crnd.pro",
-    'version': '12.0.0.25.0',
+    'version': '12.0.0.26.0',
     'category': 'Knowledge',
 
     'external_dependencies': {
@@ -31,11 +31,13 @@
 
     # always loaded
     'data': [
+        'security/security.xml',
+        'security/ir.model.access.csv',
+
         'data/generic_tag_model.xml',
         'data/bureaucrat_knowledge_base_data.xml',
         'data/bureaucrat_knowledge_base_documents_data.xml',
-        'security/security.xml',
-        'security/ir.model.access.csv',
+
         'views/bureaucrat_knowledge_category.xml',
         'views/bureaucrat_knowledge_document.xml',
         'views/bureaucrat_knowledge_menu.xml',

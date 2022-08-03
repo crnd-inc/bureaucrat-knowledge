@@ -24,7 +24,7 @@ class BureaucratKnowledgeCategory(models.Model):
     _auto_set_noupdate_on_write = True
 
     name = fields.Char(translate=True, index=True, required=True)
-    code = fields.Char(index=True, size=10, copy=False)
+    code = fields.Char(index=True, size=10, copy=False, required=True)
     full_name = fields.Char(compute='_compute_full_name')
     description = fields.Html()
     parent_id = fields.Many2one(

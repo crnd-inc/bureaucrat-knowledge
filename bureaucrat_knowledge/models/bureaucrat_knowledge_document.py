@@ -39,11 +39,13 @@ class BureaucratKnowledgeDocument(models.Model):
         selection=DOC_TYPE,
         required=True,
     )
-    document_type = fields.Selection([('', '')],
-                                     inverse='_inverse_document_type',
-                                     compute='_compute_document_type',
-                                     )
-
+    document_type = fields.Selection(
+        default='html',
+        selection=DOC_TYPE,
+        required=True,
+        inverse='_inverse_document_type',
+        compute='_compute_document_type',
+    )
     document_body_html = fields.Html()
     document_body_pdf = fields.Binary(attachment=True)
     document_preview_text = fields.Text(

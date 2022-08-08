@@ -38,10 +38,11 @@ class BureaucratKnowledgeDocument(models.Model):
         default='html',
         selection=DOC_TYPE,
         required=True,
-        inverse='_inverse_document_type',
-        compute='_compute_document_type',
     )
-    document_type = fields.Char(ldname='document_format')
+    document_type = fields.Selection([('', '')],
+                                     inverse='_inverse_document_type',
+                                     compute='_compute_document_type',
+                                     )
 
     document_body_html = fields.Html()
     document_body_pdf = fields.Binary(attachment=True)
@@ -425,10 +426,10 @@ class BureaucratKnowledgeDocument(models.Model):
     def _post_document_changed(self, changes):
         self._save_document_history()
 
-    @api.depends('document_format')
+    @api.depends('document_type')
     def _compute_document_type(self):
         for rec in self:
-            rec.document_type = rec.sudo().document_format.document_type
+            rec.document_format = rec.sudo().document_format.document_type
 
     @api.multi
     def _inverse_document_type(self):

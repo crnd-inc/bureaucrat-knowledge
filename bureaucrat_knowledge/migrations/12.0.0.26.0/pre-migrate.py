@@ -25,6 +25,7 @@ def migrate(cr, installed_version):
         FROM bureaucrat_knowledge_category
         WHERE code IS NULL
            OR code = '';
+
     """)
     for number, categ_id in enumerate(cr.fetchone()[0], 1):
         code = 'BKC%05d' % number

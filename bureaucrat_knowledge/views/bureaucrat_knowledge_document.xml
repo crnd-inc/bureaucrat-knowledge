@@ -198,7 +198,6 @@
                     <field name="category_id" string="Categories"/>
                     <field name="tag_ids" string="Tags" select="multi"
                            domain="[('model_id.model', '=', 'bureaucrat.knowledge.document')]"/>
-                    <field name="document_format" string="Types" expand="False"/>
                     <field name="document_type" string="Format" expand="False"/>
                     <field name="document_type_id" string="Document Types" expand="False"/>
                 </searchpanel>

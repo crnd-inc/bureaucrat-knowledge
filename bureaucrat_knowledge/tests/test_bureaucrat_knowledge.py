@@ -104,4 +104,3 @@ class TestBureaucratKnowledge(TestBureaucratKnowledgeBase):
         documents = Document.search([
             ('index_document_body', 'ilike', 'lorem ipsum')])
         self.assertIn(self.document_subcat_2_with_pdf, documents)
-

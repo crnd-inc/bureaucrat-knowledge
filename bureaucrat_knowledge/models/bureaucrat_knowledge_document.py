@@ -42,9 +42,9 @@ class BureaucratKnowledgeDocument(models.Model):
     document_type = fields.Selection(
         default='html',
         selection=DOC_TYPE,
-        required=True,
-        inverse='_inverse_document_type',
+        readonly=True,
         compute='_compute_document_type',
+        inverse='_inverse_document_type',
     )
     document_body_html = fields.Html()
     document_body_pdf = fields.Binary(attachment=True)
@@ -428,12 +428,13 @@ class BureaucratKnowledgeDocument(models.Model):
     def _post_document_changed(self, changes):
         self._save_document_history()
 
-    @api.depends('document_type')
+    @api.depends('document_format')
     def _compute_document_type(self):
         for rec in self:
-            rec.document_format = rec.sudo().document_format.document_type
+            rec.document_type = rec.document_format
 
     @api.multi
     def _inverse_document_type(self):
-        for this in self:
-            this.document_type = this.document_format
+        for rec in self:
+            rec.document_format = rec.document_type
+            _logger.warning('This field is deprecated and should be removed.')

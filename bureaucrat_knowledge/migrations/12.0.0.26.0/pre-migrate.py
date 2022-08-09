@@ -26,11 +26,6 @@ def migrate(cr, installed_version):
         WHERE code IS NULL
            OR code = '';
 
-        ALTER TABLE bureaucrat_knowledge_document_history
-        RENAME COLUMN document_type TO document_format;
-
-        ALTER TABLE bureaucrat_knowledge_document
-        RENAME COLUMN document_type TO document_format;
     """)
     for number, categ_id in enumerate(cr.fetchone()[0], 1):
         code = 'BKC%05d' % number

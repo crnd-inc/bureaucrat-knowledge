@@ -436,5 +436,7 @@ class BureaucratKnowledgeDocument(models.Model):
     @api.multi
     def _inverse_document_type(self):
         for rec in self:
-            rec.document_format = rec.document_type
-            _logger.warning('This field is deprecated and should be removed.')
+            if not rec.document_type:
+                rec.document_format = rec.document_type
+                _logger.warning(
+                    'This field is deprecated and should be removed.')

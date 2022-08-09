@@ -40,7 +40,6 @@ class BureaucratKnowledgeDocument(models.Model):
         required=True,
     )
     document_type = fields.Selection(
-        default='html',
         selection=DOC_TYPE,
         readonly=True,
         compute='_compute_document_type',
@@ -436,7 +435,6 @@ class BureaucratKnowledgeDocument(models.Model):
     @api.multi
     def _inverse_document_type(self):
         for rec in self:
-            if not rec.document_type:
-                rec.document_format = rec.document_type
-                _logger.warning(
-                    'This field is deprecated and should be removed.')
+            rec.document_format = rec.document_type
+            _logger.warning(
+                "Field Device type is deprecated and should be removed.")

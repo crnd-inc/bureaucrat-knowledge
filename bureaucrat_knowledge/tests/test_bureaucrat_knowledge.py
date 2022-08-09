@@ -96,8 +96,9 @@ class TestBureaucratKnowledge(TestBureaucratKnowledgeBase):
 
     def test_document_search_by_index_field(self):
         Document = self.env['bureaucrat.knowledge.document']
-        self.assertEqual(self.document_subcat_2_with_pdf.document_format,
-                         'pdf')
+        format_pdf = self.env.ref(
+            'bureaucrat_knowledge.document_demo_sub_2_with_pdf')
+        self.assertEqual(format_pdf.document_format, 'pdf')
         self.assertIn(
             'Lorem Ipsum',
             self.document_subcat_2_with_pdf._get_document_index()

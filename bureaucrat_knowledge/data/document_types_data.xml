@@ -13,14 +13,14 @@
     <record id="bureaucrat_document_type_art"
             model="bureaucrat.document.type">
         <field name="name">Article</field>
-        <field name="code">art</field>
+        <field name="code">ART</field>
         <field name="number_generator_id" ref="sequence_document_type"/>
     </record>
 
         <record id="bureaucrat_document_type_rfc"
             model="bureaucrat.document.type">
         <field name="name">Change request</field>
-        <field name="code">rfc</field>
+        <field name="code">RFC</field>
         <field name="number_generator_id" ref="sequence_document_type"/>
     </record>
     <record id="bureaucrat_document_type_fs"
@@ -32,19 +32,19 @@
     <record id="bureaucrat_document_type_ts"
             model="bureaucrat.document.type">
         <field name="name">Functional specification</field>
-        <field name="code">ts</field>
+        <field name="code">TS</field>
         <field name="number_generator_id" ref="sequence_document_type"/>
     </record>
     <record id="bureaucrat_document_type_sop"
             model="bureaucrat.document.type">
         <field name="name">Standard operating procedure</field>
-        <field name="code">sop</field>
+        <field name="code">SOP</field>
         <field name="number_generator_id" ref="sequence_document_type"/>
     </record>
     <record id="bureaucrat_document_type_bmp"
             model="bureaucrat.document.type">
         <field name="name">Business Process Model</field>
-        <field name="code">bmp</field>
+        <field name="code">BMP</field>
         <field name="number_generator_id" ref="sequence_document_type"/>
     </record>
 </odoo>

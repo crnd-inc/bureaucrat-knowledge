@@ -39,8 +39,7 @@ class BureaucratKnowledgeDocument(models.Model):
             default_fields)
         type_article = self.env.ref(
             'bureaucrat_knowledge.bureaucrat_document_type_art')
-        if self.document_type_id is None:
-            res.update({'device_type_id': type_article or False})
+        res['document_type_id'] = type_article.id
         return res
 
     name = fields.Char(translate=True, index=True, required=True)

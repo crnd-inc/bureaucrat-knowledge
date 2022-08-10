@@ -26,7 +26,7 @@
     <record id="bureaucrat_document_type_fs"
             model="bureaucrat.document.type">
         <field name="name">Act of change</field>
-        <field name="code">fs</field>
+        <field name="code">FS</field>
         <field name="number_generator_id" ref="sequence_document_type"/>
     </record>
     <record id="bureaucrat_document_type_ts"

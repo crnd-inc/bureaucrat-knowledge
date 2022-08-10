@@ -17,6 +17,15 @@
                 <filter name="filter_active"
                         string="Active"
                         domain="[('active', '=', True)]"/>
+
+                <group name="group_group_by" expand="0" string="Group by...">
+                    <filter name="filter_group_by_document_format"
+                            string="Document format" context="{'group_by': 'document_format'}"/>
+                    <filter name="filter_group_by_document_type"
+                            string="Document type" context="{'group_by': 'document_type_id'}"/>
+                    <filter name="filter_group_by_visibility_type"
+                            string="Visibility type" context="{'group_by': 'visibility_type'}"/>
+                </group>
             </search>
         </field>
     </record>
@@ -61,6 +70,7 @@
                         <group name="group_document_head_left">
                             <field name="name" placeholder="Name..."/>
                             <field name="category_id"/>
+                             <field name="document_type_id" string="Document Type"/>
                         </group>
                         <group name="group_document_head_right">
                             <field name="document_format" widget="selection"/>
@@ -182,6 +192,7 @@
                 <field name="name"/>
                 <field name="color"/>
                 <field name="category_id"/>
+                <field name="document_type_id" string="Document Type"/>
                 <field name="category_full_name"/>
                 <field name="document_format"/>
                 <field name="document_preview_text"/>
@@ -196,7 +207,8 @@
                     <field name="category_id" string="Categories"/>
                     <field name="tag_ids" string="Tags" select="multi"
                            domain="[('model_id.model', '=', 'bureaucrat.knowledge.document')]"/>
-                    <field name="document_format" string="Types" expand="False"/>
+                    <field name="document_type" string="Format" expand="False"/>
+                    <field name="document_type_id" string="Document Types" expand="False"/>
                 </searchpanel>
                 <templates>
                     <t t-name="kanban-box">

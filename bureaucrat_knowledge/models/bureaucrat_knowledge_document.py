@@ -33,6 +33,15 @@ class BureaucratKnowledgeDocument(models.Model):
 
     _auto_set_noupdate_on_write = True
 
+    @api.model
+    def default_get(self, default_fields):
+        res = super(BureaucratKnowledgeDocument, self).default_get(
+            default_fields)
+        type_article = self.env.ref(
+            'bureaucrat_knowledge.bureaucrat_document_type_art')
+        res['document_type_id'] = type_article.id
+        return res
+
     name = fields.Char(translate=True, index=True, required=True)
     document_format = fields.Selection(
         default='html',
@@ -70,6 +79,10 @@ class BureaucratKnowledgeDocument(models.Model):
     commit_summary = fields.Char(store=True)
     index_document_body = fields.Text(
         store=True, compute='_compute_index_body')
+    document_type_id = fields.Many2one(
+        'bureaucrat.document.type', index=True,
+        required=True, ondelete='restrict',
+        auto_join=True)
 
     active = fields.Boolean(default=True, index=True)
     color = fields.Integer('Color Index', readonly=False)
@@ -407,7 +420,6 @@ class BureaucratKnowledgeDocument(models.Model):
         # to ensure that current user has access to create this document
         document.check_access_rule('create')
         document._save_document_history()
-
         return document
 
     @pre_write('document_format')

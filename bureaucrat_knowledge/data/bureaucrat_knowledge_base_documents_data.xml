@@ -5,6 +5,7 @@
             model="bureaucrat.knowledge.document">
         <field name="name">Configure Request Category</field>
         <field name="document_format">html</field>
+        <field name="document_type_id" ref="bureaucrat_document_type_art"/>
         <field name="category_id"
                ref="bureaucrat_documentation_admin_guides"/>
         <field name="document_body_html"><![CDATA[
@@ -35,6 +36,7 @@
             model="bureaucrat.knowledge.document">
         <field name="name">Configure Request Type</field>
         <field name="document_format">html</field>
+        <field name="document_type_id" ref="bureaucrat_document_type_art"/>
         <field name="category_id"
                ref="bureaucrat_documentation_admin_guides"/>
         <field name="document_body_html"><![CDATA[
@@ -69,6 +71,7 @@
             model="bureaucrat.knowledge.document">
         <field name="name">Configure Request Type Stages</field>
         <field name="document_format">html</field>
+        <field name="document_type_id" ref="bureaucrat_document_type_art"/>
         <field name="category_id"
                ref="bureaucrat_documentation_admin_guides"/>
         <field name="document_body_html"><![CDATA[
@@ -99,6 +102,7 @@
             model="bureaucrat.knowledge.document">
         <field name="name">Configure Request Type Routes</field>
         <field name="document_format">html</field>
+        <field name="document_type_id" ref="bureaucrat_document_type_art"/>
         <field name="category_id"
                ref="bureaucrat_documentation_admin_guides"/>
         <field name="document_body_html"><![CDATA[
@@ -159,6 +163,7 @@
             model="bureaucrat.knowledge.document">
         <field name="name">How to Configure Request for Incident</field>
         <field name="document_format">html</field>
+        <field name="document_type_id" ref="bureaucrat_document_type_art"/>
         <field name="category_id"
                ref="bureaucrat_documentation_admin_guides"/>
         <field name="document_body_html"><![CDATA[
@@ -293,6 +298,7 @@
             model="bureaucrat.knowledge.document">
         <field name="name">How to Set Up Request for Changes</field>
         <field name="document_format">html</field>
+        <field name="document_type_id" ref="bureaucrat_document_type_art"/>
         <field name="category_id"
                ref="bureaucrat_documentation_admin_guides"/>
         <field name="document_body_html"><![CDATA[
@@ -384,6 +390,7 @@
             model="bureaucrat.knowledge.document">
         <field name="name">How to Set Up Integration between Requests and Projects</field>
         <field name="document_format">html</field>
+        <field name="document_type_id" ref="bureaucrat_document_type_art"/>
         <field name="category_id"
                ref="bureaucrat_documentation_admin_guides"/>
         <field name="document_body_html"><![CDATA[
@@ -484,6 +491,7 @@
             model="bureaucrat.knowledge.document">
         <field name="name">How to Assign Manager of the User Who Submitted the Request</field>
         <field name="document_format">html</field>
+        <field name="document_type_id" ref="bureaucrat_document_type_art"/>
         <field name="category_id"
                ref="bureaucrat_documentation_admin_guides"/>
         <field name="document_body_html"><![CDATA[
@@ -606,6 +614,7 @@
             model="bureaucrat.knowledge.document">
         <field name="name">How To Configure The Request Numbering Sequence</field>
         <field name="document_format">html</field>
+        <field name="document_type_id" ref="bureaucrat_document_type_art"/>
         <field name="category_id"
                ref="bureaucrat_documentation_admin_guides"/>
         <field name="document_body_html"><![CDATA[
@@ -675,6 +684,7 @@
             model="bureaucrat.knowledge.document">
         <field name="name">How to Move Requests by the Route from Website Interface</field>
         <field name="document_format">html</field>
+        <field name="document_type_id" ref="bureaucrat_document_type_art"/>
         <field name="category_id"
                ref="bureaucrat_documentation_admin_guides"/>
         <field name="document_body_html"><![CDATA[
@@ -723,6 +733,7 @@
             model="bureaucrat.knowledge.document">
         <field name="name">How to Configure SLA to Work for Clients with Different Services and Service Levels in Contracts</field>
         <field name="document_format">html</field>
+        <field name="document_type_id" ref="bureaucrat_document_type_art"/>
         <field name="category_id"
                ref="bureaucrat_documentation_admin_guides"/>
         <field name="document_body_html"><![CDATA[
@@ -1070,6 +1081,7 @@
             model="bureaucrat.knowledge.document">
         <field name="name">Setting Up a Request. Only Assigned Person or System Administrator Can Move Requests by the Route</field>
         <field name="document_format">html</field>
+        <field name="document_type_id" ref="bureaucrat_document_type_art"/>
         <field name="category_id"
                ref="bureaucrat_documentation_admin_guides"/>
         <field name="document_body_html"><![CDATA[
@@ -1140,6 +1152,7 @@
             model="bureaucrat.knowledge.document">
         <field name="name">How To Set Up Notifications in the Bureaucrat System</field>
         <field name="document_format">html</field>
+        <field name="document_type_id" ref="bureaucrat_document_type_art"/>
         <field name="category_id"
                ref="bureaucrat_documentation_admin_guides"/>
         <field name="document_body_html"><![CDATA[
@@ -1219,6 +1232,7 @@
             model="bureaucrat.knowledge.document">
         <field name="name">How To Set Up Automated Emails on SLA Events (Using Automated Actions)</field>
         <field name="document_format">html</field>
+        <field name="document_type_id" ref="bureaucrat_document_type_art"/>
         <field name="category_id"
                ref="bureaucrat_documentation_admin_guides"/>
         <field name="document_body_html"><![CDATA[
@@ -1471,6 +1485,7 @@ has Failed the SLA.</code></p>
             model="bureaucrat.knowledge.document">
         <field name="name">Website Service Desk</field>
         <field name="document_format">html</field>
+        <field name="document_type_id" ref="bureaucrat_document_type_art"/>
         <field name="category_id"
                ref="bureaucrat_documentation_user_guides"/>
         <field name="document_body_html"><![CDATA[
@@ -1607,6 +1622,7 @@ has Failed the SLA.</code></p>
             model="bureaucrat.knowledge.document">
         <field name="name">Incident Life Cycle</field>
         <field name="document_format">html</field>
+        <field name="document_type_id" ref="bureaucrat_document_type_art"/>
         <field name="category_id"
                ref="bureaucrat_documentation_user_guides"/>
         <field name="document_body_html"><![CDATA[
@@ -1654,6 +1670,7 @@ has Failed the SLA.</code></p>
             model="bureaucrat.knowledge.document">
         <field name="name">Generic Request Overview</field>
         <field name="document_format">html</field>
+        <field name="document_type_id" ref="bureaucrat_document_type_art"/>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_generic_request_modules"/>
         <field name="document_body_html"><![CDATA[
@@ -1672,6 +1689,7 @@ has Failed the SLA.</code></p>
             model="bureaucrat.knowledge.document">
         <field name="name">Generic Request Action (HR)</field>
         <field name="document_format">html</field>
+        <field name="document_type_id" ref="bureaucrat_document_type_art"/>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_generic_request_modules"/>
         <field name="document_body_html"><![CDATA[
@@ -1706,6 +1724,7 @@ has Failed the SLA.</code></p>
             model="bureaucrat.knowledge.document">
         <field name="name">Generic Request (Actions)</field>
         <field name="document_format">html</field>
+        <field name="document_type_id" ref="bureaucrat_document_type_art"/>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_generic_request_modules"/>
         <field name="document_body_html"><![CDATA[
@@ -1871,6 +1890,7 @@ has Failed the SLA.</code></p>
             model="bureaucrat.knowledge.document">
         <field name="name">Generic Request (Action Subrequest)</field>
         <field name="document_format">html</field>
+        <field name="document_type_id" ref="bureaucrat_document_type_art"/>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_generic_request_modules"/>
         <field name="document_body_html"><![CDATA[
@@ -1920,6 +1940,7 @@ has Failed the SLA.</code></p>
             model="bureaucrat.knowledge.document">
         <field name="name">Generic Request (Auto route)</field>
         <field name="document_format">html</field>
+        <field name="document_type_id" ref="bureaucrat_document_type_art"/>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_generic_request_modules"/>
         <field name="document_body_html"><![CDATA[
@@ -1990,6 +2011,7 @@ has Failed the SLA.</code></p>
             model="bureaucrat.knowledge.document">
         <field name="name">Generic Request (Auto routes subrequest)</field>
         <field name="document_format">html</field>
+        <field name="document_type_id" ref="bureaucrat_document_type_art"/>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_generic_request_modules"/>
         <field name="document_body_html"><![CDATA[
@@ -2014,6 +2036,7 @@ has Failed the SLA.</code></p>
             model="bureaucrat.knowledge.document">
         <field name="name">Generic Request (Conditional Actions)</field>
         <field name="document_format">html</field>
+        <field name="document_type_id" ref="bureaucrat_document_type_art"/>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_generic_request_modules"/>
         <field name="document_body_html"><![CDATA[
@@ -2063,6 +2086,7 @@ has Failed the SLA.</code></p>
             model="bureaucrat.knowledge.document">
         <field name="name">Generic Request (Conditions)</field>
         <field name="document_format">html</field>
+        <field name="document_type_id" ref="bureaucrat_document_type_art"/>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_generic_request_modules"/>
         <field name="document_body_html"><![CDATA[
@@ -2092,6 +2116,7 @@ has Failed the SLA.</code></p>
             model="bureaucrat.knowledge.document">
         <field name="name">Generic Request (Dashboard)</field>
         <field name="document_format">html</field>
+        <field name="document_type_id" ref="bureaucrat_document_type_art"/>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_generic_request_modules"/>
         <field name="document_body_html"><![CDATA[
@@ -2148,6 +2173,7 @@ has Failed the SLA.</code></p>
             model="bureaucrat.knowledge.document">
         <field name="name">Generic Request (Fields)</field>
         <field name="document_format">html</field>
+        <field name="document_type_id" ref="bureaucrat_document_type_art"/>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_generic_request_modules"/>
         <field name="document_body_html"><![CDATA[
@@ -2235,6 +2261,7 @@ has Failed the SLA.</code></p>
             model="bureaucrat.knowledge.document">
         <field name="name">Generic Request (Kind)</field>
         <field name="document_format">html</field>
+        <field name="document_type_id" ref="bureaucrat_document_type_art"/>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_generic_request_modules"/>
         <field name="document_body_html"><![CDATA[
@@ -2292,6 +2319,7 @@ has Failed the SLA.</code></p>
             model="bureaucrat.knowledge.document">
         <field name="name">Generic Request (Mail Integration)</field>
         <field name="document_format">html</field>
+        <field name="document_type_id" ref="bureaucrat_document_type_art"/>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_generic_request_modules"/>
         <field name="document_body_html"><![CDATA[
@@ -2367,6 +2395,7 @@ has Failed the SLA.</code></p>
             model="bureaucrat.knowledge.document">
         <field name="name">Generic Request (Parent)</field>
         <field name="document_format">html</field>
+        <field name="document_type_id" ref="bureaucrat_document_type_art"/>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_generic_request_modules"/>
         <field name="document_body_html"><![CDATA[
@@ -2415,6 +2444,7 @@ has Failed the SLA.</code></p>
             model="bureaucrat.knowledge.document">
         <field name="name">Generic Request (Priority)</field>
         <field name="document_format">html</field>
+        <field name="document_type_id" ref="bureaucrat_document_type_art"/>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_generic_request_modules"/>
         <field name="document_body_html"><![CDATA[
@@ -2465,6 +2495,7 @@ has Failed the SLA.</code></p>
             model="bureaucrat.knowledge.document">
         <field name="name">Generic Request (Related Document)</field>
         <field name="document_format">html</field>
+        <field name="document_type_id" ref="bureaucrat_document_type_art"/>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_generic_request_modules"/>
         <field name="document_body_html"><![CDATA[
@@ -2515,6 +2546,7 @@ has Failed the SLA.</code></p>
             model="bureaucrat.knowledge.document">
         <field name="name">Generic Request (Related Requests)</field>
         <field name="document_format">html</field>
+        <field name="document_type_id" ref="bureaucrat_document_type_art"/>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_generic_request_modules"/>
         <field name="document_body_html"><![CDATA[
@@ -2559,6 +2591,7 @@ has Failed the SLA.</code></p>
             model="bureaucrat.knowledge.document">
         <field name="name">Generic Request (Reopen As)</field>
         <field name="document_format">html</field>
+        <field name="document_type_id" ref="bureaucrat_document_type_art"/>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_generic_request_modules"/>
         <field name="document_body_html"><![CDATA[
@@ -2611,6 +2644,7 @@ has Failed the SLA.</code></p>
             model="bureaucrat.knowledge.document">
         <field name="name">Generic Request (Resource)</field>
         <field name="document_format">html</field>
+        <field name="document_type_id" ref="bureaucrat_document_type_art"/>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_generic_request_modules"/>
         <field name="document_body_html"><![CDATA[
@@ -2637,6 +2671,7 @@ has Failed the SLA.</code></p>
             model="bureaucrat.knowledge.document">
         <field name="name">Generic Request (Service)</field>
         <field name="document_format">html</field>
+        <field name="document_type_id" ref="bureaucrat_document_type_art"/>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_generic_request_modules"/>
         <field name="document_body_html"><![CDATA[
@@ -2696,6 +2731,7 @@ has Failed the SLA.</code></p>
             model="bureaucrat.knowledge.document">
         <field name="name">Generic Request (SLA)</field>
         <field name="document_format">html</field>
+        <field name="document_type_id" ref="bureaucrat_document_type_art"/>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_generic_request_modules"/>
         <field name="document_body_html"><![CDATA[
@@ -2841,6 +2877,7 @@ has Failed the SLA.</code></p>
             model="bureaucrat.knowledge.document">
         <field name="name">Generic Request (SLA Log)</field>
         <field name="document_format">html</field>
+        <field name="document_type_id" ref="bureaucrat_document_type_art"/>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_generic_request_modules"/>
         <field name="document_body_html"><![CDATA[
@@ -2885,6 +2922,7 @@ has Failed the SLA.</code></p>
             model="bureaucrat.knowledge.document">
         <field name="name">Generic Request (Stage Type)</field>
         <field name="document_format">html</field>
+        <field name="document_type_id" ref="bureaucrat_document_type_art"/>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_generic_request_modules"/>
         <field name="document_body_html"><![CDATA[
@@ -2923,6 +2961,7 @@ has Failed the SLA.</code></p>
             model="bureaucrat.knowledge.document">
         <field name="name">Generic Request (Stage Type SLA)</field>
         <field name="document_format">html</field>
+        <field name="document_type_id" ref="bureaucrat_document_type_art"/>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_generic_request_modules"/>
         <field name="document_body_html"><![CDATA[
@@ -2948,6 +2987,7 @@ has Failed the SLA.</code></p>
             model="bureaucrat.knowledge.document">
         <field name="name">Generic Request (Tags)</field>
         <field name="document_format">html</field>
+        <field name="document_type_id" ref="bureaucrat_document_type_art"/>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_generic_request_modules"/>
         <field name="document_body_html"><![CDATA[
@@ -3002,6 +3042,7 @@ has Failed the SLA.</code></p>
             model="bureaucrat.knowledge.document">
         <field name="name">Website Service Desk (Field)</field>
         <field name="document_format">html</field>
+        <field name="document_type_id" ref="bureaucrat_document_type_art"/>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_website_service_desk_modules"/>
         <field name="document_body_html"><![CDATA[
@@ -3018,6 +3059,7 @@ has Failed the SLA.</code></p>
             model="bureaucrat.knowledge.document">
         <field name="name">Website Service Desk (Resource)</field>
         <field name="document_format">html</field>
+        <field name="document_type_id" ref="bureaucrat_document_type_art"/>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_website_service_desk_modules"/>
         <field name="document_body_html"><![CDATA[
@@ -3034,6 +3076,7 @@ has Failed the SLA.</code></p>
             model="bureaucrat.knowledge.document">
         <field name="name">Website Service Desk (Service)</field>
         <field name="document_format">html</field>
+        <field name="document_type_id" ref="bureaucrat_document_type_art"/>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_website_service_desk_modules"/>
         <field name="document_body_html"><![CDATA[
@@ -3050,6 +3093,7 @@ has Failed the SLA.</code></p>
             model="bureaucrat.knowledge.document">
         <field name="name">Website Service Desk (Tag)</field>
         <field name="document_format">html</field>
+        <field name="document_type_id" ref="bureaucrat_document_type_art"/>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_website_service_desk_modules"/>
         <field name="document_body_html"><![CDATA[
@@ -3066,6 +3110,7 @@ has Failed the SLA.</code></p>
             model="bureaucrat.knowledge.document">
         <field name="name">Generic Condition</field>
         <field name="document_format">html</field>
+        <field name="document_type_id" ref="bureaucrat_document_type_art"/>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_generic_condition_modules"/>
         <field name="document_body_html"><![CDATA[
@@ -3242,6 +3287,7 @@ Here you need to enter the following data:
             model="bureaucrat.knowledge.document">
         <field name="name">Generic Condition - Action Rules</field>
         <field name="document_format">html</field>
+        <field name="document_type_id" ref="bureaucrat_document_type_art"/>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_generic_condition_modules"/>
         <field name="document_body_html"><![CDATA[
@@ -3295,6 +3341,7 @@ Here you need to enter the following data:
             model="bureaucrat.knowledge.document">
         <field name="name">Generic Condition (description)</field>
         <field name="document_format">html</field>
+        <field name="document_type_id" ref="bureaucrat_document_type_art"/>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_generic_condition_modules"/>
         <field name="document_body_html"><![CDATA[
@@ -3321,6 +3368,7 @@ Here you need to enter the following data:
             model="bureaucrat.knowledge.document">
         <field name="name">Generic Resource</field>
         <field name="document_format">html</field>
+        <field name="document_type_id" ref="bureaucrat_document_type_art"/>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_generic_resource_modules"/>
         <field name="document_body_html"><![CDATA[
@@ -3387,6 +3435,7 @@ Here you need to enter the following data:
             model="bureaucrat.knowledge.document">
         <field name="name">Generic Resource (Role)</field>
         <field name="document_format">html</field>
+        <field name="document_type_id" ref="bureaucrat_document_type_art"/>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_generic_resource_modules"/>
         <field name="document_body_html"><![CDATA[
@@ -3460,6 +3509,7 @@ Here you need to enter the following data:
             model="bureaucrat.knowledge.document">
         <field name="name">Generic Resource (Timesheet)</field>
         <field name="document_format">html</field>
+        <field name="document_type_id" ref="bureaucrat_document_type_art"/>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_generic_resource_modules"/>
         <field name="document_body_html"><![CDATA[
@@ -3512,6 +3562,7 @@ Here you need to enter the following data:
             model="bureaucrat.knowledge.document">
         <field name="name">Generic Service</field>
         <field name="document_format">html</field>
+        <field name="document_type_id" ref="bureaucrat_document_type_art"/>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_generic_service_modules"/>
         <field name="document_body_html"><![CDATA[
@@ -3560,6 +3611,7 @@ Here you need to enter the following data:
             model="bureaucrat.knowledge.document">
         <field name="name">Generic Service (Resource)</field>
         <field name="document_format">html</field>
+        <field name="document_type_id" ref="bureaucrat_document_type_art"/>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_generic_service_modules"/>
         <field name="document_body_html"><![CDATA[
@@ -3603,6 +3655,7 @@ Here you need to enter the following data:
             model="bureaucrat.knowledge.document">
         <field name="name">Generic Tag</field>
         <field name="document_format">html</field>
+        <field name="document_type_id" ref="bureaucrat_document_type_art"/>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_generic_tag_modules"/>
         <field name="document_body_html"><![CDATA[
@@ -3681,6 +3734,7 @@ Here you need to enter the following data:
             model="bureaucrat.knowledge.document">
         <field name="name">Generic Tag (description)</field>
         <field name="document_format">html</field>
+        <field name="document_type_id" ref="bureaucrat_document_type_art"/>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_generic_tag_modules"/>
         <field name="document_body_html"><![CDATA[
@@ -3705,6 +3759,7 @@ Here you need to enter the following data:
             model="bureaucrat.knowledge.document">
         <field name="name">Generic Assignment Policies</field>
         <field name="document_format">html</field>
+        <field name="document_type_id" ref="bureaucrat_document_type_art"/>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_generic_assignment_modules"/>
         <field name="document_body_html"><![CDATA[
@@ -3800,6 +3855,7 @@ Here you need to enter the following data:
             model="bureaucrat.knowledge.document">
         <field name="name">Generic Assignment HR</field>
         <field name="document_format">html</field>
+        <field name="document_type_id" ref="bureaucrat_document_type_art"/>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_generic_assignment_modules"/>
         <field name="document_body_html"><![CDATA[
@@ -3821,6 +3877,7 @@ Here you need to enter the following data:
             model="bureaucrat.knowledge.document">
         <field name="name">Generic Assignment Team</field>
         <field name="document_format">html</field>
+        <field name="document_type_id" ref="bureaucrat_document_type_art"/>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_generic_assignment_modules"/>
         <field name="document_body_html"><![CDATA[
@@ -3842,6 +3899,7 @@ Here you need to enter the following data:
             model="bureaucrat.knowledge.document">
         <field name="name">Generic Team</field>
         <field name="document_format">html</field>
+        <field name="document_type_id" ref="bureaucrat_document_type_art"/>
         <field name="category_id"
                ref="bureaucrat_documentation_reference_generic_team_modules"/>
         <field name="document_body_html"><![CDATA[
@@ -3881,6 +3939,7 @@ Here you need to enter the following data:
             model="bureaucrat.knowledge.document">
         <field name="name">Odoo Notification Management</field>
         <field name="document_format">html</field>
+        <field name="document_type_id" ref="bureaucrat_document_type_art"/>
         <field name="category_id"
                ref="bureaucrat_documentation_reference"/>
         <field name="document_body_html"><![CDATA[
@@ -4010,6 +4069,7 @@ Here you need to enter the following data:
             model="bureaucrat.knowledge.document">
         <field name="name">Error on the diagram view</field>
         <field name="document_format">html</field>
+        <field name="document_type_id" ref="bureaucrat_document_type_art"/>
         <field name="category_id"
                ref="bureaucrat_documentation_faq_troubleshooting"/>
         <field name="document_body_html"><![CDATA[
@@ -4044,6 +4104,7 @@ ValueError: Expected singleton: ir.model.fields(6706, 6713)
             model="bureaucrat.knowledge.document">
         <field name="name">How to backup and restore Odoo database</field>
         <field name="document_format">html</field>
+        <field name="document_type_id" ref="bureaucrat_document_type_art"/>
         <field name="category_id"
                ref="bureaucrat_documentation_faq"/>
         <field name="document_body_html"><![CDATA[

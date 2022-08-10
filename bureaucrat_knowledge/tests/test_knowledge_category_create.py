@@ -1,3 +1,5 @@
+# pylint: disable= too-many-lines
+
 from odoo.exceptions import AccessError
 from .test_common import TestBureaucratKnowledgeBase
 

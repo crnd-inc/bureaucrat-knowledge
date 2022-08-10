@@ -477,14 +477,3 @@ class BureaucratKnowledgeDocument(models.Model):
             rec.document_format = rec.document_type
             _logger.warning(
                 "Field Device type is deprecated and should be removed.")
-
-    @api.depends('category_code', 'document_type_code',
-                 'document_number')
-    def _compute_code_document(self):
-        for rec in self:
-            if rec.code:
-                if rec.category_code_document_type_code_document_number:
-                        rec.code =\
-                        rec.category_code_document_type_code_document_number.code
-                else:
-                    rec.code = False

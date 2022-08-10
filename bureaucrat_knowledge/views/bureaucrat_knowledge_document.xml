@@ -17,6 +17,15 @@
                 <filter name="filter_active"
                         string="Active"
                         domain="[('active', '=', True)]"/>
+
+                <group name="group_group_by" expand="0" string="Group by...">
+                    <filter name="filter_group_by_document_format"
+                            string="Document format" context="{'group_by': 'document_format'}"/>
+                    <filter name="filter_group_by_document_type"
+                            string="Document type" context="{'group_by': 'document_type_id'}"/>
+                    <filter name="filter_group_by_visibility_type"
+                            string="Visibility type" context="{'group_by': 'visibility_type'}"/>
+                </group>
             </search>
         </field>
     </record>

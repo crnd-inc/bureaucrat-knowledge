@@ -52,7 +52,7 @@
             model="bureaucrat.knowledge.document">
         <field name="name">Demo Document For Subcategory 2 With PDF</field>
         <field name="document_format">pdf</field>
-        <field name="document_type_id" ref="bureaucrat_document_type_art"/>
+        <field name="document_type_id" ref="bureaucrat_document_type_ts"/>
         <field name="category_id"
                ref="bureaucrat_demo_subcategory_2"/>
         <field name="document_body_pdf" type="base64" file="bureaucrat_knowledge/demo/demo-pdf/sample-pdf-file.pdf"/>

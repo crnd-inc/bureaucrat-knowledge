@@ -279,6 +279,8 @@
 <p><strong>After installing necessary modules, you need to set up triggers on the route:</strong></p>
 <ol>
 <li>Open the <em>Request for Incident</em> routes page and select the route from Draft to New.</li>
+<li>On the route form, click <strong>Triggers</strong>.<br/><img alt="" class="knowledge-document-img" src="/bureaucrat_knowledge/static/knowledge/bureaucrat_documentation_admin_guides/how_to_configure_request_for_incident/RFI_30.png"/></li>
+<li>The triggers page opens. Here, click <strong>Create</strong>. A form for creating a new trigger opens.</li>
 <li>Enter the trigger name in the upper field.</li>
 <li>Next to the <strong>Trigger</strong> field, select the type of the trigger. In our case, we selected <strong>Auto: On create</strong>.</li>
 <li>In the <em>Trigger Conditions</em> menu, you can specify conditions for triggering. More information about conditions you can read in the instruction to the <a href="../Generic_Condition_admin_eng/">Generic Condition</a> module.</li>

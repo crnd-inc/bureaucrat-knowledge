@@ -69,6 +69,7 @@ class TestBureaucratKnowledge(TestBureaucratKnowledgeBase):
         document = Document.sudo(self.demo_user).create({
             'name': 'Test top level document',
             'document_format': 'html',
+            'document_number': 'SR-0060',
             'document_type_id': self.env.ref(
                 'bureaucrat_knowledge.bureaucrat_document_type_art').id
         })
@@ -87,6 +88,7 @@ class TestBureaucratKnowledge(TestBureaucratKnowledgeBase):
         subdocument = Document.sudo(self.demo_user).create({
             'name': 'Test top level document1',
             'category_id': category.id,
+            'document_number': 'SR-0080',
             'document_format': 'html',
             'document_type_id': self.env.ref(
                 'bureaucrat_knowledge.bureaucrat_document_type_art').id

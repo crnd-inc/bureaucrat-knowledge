@@ -1,3 +1,4 @@
+# pylint: disable=too-many-lines
 from odoo.exceptions import AccessError
 from .test_common import TestBureaucratKnowledgeBase
 
@@ -20,11 +21,12 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
             self.Document.sudo(self.demo_user).create({
                 'name': 'Test Create 1',
                 'document_format': 'html',
+                'document_number': 'SR-0001',
                 'document_type_id': self.env.ref(
                     'bureaucrat_knowledge.bureaucrat_document_type_art').id,
                 'category_id': self.category_top_level.id,
                 'document_body_html': 'Test Document',
-                'code': '335'})
+                })
 
         self.category_top_level.write({
             'visibility_user_ids': [(4, self.demo_user.id)]})
@@ -36,9 +38,10 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'document_type_id': self.env.ref(
                     'bureaucrat_knowledge.bureaucrat_document_type_art').id,
                 'name': 'Test Create1',
+                'document_number': 'SR-0002',
                 'category_id': self.category_top_level.id,
                 'document_body_html': 'Test Document',
-                'code': '336'})
+                })
 
     def test_document_restricted_access_create_user2(self):
         self.assertEqual(
@@ -54,8 +57,8 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'name': 'Test Create2',
                 'category_id': self.category_top_level.id,
                 'document_body_html': 'Test Document',
+                'document_number': 'SR-0003',
                 'editor_user_ids': [(4, self.demo_user.id)],
-                'code': '339'
                 })
 
         self.category_top_level.write({
@@ -68,10 +71,10 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'document_type_id': self.env.ref(
                     'bureaucrat_knowledge.bureaucrat_document_type_art').id,
                 'name': 'Test Create3',
+                'document_number': 'SR-0004',
                 'category_id': self.category_top_level.id,
                 'document_body_html': 'Test Document',
                 'editor_user_ids': [(4, self.demo_user.id)],
-                'code': '337',
             })
 
     def test_document_restricted_access_create_user3(self):
@@ -86,10 +89,11 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'document_type_id': self.env.ref(
                     'bureaucrat_knowledge.bureaucrat_document_type_art').id,
                 'name': 'Test Create4',
+                'document_number': 'SR-0005',
                 'category_id': self.category_top_level.id,
                 'document_body_html': 'Test Document',
                 'owner_user_ids': [(4, self.demo_user.id)],
-                'code': '340'})
+                })
 
         self.category_top_level.write({
             'visibility_user_ids': [(4, self.demo_user.id)]})
@@ -101,10 +105,11 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'document_type_id': self.env.ref(
                     'bureaucrat_knowledge.bureaucrat_document_type_art').id,
                 'name': 'Test Create5',
+                'document_number': 'SR-0006',
                 'category_id': self.category_top_level.id,
                 'document_body_html': 'Test Document',
                 'owner_user_ids': [(4, self.demo_user.id)],
-                'code': '341'})
+                })
 
     def test_document_restricted_access_create_group(self):
         self.demo_user.groups_id |= self.group_demo
@@ -120,9 +125,10 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'document_type_id': self.env.ref(
                     'bureaucrat_knowledge.bureaucrat_document_type_art').id,
                 'name': 'Test Create6',
+                'document_number': 'SR-0007',
                 'category_id': self.category_top_level.id,
                 'document_body_html': 'Test Document',
-                'code': '342'})
+                })
 
         self.category_top_level.write({
             'visibility_group_ids': [(4, self.group_demo.id)]})
@@ -134,9 +140,10 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'document_type_id': self.env.ref(
                     'bureaucrat_knowledge.bureaucrat_document_type_art').id,
                 'name': 'Test Create7',
+                'document_number': 'SR-0008',
                 'category_id': self.category_top_level.id,
                 'document_body_html': 'Test Document',
-                'code': '343'})
+                })
 
     def test_document_restricted_access_create_group2(self):
         self.demo_user.groups_id |= self.group_demo
@@ -152,10 +159,11 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'document_type_id': self.env.ref(
                     'bureaucrat_knowledge.bureaucrat_document_type_art').id,
                 'name': 'Test Create8',
+                'document_number': 'SR-0009',
                 'category_id': self.category_top_level.id,
                 'document_body_html': 'Test Document',
                 'editor_group_ids': [(4, self.group_demo.id)],
-                'code': '344'})
+                })
 
         self.category_top_level.write({
             'visibility_group_ids': [(4, self.group_demo.id)]})
@@ -167,10 +175,11 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'document_type_id': self.env.ref(
                     'bureaucrat_knowledge.bureaucrat_document_type_art').id,
                 'name': 'Test Create9',
+                'document_number': 'SR-0010',
                 'category_id': self.category_top_level.id,
                 'document_body_html': 'Test Document',
                 'editor_group_ids': [(4, self.group_demo.id)],
-                'code': '345'})
+                })
 
     def test_document_restricted_access_create_group3(self):
         self.demo_user.groups_id |= self.group_demo
@@ -186,10 +195,11 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'document_type_id': self.env.ref(
                     'bureaucrat_knowledge.bureaucrat_document_type_art').id,
                 'name': 'Test Create10',
+                'document_number': 'SR-0011',
                 'category_id': self.category_top_level.id,
                 'document_body_html': 'Test Document',
                 'owner_group_ids': [(4, self.group_demo.id)],
-                'code': '346'})
+                })
 
         self.category_top_level.write({
             'visibility_group_ids': [(4, self.group_demo.id)]})
@@ -201,10 +211,11 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'document_type_id': self.env.ref(
                     'bureaucrat_knowledge.bureaucrat_document_type_art').id,
                 'name': 'Test Create11',
+                'document_number': 'SR-0012',
                 'category_id': self.category_top_level.id,
                 'document_body_html': 'Test Document',
                 'owner_group_ids': [(4, self.group_demo.id)],
-                'code': '347'})
+                })
 
     def test_document_restricted_editors_access_create_user(self):
         self.assertEqual(
@@ -218,9 +229,10 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'document_type_id': self.env.ref(
                     'bureaucrat_knowledge.bureaucrat_document_type_art').id,
                 'name': 'Test Create12',
+                'document_number': 'SR-0013',
                 'category_id': self.category_top_level.id,
                 'document_body_html': 'Test Document',
-                'code': '348'})
+                })
 
         self.category_top_level.write({
             'editor_user_ids': [(4, self.demo_user.id)]})
@@ -231,9 +243,10 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
             'document_type_id': self.env.ref(
                 'bureaucrat_knowledge.bureaucrat_document_type_art').id,
             'name': 'Test Create13',
+            'document_number': 'SR-0014',
             'category_id': self.category_top_level.id,
             'document_body_html': 'Test Document',
-            'code': '349'})
+            })
         self.assertEqual(document.visibility_type, 'parent')
         self.assertFalse(document.visibility_user_ids)
         self.assertFalse(document.visibility_group_ids)
@@ -256,9 +269,10 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'document_type_id': self.env.ref(
                     'bureaucrat_knowledge.bureaucrat_document_type_art').id,
                 'name': 'Test Create14',
+                'document_number': 'SR-0015',
                 'category_id': self.category_top_level.id,
                 'document_body_html': 'Test Document',
-                'code': '350'})
+                })
 
         self.category_top_level.write({
             'editor_group_ids': [(4, self.group_demo.id)]})
@@ -269,9 +283,10 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
             'document_type_id': self.env.ref(
                 'bureaucrat_knowledge.bureaucrat_document_type_art').id,
             'name': 'Test Create15',
+            'document_number': 'SR-0016',
             'category_id': self.category_top_level.id,
             'document_body_html': 'Test Document',
-            'code': '351'})
+            })
         self.assertEqual(document.visibility_type, 'parent')
         self.assertFalse(document.visibility_user_ids)
         self.assertFalse(document.visibility_group_ids)
@@ -292,9 +307,10 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'document_type_id': self.env.ref(
                     'bureaucrat_knowledge.bureaucrat_document_type_art').id,
                 'name': 'Test Create16',
+                'document_number': 'SR-0017',
                 'category_id': self.category_top_level.id,
                 'document_body_html': 'Test Document',
-                'code': '352'})
+                })
 
         self.category_top_level.write({
             'owner_user_ids': [(4, self.demo_user.id)]})
@@ -305,9 +321,10 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
             'document_type_id': self.env.ref(
                 'bureaucrat_knowledge.bureaucrat_document_type_art').id,
             'name': 'Test Create161',
+            'document_number': 'SR-0018',
             'category_id': self.category_top_level.id,
             'document_body_html': 'Test Document',
-            'code': '353'})
+            })
         self.assertEqual(document.visibility_type, 'parent')
         self.assertFalse(document.visibility_user_ids)
         self.assertFalse(document.visibility_group_ids)
@@ -330,9 +347,10 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'document_type_id': self.env.ref(
                     'bureaucrat_knowledge.bureaucrat_document_type_art').id,
                 'name': 'Test Create17',
+                'document_number': 'SR-0019',
                 'category_id': self.category_top_level.id,
                 'document_body_html': 'Test Document',
-                'code': '354'})
+                })
 
         self.category_top_level.write({
             'owner_group_ids': [(4, self.group_demo.id)]})
@@ -343,9 +361,10 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
             'document_type_id': self.env.ref(
                 'bureaucrat_knowledge.bureaucrat_document_type_art').id,
             'name': 'Test Create18',
+            'document_number': 'SR-0020',
             'category_id': self.category_top_level.id,
             'document_body_html': 'Test Document',
-            'code': '355'})
+            })
         self.assertEqual(document.visibility_type, 'parent')
         self.assertFalse(document.visibility_user_ids)
         self.assertFalse(document.visibility_group_ids)
@@ -360,8 +379,9 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
             'document_type_id': self.env.ref(
                 'bureaucrat_knowledge.bureaucrat_document_type_art').id,
             'name': 'Test Create19',
+            'document_number': 'SR-0021',
             'document_body_html': 'Test Document',
-            'code': '356'})
+            })
         self.assertEqual(document.visibility_type, 'restricted')
         self.assertFalse(document.visibility_user_ids)
         self.assertFalse(document.visibility_group_ids)
@@ -381,9 +401,10 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'document_type_id': self.env.ref(
                     'bureaucrat_knowledge.bureaucrat_document_type_art').id,
                 'name': 'Test Create20',
+                'document_number': 'SR-0022',
                 'category_id': self.category_top_level.id,
                 'document_body_html': 'Test Document',
-                'code': '357'})
+                })
 
         self.category_top_level.visibility_type = 'internal'
         with self.assertRaises(AccessError):
@@ -392,9 +413,10 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'document_type_id': self.env.ref(
                     'bureaucrat_knowledge.bureaucrat_document_type_art').id,
                 'name': 'Test Create21',
+                'document_number': 'SR-0023',
                 'category_id': self.category_top_level.id,
                 'document_body_html': 'Test Document',
-                'code': '358'})
+                })
 
         self.category_top_level.visibility_type = 'portal'
         with self.assertRaises(AccessError):
@@ -403,9 +425,10 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'document_type_id': self.env.ref(
                     'bureaucrat_knowledge.bureaucrat_document_type_art').id,
                 'name': 'Test Create22',
+                'document_number': 'SR-0024',
                 'category_id': self.category_top_level.id,
                 'document_body_html': 'Test Document',
-                'code': '359'})
+                })
 
         self.category_top_level.visibility_type = 'public'
 
@@ -415,9 +438,10 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'document_type_id': self.env.ref(
                     'bureaucrat_knowledge.bureaucrat_document_type_art').id,
                 'name': 'Test Create23',
+                'document_number': 'SR-0025',
                 'category_id': self.category_top_level.id,
                 'document_body_html': 'Test Document',
-                'code': '360'})
+                })
 
     # Testing Top level category for visibility_type = 'portal'
     def test_document_portal_access_create_user(self):
@@ -430,9 +454,10 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'document_type_id': self.env.ref(
                     'bureaucrat_knowledge.bureaucrat_document_type_art').id,
                 'name': 'Test Create24',
+                'document_number': 'SR-0025',
                 'category_id': self.category_top_level.id,
                 'document_body_html': 'Test Document',
-                'code': '361'})
+                })
 
         self.category_top_level.visibility_type = 'internal'
         with self.assertRaises(AccessError):
@@ -441,9 +466,10 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'document_type_id': self.env.ref(
                     'bureaucrat_knowledge.bureaucrat_document_type_art').id,
                 'name': 'Test Create25',
+                'document_number': 'SR-0026',
                 'category_id': self.category_top_level.id,
                 'document_body_html': 'Test Document',
-                'code': '362'})
+                })
 
         self.category_top_level.visibility_type = 'public'
         with self.assertRaises(AccessError):
@@ -452,9 +478,10 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'document_type_id': self.env.ref(
                     'bureaucrat_knowledge.bureaucrat_document_type_art').id,
                 'name': 'Test Create26',
+                'document_number': 'SR-0027',
                 'category_id': self.category_top_level.id,
                 'document_body_html': 'Test Document',
-                'code': '363'})
+                })
 
         self.category_top_level.visibility_type = 'portal'
         with self.assertRaises(AccessError):
@@ -463,9 +490,10 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'document_type_id': self.env.ref(
                     'bureaucrat_knowledge.bureaucrat_document_type_art').id,
                 'name': 'Test Create27',
+                'document_number': 'SR-0028',
                 'category_id': self.category_top_level.id,
                 'document_body_html': 'Test Document',
-                'code': '364'})
+                })
 
     # Testing Top level document for visibility_type = 'internal'
     def test_document_internal_access_create_user(self):
@@ -478,9 +506,10 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'document_type_id': self.env.ref(
                     'bureaucrat_knowledge.bureaucrat_document_type_art').id,
                 'name': 'Test Create28',
+                'document_number': 'SR-0029',
                 'category_id': self.category_top_level.id,
                 'document_body_html': 'Test Document',
-                'code': '365'})
+                })
 
         self.category_top_level.visibility_type = 'portal'
         with self.assertRaises(AccessError):
@@ -489,9 +518,10 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'document_type_id': self.env.ref(
                     'bureaucrat_knowledge.bureaucrat_document_type_art').id,
                 'name': 'Test Create29',
+                'document_number': 'SR-0030',
                 'category_id': self.category_top_level.id,
                 'document_body_html': 'Test Document',
-                'code': '366'})
+                })
 
         self.category_top_level.visibility_type = 'public'
         with self.assertRaises(AccessError):
@@ -500,9 +530,10 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'document_type_id': self.env.ref(
                     'bureaucrat_knowledge.bureaucrat_document_type_art').id,
                 'name': 'Test Create30',
+                'document_number': 'SR-0031',
                 'category_id': self.category_top_level.id,
                 'document_body_html': 'Test Document',
-                'code': '367'})
+                })
 
         self.category_top_level.visibility_type = 'internal'
 
@@ -512,9 +543,10 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'document_type_id': self.env.ref(
                     'bureaucrat_knowledge.bureaucrat_document_type_art').id,
                 'name': 'Test Create31',
+                'document_number': 'SR-0032',
                 'category_id': self.category_top_level.id,
                 'document_body_html': 'Test Document',
-                'code': '368'})
+                })
 
     # Testing subcategory 2nd level depth for visibility_type = 'restricted'
     def test_subcategory_2_restricted_access_create_user(self):
@@ -540,9 +572,10 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'document_type_id': self.env.ref(
                     'bureaucrat_knowledge.bureaucrat_document_type_art').id,
                 'name': 'Test Create Sub 9',
+                'document_number': 'SR-0033',
                 'category_id': self.category_subcat_2.id,
                 'document_body_html': 'Test Document',
-                'code': '369'})
+                })
 
         self.category_top_level.write({
             'visibility_user_ids': [(4, self.demo_user.id)]})
@@ -554,9 +587,10 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'document_type_id': self.env.ref(
                     'bureaucrat_knowledge.bureaucrat_document_type_art').id,
                 'name': 'Test Create Sub 10',
+                'document_number': 'SR-0034',
                 'category_id': self.category_subcat_2.id,
                 'document_body_html': 'Test Document',
-                'code': '370'})
+                })
 
     def test_subdocument_2_restricted_access_create_group(self):
         self.demo_user.groups_id |= self.group_demo
@@ -581,11 +615,12 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
             self.Document.sudo(self.demo_user).create({
                 'name': 'Test Create Sub 12',
                 'document_format': 'html',
+                'document_number': 'SR-0035',
                 'document_type_id': self.env.ref(
                     'bureaucrat_knowledge.bureaucrat_document_type_art').id,
                 'category_id': self.category_subcat_2.id,
                 'document_body_html': 'Test Document',
-                'code': '380'})
+                })
 
         self.category_top_level.write({
             'visibility_group_ids': [(4, self.group_demo.id)]})
@@ -595,11 +630,12 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
             self.Document.sudo(self.demo_user).create({
                 'name': 'Test Create Sub 13',
                 'document_format': 'html',
+                'document_number': 'SR-0036',
                 'document_type_id': self.env.ref(
                     'bureaucrat_knowledge.bureaucrat_document_type_art').id,
                 'category_id': self.category_subcat_2.id,
                 'document_body_html': 'Test Document',
-                'code': '381'})
+                })
 
     def test_subdocument_2_restricted_editors_access_create_user(self):
         self.assertEqual(
@@ -626,11 +662,12 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
             self.Document.sudo(self.demo_user).create({
                 'name': 'Test Create Sub 14',
                 'document_format': 'html',
+                'document_number': 'SR-0037',
                 'document_type_id': self.env.ref(
                     'bureaucrat_knowledge.bureaucrat_document_type_art').id,
                 'category_id': self.category_subcat_2.id,
                 'document_body_html': 'Test Document',
-                'code': '382'})
+                })
 
         self.category_top_level.write({
             'editor_user_ids': [(4, self.demo_user.id)]})
@@ -648,11 +685,12 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         document = self.Document.sudo(self.demo_user).create({
             'name': 'Test Create Sub 15',
             'document_format': 'html',
+            'document_number': 'SR-0038',
             'document_type_id': self.env.ref(
                 'bureaucrat_knowledge.bureaucrat_document_type_art').id,
             'category_id': self.category_subcat_2.id,
             'document_body_html': 'Test Document',
-            'code': '383'})
+            })
         self.assertEqual(document.visibility_type, 'parent')
         self.assertFalse(document.visibility_user_ids)
         self.assertFalse(document.visibility_group_ids)
@@ -688,11 +726,12 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
             self.Document.sudo(self.demo_user).create({
                 'name': 'Test Create Sub 16',
                 'document_format': 'html',
+                'document_number': 'SR-0039',
                 'document_type_id': self.env.ref(
                     'bureaucrat_knowledge.bureaucrat_document_type_art').id,
                 'category_id': self.category_subcat_2.id,
                 'document_body_html': 'Test Document',
-                'code': '384'})
+                })
 
         self.category_top_level.write({
             'editor_group_ids': [(4, self.group_demo.id)]})
@@ -712,11 +751,12 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         document = self.Document.sudo(self.demo_user).create({
             'name': 'Test Create Sub 17',
             'document_format': 'html',
+            'document_number': 'SR-0040',
             'document_type_id': self.env.ref(
                 'bureaucrat_knowledge.bureaucrat_document_type_art').id,
             'category_id': self.category_subcat_2.id,
             'document_body_html': 'Test Document',
-            'code': '385'})
+            })
         self.assertEqual(document.visibility_type, 'parent')
         self.assertFalse(document.visibility_user_ids)
         self.assertFalse(document.visibility_group_ids)
@@ -750,11 +790,12 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
             self.Document.sudo(self.demo_user).create({
                 'name': 'Test Create Sub 18',
                 'document_format': 'html',
+                'document_number': 'SR-0041',
                 'document_type_id': self.env.ref(
                     'bureaucrat_knowledge.bureaucrat_document_type_art').id,
                 'category_id': self.category_subcat_2.id,
                 'document_body_html': 'Test Document',
-                'code': '386'})
+                })
 
         self.category_top_level.write({
             'owner_user_ids': [(4, self.demo_user.id)]})
@@ -772,11 +813,12 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         document = self.Document.sudo(self.demo_user).create({
             'name': 'Test Create Sub 19',
             'document_format': 'html',
+            'document_number': 'SR-0042',
             'document_type_id': self.env.ref(
                 'bureaucrat_knowledge.bureaucrat_document_type_art').id,
             'category_id': self.category_subcat_2.id,
             'document_body_html': 'Test Document',
-            'code': '387'})
+            })
         self.assertEqual(document.visibility_type, 'parent')
         self.assertFalse(document.visibility_user_ids)
         self.assertFalse(document.visibility_group_ids)
@@ -812,11 +854,12 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
             self.Document.sudo(self.demo_user).create({
                 'name': 'Test Create Sub 20',
                 'document_format': 'html',
+                'document_number': 'SR-0043',
                 'document_type_id': self.env.ref(
                     'bureaucrat_knowledge.bureaucrat_document_type_art').id,
                 'category_id': self.category_subcat_2.id,
                 'document_body_html': 'Test Document',
-                'code': '388'})
+                })
 
         self.category_top_level.write({
             'owner_group_ids': [(4, self.group_demo.id)]})
@@ -834,11 +877,12 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
         document = self.Document.sudo(self.demo_user).create({
             'name': 'Test Create Sub 21',
             'document_format': 'html',
+            'document_number': 'SR-0044',
             'document_type_id': self.env.ref(
                 'bureaucrat_knowledge.bureaucrat_document_type_art').id,
             'category_id': self.category_subcat_2.id,
             'document_body_html': 'Test Document',
-            'code': '390'})
+            })
         self.assertEqual(document.visibility_type, 'parent')
         self.assertFalse(document.visibility_user_ids)
         self.assertFalse(document.visibility_group_ids)
@@ -863,33 +907,36 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
             self.Document.sudo(self.demo_user).create({
                 'name': 'Test Create Sub 22',
                 'document_format': 'html',
+                'document_number': 'SR-0045',
                 'document_type_id': self.env.ref(
                     'bureaucrat_knowledge.bureaucrat_document_type_art').id,
                 'category_id': self.category_subcat_2.id,
                 'document_body_html': 'Test Document',
-                'code': '391'})
+                })
 
         self.category_top_level.visibility_type = 'internal'
         with self.assertRaises(AccessError):
             self.Document.sudo(self.demo_user).create({
                 'name': 'Test Create Sub 23',
                 'document_format': 'html',
+                'document_number': 'SR-0046',
                 'document_type_id': self.env.ref(
                     'bureaucrat_knowledge.bureaucrat_document_type_art').id,
                 'category_id': self.category_subcat_2.id,
                 'document_body_html': 'Test Document',
-                'code': '392'})
+                })
 
         self.category_top_level.visibility_type = 'portal'
         with self.assertRaises(AccessError):
             self.Document.sudo(self.demo_user).create({
                 'name': 'Test Create Sub 24',
                 'document_format': 'html',
+                'document_number': 'SR-0047',
                 'document_type_id': self.env.ref(
                     'bureaucrat_knowledge.bureaucrat_document_type_art').id,
                 'category_id': self.category_subcat_2.id,
                 'document_body_html': 'Test Document',
-                'code': '393'})
+                })
 
         self.category_top_level.visibility_type = 'public'
 
@@ -897,11 +944,12 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
             self.Document.sudo(self.demo_user).create({
                 'name': 'Test Create Sub 25',
                 'document_format': 'html',
+                'document_number': 'SR-0048',
                 'document_type_id': self.env.ref(
                     'bureaucrat_knowledge.bureaucrat_document_type_art').id,
                 'category_id': self.category_subcat_2.id,
                 'document_body_html': 'Test Document',
-                'code': '394'})
+                })
 
     # Testing subdocument 2nd level depth for visibility_type = 'portal'
     def test_subdocument_2_portal_access_create_user(self):
@@ -919,33 +967,36 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
             self.Document.sudo(self.demo_user).create({
                 'name': 'Test Create Sub 26',
                 'document_format': 'html',
+                'document_number': 'SR-0049',
                 'document_type_id': self.env.ref(
                     'bureaucrat_knowledge.bureaucrat_document_type_art').id,
                 'category_id': self.category_subcat_2.id,
                 'document_body_html': 'Test Document',
-                'code': '395'})
+                })
 
         self.category_top_level.visibility_type = 'internal'
         with self.assertRaises(AccessError):
             self.Document.sudo(self.demo_user).create({
                 'name': 'Test Create Sub 27',
                 'document_format': 'html',
+                'document_number': 'SR-0050',
                 'document_type_id': self.env.ref(
                     'bureaucrat_knowledge.bureaucrat_document_type_art').id,
                 'category_id': self.category_subcat_2.id,
                 'document_body_html': 'Test Document',
-                'code': '396'})
+                })
 
         self.category_top_level.visibility_type = 'public'
         with self.assertRaises(AccessError):
             self.Document.sudo(self.demo_user).create({
                 'name': 'Test Create Sub 28',
                 'document_format': 'html',
+                'document_number': 'SR-0051',
                 'document_type_id': self.env.ref(
                     'bureaucrat_knowledge.bureaucrat_document_type_art').id,
                 'category_id': self.category_subcat_2.id,
                 'document_body_html': 'Test Document',
-                'code': '397'})
+                })
 
         self.category_top_level.visibility_type = 'portal'
 
@@ -953,11 +1004,12 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
             self.Document.sudo(self.demo_user).create({
                 'name': 'Test Create Sub 29',
                 'document_format': 'html',
+                'document_number': 'SR-0052',
                 'document_type_id': self.env.ref(
                     'bureaucrat_knowledge.bureaucrat_document_type_art').id,
                 'category_id': self.category_subcat_2.id,
                 'document_body_html': 'Test Document',
-                'code': '398'})
+                })
 
     # Testing subcategory 2nd level depth for visibility_type = 'internal'
     def test_subcategory_2_internal_access_read_user(self):
@@ -977,20 +1029,22 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'document_type_id': self.env.ref(
                     'bureaucrat_knowledge.bureaucrat_document_type_art').id,
                 'name': 'Test Create Sub 31',
+                'document_number': 'SR-0053',
                 'category_id': self.category_subcat_2.id,
                 'document_body_html': 'Test Document',
-                'code': '399'})
+                })
 
         self.category_top_level.visibility_type = 'portal'
         with self.assertRaises(AccessError):
             self.Document.sudo(self.demo_user).create({
                 'document_format': 'html',
+                'document_number': 'SR-0054',
                 'document_type_id': self.env.ref(
                     'bureaucrat_knowledge.bureaucrat_document_type_art').id,
                 'name': 'Test Create Sub 32',
                 'category_id': self.category_subcat_2.id,
                 'document_body_html': 'Test Document',
-                'code': '400'})
+                })
 
         self.category_top_level.visibility_type = 'public'
         with self.assertRaises(AccessError):
@@ -999,17 +1053,19 @@ class TestKnowledgeDocumentCreate(TestBureaucratKnowledgeBase):
                 'document_type_id': self.env.ref(
                     'bureaucrat_knowledge.bureaucrat_document_type_art').id,
                 'name': 'Test Create Sub 33',
+                'document_number': 'SR-0055',
                 'category_id': self.category_subcat_2.id,
                 'document_body_html': 'Test Document',
-                'code': '401'})
+                })
 
         self.category_top_level.visibility_type = 'internal'
         with self.assertRaises(AccessError):
             self.Document.sudo(self.demo_user).create({
                 'document_format': 'html',
+                'document_number': 'SR-0056',
                 'document_type_id': self.env.ref(
                     'bureaucrat_knowledge.bureaucrat_document_type_art').id,
                 'name': 'Test Create Sub 34',
                 'category_id': self.category_subcat_2.id,
                 'document_body_html': 'Test Document',
-                'code': '402'})
+                })

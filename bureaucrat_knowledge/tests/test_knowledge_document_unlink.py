@@ -86,10 +86,10 @@ class TestKnowledgeDocumentUnlink(TestBureaucratKnowledgeBase):
         document = Document.create({
             'document_format': 'html',
             'name': 'Test document',
+            'document_number': 'SR-0062',
             'document_type_id': self.env.ref(
                 'bureaucrat_knowledge.bureaucrat_document_type_art').id,
-            'code': '332'
-        })
+            })
 
         self.assertFalse(document.owner_group_ids)
         self.assertEqual(len(document.owner_user_ids), 0)
@@ -112,10 +112,10 @@ class TestKnowledgeDocumentUnlink(TestBureaucratKnowledgeBase):
         document = Document.create({
             'document_format': 'html',
             'name': 'Test document',
+            'document_number': 'SR-0063',
             'document_type_id': self.env.ref(
                 'bureaucrat_knowledge.bureaucrat_document_type_art').id,
-            'code': '333'
-        })
+            })
 
         self.assertFalse(document.owner_group_ids)
         self.assertEqual(len(document.owner_user_ids), 0)
@@ -505,11 +505,11 @@ class TestKnowledgeDocumentUnlink(TestBureaucratKnowledgeBase):
         document_subcat_2 = Document.create({
             'name': 'Test document',
             'document_format': 'html',
+            'document_number': 'SR-0065',
             'category_id': self.category_subcat_2.id,
             'document_type_id': self.env.ref(
                 'bureaucrat_knowledge.bureaucrat_document_type_art').id,
-            'code': '334'
-        })
+            })
 
         self.assertEqual(
             document_subcat_2.visibility_type, 'parent')
@@ -545,11 +545,11 @@ class TestKnowledgeDocumentUnlink(TestBureaucratKnowledgeBase):
         document_subcat_2 = Document.create({
             'name': 'Test document',
             'document_format': 'html',
+            'document_number': 'SR-0066',
             'category_id': self.category_subcat_2.id,
             'document_type_id': self.env.ref(
                 'bureaucrat_knowledge.bureaucrat_document_type_art').id,
-            'code': '335'
-        })
+            })
         with self.assertRaises(AccessError):
             self.document_subcat_2.sudo(self.demo_user).unlink()
 
@@ -572,10 +572,11 @@ class TestKnowledgeDocumentUnlink(TestBureaucratKnowledgeBase):
         document_subcat_2 = Document.create({
             'name': 'Test document',
             'document_format': 'html',
+            'document_number': 'SR-0067',
             'category_id': self.category_subcat_2.id,
             'document_type_id': self.env.ref(
                 'bureaucrat_knowledge.bureaucrat_document_type_art').id,
-            'code': '336',
+
         })
         with self.assertRaises(AccessError):
             document_subcat_2.sudo(self.demo_user).unlink()
@@ -599,11 +600,11 @@ class TestKnowledgeDocumentUnlink(TestBureaucratKnowledgeBase):
         document_subcat_2 = Document.create({
             'name': 'Test document',
             'document_format': 'html',
+            'document_number': 'SR-0068',
             'category_id': self.category_subcat_2.id,
             'document_type_id': self.env.ref(
                 'bureaucrat_knowledge.bureaucrat_document_type_art').id,
-            'code': '337'
-        })
+            })
         with self.assertRaises(AccessError):
             document_subcat_2.sudo(self.demo_user).unlink()
 
@@ -619,11 +620,11 @@ class TestKnowledgeDocumentUnlink(TestBureaucratKnowledgeBase):
         document_subcat_2 = Document.create({
             'name': 'Test document',
             'document_format': 'html',
+            'document_number': 'SR-0069',
             'category_id': self.category_subcat_2.id,
             'document_type_id': self.env.ref(
                 'bureaucrat_knowledge.bureaucrat_document_type_art').id,
-            'code': '338'
-        })
+            })
 
         self.assertEqual(
             document_subcat_2.visibility_type, 'parent')
@@ -659,10 +660,10 @@ class TestKnowledgeDocumentUnlink(TestBureaucratKnowledgeBase):
         document_subcat_2 = Document.create({
             'name': 'Test document',
             'document_format': 'html',
+            'document_number': 'SR-0070',
             'category_id': self.category_subcat_2.id,
             'document_type_id': self.env.ref(
                 'bureaucrat_knowledge.bureaucrat_document_type_art').id,
-            'code': '339',
         })
         with self.assertRaises(AccessError):
             document_subcat_2.sudo(self.demo_user).unlink()
@@ -685,10 +686,10 @@ class TestKnowledgeDocumentUnlink(TestBureaucratKnowledgeBase):
         document_subcat_2 = Document.create({
             'name': 'Test document',
             'document_format': 'html',
+            'document_number': 'SR-0071',
             'category_id': self.category_subcat_2.id,
             'document_type_id': self.env.ref(
                 'bureaucrat_knowledge.bureaucrat_document_type_art').id,
-            'code': '400',
         })
         with self.assertRaises(AccessError):
             document_subcat_2.sudo(self.demo_user).unlink()
@@ -711,11 +712,10 @@ class TestKnowledgeDocumentUnlink(TestBureaucratKnowledgeBase):
         document_subcat_2 = Document.create({
             'name': 'Test document',
             'document_format': 'html',
+            'document_number': 'SR-0072',
             'category_id': self.category_subcat_2.id,
             'document_type_id': self.env.ref(
                 'bureaucrat_knowledge.bureaucrat_document_type_art').id,
-            'code': '401',
-
         })
         with self.assertRaises(AccessError):
             document_subcat_2.sudo(self.demo_user).unlink()

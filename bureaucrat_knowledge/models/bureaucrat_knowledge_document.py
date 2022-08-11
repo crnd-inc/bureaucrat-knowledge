@@ -28,7 +28,6 @@ class BureaucratKnowledgeDocument(models.Model):
         'generic.mixin.get.action',
         'mail.thread',
         'mail.activity.mixin',
-        'generic.mixin.name.by.sequence',
     ]
     _order = 'sequence, name, id'
 
@@ -46,11 +45,9 @@ class BureaucratKnowledgeDocument(models.Model):
         return res
 
     name = fields.Char(translate=True, index=True, required=True)
-    document_number = fields.Char(required=True, index=True)
-    category_code = fields.Char(index=True, related='category_id.code')
-    document_type_code = fields.Char(
-        index=True, related='document_type_id.code')
-    code = fields.Char(compute='_compute_code', store=True, index=True)
+    document_number = fields.Char(index=True, required=True)
+    code = fields.Char(
+        compute='_compute_code', store=True, index=True, readonly=True)
     document_format = fields.Selection(
         default='html',
         selection=DOC_TYPE,
@@ -203,26 +200,21 @@ class BureaucratKnowledgeDocument(models.Model):
          "(category_id IS NULL AND visibility_type != 'parent'))",
          "Document must have a parent category "
          "to set Visibility Type 'Parent'"),
-        ('category_code_uniq',
-         'UNIQUE (category_code)',
-         'Category CODE must be unique.'),
-        ('document_type_code_uniq',
-         'UNIQUE (document_type_code)',
-         'document type code must be unique.'),
-        ('code_ascii_only',
-         r"CHECK (code ~ '^[a-zA-Z0-9\-_]*$')",
-         'Code must be ascii only'),
         ('document_number_ascii_only',
          r"CHECK (document_number ~ '^[a-zA-Z0-9\-_]*$')",
          'document number must be ascii only'),
     ]
 
-    @api.depends('category_code', 'document_type_code', 'document_number')
+    @api.depends('category_id', 'document_type_id', 'document_number')
     def _compute_code(self):
         for rec in self:
-            rec.code = '%s_%s_%s' % (
-                rec.category_code, rec.document_type_code,
-                rec.document_number)
+            if rec.category_id:
+                rec.code = '%s_%s_%s' % (rec.document_type_id.code,
+                                         rec.document_number,
+                                         rec.category_id.code)
+            else:
+                rec.code = '%s_%s' % (rec.document_type_id.code,
+                                      rec.document_number, )
 
     @api.depends('document_body_html', 'document_body_pdf', 'document_type')
     def _compute_preview(self):
@@ -477,3 +469,14 @@ class BureaucratKnowledgeDocument(models.Model):
             rec.document_format = rec.document_type
             _logger.warning(
                 "Field Device type is deprecated and should be removed.")
+
+    @api.model
+    def _add_missing_default_values(self, values):
+        res = super(BureaucratKnowledgeDocument, self
+                    )._add_missing_default_values(values)
+        # doc_number = self.sudo().env['bureaucrat.knowledge.document'].browse(
+        #     'bureaucrat_knowledge.default_document_number')
+        doc_number = res.get('document_number')
+        if doc_number and not res.get('document_number'):
+            res['document_number'] = doc_number
+        return res

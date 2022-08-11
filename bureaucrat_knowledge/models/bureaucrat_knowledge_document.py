@@ -32,8 +32,6 @@ class BureaucratKnowledgeDocument(models.Model):
     _order = 'sequence, name, id'
 
     _auto_set_noupdate_on_write = True
-    _name_by_sequence_name_field = 'document_number'
-    _name_by_sequence_sequence_code = 'bureaucrat.knowledge.document.sequence'
 
     @api.model
     def default_get(self, default_fields):
@@ -474,9 +472,18 @@ class BureaucratKnowledgeDocument(models.Model):
     def _add_missing_default_values(self, values):
         res = super(BureaucratKnowledgeDocument, self
                     )._add_missing_default_values(values)
-        # doc_number = self.sudo().env['bureaucrat.knowledge.document'].browse(
-        #     'bureaucrat_knowledge.default_document_number')
         doc_number = res.get('document_number')
-        if doc_number and not res.get('document_number'):
-            res['document_number'] = doc_number
+        if not doc_number:
+            self.env['bureaucrat.knowledge.document'].sudo(
+            ).generate_document_number()
         return res
+
+    def generate_document_number(self, vals, r_type, ):
+        vals = dict(vals)
+        if vals.get('document_number') == "###new###":
+            vals['document_number'] = False
+        if not vals.get('document_number') and r_type.sequence_id:
+            vals['document_number'] = r_type.sudo().sequence_id.next_by_id()
+        elif not vals.get('document_number'):
+            vals['document_number'] = self.env['ir.sequence'].sudo(
+            ).next_by_code('bureaucrat.knowledge.document_number')

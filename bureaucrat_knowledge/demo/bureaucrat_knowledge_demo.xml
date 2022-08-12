@@ -30,7 +30,6 @@
             model="bureaucrat.knowledge.document">
         <field name="name">Demo Document Top Level</field>
         <field name="document_format">html</field>
-        <field name="document_number">SR-0061</field>
         <field name="document_type_id" ref="bureaucrat_document_type_art"/>
         <field name="document_body_html">
             <![CDATA[
@@ -44,7 +43,6 @@
         <field name="name">Demo Document For Subcategory 2</field>
         <field name="document_format">html</field>
         <field name="document_type_id" ref="bureaucrat_document_type_art"/>
-        <field name="document_number">SR-0062</field>
         <field name="category_id"
                ref="bureaucrat_demo_subcategory_2"/>
         <field name="document_body_html">Subcategory2 document content</field>
@@ -54,7 +52,6 @@
             model="bureaucrat.knowledge.document">
         <field name="name">Demo Document For Subcategory 2 With PDF</field>
         <field name="document_format">pdf</field>
-        <field name="document_number">SR-0063</field>
         <field name="document_type_id" ref="bureaucrat_document_type_ts"/>
         <field name="category_id"
                ref="bureaucrat_demo_subcategory_2"/>

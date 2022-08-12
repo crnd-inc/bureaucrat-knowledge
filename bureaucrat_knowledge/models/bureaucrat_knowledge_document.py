@@ -43,7 +43,7 @@ class BureaucratKnowledgeDocument(models.Model):
         return res
 
     name = fields.Char(translate=True, index=True, required=True)
-    document_number = fields.Char(index=True, required=True)
+    document_number = fields.Char(index=True, required=False)
     code = fields.Char(
         compute='_compute_code', store=True, index=True, readonly=True)
     document_format = fields.Selection(
@@ -208,8 +208,8 @@ class BureaucratKnowledgeDocument(models.Model):
         for rec in self:
             if rec.category_id:
                 rec.code = '%s_%s_%s' % (rec.document_type_id.code,
-                                         rec.document_number,
-                                         rec.category_id.code)
+                                         rec.category_id.code,
+                                         rec.document_number)
             else:
                 rec.code = '%s_%s' % (rec.document_type_id.code,
                                       rec.document_number, )
@@ -307,7 +307,8 @@ class BureaucratKnowledgeDocument(models.Model):
         )
 
     def _get_document_index_pdf(self):
-        '''Index PDF documents'''
+        """ Index PDF documents
+        """
         # TODO: Maybe there is a better way to do pdf indexing
         self.ensure_one()
         if not self.document_body_pdf:
@@ -470,20 +471,13 @@ class BureaucratKnowledgeDocument(models.Model):
 
     @api.model
     def _add_missing_default_values(self, values):
-        res = super(BureaucratKnowledgeDocument, self
-                    )._add_missing_default_values(values)
-        doc_number = res.get('document_number')
-        if not doc_number:
-            self.env['bureaucrat.knowledge.document'].sudo(
-            ).generate_document_number()
-        return res
+        res = super(
+            BureaucratKnowledgeDocument, self
+        )._add_missing_default_values(values)
 
-    def generate_document_number(self, vals, r_type, ):
-        vals = dict(vals)
-        if vals.get('document_number') == "###new###":
-            vals['document_number'] = False
-        if not vals.get('document_number') and r_type.sequence_id:
-            vals['document_number'] = r_type.sudo().sequence_id.next_by_id()
-        elif not vals.get('document_number'):
-            vals['document_number'] = self.env['ir.sequence'].sudo(
-            ).next_by_code('bureaucrat.knowledge.document_number')
+        new_doc = self.new(res)
+        if not new_doc.document_number and new_doc.document_type_id:
+            res['document_number'] = (
+                new_doc.document_type_id.sudo().
+                    number_generator_id.next_by_id())
+        return res

@@ -5,6 +5,7 @@
         <field name="arch" type="xml">
             <search>
                 <field name="name"/>
+                <field name="code"/>
                 <field name="category_id"/>
                 <field name="tag_ids"/>
                 <field name="search_tag_id"/>
@@ -35,14 +36,13 @@
         <field name="arch" type="xml">
             <tree>
                 <field name="name"/>
+                <field name="code"/>
                 <field name="category_id"/>
                 <field name="tag_ids"
                        options="{'color_field': 'color'}"
                        widget="many2many_tags"
                        placeholder="Tags..."
                        context="{'default_model': 'bureaucrat.knowledge.document'}"/>
-                <field name="code"/>
-                <field name="document_number"/>
             </tree>
         </field>
     </record>

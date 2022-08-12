@@ -34,12 +34,10 @@
         'security/security.xml',
         'security/ir.model.access.csv',
 
-        'data/ir_sequence_data.xml',
         'data/generic_tag_model.xml',
         'data/document_types_data.xml',
         'data/bureaucrat_knowledge_base_data.xml',
         'data/bureaucrat_knowledge_base_documents_data.xml',
-        'data/document_types_data.xml',
 
         'views/bureaucrat_knowledge_category.xml',
         'views/bureaucrat_knowledge_document.xml',

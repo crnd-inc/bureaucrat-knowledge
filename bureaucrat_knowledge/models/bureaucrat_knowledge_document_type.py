@@ -13,8 +13,8 @@ class BureaucratDocumentType(models.Model):
         index=True, translate=True, required=True, default='art')
     code = fields.Char(index=True, required=True, Size=3)
     description = fields.Text()
-    number_generator_id = fields.Many2one('ir.sequence', required=True,
-                                          ondelete='restrict')
+    number_generator_id = fields.Many2one(
+        'ir.sequence', required=True, ondelete='restrict')
 
     parent_id = fields.Many2one(
         'bureaucrat.document.type', index=True, ondelete='cascade')

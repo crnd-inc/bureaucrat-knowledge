@@ -108,3 +108,67 @@ class TestBureaucratKnowledge(TestBureaucratKnowledgeBase):
         documents = Document.search([
             ('index_document_body', 'ilike', 'lorem ipsum')])
         self.assertIn(self.document_subcat_2_with_pdf, documents)
+
+    def test_document_code_generation_no_categ_auto_number(self):
+        doc_type = self.env.ref(
+            'bureaucrat_knowledge.bureaucrat_document_type_rfc')
+        doc = self.env['bureaucrat.knowledge.document'].create({
+            'name': 'Test document 123543',
+            'document_format': 'html',
+            'document_type_id': doc_type.id,
+            'document_body_html': "<p>Test</p>",
+        })
+
+        self.assertRegex(doc.document_number, r'D\d{4}')
+        self.assertRegex(doc.code, r'RFC_D\d{4}')
+
+    def test_document_code_generation_no_categ_custom_number(self):
+        doc_type = self.env.ref(
+            'bureaucrat_knowledge.bureaucrat_document_type_rfc')
+        doc = self.env['bureaucrat.knowledge.document'].create({
+            'name': 'Test document 123543',
+            'document_format': 'html',
+            'document_type_id': doc_type.id,
+            'document_body_html': "<p>Test</p>",
+            'document_number': 'TST13',
+        })
+
+        self.assertEqual(doc.document_number, 'TST13')
+        self.assertEqual(doc.code, r'RFC_TST13')
+
+    def test_document_code_generation_with_categ_auto_number(self):
+        category = self.env['bureaucrat.knowledge.category'].create({
+            'name': 'Test Categ 13',
+            'code': 'CST18',
+        })
+        doc_type = self.env.ref(
+            'bureaucrat_knowledge.bureaucrat_document_type_rfc')
+        doc = self.env['bureaucrat.knowledge.document'].create({
+            'name': 'Test document 123543',
+            'document_format': 'html',
+            'document_type_id': doc_type.id,
+            'document_body_html': "<p>Test</p>",
+            'category_id': category.id,
+        })
+
+        self.assertRegex(doc.document_number, r'D\d{4}')
+        self.assertRegex(doc.code, r'RFC_CST18_D\d{4}')
+
+    def test_document_code_generation_with_categ_custom_number(self):
+        category = self.env['bureaucrat.knowledge.category'].create({
+            'name': 'Test Categ 13',
+            'code': 'CST18',
+        })
+        doc_type = self.env.ref(
+            'bureaucrat_knowledge.bureaucrat_document_type_rfc')
+        doc = self.env['bureaucrat.knowledge.document'].create({
+            'name': 'Test document 123543',
+            'document_format': 'html',
+            'document_type_id': doc_type.id,
+            'document_body_html': "<p>Test</p>",
+            'document_number': 'TST13',
+            'category_id': category.id,
+        })
+
+        self.assertEqual(doc.document_number, 'TST13')
+        self.assertEqual(doc.code, r'RFC_CST18_TST13')

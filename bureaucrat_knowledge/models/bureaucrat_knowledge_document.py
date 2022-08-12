@@ -467,7 +467,8 @@ class BureaucratKnowledgeDocument(models.Model):
         for rec in self:
             rec.document_format = rec.document_type
             _logger.warning(
-                "Field Device type is deprecated and should be removed.")
+                "Field 'document_type' on bureaucrat.knowledge.document "
+                "is deprecated and should be removed.")
 
     @api.model
     def _add_missing_default_values(self, values):
@@ -479,5 +480,5 @@ class BureaucratKnowledgeDocument(models.Model):
         if not new_doc.document_number and new_doc.document_type_id:
             res['document_number'] = (
                 new_doc.document_type_id.sudo().
-                    number_generator_id.next_by_id())
+                number_generator_id.next_by_id())
         return res

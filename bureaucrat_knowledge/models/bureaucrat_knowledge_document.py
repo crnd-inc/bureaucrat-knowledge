@@ -43,7 +43,7 @@ class BureaucratKnowledgeDocument(models.Model):
         return res
 
     name = fields.Char(translate=True, index=True, required=True)
-    document_number = fields.Char(index=True, required=False)
+    document_number = fields.Char(index=True, required=False, size=5)
     code = fields.Char(
         compute='_compute_code', store=True, index=True, readonly=True)
     document_format = fields.Selection(

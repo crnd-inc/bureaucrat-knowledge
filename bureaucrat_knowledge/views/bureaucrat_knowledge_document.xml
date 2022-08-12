@@ -5,6 +5,7 @@
         <field name="arch" type="xml">
             <search>
                 <field name="name"/>
+                <field name="code"/>
                 <field name="category_id"/>
                 <field name="tag_ids"/>
                 <field name="search_tag_id"/>
@@ -35,6 +36,7 @@
         <field name="arch" type="xml">
             <tree>
                 <field name="name"/>
+                <field name="code"/>
                 <field name="category_id"/>
                 <field name="tag_ids"
                        options="{'color_field': 'color'}"
@@ -52,15 +54,16 @@
                 <sheet>
                     <div class="oe_button_box" name="button_box">
                         <button class="oe_stat_button"
-                            name="action_view_history"
-                            type="object"
-                            attrs="{'invisible': [('history_count', '&lt;=', 1)]}"
-                            icon="fa-history">
-                                <field name="history_count"
-                                       string="Versions"
-                                       widget="statinfo"/>
+                                name="action_view_history"
+                                type="object"
+                                attrs="{'invisible': [('history_count', '&lt;=', 1)]}"
+                                icon="fa-history">
+                            <field name="history_count"
+                                   string="Versions"
+                                   widget="statinfo"/>
                         </button>
-                        <button name="toggle_active" type="object" groups="base.group_user"
+                        <button name="toggle_active" type="object"
+                                groups="base.group_user"
                                 class="oe_stat_button" icon="fa-archive">
                             <field name="active" widget="boolean_button"
                                    options='{"terminology": "archive"}'/>
@@ -79,6 +82,8 @@
                                    widget="many2many_tags"
                                    placeholder="Tags..."
                                    context="{'default_model': 'bureaucrat.knowledge.document'}"/>
+                            <field name="code"/>
+                            <field name="document_number"/>
                         </group>
                     </group>
                     <notebook>
@@ -174,7 +179,8 @@
 
                 </sheet>
                 <div class="oe_chatter">
-                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="message_follower_ids" widget="mail_followers"
+                           groups="base.group_user"/>
                     <field name="activity_ids" widget="mail_activity"/>
                     <field name="message_ids" widget="mail_thread"/>
                 </div>
@@ -185,7 +191,8 @@
     <record model="ir.ui.view" id="bureaucrat_knowledge_document_view_kanban">
         <field name="model">bureaucrat.knowledge.document</field>
         <field name="arch" type="xml">
-            <kanban edit="false" delete="false" group_create="false" quick_create="false" group_edit="false"
+            <kanban edit="false" delete="false" group_create="false"
+                    quick_create="false" group_edit="false"
                     group_delete="false" sample="1"
                     class="oe_background_grey o_kanban_dashboard o_project_kanban o_emphasize_colors">
                 <field name="id"/>
@@ -207,20 +214,26 @@
                     <field name="category_id" string="Categories"/>
                     <field name="tag_ids" string="Tags" select="multi"
                            domain="[('model_id.model', '=', 'bureaucrat.knowledge.document')]"/>
-                    <field name="document_type" string="Format" expand="False"/>
+                    <field name="document_format" string="Format" expand="False"/>
                     <field name="document_type_id" string="Document Types" expand="False"/>
                 </searchpanel>
                 <templates>
                     <t t-name="kanban-box">
                         <div t-attf-class="oe_kanban_color_#{kanban_getcolor(record.color.raw_value)} oe_kanban_card oe_kanban_global_click"
                              style="width:180px; justify-content: flex-start;">
-                            <div class="o_dropdown_kanban dropdown mt-1" groups="base.group_user">
-                                <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#">
+                            <div class="o_dropdown_kanban dropdown mt-1"
+                                 groups="base.group_user">
+                                <a class="dropdown-toggle" role="button"
+                                   data-toggle="dropdown" href="#">
                                     <span class="fa fa-bars fa-lg"/>
                                 </a>
-                                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                                    <t t-if="widget.editable"><li><a type="edit">Edit Document</a></li></t>
-                                    <li><ul class="oe_kanban_colorpicker" data-field="color"/></li>
+                                <ul class="dropdown-menu" role="menu"
+                                    aria-labelledby="dLabel">
+                                    <t t-if="widget.editable"><li><a
+                                            type="edit">Edit
+                                        Document</a></li></t>
+                                    <li><ul class="oe_kanban_colorpicker"
+                                            data-field="color"/></li>
                                 </ul>
                             </div>
                             <div class="o_kanban_record_title font-weight-bold border-bottom border-primary text-primary mt-1"
@@ -233,18 +246,21 @@
                             </div>
                             <div class="oe_kanban_details mt-2">
                                 <div>
-                                    <field name="tag_ids" options="{'color_field': 'color'}"/>
+                                    <field name="tag_ids"
+                                           options="{'color_field': 'color'}"/>
                                 </div>
                                 <div class="">
                                     <t t-if="record.document_format.value=='pdf'">
                                         <div class="" style="width:165px;">
                                             <img t-att-src="kanban_image('bureaucrat.knowledge.document', 'document_preview_image', record.id.raw_value)"
-                                                 class="img-fluid" style="width:180px;"
+                                                 class="img-fluid"
+                                                 style="width:180px;"
                                                  alt="Document"/>
                                         </div>
                                     </t>
                                     <t t-if="record.document_format.value=='html'">
-                                        <div class="overflow-hidden" style="width:165px; max-height: 250px">
+                                        <div class="overflow-hidden"
+                                             style="width:165px; max-height: 250px">
                                             <span class="text-black-50 font-weight-light"
                                                   t-esc="record.document_preview_text.value"/>
                                         </div>
@@ -254,11 +270,13 @@
                             <div class="o_kanban_record_bottom mt-auto border-top border-primary">
                                 <div class="oe_kanban_bottom_left mt-2">
                                     <div class="o_kanban_inline_block">
-                                        <field name="activity_ids" widget="kanban_activity"/>
+                                        <field name="activity_ids"
+                                               widget="kanban_activity"/>
                                     </div>
                                 </div>
                                 <div class="oe_kanban_bottom_right mt-2">
-                                    <field name="created_by_id" widget="many2one_avatar_user"/>
+                                    <field name="created_by_id"
+                                           widget="many2one_avatar_user"/>
                                 </div>
                             </div>
                         </div>
@@ -268,7 +286,8 @@
         </field>
     </record>
 
-    <record id="action_bureaucrat_knowledge_document" model="ir.actions.act_window">
+    <record id="action_bureaucrat_knowledge_document"
+            model="ir.actions.act_window">
         <field name="name">Documents</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">bureaucrat.knowledge.document</field>

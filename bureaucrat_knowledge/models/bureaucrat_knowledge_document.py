@@ -43,6 +43,9 @@ class BureaucratKnowledgeDocument(models.Model):
         return res
 
     name = fields.Char(translate=True, index=True, required=True)
+    document_number = fields.Char(index=True, required=False, size=5)
+    code = fields.Char(
+        compute='_compute_code', store=True, index=True, readonly=True)
     document_format = fields.Selection(
         default='html',
         selection=DOC_TYPE,
@@ -195,9 +198,23 @@ class BureaucratKnowledgeDocument(models.Model):
          "(category_id IS NULL AND visibility_type != 'parent'))",
          "Document must have a parent category "
          "to set Visibility Type 'Parent'"),
+        ('document_number_ascii_only',
+         r"CHECK (document_number ~ '^[a-zA-Z0-9\-_]*$')",
+         'document number must be ascii only'),
     ]
 
-    @api.depends('document_body_html', 'document_body_pdf', 'document_format')
+    @api.depends('category_id', 'document_type_id', 'document_number')
+    def _compute_code(self):
+        for rec in self:
+            if rec.category_id:
+                rec.code = '%s_%s_%s' % (rec.document_type_id.code,
+                                         rec.category_id.code,
+                                         rec.document_number)
+            else:
+                rec.code = '%s_%s' % (rec.document_type_id.code,
+                                      rec.document_number, )
+
+    @api.depends('document_body_html', 'document_body_pdf', 'document_type')
     def _compute_preview(self):
         for rec in self:
             if rec.document_format == 'pdf':
@@ -290,7 +307,8 @@ class BureaucratKnowledgeDocument(models.Model):
         )
 
     def _get_document_index_pdf(self):
-        '''Index PDF documents'''
+        """ Index PDF documents
+        """
         # TODO: Maybe there is a better way to do pdf indexing
         self.ensure_one()
         if not self.document_body_pdf:
@@ -449,4 +467,18 @@ class BureaucratKnowledgeDocument(models.Model):
         for rec in self:
             rec.document_format = rec.document_type
             _logger.warning(
-                "Field Device type is deprecated and should be removed.")
+                "Field 'document_type' on bureaucrat.knowledge.document "
+                "is deprecated and should be removed.")
+
+    @api.model
+    def _add_missing_default_values(self, values):
+        res = super(
+            BureaucratKnowledgeDocument, self
+        )._add_missing_default_values(values)
+
+        new_doc = self.new(res)
+        if not new_doc.document_number and new_doc.document_type_id:
+            res['document_number'] = (
+                new_doc.document_type_id.sudo().
+                number_generator_id.next_by_id())
+        return res

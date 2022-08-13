@@ -40,7 +40,7 @@ class TestKnowledgeDocumentHistoryWrite(TestBureaucratKnowledgeBase):
         self.assertEqual(len(self.document_subcat_2.visibility_user_ids), 1)
         with self.assertRaises(AccessError):
             self.DocHist.with_user(self.demo_user).create({
-                'document_type': 'html',
+                'document_format': 'html',
                 'document_id': self.document_subcat_2.id})
         with self.assertRaises(AccessError):
             self.document_subcat_2.latest_history_id.with_user(

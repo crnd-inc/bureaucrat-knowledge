@@ -81,7 +81,8 @@ class TestKnowledgeCategoryUnlink(TestBureaucratKnowledgeBase):
     def test_category_restricted_owners_access_unlink_user(self):
         Category = self.env['bureaucrat.knowledge.category']
         category = Category.create({
-            'name': 'Test top level category'})
+            'name': 'Test top level category',
+            'code': 'top-10'})
 
         self.assertEqual(category.visibility_type, 'restricted')
         self.assertFalse(category.owner_group_ids)
@@ -101,7 +102,8 @@ class TestKnowledgeCategoryUnlink(TestBureaucratKnowledgeBase):
 
         Category = self.env['bureaucrat.knowledge.category']
         category = Category.create({
-            'name': 'Test top level category'})
+            'name': 'Test top level category',
+            'code': 'top-11'})
 
         self.assertEqual(category.visibility_type, 'restricted')
         self.assertFalse(category.owner_group_ids)
@@ -349,13 +351,16 @@ class TestKnowledgeCategoryUnlink(TestBureaucratKnowledgeBase):
     def test_subcategory_2_restricted_owners_access_unlink_user(self):
         Category = self.env['bureaucrat.knowledge.category']
         category_top_level = Category.create({
-            'name': 'Test top level category '})
+            'name': 'Test top level category ',
+            'code': 'top-15'})
         category_subcat_1 = Category.create({
             'name': 'Test subcategory 1',
+            'code': 'top-16',
             'parent_id': category_top_level.id,
         })
         category_subcat_2 = Category.create({
             'name': 'Test subcategory 2',
+            'code': 'top-17',
             'parent_id': category_subcat_1.id,
         })
         self.env['bureaucrat.knowledge.category']._parent_store_compute()
@@ -412,13 +417,16 @@ class TestKnowledgeCategoryUnlink(TestBureaucratKnowledgeBase):
 
         Category = self.env['bureaucrat.knowledge.category']
         category_top_level = Category.create({
-            'name': 'Test top level category '})
+            'name': 'Test top level category',
+            'code': 'top-12'})
         category_subcat_1 = Category.create({
             'name': 'Test subcategory 1',
+            'code': 'top-13',
             'parent_id': category_top_level.id,
         })
         category_subcat_2 = Category.create({
             'name': 'Test subcategory 2',
+            'code': 'top-14',
             'parent_id': category_subcat_1.id,
         })
         self.env['bureaucrat.knowledge.category']._parent_store_compute()

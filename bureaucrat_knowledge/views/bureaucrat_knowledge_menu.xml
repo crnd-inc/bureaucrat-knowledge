@@ -14,4 +14,9 @@
               parent="bureaucrat_knowledge_menu" sequence="10"
               action="action_bureaucrat_knowledge_document"/>
 
+        <menuitem id="bureaucrat_knowledge_document_types_menu"
+              parent="bureaucrat_knowledge_menu" sequence="80"
+              action="action_bureaucrat_knowledge_document_type"/>
+
+
 </odoo>

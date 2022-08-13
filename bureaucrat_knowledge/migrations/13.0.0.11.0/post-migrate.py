@@ -12,7 +12,7 @@ def migrate(cr, installed_version):
     for record in KnowledgeCategory.search([]):
         if record.parent_id and record.visibility_type != 'parent':
             record.visibility_type = 'parent'
-        elif not(record.parent_id) and record.visibility_type != 'internal':
+        elif not (record.parent_id) and record.visibility_type != 'internal':
             record.visibility_type = 'internal'
 
     # Migrate knowledge base documents
@@ -21,5 +21,5 @@ def migrate(cr, installed_version):
     for record in KnowledgeDocument.search([]):
         if record.category_id and record.visibility_type != 'parent':
             record.visibility_type = 'parent'
-        elif not(record.category_id) and record.visibility_type != 'internal':
+        elif not (record.category_id) and record.visibility_type != 'internal':
             record.visibility_type = 'internal'

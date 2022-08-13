@@ -167,9 +167,9 @@
                     <div class="row">
                         <div class="col-12">
                             <div id="document-text"
-                                 t-if="doc.document_type == 'html'"
+                                 t-if="doc.document_format == 'html'"
                                  t-field="doc.document_body_html"/>
-                            <div t-if="doc.document_type == 'pdf' and doc.document_body_pdf"
+                            <div t-if="doc.document_format == 'pdf' and doc.document_body_pdf"
                                  class="embed-responsive embed-responsive-4by3 embed-responsive-item mb8">
                                 <iframe class="o_knowledge_pdfviewer" t-att-src="doc.pdf_src_url"/>
                             </div>

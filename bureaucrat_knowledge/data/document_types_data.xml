@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="sequence_document_type_default_sequence" model="ir.sequence">
+          <field name="name">Default document numbers sequence</field>
+          <field name="code">bureaucrat.document.type.default.sequence</field>
+          <field name="prefix">D</field>
+          <field name="padding">4</field>
+          <field name="number_next">1</field>
+          <field name="number_increment">1</field>
+          <field name="company_id"></field>
+      </record>
+
+    <record id="bureaucrat_document_type_art"
+            model="bureaucrat.document.type">
+        <field name="name">Article</field>
+        <field name="code">ART</field>
+        <field name="number_generator_id" ref="sequence_document_type_default_sequence"/>
+    </record>
+
+        <record id="bureaucrat_document_type_rfc"
+            model="bureaucrat.document.type">
+        <field name="name">Change request</field>
+        <field name="code">RFC</field>
+        <field name="number_generator_id" ref="sequence_document_type_default_sequence"/>
+    </record>
+    <record id="bureaucrat_document_type_ac"
+            model="bureaucrat.document.type">
+        <field name="name">Act of change</field>
+        <field name="code">AC</field>
+        <field name="number_generator_id" ref="sequence_document_type_default_sequence"/>
+    </record>
+    <record id="bureaucrat_document_type_fs"
+            model="bureaucrat.document.type">
+        <field name="name">Functional specification</field>
+        <field name="code">FS</field>
+        <field name="number_generator_id" ref="sequence_document_type_default_sequence"/>
+    </record>
+    <record id="bureaucrat_document_type_ts"
+            model="bureaucrat.document.type">
+        <field name="name">Technical specification</field>
+        <field name="code">TS</field>
+        <field name="number_generator_id" ref="sequence_document_type_default_sequence"/>
+    </record>
+    <record id="bureaucrat_document_type_sop"
+            model="bureaucrat.document.type">
+        <field name="name">Standard operating procedure</field>
+        <field name="code">SOP</field>
+        <field name="number_generator_id" ref="sequence_document_type_default_sequence"/>
+    </record>
+    <record id="bureaucrat_document_type_bmp"
+            model="bureaucrat.document.type">
+        <field name="name">Business Process Model</field>
+        <field name="code">BMP</field>
+        <field name="number_generator_id" ref="sequence_document_type_default_sequence"/>
+    </record>
+</odoo>

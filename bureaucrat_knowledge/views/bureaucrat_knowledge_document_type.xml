@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="bureaucrat_knowledge_document_type_view_search"
+            model="ir.ui.view">
+        <field name="model">bureaucrat.document.type</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="code"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="bureaucrat_knowledge_document_type_view_tree"
+            model="ir.ui.view">
+        <field name="model">bureaucrat.document.type</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="number_generator_id"/>
+            </tree>
+        </field>
+    </record>
+    <record id="bureaucrat_knowledge_document_type_view_form"
+            model="ir.ui.view">
+        <field name="model">bureaucrat.document.type</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div>
+                        <h2>
+                        <field name="name"/>
+                        </h2>
+                    </div>
+                    <div>
+                        <field name="code"/>
+                    </div>
+                    <div>
+                        <field name="number_generator_id"/>
+                    </div>
+                    <notebook>
+                        <page name="page_info" string="Info">
+                            <div>
+                                <h3>Description</h3>
+                                <field name="description"
+                                       placeholder="Description"/>
+                            </div>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="action_bureaucrat_knowledge_document_type"
+            model="ir.actions.act_window">
+        <field name="name">Document types</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">bureaucrat.document.type</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

@@ -33,11 +33,29 @@ class BureaucratKnowledgeDocument(models.Model):
 
     _auto_set_noupdate_on_write = True
 
+    @api.model
+    def default_get(self, default_fields):
+        res = super(BureaucratKnowledgeDocument, self).default_get(
+            default_fields)
+        type_article = self.env.ref(
+            'bureaucrat_knowledge.bureaucrat_document_type_art')
+        res['document_type_id'] = type_article.id
+        return res
+
     name = fields.Char(translate=True, index=True, required=True)
-    document_type = fields.Selection(
+    document_number = fields.Char(index=True, required=False, size=5)
+    code = fields.Char(
+        compute='_compute_code', store=True, index=True, readonly=True)
+    document_format = fields.Selection(
         default='html',
         selection=DOC_TYPE,
         required=True,
+    )
+    document_type = fields.Selection(
+        selection=DOC_TYPE,
+        readonly=True,
+        compute='_compute_document_type',
+        inverse='_inverse_document_type',
     )
     document_body_html = fields.Html()
     document_body_pdf = fields.Binary(attachment=True)
@@ -64,6 +82,10 @@ class BureaucratKnowledgeDocument(models.Model):
     commit_summary = fields.Char(store=True)
     index_document_body = fields.Text(
         store=True, compute='_compute_index_body')
+    document_type_id = fields.Many2one(
+        'bureaucrat.document.type', index=True,
+        required=True, ondelete='restrict',
+        auto_join=True)
 
     active = fields.Boolean(default=True, index=True)
     color = fields.Integer('Color Index', readonly=False)
@@ -176,15 +198,29 @@ class BureaucratKnowledgeDocument(models.Model):
          "(category_id IS NULL AND visibility_type != 'parent'))",
          "Document must have a parent category "
          "to set Visibility Type 'Parent'"),
+        ('document_number_ascii_only',
+         r"CHECK (document_number ~ '^[a-zA-Z0-9\-_]*$')",
+         'document number must be ascii only'),
     ]
+
+    @api.depends('category_id', 'document_type_id', 'document_number')
+    def _compute_code(self):
+        for rec in self:
+            if rec.category_id:
+                rec.code = '%s_%s_%s' % (rec.document_type_id.code,
+                                         rec.category_id.code,
+                                         rec.document_number)
+            else:
+                rec.code = '%s_%s' % (rec.document_type_id.code,
+                                      rec.document_number, )
 
     @api.depends('document_body_html', 'document_body_pdf', 'document_type')
     def _compute_preview(self):
         for rec in self:
-            if rec.document_type == 'pdf':
+            if rec.document_format == 'pdf':
                 rec.document_preview_image = \
                     rec._get_preview_from_pdf()
-            if rec.document_type == 'html':
+            if rec.document_format == 'html':
                 rec.document_preview_text = \
                     _get_preview_from_html(rec.document_body_html)
 
@@ -271,7 +307,8 @@ class BureaucratKnowledgeDocument(models.Model):
         )
 
     def _get_document_index_pdf(self):
-        '''Index PDF documents'''
+        """ Index PDF documents
+        """
         # TODO: Maybe there is a better way to do pdf indexing
         self.ensure_one()
         if not self.document_body_pdf:
@@ -318,9 +355,9 @@ class BureaucratKnowledgeDocument(models.Model):
         """ Compute index content for the document.
             Could be used for searches
         """
-        if self.document_type == 'html':
+        if self.document_format == 'html':
             return self._get_document_index_html()
-        if self.document_type == 'pdf':
+        if self.document_format == 'pdf':
             return self._get_document_index_pdf()
         return ''
 
@@ -339,7 +376,7 @@ class BureaucratKnowledgeDocument(models.Model):
         preview[0].save(byte_io, 'PNG')
         return base64.b64encode(byte_io.getvalue())
 
-    @api.depends('document_type', 'document_body_html', 'document_body_pdf')
+    @api.depends('document_format', 'document_body_html', 'document_body_pdf')
     def _compute_index_body(self):
         for rec in self:
             rec.index_document_body = rec._get_document_index()
@@ -359,7 +396,7 @@ class BureaucratKnowledgeDocument(models.Model):
             'document_id': self.id,
             'document_name': self.name,
             'commit_summary': self.commit_summary,
-            'document_type': self.document_type,
+            'document_format': self.document_format,
         }
 
         # Clear commit_summary for next time
@@ -368,11 +405,11 @@ class BureaucratKnowledgeDocument(models.Model):
         # TODO: move preparing data logic to separate method,
         #       to simplify futher extension of knowledge base
         #       with new document types
-        if self.document_type == 'html':
+        if self.document_format == 'html':
             history_vals.update({
                 'document_body_html': self.document_body_html,
             })
-        elif self.document_type == 'pdf':
+        elif self.document_format == 'pdf':
             history_vals.update({
                 'document_body_pdf': self.document_body_pdf,
             })
@@ -401,12 +438,11 @@ class BureaucratKnowledgeDocument(models.Model):
         # to ensure that current user has access to create this document
         document.check_access_rule('create')
         document._save_document_history()
-
         return document
 
-    @pre_write('document_type')
+    @pre_write('document_format')
     def _before_document_changed(self, changes):
-        old_doc_type, __ = changes['document_type']
+        old_doc_type, __ = changes['document_format']
         if old_doc_type == 'html':
             return {'document_body_html': False}
         if old_doc_type == 'pdf':
@@ -415,8 +451,33 @@ class BureaucratKnowledgeDocument(models.Model):
 
     @post_write(
         'name',
-        'document_type',
+        'document_format',
         'document_body_html',
         'document_body_pdf')
     def _post_document_changed(self, changes):
         self._save_document_history()
+
+    @api.depends('document_format')
+    def _compute_document_type(self):
+        for rec in self:
+            rec.document_type = rec.document_format
+
+    def _inverse_document_type(self):
+        for rec in self:
+            rec.document_format = rec.document_type
+            _logger.warning(
+                "Field 'document_type' on bureaucrat.knowledge.document "
+                "is deprecated and should be removed.")
+
+    @api.model
+    def _add_missing_default_values(self, values):
+        res = super(
+            BureaucratKnowledgeDocument, self
+        )._add_missing_default_values(values)
+
+        new_doc = self.new(res)
+        if not new_doc.document_number and new_doc.document_type_id:
+            res['document_number'] = (
+                new_doc.document_type_id.sudo().
+                number_generator_id.next_by_id())
+        return res

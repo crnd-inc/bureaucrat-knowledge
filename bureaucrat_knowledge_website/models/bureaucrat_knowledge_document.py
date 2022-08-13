@@ -17,10 +17,10 @@ class BureaucratKnowledgeDocument(models.Model):
         compute='_compute_website_url',
         help='The full URL to access the document through the website.')
 
-    @api.depends('document_type')
+    @api.depends('document_format')
     def _compute_src_url(self):
         for record in self:
-            if record.document_type == 'pdf':
+            if record.document_format == 'pdf':
                 query_obj = {
                     'model': 'bureaucrat.knowledge.document',
                     'field': 'document_body_pdf',

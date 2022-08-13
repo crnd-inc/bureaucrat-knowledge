@@ -5,7 +5,7 @@
         <field name="arch" type="xml">
             <tree>
                 <field name="document_name"/>
-                <field name="document_type"/>
+                <field name="document_format"/>
                 <field name="commit_summary"/>
                 <field name="user_id"/>
                 <field name="date_create"/>
@@ -23,15 +23,15 @@
                             <field name="document_id"/>
                         </group>
                         <group>
-                            <field name="document_type" invisible="True"/>
+                            <field name="document_format" invisible="True"/>
                             <field name="commit_summary"/>
                         </group>
                     </group>
 
                     <field name="document_body_html"
-                           attrs="{'invisible': [('document_type', '!=', 'html')]}"/>
+                           attrs="{'invisible': [('document_format', '!=', 'html')]}"/>
                     <field name="document_body_pdf"
-                           attrs="{'invisible': [('document_type', '!=', 'pdf')]}"
+                           attrs="{'invisible': [('document_format', '!=', 'pdf')]}"
                            widget="pdf_viewer"/>
 
                     <group string="References">

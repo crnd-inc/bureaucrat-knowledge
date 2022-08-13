@@ -20,7 +20,7 @@ class BureaucratKnowledgeDocumentHistory(models.Model):
 
     commit_summary = fields.Char()
     document_name = fields.Char()
-    document_type = fields.Selection(
+    document_format = fields.Selection(
         selection=DOC_TYPE, required=True)
     document_body_html = fields.Html()
     document_body_pdf = fields.Binary(attachment=True)

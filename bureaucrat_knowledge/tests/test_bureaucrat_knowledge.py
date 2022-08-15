@@ -154,6 +154,11 @@ class TestBureaucratKnowledge(TestBureaucratKnowledgeBase):
         self.assertRegex(doc.document_number, r'D\d{4}')
         self.assertRegex(doc.code, r'CST18_RFC_D\d{4}')
 
+        category.code = 'TST78'
+
+        self.assertEqual(doc.category_id.code, 'TST78')
+        self.assertRegex(doc.code, r'TST78_RFC_D\d{4}')
+
     def test_document_code_generation_with_categ_custom_number(self):
         category = self.env['bureaucrat.knowledge.category'].create({
             'name': 'Test Categ 13',
@@ -171,4 +176,9 @@ class TestBureaucratKnowledge(TestBureaucratKnowledgeBase):
         })
 
         self.assertEqual(doc.document_number, 'TST13')
-        self.assertEqual(doc.code, r'CST18_RFC_TST13')
+        self.assertEqual(doc.code, 'CST18_RFC_TST13')
+
+        category.code = 'TST78'
+
+        self.assertEqual(doc.category_id.code, 'TST78')
+        self.assertEqual(doc.code, 'TST78_RFC_TST13')

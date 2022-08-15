@@ -120,7 +120,7 @@ class TestBureaucratKnowledge(TestBureaucratKnowledgeBase):
         })
 
         self.assertRegex(doc.document_number, r'D\d{4}')
-        self.assertRegex(doc.code, r'DRFC_\d{4}')
+        self.assertRegex(doc.code, r'RFC_D\d{4}')
 
     def test_document_code_generation_no_categ_custom_number(self):
         doc_type = self.env.ref(

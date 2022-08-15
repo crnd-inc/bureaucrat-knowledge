@@ -203,7 +203,9 @@ class BureaucratKnowledgeDocument(models.Model):
          'document number must be ascii only'),
     ]
 
-    @api.depends('category_id', 'document_type_id', 'document_number')
+    @api.depends('category_id.code',
+                 'document_type_id.code',
+                 'document_number')
     def _compute_code(self):
         for rec in self:
             if rec.category_id:

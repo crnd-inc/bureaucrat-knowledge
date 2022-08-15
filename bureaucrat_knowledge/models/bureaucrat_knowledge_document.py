@@ -207,8 +207,8 @@ class BureaucratKnowledgeDocument(models.Model):
     def _compute_code(self):
         for rec in self:
             if rec.category_id:
-                rec.code = '%s_%s_%s' % (rec.document_type_id.code,
-                                         rec.category_id.code,
+                rec.code = '%s_%s_%s' % (rec.category_id.code,
+                                         rec.document_type_id.code,
                                          rec.document_number)
             else:
                 rec.code = '%s_%s' % (rec.document_type_id.code,

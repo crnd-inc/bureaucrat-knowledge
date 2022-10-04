@@ -373,7 +373,14 @@ class BureaucratKnowledgeCategory(models.Model):
                          {'active': rec.active})
 
     def name_get(self):
-        return [(rec.id, rec.name) for rec in self]
+        result = []
+        for record in self:
+            rec_name = "%(name)s [%(code)s]" % {
+                'name': record.name,
+                'code': record.code,
+            }
+            result.append((record.id, rec_name))
+        return result
 
     def _compute_full_name(self):
         def get_names(rec):

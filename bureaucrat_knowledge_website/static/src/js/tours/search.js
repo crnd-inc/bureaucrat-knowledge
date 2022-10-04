@@ -56,7 +56,7 @@ odoo.define('bureaucrat_knowledge_website.search', function (require) {
         {
             content: "Navigate category 'Bureaucrat Documentation'",
             trigger: ".knowledge-base-website" +
-                " a[href='/knowledge/bureaucrat-documentation-1']",
+                " a[href='/knowledge/bureaucrat-documentation-bd-1']",
         },
     ]);
     return {};

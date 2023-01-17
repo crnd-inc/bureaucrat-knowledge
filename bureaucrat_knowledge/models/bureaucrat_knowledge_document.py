@@ -369,10 +369,18 @@ class BureaucratKnowledgeDocument(models.Model):
             return ''
 
         try:
-            preview = pdf2image.convert_from_bytes(
-                base64.b64decode(self.document_body_pdf))
+            pdf_content = base64.b64decode(self.document_body_pdf)
+
+            # TODO: This could take a lot of memory on large PDF,
+            #       thus we have to think how to optimize this.
+            preview = pdf2image.convert_from_bytes(pdf_content)
         except Exception:
-            _logger.warning('Error in decode data for pdf')
+            _logger.error('Error in decode data for pdf', exc_info=True)
+            # Cannot generate preview image, this we have return empty string
+            # to show no preview, but do not fail with error.
+            # Absence of preview is not critical, thus there is no sense
+            # to raise error here.
+            return ''
 
         byte_io = io.BytesIO()
         preview[0].save(byte_io, 'PNG')
@@ -405,7 +413,7 @@ class BureaucratKnowledgeDocument(models.Model):
         self.commit_summary = False
 
         # TODO: move preparing data logic to separate method,
-        #       to simplify futher extension of knowledge base
+        #       to simplify further extension of knowledge base
         #       with new document types
         if self.document_format == 'html':
             history_vals.update({

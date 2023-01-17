@@ -274,7 +274,7 @@ class TestKnowledgeCategoryRead(TestBureaucratKnowledgeBase):
 
         # Change visibility time of subcategory level 1 to 'internal'
         self.category_subcat_1.visibility_type = 'internal'
-        self.env['bureaucrat.knowledge.category'].flush()
+        self.env['bureaucrat.knowledge.category'].flush_model()
 
         # And check that employees, portal and public users could see
         # top-level category (it has visibility type public)
@@ -387,7 +387,7 @@ class TestKnowledgeCategoryRead(TestBureaucratKnowledgeBase):
         self.category_subcat_1.write({
             'visibility_user_ids': [(5, 0)],
             'visibility_type': 'parent'})
-        self.env['bureaucrat.knowledge.category'].flush()
+        self.env['bureaucrat.knowledge.category'].flush_model()
 
         self.assertEqual(
             self.category_top_level.with_user(self.demo_user).read(
@@ -456,7 +456,7 @@ class TestKnowledgeCategoryRead(TestBureaucratKnowledgeBase):
         self.category_subcat_1.write({
             'visibility_group_ids': [(5, 0)],
             'visibility_type': 'parent'})
-        self.env['bureaucrat.knowledge.category'].flush()
+        self.env['bureaucrat.knowledge.category'].flush_model()
 
         self.assertEqual(
             self.category_top_level.with_user(self.demo_user).read(

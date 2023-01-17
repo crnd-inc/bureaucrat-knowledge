@@ -139,7 +139,7 @@ class TestKnowledgeDocumentRead(TestBureaucratKnowledgeBase):
 
         # Make document internal
         self.document_subcat_2.visibility_type = 'internal'
-        self.env['bureaucrat.knowledge.document'].flush()
+        self.env['bureaucrat.knowledge.document'].flush_model()
 
         # Ensure that employees could access this document
         self.assertEqual(
@@ -153,7 +153,7 @@ class TestKnowledgeDocumentRead(TestBureaucratKnowledgeBase):
 
         # Make document accessible via portal
         self.document_subcat_2.visibility_type = 'portal'
-        self.env['bureaucrat.knowledge.document'].flush()
+        self.env['bureaucrat.knowledge.document'].flush_model()
 
         # Ensure that employees and portal users could access this documnet
         self.assertEqual(
@@ -169,7 +169,7 @@ class TestKnowledgeDocumentRead(TestBureaucratKnowledgeBase):
 
         # Make document public
         self.document_subcat_2.visibility_type = 'public'
-        self.env['bureaucrat.knowledge.document'].flush()
+        self.env['bureaucrat.knowledge.document'].flush_model()
 
         # Ensure that even public users could read this document
         self.assertEqual(
@@ -248,7 +248,7 @@ class TestKnowledgeDocumentRead(TestBureaucratKnowledgeBase):
 
         # Change visibility time of subcategory level 1 to 'internal'
         self.category_subcat_1.visibility_type = 'internal'
-        self.env['bureaucrat.knowledge.document'].flush()
+        self.env['bureaucrat.knowledge.document'].flush_model()
 
         # And check that only employees can see subcategory (level 1)
         self.assertEqual(
@@ -262,7 +262,7 @@ class TestKnowledgeDocumentRead(TestBureaucratKnowledgeBase):
 
         # Change visibility type to 'restricted' for subcategory level 2
         self.document_subcat_2.visibility_type = 'portal'
-        self.env['bureaucrat.knowledge.document'].flush()
+        self.env['bureaucrat.knowledge.document'].flush_model()
 
         # And check that nobody can see subcategory (level 2)
         self.assertEqual(
@@ -361,7 +361,7 @@ class TestKnowledgeDocumentRead(TestBureaucratKnowledgeBase):
 
         self.category_top_level.write({
             'editor_user_ids': [(4, self.demo_user.id)]})
-        self.env['bureaucrat.knowledge.document'].flush()
+        self.env['bureaucrat.knowledge.document'].flush_model()
 
         self.assertEqual(len(self.category_top_level.editor_user_ids), 1)
         self.assertEqual(
@@ -373,7 +373,7 @@ class TestKnowledgeDocumentRead(TestBureaucratKnowledgeBase):
 
         self.category_top_level.write({
             'editor_user_ids': [(3, self.demo_user.id)]})
-        self.env['bureaucrat.knowledge.document'].flush()
+        self.env['bureaucrat.knowledge.document'].flush_model()
         with self.assertRaises(exceptions.AccessError):
             self.document_subcat_2.with_user(self.demo_user).read(['name'])
 
@@ -383,7 +383,7 @@ class TestKnowledgeDocumentRead(TestBureaucratKnowledgeBase):
 
         self.category_subcat_1.write({
             'editor_user_ids': [(4, self.demo_user.id)]})
-        self.env['bureaucrat.knowledge.document'].flush()
+        self.env['bureaucrat.knowledge.document'].flush_model()
 
         self.assertEqual(len(self.category_subcat_1.editor_user_ids), 1)
         self.assertEqual(
@@ -395,7 +395,7 @@ class TestKnowledgeDocumentRead(TestBureaucratKnowledgeBase):
 
         self.category_subcat_1.write({
             'editor_user_ids': [(3, self.demo_user.id)]})
-        self.env['bureaucrat.knowledge.document'].flush()
+        self.env['bureaucrat.knowledge.document'].flush_model()
         with self.assertRaises(exceptions.AccessError):
             self.document_subcat_2.with_user(self.demo_user).read(['name'])
 
@@ -405,7 +405,7 @@ class TestKnowledgeDocumentRead(TestBureaucratKnowledgeBase):
 
         self.category_subcat_2.write({
             'editor_user_ids': [(4, self.demo_user.id)]})
-        self.env['bureaucrat.knowledge.document'].flush()
+        self.env['bureaucrat.knowledge.document'].flush_model()
 
         self.assertEqual(len(self.category_subcat_2.editor_user_ids), 1)
         self.assertEqual(
@@ -417,7 +417,7 @@ class TestKnowledgeDocumentRead(TestBureaucratKnowledgeBase):
 
         self.category_subcat_2.write({
             'editor_user_ids': [(3, self.demo_user.id)]})
-        self.env['bureaucrat.knowledge.document'].flush()
+        self.env['bureaucrat.knowledge.document'].flush_model()
         with self.assertRaises(exceptions.AccessError):
             self.document_subcat_2.with_user(self.demo_user).read(['name'])
 
@@ -445,7 +445,7 @@ class TestKnowledgeDocumentRead(TestBureaucratKnowledgeBase):
 
         self.category_top_level.write({
             'editor_group_ids': [(4, self.group_demo.id)]})
-        self.env['bureaucrat.knowledge.document'].flush()
+        self.env['bureaucrat.knowledge.document'].flush_model()
 
         self.assertEqual(len(self.category_top_level.editor_group_ids), 1)
         self.assertEqual(
@@ -458,7 +458,7 @@ class TestKnowledgeDocumentRead(TestBureaucratKnowledgeBase):
 
         self.category_top_level.write({
             'editor_group_ids': [(3, self.group_demo.id)]})
-        self.env['bureaucrat.knowledge.document'].flush()
+        self.env['bureaucrat.knowledge.document'].flush_model()
         with self.assertRaises(exceptions.AccessError):
             self.document_subcat_2.with_user(self.demo_user).read(['name'])
 
@@ -468,7 +468,7 @@ class TestKnowledgeDocumentRead(TestBureaucratKnowledgeBase):
 
         self.category_subcat_1.write({
             'editor_group_ids': [(4, self.group_demo.id)]})
-        self.env['bureaucrat.knowledge.document'].flush()
+        self.env['bureaucrat.knowledge.document'].flush_model()
 
         self.assertEqual(len(self.category_subcat_1.editor_group_ids), 1)
         self.assertEqual(
@@ -480,7 +480,7 @@ class TestKnowledgeDocumentRead(TestBureaucratKnowledgeBase):
 
         self.category_subcat_1.write({
             'editor_group_ids': [(3, self.group_demo.id)]})
-        self.env['bureaucrat.knowledge.document'].flush()
+        self.env['bureaucrat.knowledge.document'].flush_model()
         with self.assertRaises(exceptions.AccessError):
             self.document_subcat_2.with_user(self.demo_user).read(['name'])
 
@@ -490,7 +490,7 @@ class TestKnowledgeDocumentRead(TestBureaucratKnowledgeBase):
 
         self.category_subcat_2.write({
             'editor_group_ids': [(4, self.group_demo.id)]})
-        self.env['bureaucrat.knowledge.document'].flush()
+        self.env['bureaucrat.knowledge.document'].flush_model()
 
         self.assertEqual(len(self.category_subcat_2.editor_group_ids), 1)
         self.assertEqual(
@@ -502,7 +502,7 @@ class TestKnowledgeDocumentRead(TestBureaucratKnowledgeBase):
 
         self.category_subcat_2.write({
             'editor_group_ids': [(3, self.group_demo.id)]})
-        self.env['bureaucrat.knowledge.document'].flush()
+        self.env['bureaucrat.knowledge.document'].flush_model()
         with self.assertRaises(exceptions.AccessError):
             self.document_subcat_2.with_user(self.demo_user).read(['name'])
 
@@ -529,7 +529,7 @@ class TestKnowledgeDocumentRead(TestBureaucratKnowledgeBase):
         # Add owner to Top level category
         self.category_top_level.write({
             'owner_user_ids': [(4, self.demo_user.id)]})
-        self.env['bureaucrat.knowledge.document'].flush()
+        self.env['bureaucrat.knowledge.document'].flush_model()
 
         self.assertEqual(len(self.category_top_level.owner_user_ids), 1)
         self.assertEqual(
@@ -541,7 +541,7 @@ class TestKnowledgeDocumentRead(TestBureaucratKnowledgeBase):
 
         self.category_top_level.write({
             'owner_user_ids': [(3, self.demo_user.id)]})
-        self.env['bureaucrat.knowledge.document'].flush()
+        self.env['bureaucrat.knowledge.document'].flush_model()
         with self.assertRaises(exceptions.AccessError):
             self.document_subcat_2.with_user(self.demo_user).read(['name'])
 
@@ -552,7 +552,7 @@ class TestKnowledgeDocumentRead(TestBureaucratKnowledgeBase):
 
         self.category_subcat_1.write({
             'owner_user_ids': [(4, self.demo_user.id)]})
-        self.env['bureaucrat.knowledge.document'].flush()
+        self.env['bureaucrat.knowledge.document'].flush_model()
 
         self.assertEqual(len(self.category_subcat_1.owner_user_ids), 1)
         self.assertEqual(
@@ -564,7 +564,7 @@ class TestKnowledgeDocumentRead(TestBureaucratKnowledgeBase):
 
         self.category_subcat_1.write({
             'owner_user_ids': [(3, self.demo_user.id)]})
-        self.env['bureaucrat.knowledge.document'].flush()
+        self.env['bureaucrat.knowledge.document'].flush_model()
         with self.assertRaises(exceptions.AccessError):
             self.document_subcat_2.with_user(self.demo_user).read(['name'])
 
@@ -575,7 +575,7 @@ class TestKnowledgeDocumentRead(TestBureaucratKnowledgeBase):
 
         self.category_subcat_2.write({
             'owner_user_ids': [(4, self.demo_user.id)]})
-        self.env['bureaucrat.knowledge.document'].flush()
+        self.env['bureaucrat.knowledge.document'].flush_model()
 
         self.assertEqual(len(self.category_subcat_2.owner_user_ids), 1)
         self.assertEqual(
@@ -587,7 +587,7 @@ class TestKnowledgeDocumentRead(TestBureaucratKnowledgeBase):
 
         self.category_subcat_2.write({
             'owner_user_ids': [(3, self.demo_user.id)]})
-        self.env['bureaucrat.knowledge.document'].flush()
+        self.env['bureaucrat.knowledge.document'].flush_model()
         with self.assertRaises(exceptions.AccessError):
             self.document_subcat_2.with_user(self.demo_user).read(['name'])
 
@@ -616,7 +616,7 @@ class TestKnowledgeDocumentRead(TestBureaucratKnowledgeBase):
         # Add owner group to Top level category
         self.category_top_level.write({
             'owner_group_ids': [(4, self.group_demo.id)]})
-        self.env['bureaucrat.knowledge.document'].flush()
+        self.env['bureaucrat.knowledge.document'].flush_model()
 
         self.assertEqual(len(self.category_top_level.owner_group_ids), 1)
         self.assertEqual(
@@ -628,7 +628,7 @@ class TestKnowledgeDocumentRead(TestBureaucratKnowledgeBase):
 
         self.category_top_level.write({
             'owner_group_ids': [(3, self.group_demo.id)]})
-        self.env['bureaucrat.knowledge.document'].flush()
+        self.env['bureaucrat.knowledge.document'].flush_model()
         with self.assertRaises(exceptions.AccessError):
             self.document_subcat_2.with_user(self.demo_user).read(['name'])
 
@@ -638,7 +638,7 @@ class TestKnowledgeDocumentRead(TestBureaucratKnowledgeBase):
 
         self.category_subcat_1.write({
             'owner_group_ids': [(4, self.group_demo.id)]})
-        self.env['bureaucrat.knowledge.document'].flush()
+        self.env['bureaucrat.knowledge.document'].flush_model()
 
         self.assertEqual(len(self.category_subcat_1.owner_group_ids), 1)
         self.assertEqual(
@@ -650,7 +650,7 @@ class TestKnowledgeDocumentRead(TestBureaucratKnowledgeBase):
 
         self.category_subcat_1.write({
             'owner_group_ids': [(3, self.group_demo.id)]})
-        self.env['bureaucrat.knowledge.document'].flush()
+        self.env['bureaucrat.knowledge.document'].flush_model()
         with self.assertRaises(exceptions.AccessError):
             self.document_subcat_2.with_user(self.demo_user).read(['name'])
 
@@ -660,7 +660,7 @@ class TestKnowledgeDocumentRead(TestBureaucratKnowledgeBase):
 
         self.category_subcat_2.write({
             'owner_group_ids': [(4, self.group_demo.id)]})
-        self.env['bureaucrat.knowledge.document'].flush()
+        self.env['bureaucrat.knowledge.document'].flush_model()
 
         self.assertEqual(len(self.category_subcat_2.owner_group_ids), 1)
         self.assertEqual(
@@ -672,6 +672,6 @@ class TestKnowledgeDocumentRead(TestBureaucratKnowledgeBase):
 
         self.category_subcat_2.write({
             'owner_group_ids': [(3, self.group_demo.id)]})
-        self.env['bureaucrat.knowledge.document'].flush()
+        self.env['bureaucrat.knowledge.document'].flush_model()
         with self.assertRaises(exceptions.AccessError):
             self.document_subcat_2.with_user(self.demo_user).read(['name'])

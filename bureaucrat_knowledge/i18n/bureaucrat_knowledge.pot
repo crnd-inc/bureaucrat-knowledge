@@ -50,6 +50,11 @@ msgid "#{record.name.value}"
 msgstr ""
 
 #. module: bureaucrat_knowledge
+#: model:bureaucrat.document.type,name:bureaucrat_knowledge.bureaucrat_document_type_ac
+msgid "Act of change"
+msgstr ""
+
+#. module: bureaucrat_knowledge
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category__message_needaction
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document__message_needaction
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document_history__message_needaction
@@ -134,6 +139,11 @@ msgid "Archived"
 msgstr ""
 
 #. module: bureaucrat_knowledge
+#: model:bureaucrat.document.type,name:bureaucrat_knowledge.bureaucrat_document_type_art
+msgid "Article"
+msgstr ""
+
+#. module: bureaucrat_knowledge
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category__message_attachment_count
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document__message_attachment_count
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document_history__message_attachment_count
@@ -143,6 +153,11 @@ msgstr ""
 #. module: bureaucrat_knowledge
 #: model:bureaucrat.knowledge.category,name:bureaucrat_knowledge.bureaucrat_documentation
 msgid "Bureaucrat Documentation"
+msgstr ""
+
+#. module: bureaucrat_knowledge
+#: model:res.groups,name:bureaucrat_knowledge.group_demo_knowledge_base_test
+msgid "Bureaucrat Knowledge Demo Test"
 msgstr ""
 
 #. module: bureaucrat_knowledge
@@ -163,6 +178,11 @@ msgid "Bureaucrat Knowledge: Document History"
 msgstr ""
 
 #. module: bureaucrat_knowledge
+#: model:ir.model,name:bureaucrat_knowledge.model_bureaucrat_document_type
+msgid "Bureaucrat document type"
+msgstr ""
+
+#. module: bureaucrat_knowledge
 #: model:ir.module.category,name:bureaucrat_knowledge.module_category_bureaucratic_knowledge
 msgid "Bureaucratic Knowledge"
 msgstr ""
@@ -180,6 +200,16 @@ msgstr ""
 #. module: bureaucrat_knowledge
 #: model:res.groups,name:bureaucrat_knowledge.group_bureaucratic_knowledge_user_implicit
 msgid "Bureaucratic Knowledge / User (implicit)"
+msgstr ""
+
+#. module: bureaucrat_knowledge
+#: model:bureaucrat.document.type,name:bureaucrat_knowledge.bureaucrat_document_type_bmp
+msgid "Business Process Model"
+msgstr ""
+
+#. module: bureaucrat_knowledge
+#: sql_constraint:bureaucrat.knowledge.category:0
+msgid "CODE must be unique."
 msgstr ""
 
 #. module: bureaucrat_knowledge
@@ -205,6 +235,11 @@ msgid "Category must have a parent category to set Visibility Type 'Parent'"
 msgstr ""
 
 #. module: bureaucrat_knowledge
+#: model:bureaucrat.document.type,name:bureaucrat_knowledge.bureaucrat_document_type_rfc
+msgid "Change request"
+msgstr ""
+
+#. module: bureaucrat_knowledge
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category__child_ids
 msgid "Child"
 msgstr ""
@@ -212,6 +247,28 @@ msgstr ""
 #. module: bureaucrat_knowledge
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category__child_category_count
 msgid "Child Category Count"
+msgstr ""
+
+#. module: bureaucrat_knowledge
+#: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_document_type__code
+#: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category__code
+#: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document__code
+msgid "Code"
+msgstr ""
+
+#. module: bureaucrat_knowledge
+#: sql_constraint:bureaucrat.knowledge.category:0
+msgid "Code must be ascii only"
+msgstr ""
+
+#. module: bureaucrat_knowledge
+#: sql_constraint:bureaucrat.document.type:0
+msgid "Code name must be unique."
+msgstr ""
+
+#. module: bureaucrat_knowledge
+#: model_terms:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_category_view_form
+msgid "Code..."
 msgstr ""
 
 #. module: bureaucrat_knowledge
@@ -261,6 +318,7 @@ msgid "Created at"
 msgstr ""
 
 #. module: bureaucrat_knowledge
+#: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_document_type__create_uid
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category__create_uid
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document__create_uid
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document__created_by_id
@@ -270,6 +328,7 @@ msgid "Created by"
 msgstr ""
 
 #. module: bureaucrat_knowledge
+#: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_document_type__create_date
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category__create_date
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document__create_date
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document_history__create_date
@@ -294,12 +353,35 @@ msgid "Date Create"
 msgstr ""
 
 #. module: bureaucrat_knowledge
+#: model:bureaucrat.knowledge.document,name:bureaucrat_knowledge.document_demo_sub_2
+msgid "Demo Document For Subcategory 2"
+msgstr ""
+
+#. module: bureaucrat_knowledge
+#: model:bureaucrat.knowledge.document,name:bureaucrat_knowledge.document_demo_sub_2_with_pdf
+msgid "Demo Document For Subcategory 2 With PDF"
+msgstr ""
+
+#. module: bureaucrat_knowledge
+#: model:bureaucrat.knowledge.document,name:bureaucrat_knowledge.document_demo_top_1
+msgid "Demo Document Top Level"
+msgstr ""
+
+#. module: bureaucrat_knowledge
+#: model:res.groups,comment:bureaucrat_knowledge.group_demo_knowledge_base_test
+msgid "Demo group, used in automated tests to test access rights"
+msgstr ""
+
+#. module: bureaucrat_knowledge
+#: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_document_type__description
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category__description
 #: model_terms:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_category_view_form
+#: model_terms:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_document_type_view_form
 msgid "Description"
 msgstr ""
 
 #. module: bureaucrat_knowledge
+#: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_document_type__display_name
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category__display_name
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document__display_name
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document_history__display_name
@@ -332,6 +414,12 @@ msgid "Document Content"
 msgstr ""
 
 #. module: bureaucrat_knowledge
+#: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document__document_format
+#: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document_history__document_format
+msgid "Document Format"
+msgstr ""
+
+#. module: bureaucrat_knowledge
 #: model:ir.actions.act_window,name:bureaucrat_knowledge.action_bureaucrat_knowledge_document_history
 msgid "Document History"
 msgstr ""
@@ -342,19 +430,47 @@ msgid "Document Name"
 msgstr ""
 
 #. module: bureaucrat_knowledge
+#: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document__document_number
+msgid "Document Number"
+msgstr ""
+
+#. module: bureaucrat_knowledge
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document__document_preview_text
 msgid "Document Preview Text"
 msgstr ""
 
 #. module: bureaucrat_knowledge
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document__document_type
-#: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document_history__document_type
+#: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document__document_type_id
+#: model_terms:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_document_view_form
+#: model_terms:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_document_view_kanban
 msgid "Document Type"
+msgstr ""
+
+#. module: bureaucrat_knowledge
+#: model_terms:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_document_view_kanban
+msgid "Document Types"
+msgstr ""
+
+#. module: bureaucrat_knowledge
+#: model_terms:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_document_view_search
+msgid "Document format"
 msgstr ""
 
 #. module: bureaucrat_knowledge
 #: sql_constraint:bureaucrat.knowledge.document:0
 msgid "Document must have a parent category to set Visibility Type 'Parent'"
+msgstr ""
+
+#. module: bureaucrat_knowledge
+#: model_terms:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_document_view_search
+msgid "Document type"
+msgstr ""
+
+#. module: bureaucrat_knowledge
+#: model:ir.actions.act_window,name:bureaucrat_knowledge.action_bureaucrat_knowledge_document_type
+#: model:ir.ui.menu,name:bureaucrat_knowledge.bureaucrat_knowledge_document_types_menu
+msgid "Document types"
 msgstr ""
 
 #. module: bureaucrat_knowledge
@@ -377,7 +493,8 @@ msgstr ""
 
 #. module: bureaucrat_knowledge
 #: model_terms:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_document_view_kanban
-msgid "Edit Document"
+msgid "Edit\n"
+"                                        Document"
 msgstr ""
 
 #. module: bureaucrat_knowledge
@@ -448,9 +565,19 @@ msgid "Followers (Partners)"
 msgstr ""
 
 #. module: bureaucrat_knowledge
+#: model_terms:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_document_view_kanban
+msgid "Format"
+msgstr ""
+
+#. module: bureaucrat_knowledge
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category__full_name
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document__category_full_name
 msgid "Full Name"
+msgstr ""
+
+#. module: bureaucrat_knowledge
+#: model:bureaucrat.document.type,name:bureaucrat_knowledge.bureaucrat_document_type_fs
+msgid "Functional specification"
 msgstr ""
 
 #. module: bureaucrat_knowledge
@@ -685,6 +812,11 @@ msgid "Group"
 msgstr ""
 
 #. module: bureaucrat_knowledge
+#: model_terms:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_document_view_search
+msgid "Group by..."
+msgstr ""
+
+#. module: bureaucrat_knowledge
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document__history_ids
 msgid "History"
 msgstr ""
@@ -745,6 +877,7 @@ msgid "How to backup and restore Odoo database"
 msgstr ""
 
 #. module: bureaucrat_knowledge
+#: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_document_type__id
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category__id
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document__id
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document_history__id
@@ -790,6 +923,7 @@ msgstr ""
 
 #. module: bureaucrat_knowledge
 #: model_terms:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_category_view_form
+#: model_terms:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_document_type_view_form
 msgid "Info"
 msgstr ""
 
@@ -812,6 +946,7 @@ msgid "Knowledge"
 msgstr ""
 
 #. module: bureaucrat_knowledge
+#: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_document_type____last_update
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category____last_update
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document____last_update
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document_history____last_update
@@ -819,6 +954,7 @@ msgid "Last Modified on"
 msgstr ""
 
 #. module: bureaucrat_knowledge
+#: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_document_type__write_uid
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category__write_uid
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document__write_uid
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document_history__write_uid
@@ -826,6 +962,7 @@ msgid "Last Updated by"
 msgstr ""
 
 #. module: bureaucrat_knowledge
+#: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_document_type__write_date
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category__write_date
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document__write_date
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document_history__write_date
@@ -859,6 +996,7 @@ msgid "Messages"
 msgstr ""
 
 #. module: bureaucrat_knowledge
+#: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_document_type__name
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category__name
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document__name
 msgid "Name"
@@ -904,6 +1042,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category__ir_model_data_no_update
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document__ir_model_data_no_update
 msgid "Non Updatable"
+msgstr ""
+
+#. module: bureaucrat_knowledge
+#: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_document_type__number_generator_id
+msgid "Number Generator"
 msgstr ""
 
 #. module: bureaucrat_knowledge
@@ -985,6 +1128,7 @@ msgstr ""
 #. module: bureaucrat_knowledge
 #: selection:bureaucrat.knowledge.category,visibility_type:0
 #: selection:bureaucrat.knowledge.document,visibility_type:0
+#: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_document_type__parent_id
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category__parent_id
 msgid "Parent"
 msgstr ""
@@ -992,6 +1136,11 @@ msgstr ""
 #. module: bureaucrat_knowledge
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category__parent_path
 msgid "Parent Path"
+msgstr ""
+
+#. module: bureaucrat_knowledge
+#: model_terms:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_category_view_form
+msgid "Parent cagtegory..."
 msgstr ""
 
 #. module: bureaucrat_knowledge
@@ -1069,6 +1218,11 @@ msgid "Restricted"
 msgstr ""
 
 #. module: bureaucrat_knowledge
+#: sql_constraint:bureaucrat.document.type:0
+msgid "Role type code must be ascii only"
+msgstr ""
+
+#. module: bureaucrat_knowledge
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_category__sequence
 #: model:ir.model.fields,field_description:bureaucrat_knowledge.field_bureaucrat_knowledge_document__sequence
 msgid "Sequence"
@@ -1086,6 +1240,11 @@ msgid "Settings"
 msgstr ""
 
 #. module: bureaucrat_knowledge
+#: model:bureaucrat.document.type,name:bureaucrat_knowledge.bureaucrat_document_type_sop
+msgid "Standard operating procedure"
+msgstr ""
+
+#. module: bureaucrat_knowledge
 #: model:ir.model.fields,help:bureaucrat_knowledge.field_bureaucrat_knowledge_document__activity_state
 #: model:ir.model.fields,help:bureaucrat_knowledge.field_bureaucrat_knowledge_document_history__activity_state
 msgid "Status based on activities\n"
@@ -1098,6 +1257,16 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_category_view_form
 #: model_terms:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_category_view_tree
 msgid "Subcategories"
+msgstr ""
+
+#. module: bureaucrat_knowledge
+#: model:bureaucrat.knowledge.category,name:bureaucrat_knowledge.bureaucrat_demo_subcategory_1
+msgid "Subcategory 1"
+msgstr ""
+
+#. module: bureaucrat_knowledge
+#: model:bureaucrat.knowledge.category,name:bureaucrat_knowledge.bureaucrat_demo_subcategory_2
+msgid "Subcategory 2"
 msgstr ""
 
 #. module: bureaucrat_knowledge
@@ -1122,6 +1291,11 @@ msgid "Tags..."
 msgstr ""
 
 #. module: bureaucrat_knowledge
+#: model:bureaucrat.document.type,name:bureaucrat_knowledge.bureaucrat_document_type_ts
+msgid "Technical specification"
+msgstr ""
+
+#. module: bureaucrat_knowledge
 #: selection:bureaucrat.knowledge.document,activity_state:0
 #: selection:bureaucrat.knowledge.document.history,activity_state:0
 msgid "Today"
@@ -1133,13 +1307,13 @@ msgid "Top Level"
 msgstr ""
 
 #. module: bureaucrat_knowledge
-#: model:bureaucrat.knowledge.category,name:bureaucrat_knowledge.bureaucrat_documentation_faq_troubleshooting
-msgid "Troubleshooting"
+#: model:bureaucrat.knowledge.category,name:bureaucrat_knowledge.bureaucrat_demo_top_level_1
+msgid "Top level category 1"
 msgstr ""
 
 #. module: bureaucrat_knowledge
-#: model_terms:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_document_view_kanban
-msgid "Types"
+#: model:bureaucrat.knowledge.category,name:bureaucrat_knowledge.bureaucrat_documentation_faq_troubleshooting
+msgid "Troubleshooting"
 msgstr ""
 
 #. module: bureaucrat_knowledge
@@ -1190,6 +1364,11 @@ msgid "Visibility settings"
 msgstr ""
 
 #. module: bureaucrat_knowledge
+#: model_terms:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_document_view_search
+msgid "Visibility type"
+msgstr ""
+
+#. module: bureaucrat_knowledge
 #: model:bureaucrat.knowledge.document,name:bureaucrat_knowledge.website_service_desk
 msgid "Website Service Desk"
 msgstr ""
@@ -1232,14 +1411,21 @@ msgid "XML ID for this record."
 msgstr ""
 
 #. module: bureaucrat_knowledge
+#: sql_constraint:bureaucrat.knowledge.document:0
+msgid "document number must be ascii only"
+msgstr ""
+
+#. module: bureaucrat_knowledge
+#: selection:bureaucrat.knowledge.document,document_format:0
 #: selection:bureaucrat.knowledge.document,document_type:0
-#: selection:bureaucrat.knowledge.document.history,document_type:0
+#: selection:bureaucrat.knowledge.document.history,document_format:0
 msgid "html"
 msgstr ""
 
 #. module: bureaucrat_knowledge
+#: selection:bureaucrat.knowledge.document,document_format:0
 #: selection:bureaucrat.knowledge.document,document_type:0
-#: selection:bureaucrat.knowledge.document.history,document_type:0
+#: selection:bureaucrat.knowledge.document.history,document_format:0
 msgid "pdf"
 msgstr ""
 

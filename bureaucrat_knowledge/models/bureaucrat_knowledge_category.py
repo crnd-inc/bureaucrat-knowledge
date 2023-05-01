@@ -20,7 +20,7 @@ class BureaucratKnowledgeCategory(models.Model):
         'mail.thread',
 
     ]
-    _order = 'sequence, name, id'
+    _order = 'sequence, code, name, id'
     _auto_set_noupdate_on_write = True
 
     name = fields.Char(translate=True, index=True, required=True)

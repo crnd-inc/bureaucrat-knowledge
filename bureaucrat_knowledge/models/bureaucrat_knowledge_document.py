@@ -29,7 +29,7 @@ class BureaucratKnowledgeDocument(models.Model):
         'mail.thread',
         'mail.activity.mixin',
     ]
-    _order = 'sequence, name, id'
+    _order = 'sequence, code, name, id'
 
     _auto_set_noupdate_on_write = True
 

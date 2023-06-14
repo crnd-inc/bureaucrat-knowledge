@@ -30,7 +30,7 @@ class BureaucratKnowledgeCategory(models.Model):
     description = fields.Html()
     parent_id = fields.Many2one(
         'bureaucrat.knowledge.category', index=True, ondelete='cascade')
-    parent_path = fields.Char(index=True)
+    parent_path = fields.Char(index=True, readonly=True, unaccent=False)
 
     child_ids = fields.One2many(
         'bureaucrat.knowledge.category', 'parent_id')
@@ -318,7 +318,7 @@ class BureaucratKnowledgeCategory(models.Model):
                 [vals])
         else:
             to_invalidate = self._clean_caches_on_write__get_clean_fields(vals)
-        self.invalidate_cache(list(to_invalidate))
+        self.invalidate_model(list(to_invalidate))
 
     @api.model_create_multi
     def create(self, vals):

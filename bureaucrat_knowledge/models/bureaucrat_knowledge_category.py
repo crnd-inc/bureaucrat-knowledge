@@ -1,3 +1,4 @@
+import collections.abc
 import logging
 from psycopg2 import sql
 from odoo import models, fields, api, tools
@@ -286,58 +287,75 @@ class BureaucratKnowledgeCategory(models.Model):
             )
         """))
 
+    def _clean_caches_on_write__get_clean_fields(self, vals_list):
+        """ Return set of fields, to clean caches for
+        """
+        to_invalidate = set()
+        for vals in vals_list:
+            if 'parent_id' in vals:
+                to_invalidate |= {
+                    'parent_ids',
+                    'actual_owner_group_ids',
+                    'actual_owner_user_ids',
+                    'actual_editor_group_ids',
+                    'actual_editor_user_ids',
+                }
+            if 'owner_group_ids' in vals:
+                to_invalidate |= {'actual_owner_group_ids'}
+            if 'owner_user_ids' in vals:
+                to_invalidate |= {'actual_owner_user_ids'}
+            if 'editor_group_ids' in vals:
+                to_invalidate |= {'actual_editor_group_ids'}
+            if 'editor_user_ids' in vals:
+                to_invalidate |= {'actual_editor_user_ids'}
+
+        return to_invalidate
+
     def _clean_caches_on_create_write(self, vals):
         # Invalidate cache for 'parent_ids' field
-        to_invalidate = []
-        if 'parent_id' in vals:
-            to_invalidate += [
-                'parent_ids',
-                'actual_owner_group_ids',
-                'actual_owner_user_ids',
-                'actual_editor_group_ids',
-                'actual_editor_user_ids',
-            ]
-        if 'owner_group_ids' in vals:
-            to_invalidate += ['actual_owner_group_ids']
-        if 'owner_user_ids' in vals:
-            to_invalidate += ['actual_owner_user_ids']
-        if 'editor_group_ids' in vals:
-            to_invalidate += ['actual_editor_group_ids']
-        if 'editor_user_ids' in vals:
-            to_invalidate += ['actual_editor_user_ids']
-        self.invalidate_cache(list(set(to_invalidate)))
+        if isinstance(vals, collections.abc.Mapping):
+            to_invalidate = self._clean_caches_on_write__get_clean_fields(
+                [vals])
+        else:
+            to_invalidate = self._clean_caches_on_write__get_clean_fields(vals)
+        self.invalidate_cache(list(to_invalidate))
 
-    @api.model
+    @api.model_create_multi
     def create(self, vals):
         self.check_access_rights('create')
-        # TODO: move this to defaults
-        if vals.get('parent_id', False):
-            vals['visibility_type'] = 'parent'
-        else:
-            vals['visibility_type'] = 'restricted'
-            vals['owner_user_ids'] = [(6, 0, [self.env.user.id])]
+
+        values = []
+        for v in vals:
+            v = dict(v)
+            if v.get('parent_id', False):
+                v['visibility_type'] = 'parent'
+            else:
+                v['visibility_type'] = 'restricted'
+                v['owner_user_ids'] = [(6, 0, [self.env.user.id])]
+            values += [v]
 
         # create with sudo to avoid access rights error on creation, but check
         # access rights later
-        category = super(BureaucratKnowledgeCategory, self.sudo()).create(vals)
+        categories = super(
+            BureaucratKnowledgeCategory, self.sudo()).create(values)
 
-        # It is required to recompute parnt-store, because access rules relies
+        # It is required to recompute parent-store, because access rules relies
         # on parent-store already computed
-        category._parent_store_compute()
+        categories._parent_store_compute()
 
         # reference created category as self.env (because before this category
         # is referenced as sudo)
-        category = category.with_env(self.env)
+        categories = categories.with_env(self.env)
 
         # Clean caches to enforce odoo to reread fields, instead of using
         # cached (incorrect) value
-        self._clean_caches_on_create_write(vals)
+        self._clean_caches_on_create_write(values)
 
         # Enforce check of access rights after category created,
         # to ensure that current user has access to create this category
-        category.check_access_rule('create')
+        categories.check_access_rule('create')
 
-        return category
+        return categories
 
     def write(self, vals):
         res = super(BureaucratKnowledgeCategory, self).write(vals)

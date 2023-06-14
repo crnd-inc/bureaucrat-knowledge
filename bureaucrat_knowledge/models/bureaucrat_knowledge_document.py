@@ -400,55 +400,62 @@ class BureaucratKnowledgeDocument(models.Model):
                 record.visibility_type = False
 
     def _save_document_history(self):
-        history_obj = self.env['bureaucrat.knowledge.document.history']
+        history_data = []
+        for document in self:
+            history_vals = {
+                'document_id': document.id,
+                'document_name': document.name,
+                'commit_summary': document.commit_summary,
+                'document_format': document.document_format,
+            }
 
-        history_vals = {
-            'document_id': self.id,
-            'document_name': self.name,
-            'commit_summary': self.commit_summary,
-            'document_format': self.document_format,
-        }
+            # TODO: move preparing data logic to separate method,
+            #       to simplify further extension of knowledge base
+            #       with new document types
+            if document.document_format == 'html':
+                history_vals.update({
+                    'document_body_html': document.document_body_html,
+                })
+            elif document.document_format == 'pdf':
+                history_vals.update({
+                    'document_body_pdf': document.document_body_pdf,
+                })
 
-        # Clear commit_summary for next time
-        self.commit_summary = False
+            history_data += [history_vals]
 
-        # TODO: move preparing data logic to separate method,
-        #       to simplify further extension of knowledge base
-        #       with new document types
-        if self.document_format == 'html':
-            history_vals.update({
-                'document_body_html': self.document_body_html,
-            })
-        elif self.document_format == 'pdf':
-            history_vals.update({
-                'document_body_pdf': self.document_body_pdf,
-            })
-        return history_obj.create(history_vals)
+        self.env['bureaucrat.knowledge.document.history'].create(history_data)
+        self.write({'commit_summary': False})
 
-    @api.model
+    @api.model_create_multi
     def create(self, vals):
         self.check_access_rights('create')
 
-        # TODO: move to defaults level
-        if vals.get('category_id', False):
-            vals['visibility_type'] = 'parent'
-        else:
-            vals['visibility_type'] = 'restricted'
-            vals['owner_user_ids'] = [(4, self.env.user.id)]
+        values = []
+        for v in vals:
+            v = dict(v)
+            # TODO: move to defaults level
+            if v.get('category_id', False):
+                v['visibility_type'] = 'parent'
+            else:
+                v['visibility_type'] = 'restricted'
+                v['owner_user_ids'] = [(4, self.env.user.id)]
 
-        # This is required to display the author of the document correctly
-        vals.update({'created_by_id': self.env.user.id})
+            # This is required to display the author of the document correctly
+            v.update({'created_by_id': self.env.user.id})
 
-        document = super(BureaucratKnowledgeDocument, self.sudo()).create(vals)
+            values += [v]
+
+        documents = super(BureaucratKnowledgeDocument, self.sudo()).create(
+            values)
         # reference created document as self.env (because before this document
         # is referenced as sudo)
-        document = document.with_env(self.env)
+        documents = documents.with_env(self.env)
 
         # Enforce check of access rights after document created,
         # to ensure that current user has access to create this document
-        document.check_access_rule('create')
-        document._save_document_history()
-        return document
+        documents.check_access_rule('create')
+        documents._save_document_history()
+        return documents
 
     @pre_write('document_format')
     def _before_document_changed(self, changes):

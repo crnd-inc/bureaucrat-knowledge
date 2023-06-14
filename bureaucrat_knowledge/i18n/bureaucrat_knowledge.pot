@@ -53,6 +53,11 @@ msgid "#{record.name.value}"
 msgstr ""
 
 #. module: bureaucrat_knowledge
+#: model_terms:ir.ui.view,arch_db:bureaucrat_knowledge.bureaucrat_knowledge_document_view_kanban
+msgid "<span class=\"fa fa-bars fa-lg\" title=\"Menu\"/>"
+msgstr ""
+
+#. module: bureaucrat_knowledge
 #: model:bureaucrat.document.type,name:bureaucrat_knowledge.bureaucrat_document_type_ac
 msgid "Act of change"
 msgstr ""

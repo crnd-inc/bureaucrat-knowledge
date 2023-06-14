@@ -223,7 +223,7 @@
                                  groups="base.group_user">
                                 <a class="dropdown-toggle" role="button"
                                    data-toggle="dropdown" href="#">
-                                    <span class="fa fa-bars fa-lg"/>
+                                    <span class="fa fa-bars fa-lg" title="Menu"/>
                                 </a>
                                 <ul class="dropdown-menu" role="menu"
                                     aria-labelledby="dLabel">

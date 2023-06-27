@@ -179,9 +179,13 @@ class BureaucratKnowledgeCategory(models.Model):
             'bureaucrat_knowledge.knowledge_category_content_template')
         for rec in self:
             if rec.child_ids or rec.document_ids:
-                rec.category_contents = tmpl._render({
+                val = {
+                    'user': self.env.user,
+                    'env': self.env,
                     'category': rec,
-                })
+                }
+                rec.category_contents = self.env['ir.qweb']._render(
+                    template=tmpl.key, values=val)
             else:
                 rec.category_contents = False
 

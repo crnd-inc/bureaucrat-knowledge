@@ -1094,7 +1094,7 @@ msgstr ""
 #: model:ir.model.fields,help:bureaucrat_knowledge.field_bureaucrat_knowledge_category__message_needaction_counter
 #: model:ir.model.fields,help:bureaucrat_knowledge.field_bureaucrat_knowledge_document__message_needaction_counter
 #: model:ir.model.fields,help:bureaucrat_knowledge.field_bureaucrat_knowledge_document_history__message_needaction_counter
-msgid "Number of messages which requires an action"
+msgid "Number of messages requiring action"
 msgstr ""
 
 #. module: bureaucrat_knowledge

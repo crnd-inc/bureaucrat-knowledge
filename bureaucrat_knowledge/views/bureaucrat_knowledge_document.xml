@@ -198,7 +198,7 @@
             <kanban edit="false" delete="false" group_create="false"
                     quick_create="false" group_edit="false"
                     group_delete="false" sample="1"
-                    class="oe_background_grey o_kanban_dashboard o_project_kanban o_emphasize_colors">
+                    class="oe_background_grey o_kanban_dashboard knowledge-dashboard o_project_kanban o_emphasize_colors">
                 <field name="id"/>
                 <field name="name"/>
                 <field name="color"/>

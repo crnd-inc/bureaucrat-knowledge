@@ -14,3 +14,16 @@
     padding-right: 4px;
     margin-right: 4px;
 }
+.o_kanban_dashboard.knowledge-dashboard {
+    .o_kanban_record {
+        width: auto !important;
+        .o-dropdown {
+            visibility: hidden !important;
+        }
+    }
+    .o_kanban_record:hover {
+        .o-dropdown {
+            visibility: visible !important;
+        }
+    }
+}

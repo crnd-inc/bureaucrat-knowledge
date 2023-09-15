@@ -240,7 +240,7 @@
                                  t-attf-title="#{record.name.value}">
                                 <t t-esc="record.name.value"/>
                             </div>
-                            <div class="o_kanban_record_subtitle border-bottom text-primary border-primary font-italic"
+                            <div class="o_kanban_record_subtitle border-bottom text-primary border-primary font-italic knowledge-subtitle"
                                  t-attf-title="#{record.category_full_name.value}">
                                 <t t-esc="record.category_full_name.value"/>
                             </div>

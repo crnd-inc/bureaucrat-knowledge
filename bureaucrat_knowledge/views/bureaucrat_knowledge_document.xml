@@ -94,7 +94,8 @@
                     <notebook>
                         <page name="document_document" string="Document">
                             <field name="document_body_html"
-                                attrs="{'invisible': [('document_format', '!=', 'html')]}"/>
+                                   attrs="{'invisible': [('document_format', '!=', 'html')]}"
+                                   options="{'style-inline': true, 'codeview': true }"/>
                             <field name="document_body_pdf"
                                 attrs="{'invisible': [('document_format', '!=', 'pdf')]}"
                                 widget="pdf_viewer"/>

@@ -7,7 +7,7 @@
 
     'author': "Center of Research and Development",
     'website': "https://crnd.pro",
-    'version': '16.0.0.37.0',
+    'version': '16.0.0.37.1',
     'category': 'Knowledge',
 
     'external_dependencies': {

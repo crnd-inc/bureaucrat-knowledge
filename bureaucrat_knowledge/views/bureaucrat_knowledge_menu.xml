@@ -3,8 +3,8 @@
     <menuitem id="bureaucrat_knowledge_menu"
               name="Knowledge"
               groups="bureaucrat_knowledge.group_bureaucratic_knowledge_user"
-              sequence="50"
-              web_icon="bureaucrat_knowledge,static/description/icon.png"/>
+              web_icon="bureaucrat_knowledge,static/description/icon.png"
+              sequence="14"/>
 
     <menuitem id="bureaucrat_knowledge_category_menu"
               parent="bureaucrat_knowledge_menu" sequence="30"

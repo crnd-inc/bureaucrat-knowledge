@@ -7,7 +7,7 @@
 
     'author': "Center of Research and Development",
     'website': "https://crnd.pro",
-    'version': '15.0.0.2.0',
+    'version': '15.0.0.3.0',
     'category': 'Knowledge',
 
     # any module necessary for this one to work correctly
@@ -27,6 +27,6 @@
     'demo': [],
 
     'installable': True,
-    'application': True,
+    'application': False,
     'license': 'OPL-1',
 }

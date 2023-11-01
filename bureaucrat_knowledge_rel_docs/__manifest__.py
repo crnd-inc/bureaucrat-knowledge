@@ -7,7 +7,7 @@
 
     'author': "Center of Research and Development",
     'website': "https://crnd.pro",
-    'version': '14.0.0.2.0',
+    'version': '14.0.0.4.0',
     'category': 'Knowledge',
 
     # any module necessary for this one to work correctly
@@ -23,10 +23,10 @@
 
         'wizard/related_documents_change_views.xml',
     ],
-    'images': [],
+    'images': ['static/description/banner.png'],
     'demo': [],
 
     'installable': True,
-    'application': True,
+    'application': False,
     'license': 'OPL-1',
 }

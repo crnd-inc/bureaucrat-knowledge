@@ -9,7 +9,7 @@
     'author': "Center of Research and Development",
     'website': "https://crnd.pro",
 
-    'version': '16.0.0.15.0',
+    'version': '16.0.0.15.1',
 
     'category': 'Knowledge',
 
